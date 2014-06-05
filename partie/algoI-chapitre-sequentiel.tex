@@ -1,0 +1,1257 @@
+\chapter{Algorithmes séquentiels}
+
+	\marginicon{objectif}
+	Dans ce chapitre, vous apprendrez à écrire un algorithme séquentiel pour
+	résoudre un problème informatique. C’est aussi
+	l’occasion de fixer la syntaxe du pseudo-code que nous
+	allons utiliser. Nous commençons avec les algorithmes
+	séquentiels qui sont de simples séquences de suites
+	d’instructions. Les structures alternatives et
+	répétitives seront vues dans les chapitres suivants.
+
+
+	\section{Introduction}
+
+		Supposons que nous voulions rédiger une marche
+		à suivre détaillée qui explique comment additionner deux fractions. Une
+		possibilité de l’écrire en langage «~naturel~» serait la suivante~:
+
+		\begin{Pseudocode}
+			\Stmt - Rechercher le dénominateur commun des deux fractions
+			\Stmt - Mettre chaque fraction au même dénominateur
+			\Stmt - Additionner les numérateurs des deux fractions, ce qui donne le numérateur de la somme
+			\Stmt - Simplifier la fraction obtenue
+		\end{Pseudocode}
+		
+		Cet algorithme, bien que résultant d’un effort
+		d’explicitation, est encore très imprécis et risque fort de ne pas
+		faciliter l’effort de programmation qui en suivrait. N’oublions pas
+		qu’un ordinateur n’est qu’une machine dépourvue de toute intelligence
+		et incapable de comprendre les sous-entendus qu’un être humain pourrait
+		comprendre~!
+
+		De plus, les notions de dénominateur commun et
+		de simplification de fraction, qui vous sont 
+		familières depuis l’école primaire, 
+		ne sont pas immédiates d’un point de
+		vue algorithmique. Un algorithme proche d’un langage
+		de programmation ne devrait mentionner que les opérations élémentaires
+		de calcul telles que $+$, -, $*$, $/$.
+
+		Ceci dit, afin d’être plus proche d’un
+		programme écrit dans un langage compréhensible par l’ordinateur,
+		l’algorithme ci-dessus pourrait s’écrire~:
+
+		\begin{Pseudocode}
+			\Stmt - Prendre connaissance du premier numérateur et du premier dénominateur ;
+			\Stmt - Prendre connaissance du second numérateur et du second dénominateur ;
+			\Stmt - Multiplier les deux dénominateurs pour obtenir le dénominateur commun ;
+			\Stmt - Multiplier le premier numérateur par le second dénominateur
+			\Stmt \Indent et le second numérateur par le premier dénominateur ;
+			\Stmt - Additionner ces deux produits pour obtenir le numérateur du résultat ;
+			\Stmt - Communiquer ce résultat ainsi que le dénominateur commun.
+		\end{Pseudocode}
+
+		Notons encore que cet algorithme n’est pas le
+		plus efficace pour ce type de problème. 
+		Il vaudrait mieux utiliser le PPCM 
+		(\textit{Plus Petit Commun Multiple}) 
+		pour le calcul du dénominateur commun, mais la façon
+		de calculer ce dernier serait très fastidieuse à rédiger en langage
+		«~naturel~».
+
+		On comprend bien, au travers de cet exemple, que
+		le français n’est pas adapté à la description de problèmes au contenu
+		mathématique ou scientifique. Le langage naturel est, en effet, un mode
+		de représentation trop riche des algorithmes. Il faut comprendre par
+		«~riche~», la présence de synonymes, de nombreux mots aux
+		significations proches et voisines. L’utiliser amènerait probablement à
+		une perte de temps (donc d’argent), et à des risques d’erreurs dans la
+		conception des programmes. Il convient dès lors d’élaborer des méthodes
+		de représentation plus rigoureuses (donc moins riches) mais nécessitant
+		un effort moindre de programmation.
+
+		Ceci dit, le français peut toujours être
+		utilisé dans la formalisation d’une première approche de la résolution
+		d’un problème devant être traduit ensuite en algorithme puis en
+		programme.
+
+	\section{Le pseudo-code}
+	
+		Les inconvénients de l’utilisation du français dans la représentation
+		des algorithmes sont dus à la trop grande richesse de ce langage en
+		comparaison à la pauvreté (mais aussi la rigueur) du langage compris
+		par la machine. De plus, la lourdeur et la longueur des phrases
+		risquent de rendre pénible la relecture et le travail d’élaboration des
+		algorithmes. La solution consiste à édulcorer le langage naturel, d’une
+		part en remplaçant les noms parfois fastidieux des objets sur lesquels
+		portent des opérations par des mots (noms de variables) plus courts,
+		d’autre part, en remplaçant les opérations elles-mêmes par des
+		opérateurs symboliques suffisamment explicites. De plus, des structures
+		types remplaceront les multiples possibilités linguistiques signifiant
+		la même chose.
+
+		\marginicon{definition}
+		Le \textbf{pseudo-code} ou \textit{Langage de Description des
+		Algorithmes} (LDA en abrégé) est un langage formel et symbolique
+		utilisant~:
+
+		\begin{liste}
+		\item
+			des \textbf{noms symboliques} destinés à représenter les objets sur
+			lesquels s’effectuent des actions ;
+		\item
+			des \textbf{opérateurs symboliques} ou des mots-clés traduisant les
+			opérations primitives exécutables par un exécutant donné ;
+		\item
+			des \textbf{structures de contrôle} types.
+		\end{liste}
+
+		Ce langage repose sur des conventions d’écriture. Il est destiné à
+		servir de vecteur de la compréhension permettant par exemple une
+		relecture faite par l’élaborateur de l’algorithme lui-même ou faite par
+		autrui et facilitant le travail de programmation.
+
+		C’est de cette dernière exigence que nait la polémique consistant à
+		savoir jusqu’à quel niveau de détail il convient d’aller dans la
+		représentation d’un algorithme~! Nous dirons, pour notre part, qu’il ne
+		doit jamais être aussi détaillé que le programme lui-même, celui-ci
+		étant, par essence, la description ultime. Point n’est besoin de donner
+		deux descriptions quasi identiques d’un algorithme, l’une dans un
+		langage \textit{pseudo-codé}, l’autre exprimée dans un langage de
+		programmation.
+
+		Nous dirons qu’un algorithme \textit{idéal}, appelé \textbf{algorithme
+		général}, exprimé en pseudo-code, devrait se situer à mi-chemin entre
+		la démarche globale exprimée dans un langage naturel (langue française)
+		ou structuré (ordinogramme) et l’algorithme ultime, c’est-à-dire le
+		\textbf{programme}, exprimé en langage de programmation.
+
+		On pourrait d’ailleurs concevoir la possibilité d’établir d’autres
+		\textbf{algorithmes plus détaillés} se situant entre
+		l’algorithme général et le programme et qui tiendraient compte de
+		certaines particularités du langage de programmation dans lequel ils
+		sont destinés à être traduits.
+
+		Enfin, et ce n’est pas la chose la moins importante, la définition d’un
+		pseudo-code doit être telle qu’il puisse \textbf{faciliter
+		l’apprentissage de la logique de programmation} par des personnes
+		désireuses de faire de l’informatique un métier. Dans cette optique, il
+		est inutile de les embarrasser de contraintes syntaxiques ou autres qui
+		risquent de les éloigner du but poursuivi.
+
+		En conclusion, à partir du moment où des conventions sont prises dans un
+		contexte bien déterminé (un service informatique d’une entreprise, un
+		groupe scolaire...), il convient que \textbf{tous} respectent ces
+		conventions. Ce sera à chacun de juger jusqu’où il ne faut pas aller
+		trop loin dans la liberté d’écriture.
+
+	\section{Variables et types}
+
+		Nous savons que les opérations que l’ordinateur devra exécuter portent
+		sur des éléments qui sont les \textbf{données} du problème. Lorsqu’on
+		attribue un \textbf{nom} et un \textbf{type} à ces données, on parle
+		alors de \textbf{variables}. Dans un algorithme, une variable conserve
+		toujours son nom et son type, mais peut changer de \textbf{valeur}.
+		
+		Le \textbf{nom} d’une variable permet de la caractériser et de la
+		reconnaitre. Ainsi, dans l’exemple donné ci-dessus, nous pourrions
+		donner le nom \textit{num1} au \textit{premier numérateur} et
+		\textit{num2} au \textit{second numérateur}, ce qui permet déjà de
+		nommer les objets de l’algorithme de façon tout aussi reconnaissable
+		mais plus courte et donc plus commode. Quant au \textbf{type} d’une
+		variable, il décrit la nature de son contenu.
+
+		\subsection{Les types autorisés}
+
+			Dans un premier temps, les seuls \textbf{types} utilisés sont les
+			suivants~:
+			
+			\begin{center}
+			\begin{tabular}[t]{p{1.6cm}|p{11.5cm}}
+				\raggedleft \pseudocode{entier} & pour les nombres entiers\\
+				\raggedleft \pseudocode{réel} & pour les nombres réels\\
+				\raggedleft \pseudocode{caractère} & pour les différentes lettres et caractères 
+						(par exemple ceux qui apparaissent sur un clavier~: 
+						\pseudocode{‘a’}, \pseudocode{‘1’}, \pseudocode{‘\#’}, etc.)
+						\\
+				\raggedleft \pseudocode{chaine} & pour les variables contenant plusieurs
+						caractères ou aucun (la chaine vide)
+						(par exemple~: 
+						\pseudocode{"Bonjour"}, \pseudocode{"Bonjour le monde"}, 
+						\pseudocode{"a"}, \pseudocode{""}, etc.)
+						\\
+				\raggedleft \pseudocode{booléen} & les variables de ce type ne peuvent valoir 
+						que \pseudocode{vrai} ou \pseudocode{faux}\\
+			\end{tabular}
+			\end{center}
+			
+			On veillera au cours de logique à ne pas utiliser les valeurs 0 et 1
+			pour les variables booléennes, même si leur emploi est correct dans
+			beaucoup de langages de programmation.
+			
+			\begin{Emphase}[exercice]{Exercices}
+				Quel(s) type(s) de données utiliseriez-vous 
+				pour représenter 
+				\begin{itemize}
+					\item une date du calendrier~?
+					\item un moment dans la journée~?
+					\item le prix d’un produit en grande surface~?
+					\item votre nom~?
+					\item vos initiales~?
+					\item votre adresse~?
+				\end{itemize}
+				\bigskip
+			\end{Emphase}
+
+		\subsection{Déclaration de variables}
+
+			La déclaration d’une variable est l’instruction 
+			qui définit son nom et son type. On pourrait écrire~:
+
+			\begin{Pseudocode}
+				\Stmt num1 et num2 seront les noms de deux objets destinés à recevoir
+				\Stmt les numérateurs des fractions, c’est-à-dire des nombres à valeurs entières.
+			\end{Pseudocode}
+			
+			Mais, bien entendu, cette formulation, trop proche du
+			langage parlé, serait trop floue et trop longue. 
+			Dès lors, nous abrégerons par~:
+
+			\begin{Pseudocode}
+				\Decl num1, num2 : entiers
+			\end{Pseudocode}
+
+			\marginicon{definition}
+			L’ensemble des instructions de la forme
+
+			\begin{Pseudocode}
+				\Decl variable1, variable2,\ldots : type
+			\end{Pseudocode}
+
+			forme la partie d’un algorithme nommée 
+			\textbf{déclaration des variables}. 
+			La déclaration des informations apparaitra toujours en
+			début d’algorithme, ou dans un bloc annexe appelé 
+			\textbf{dictionnaire des variables} 
+			ou encore \textbf{dictionnaire des données}.
+
+			Par exemple, pour l’algorithme des fractions, 
+			la déclaration des informations pourrait être la suivante~:
+
+			\begin{Pseudocode}
+				\Decl num1, den1, num2, den2, numRes, denRes : entiers
+			\end{Pseudocode}
+
+			avec la signification suivante~:
+
+			\begin{liste}
+			\item
+				\pseudocode{num1 (num2)}~: 
+					le numérateur de la première (seconde) fraction ;
+			\item
+				\pseudocode{den1 (den2)}~: 
+					le dénominateur de la première (seconde) fraction ;
+			\item
+				\pseudocode{numRes (denRes)}~: 
+					le numérateur (dénominateur) du résultat.
+			\end{liste}
+			
+			\marginicon{attention}
+			Attention, lors de la déclaration d’une variable, celle-ci n’a pas de
+			valeur~! Nous verrons plus loin que c’est l’instruction
+			d’\textbf{affectation} qui va servir à donner un contenu aux variables
+			déclarées. En logique, nous n’envisageons pas d’\textit{affectation par
+			défaut} consistant à donner une valeur initiale de façon automatique
+			aux variables déclarées (par exemple 0 pour les variables numériques,
+			comme c’est le cas dans certains langages informatiques).
+
+		\subsection{Comment nommer correctement une variable~?}
+
+			Le but est de trouver un nom qui soit suffisamment court,
+			tout en restant explicite et ne prêtant pas à confusion.
+			
+			Ainsi \pseudocode{num1} est plus approprié pour
+			désigner le \textit{premier numérateur} que 
+			\pseudocode{zozo1}, \pseudocode{tintin}, \pseudocode{bidule}
+			ou \pseudocode{premierNumérateur}.
+			De même, ne pas appeler appeler \pseudocode{den} 
+			la variable représentant le numérateur.
+			
+			Il faut aussi tenir compte que les
+			langages de programmation imposent certaines limitations 
+			(parfois différentes d’un langage à l’autre)
+			ce qui peut nécessiter une modification du nom lors de la traduction.
+
+			Voici quelques règles et limitations traditionnelles dans les langages
+			de programmation:
+
+			\begin{liste}
+			\item 
+				Un nom de variable est généralement une suite de caractères
+				alphanumériques d’un seul tenant (pas de caractères blancs) et ne
+				commençant jamais par un chiffre. 
+				Ainsi \pseudocode{x1} est correct mais pas \pseudocode{1x}. 
+			\item 
+				Pour donner un nom composé à une variable, 
+				on peut utiliser le «~tiret bas~» ou \textit{underscore} 
+				(par ex. \pseudocode{premier\_numérateur}) 
+				mais on déconseille d’utiliser le signe «~–~» 
+				qui est plutôt réservé à la soustraction. 
+				Ainsi, dans la plupart des langages,
+				\pseudocode{premier-numérateur} serait interprété comme la
+				soustraction des variables \pseudocode{premier} et
+				\pseudocode{numérateur}%
+				\footnote{%
+					Signalons que le tiret \textcolor{black}{«~–~»} 
+					est autorisé en Cobol, 
+					où il récupère son rôle arithmétique 
+					s’il est précédé et suivi d’au moins un blanc.
+				}.
+			\item 
+				Une alternative à l’utilisation du tiret bas 
+				pour l’écriture de noms de variables composés 
+				est la notation «~chameau~» 
+				(\textit{camelCase} en anglais), 
+				qui consiste à mettre une majuscule au début des mots
+				(généralement à partir du deuxième), 
+				par exemple
+				\pseudocode{premierNombre} ou
+				\pseudocode{dateNaissance}.
+			\item
+				Les indices et exposants sont proscrits 
+				(par ex.
+				\pseudocode{x\textsubscript{1}},
+				\pseudocode{z\textsubscript{6}} ou
+				\pseudocode{m\up{2}})
+			\item{}
+				Les mots-clés du langage sont interdits 
+				(par exemple \K{for}, \K{if}, \K{while} 
+				pour Java et Cobol) 
+				et on déconseille d’utiliser les mots-clés du pseudo-code 
+				(tels que
+				\pseudocode{\K{Lire}}, 
+				\pseudocode{\K{Afficher}}, 
+				\pseudocode{\K{pour}}\dots)
+			\item
+				Certains langages n’autorisent pas les caractères accentués 
+				(tels que \textit{à, ç, ê, ø,} etc.) 
+				ou les lettres des alphabets non latins
+				(tel que ${\Delta}$) mais d’autres oui ; 
+				certains font la distinction
+				entre les minuscules et majuscules, d’autres non. 
+				En logique, nous admettons dans noms de variables 
+				les caractères accentués du français,
+				par ex.~: \pseudocode{durée}, 
+				\pseudocode{intérêts}, etc.
+			\end{liste}
+
+			Il est impossible de décrire ici toutes les particularités des
+			différents langages, le programmeur se reportera aux règles spécifiques
+			du langage qu’il sera amené à utiliser.
+
+			
+			\begin{Emphase}[exercice]{Exercice~:~Déclarer une date}
+				Déclarer le(s) variable(s) permettant de représenter la date
+				d’anniversaire de quelqu’un.
+			\end{Emphase}
+			
+			
+			\begin{Emphase}[exercice]{Exercice~:~Déclarer un rendez-vous}
+				Déclarer le(s) variable(s) permettant de représenter
+				l’heure de début, l’heure de fin et
+				l’objet d’un rendez-vous.
+			\end{Emphase}
+
+	\section{Opérateurs et expressions}
+	
+		Les opérateurs agissent sur les variables et les constantes pour former
+		des \textbf{expressions}. Une expression est donc une combinaison
+		\textbf{cohérente} de variables, de constantes et d’opérateurs,
+		éventuellement accompagnés de parenthèses.
+	
+		\subsection{Opérateurs arithmétiques élémentaires}
+	
+			Ce sont les opérateurs binaires bien connus~:
+	
+			\begin{center}
+			\begin{tabular}{m{1cm}|m{12cm}}
+			\raggedleft  \pseudocode{+} & addition\\
+			\raggedleft  \pseudocode{-} & soustraction\\
+			\raggedleft  \pseudocode{*} & multiplication\\
+			\raggedleft  \pseudocode{/} & division réelle\\
+			\end{tabular}
+			\end{center}
+	
+			Ils agissent sur des variables ou expressions à valeurs entières ou
+			réelles. Plusieurs opérateurs peuvent être utilisés pour former des
+			expressions plus ou moins complexes, en tenant compte des règles de
+			calcul habituelles, notamment la priorité de la multiplication et de la
+			division sur l’addition et la soustraction. Il est aussi permis
+			d’utiliser des parenthèses, par exemple \pseudocode{a – (b + c *
+			d)/x}. Tout emploi de la division devra être accompagné d’une réflexion
+			sur la valeur du dénominateur, une division par 0 entrainant toujours
+			l’arrêt d’un algorithme.
+	
+		\subsection{DIV et MOD}
+	
+			Ce sont deux opérateurs très importants qui ne peuvent s’utiliser
+			qu’avec des variables entières~:
+	
+			\begin{center}
+			\begin{tabular}{m{1cm}|m{12cm}}
+			\raggedleft  \pseudocode{DIV} & division entière\\
+			\raggedleft  \pseudocode{MOD} & reste de la division entière\\
+			\end{tabular}
+			\end{center}
+	
+			Par exemple, \pseudocode{47 DIV 7} donne 6 tandis que
+			\pseudocode{47 MOD 7} donne \pseudocode{5}.
+	
+		\subsection{Fonctions mathématiques complexes}
+	
+			L’élévation à la puissance sera notée \pseudocode{**} ou
+			\pseudocode{\^{}} . Pour la racine carrée d’une variable x nous
+			écrirons  $\sqrt{x}$ \textit{.} Attention, pour ce dernier, de veiller
+			à ne l’utiliser qu’avec un radicant positif~!
+	
+			\textbf{Exemple}~: 
+			$(-b+\sqrt{(b\ast \ast 2-4\ast a\ast c)})/(2\ast a)$
+			
+			Mais on peut aussi accepter la notation mathématique usuelle
+			$\frac{-b+\sqrt{b^{2}-4\ast a\ast c}}{2\ast a}$ 
+	
+			\marginicon{reflexion}
+			Pourquoi ne pas avoir écrit «~\pseudocode{4ac}~» et
+			«~\pseudocode{2a}~»~?
+	
+			Si nécessaire, on se permettra d’utiliser les autres
+			fonctions mathématiques sous leur forme la plus courante dans la
+			plupart des langages de programmation (exemples~:
+			$sin(x)$, $tan(x)$, $log(x)$, $exp(x)$\dots)
+			
+		
+		\subsection{Opérateurs de comparaison}
+	
+			Ces opérateurs agissent généralement sur des variables numériques ou des
+			chaines et donnent un résultat booléen.
+	
+			\begin{center}
+			\begin{tabular}{m{2cm}|m{11cm}}
+			\raggedleft  \pseudocode{=} & égal\\
+			\raggedleft  \pseudocode{{\textless}{\textgreater}}
+				ou \pseudocode{${\neq}$} &  différent de\\
+			\raggedleft  \pseudocode{\textless} & (strictement) plus petit que\\
+			\raggedleft  \pseudocode{\textgreater} & (strictement) plus grand que\\
+			\raggedleft  \pseudocode{${\leq}$} & plus petit ou égal\\
+			\raggedleft  \pseudocode{${\geq}$} & plus grand ou égal\\
+			\end{tabular}
+			\end{center}
+	
+			Pour les chaines, 
+			c’est l’ordre alphabétique qui détermine le résultat 
+			(par exemple
+			\pseudocode{"milou" < "tintin"} est \textbf{vrai} 
+			de même que
+			\pseudocode{"assembleur" ${\leq}$ "java"})
+	
+		\subsection{Opérateurs logiques}
+	
+			Ils agissent sur des expressions booléennes (variables ou expressions à
+			valeurs booléennes) pour donner un résultat du même type.
+	
+			\begin{center}
+			\begin{tabular}{m{1cm}|m{12cm}}
+			\raggedleft \pseudocode{NON} & négation\\
+			\raggedleft \pseudocode{ET} & conjonction logique\\
+			\raggedleft \pseudocode{OU} & disjonction logique\\
+			\end{tabular}
+			\end{center}
+	
+			Pour rappel, \pseudocode{cond1 ET cond2} n’est vrai que lorsque
+			les deux conditions sont vraies. \pseudocode{cond1 OU cond2} est
+			toujours vrai, sauf quand les deux conditions sont fausses.
+	
+			Veillez à mettre des parenthèses dans le cas de combinaisons de ET et de
+			OU~: \pseudocode{(cond1 ET cond2) OU cond3} étant différent de
+			\pseudocode{cond1 ET (cond2 OU cond3).} En cas
+			d’oubli de parenthèses, il faudra se rappeler que
+			\pseudocode{ET} est prioritaire sur le \pseudocode{OU}.
+			
+			Pour rappel aussi, pour un booléen \pseudocode{ok}~: 
+			\pseudocode{ok = faux} est équivalent à \pseudocode{NON ok},
+			\pseudocode{ok = vrai} est équivalent à \pseudocode{ok} et 
+			\pseudocode{NON NON ok} est équivalent à \pseudocode{ok}.
+			Dans les trois cas, nous préconiserons la seconde écriture.
+	
+		\subsection{Évaluation complète et court-circuitée}
+	
+			On définit deux modes d’évaluation des opérateurs \pseudocode{ET}
+			et \pseudocode{OU}~:
+	
+			\begin{description}
+			\item[l’évaluation \textit{complète}]
+				pour connaitre la valeur de
+				\pseudocode{cond1 ET cond2} (respectivement
+				\pseudocode{cond1 OU cond2}), les deux conditions sont chacune
+				évaluées, après quoi on évalue la valeur de vérité de l’ensemble de
+				l’expression.
+			\item[l’évaluation \textit{court-circuitée}]
+				dans un premier temps, seule la
+				première condition est testée. Dans le cas du \pseudocode{ET},
+				si \pseudocode{cond1} s’avère faux, il est inutile d’évaluer
+				\pseudocode{cond2} puisque le résultat sera faux de toute façon
+				; l’évaluation de \pseudocode{cond2} et de l’ensemble de la
+				conjonction ne se fera que si \pseudocode{cond1} est vrai. De
+				même, dans le cas du \pseudocode{OU}, si
+				\pseudocode{cond1} s’avère vrai, il est inutile d’évaluer
+				\pseudocode{cond2} puisque le résultat sera vrai de toute façon
+				; l’évaluation de \pseudocode{cond2} et de l’ensemble de la
+				disjonction ne se fera que si \pseudocode{cond1} est faux.
+			\end{description}
+	
+			Dans le cadre de ce cours, nous opterons pour la deuxième 
+			interprétation.
+			Montrons son avantage sur un exemple.
+			Considérons	l’expression 
+			\pseudocode{n }\pseudocode{${\neq}$}\pseudocode{ 0
+			ET m/n {\textgreater} 10}. Si on teste sa valeur de vérité avec une
+			valeur de \pseudocode{n} non nulle, la première condition est
+			vraie et le résultat de la conjonction dépendra de la valeur de la
+			deuxième condition. Supposons à présent que \pseudocode{n} soit
+			nul. L’évaluation court-circuitée donne le résultat \textbf{faux}
+			immédiatement après test de la première condition sans évaluer la
+			seconde, tandis que l’évaluation complète entrainerait un arrêt de
+			l’algorithme pour cause de division par 0~!
+	
+			Notez que l’évaluation court-circuitée a pour conséquence la
+			non-commutativité du \pseudocode{ET} et du
+			\pseudocode{OU~}: \pseudocode{cond1 ET cond2} n’est donc
+			pas équivalent à \pseudocode{cond2 ET cond1}, puisque l’ordre
+			des évaluations des deux conditions entre en jeu.~Nous conseillons
+			cependant de limiter les cas d’utilisation de l’évaluation
+			court-circuitée et d’opter pour des expressions dont
+			l’évaluation serait similaire dans les deux cas. La justification
+			d’utiliser l’évaluation court-circuitée apparaitra dans plusieurs
+			exemples tout au long du cours.
+	
+		\subsection{Manipuler les chaines}
+		
+			Pour les chaines, nous allons introduire quelques notations\footnote{
+			Le lecteur averti reconnaitra la notation modulaire}
+			qui vont nous permettre de les manipuler plus facilement.
+		
+			\begin{liste}
+			\item 
+				\pseudocode{long(maChaine)}
+				donne la taille (le nombre de caractères) de la chaine 
+				\pseudocode{maChaine}.
+			\item 
+				\pseudocode{car(maChaine,pos)}
+				donne le caractère en position \pseudocode{pos} 
+				(à partir de 1) dans la chaine \pseudocode{maChaine}.
+			\item{}
+				\pseudocode{souschaine(maChaine,pos,long)}
+				donne la sous-chaine de \pseudocode{maChaine}
+				commençant en position \pseudocode{pos}
+				et de longueur \pseudocode{long}.
+				Exemple: 
+				\pseudocode{souschaine("Bonjour",2,3)} donne \pseudocode{"onj"}.
+			\item 
+				\pseudocode{concat(maChaine1,\dots,maChaineN)}
+				concatène les chaines \pseudocode{maChaine1} 
+				à \pseudocode{maChaineN}.
+				\\
+				Exemple:
+				\pseudocode{concat("Bon","j", "our")} donne \pseudocode{"Bonjour"}.
+			\end{liste}
+			
+
+		\subsection{Manipuler les caractères}
+
+			Introduisons également quelques notations pour les caractères.
+
+			\begin{liste}
+			\item \pseudocode{chaine(car)} transforme le caractère \pseudocode{car} en une chaine de taille 1.
+			\item \pseudocode{estLettre(car)} est vrai si le caractère \pseudocode{car} est une lettre
+				(idem pour \pseudocode{estChiffre}, 
+				\pseudocode{estMajuscule}, 
+				\pseudocode{estMinuscule}).
+			\item \pseudocode{majuscule(car)} donne la majuscule de la lettre \pseudocode{car}
+				(idem pour \pseudocode{minuscule}).
+			\item \pseudocode{numLettre(car)} donne la position de \pseudocode{car} dans l’alphabet (ex~:~\pseudocode{numLettre(’E’)} donne 5, 
+			idem pour \pseudocode{numLettre(’e’)}).
+			\item \pseudocode{lettre(num)} l’inverse de la précédente (ex~:~\pseudocode{lettre(4)} donne le caractère ’D’).
+			\end{liste}
+
+			 
+	\section{L’affectation d’une valeur à une variable}
+
+		Cette opération est probablement l’opération la plus importante. En
+		effet, une variable ne prend son sens réel que si elle reçoit à un
+		moment donné une valeur. Il y a deux moyens de donner une valeur à une
+		variable.
+
+		\subsection{Affectation externe }
+
+			On parle d’\textbf{affectation externe} lorsque la valeur à affecter à
+			une variable est donnée par l’utilisateur qui la communique à
+			l’exécutant quand celui-ci le lui demande~:~cette valeur est donc
+			\textit{externe} à la procédure \ (l’ordinateur ne peut la deviner
+			lui-même~!)
+
+			L’affectation externe est donc la primitive qui permet de recevoir de
+			l’utilisateur, au moment où l’algorithme se déroule,
+			une ou plusieurs valeur(s) et de les affecter à des variables en
+			mémoire. Nous noterons~:
+
+			\begin{Pseudocode}
+			\Read liste\_de\_variables\_à\_lire
+			\end{Pseudocode}
+			
+			{\bfseries Exemples}
+			
+			\begin{Pseudocode}
+			\Read nombre1, nombre2
+			\Read num1, den1, num2, den2
+			\end{Pseudocode}
+			
+			L’exécution de cette instruction provoque une
+			pause dans le déroulement de l’algorithme ; 
+			l’exécutant demande alors à l’utilisateur 
+			les valeurs des variables à lire. 
+			Ces valeurs viennent donc de l’\textit{extérieur~}; 
+			une fois introduites dans le système,
+			elles sont affectées aux variables concernées 
+			et l’algorithme peut reprendre son cours. 
+			Les possibilités d’introduction de données 
+			sont nombreuses~:~citons par exemple l’encodage de
+			données au clavier, un clic de souris, le toucher d’un
+			écran tactile, des données provenant d’un fichier, etc.
+
+		\subsection{Affectation interne }
+
+			On parle d’affectation interne lorsque la valeur d’une variable est
+			«~calculée~» par l’exécutant de l’algorithme lui-même à partir de
+			données qu’il connait déjà~:
+
+			\begin{Pseudocode}
+			\Let nomVariable \Gets expression
+			\end{Pseudocode}
+			
+			Rappelons qu’une \textbf{expression} 
+			est une combinaison de variables et
+			d’opérateurs. L’expression a une valeur.
+			
+			\subsubsection*{Exemples d’affectation corrects}
+			
+			\begin{Pseudocode}
+			\Let somme \Gets nombre1 + nombre2
+			\Let denRes \Gets den1 * den2
+			\Let cpt \Gets cpt + 1
+			\Let delta \Gets b**2 – 4*a*c
+			\Let test \Gets a < b \RComment pour une variable logique
+			\Let maChaine \Gets "Bon"
+			\Let uneChaine \Gets concat(maChaine, "jour")
+			\end{Pseudocode}
+			
+			\subsubsection*{Exemples d’affectation incorrects}
+			
+			\begin{Pseudocode}
+			\Let somme + 1 \Gets 3
+			\RComment somme + 1 n’est pas une variable
+			\Let somme \Gets 3n
+			\RComment 3n n’est ni un nom de variable correct ni une expression correcte
+			\end{Pseudocode}
+			
+			\subsubsection*{Remarques}
+
+			\begin{liste}
+			\item
+				Il est de règle que le résultat de l’expression à droite du signe
+				d’affectation ($\gets$) soit de
+				même type que la variable à sa gauche. On tolère certaines exceptions
+				:
+				\begin{liste}
+				\item
+					\pseudocode{varEntière}{ $\gets$
+                    }\pseudocode{varRéelle}~:~dans ce cas le contenu de la variable sera 
+                    la valeur \textbf{tronquée} de l’expression réelle. 
+					Par exemple si «~\pseudocode{nb}~» est
+					une variable de type entier, son contenu après l’instruction
+					«~\pseudocode{nb}{ $\gets$ }\pseudocode{$15/4$}~» 
+					sera 3
+				\item 
+					\pseudocode{varRéelle}{ $\gets$
+                    }\pseudocode{varEntière}~:~ici, il n’y a pas de perte de valeur.
+				\item 
+					\pseudocode{varChaine}{ $\gets$
+                    }\pseudocode{varCaractère}~:~équivalent à 
+                    \pseudocode{varChaine}{ $\gets$ }\pseudocode{chaine(varCaractère)}.
+					
+					Le contraire n’est évidemment pas accepté.
+				\end{liste}
+			\item 
+				Seules les variables déclarées peuvent être affectées, que ce soit par
+				l’affectation externe ou interne!
+			\item 
+				Nous ne mélangerons pas la déclaration d’une variable et son
+				affectation interne dans une même ligne de code, donc pas
+				d’instructions hybrides du genre 
+				\textsf{x}{ $\gets$ }\pseudocode{2~:~entier} ou encore 
+				\textsf{x~:~entier(0)}.
+			\item 
+				Pour l’affectation interne, toutes les variables apparaissant dans
+				l’\pseudocode{expression} doivent avoir été affectées
+				préalablement. Le contraire provoquerait un arrêt de l’algorithme.
+			\end{liste}
+			
+	\section{Communication des résultats}
+
+		L’instruction de communication des résultats consiste à donner à
+		l’extérieur (donc à l’utilisateur) la valeur d’un résultat 
+		calculé au cours de l’exécution de l’algorithme. Nous écrirons~:
+
+			\begin{Pseudocode}
+			\Write \textit{expression} ou \textit{liste de variables séparées par des virgules}
+			\end{Pseudocode}
+
+		qui signifie que la valeur d’une expression (ou celles des différentes
+		variables mentionnées) sera fournie à l’utilisateur (par exemple par un
+		affichage à l’écran ou par impression sur listing via l’imprimante,
+		etc.).
+
+		\subsubsection*{Remarques}
+
+		\begin{liste}
+		\item
+			Ce ne serait pas une erreur fondamentale de remplacer
+			\pseudocode{lire} par \pseudocode{recevoir} ou
+			\pseudocode{afficher} par \pseudocode{écrire}. Il n’y a
+			évidemment pas de confusion possible à partir du moment où l’on sait
+			qu’il s’agit de primitives d’échange entre l’extérieur et l’ordinateur
+			exécutant la procédure, mais par principe, il est conseillé d’utiliser
+			une syntaxe commune et limitée à un petit nombre de mots-clés.
+		\item
+			Comme pour l’affectation interne, on ne peut \pseudocode{afficher}
+			que des expressions dont les variables qui la composent ont été 
+			affectées préalablement.
+		\end{liste}
+
+	\section{Structure générale d’un algorithme}
+
+		La traduction d’un algorithme en pseudo-code constituera le contenu d’un
+		\K{module}. Un module contient donc la solution
+		algorithmique d’un problème donné (ou d’une de ses parties). Sa
+		structure générale sera la suivante~:
+
+		\begin{Pseudocode}
+		\Module{nomDuModule}{}{}
+			\Stmt \textit{déclaration des variables et constantes utilisées dans le module}
+			\Stmt \textit{lecture des données}
+			\Stmt \textit{instructions utilisant les données lues}
+			\Stmt \textit{communication des résultats}
+		\EndModule
+		\end{Pseudocode}
+
+		\subsubsection*{Remarques}
+		
+		\begin{liste}
+		\item {
+			Le code d’un algorithme sera toujours compris entre la
+			première ligne, appelée «~entête~» qui commence par 
+			le mot «~module~»
+			suivi du nom choisi pour l’algorithme, et la ligne
+			finale «~fin module~». Le code compris entre l’entête
+			et la ligne finale sera toujours légèrement décalé vers la droite,
+			c’est un premier exemple
+			d’\textbf{indentation} indispensable pour la
+			lisibilité d’un programme, nous y reviendrons lors de
+			l’étude des structures alternatives et répétitives.}
+		\item {
+			Comme pour les variables, le nomDuModule devra être approprié au
+            contenu~! Par exemple, \pseudocode{sommerNombres)}, 
+			\pseudocode{additionnerFractions()} plutôt que 
+			\pseudocode{goPartez()}!
+			Le rôle des parenthèses qui suivent le nom du module sera expliqué plus
+			tard.}
+		\item {
+			Il va de soi que toutes les parties de cette structure générale ne
+			seront pas toujours nécessaires~:~certains algorithmes ne nécessiteront
+			pas de lecture de données, d’autres ne devront pas
+			communiquer des résultats...}
+		\item {
+			Pour la lisibilité, on veillera toujours à ce qu’un module
+			tienne sur une vingtaine de lignes (donc, en pratique, sur un écran 
+			de 40 x 80 caractères ou une page). Ceci implique que si le module 
+			devait être plus long, il faudrait le découper, comme nous le verrons 
+			plus loin.}
+		\end{liste}
+
+		\bigskip
+
+		Analysons les algorithmes suivants~:
+		
+		\begin{Pseudocode}
+		\Module{exempleValide}{}{}
+			\Decl a, b, c : entiers
+			\Let a \Gets 12
+			\Let b \Gets 5
+			\Let c \Gets a - b
+			\Let a \Gets a + c
+			\Let b \Gets a
+		\EndModule
+		\end{Pseudocode}
+		
+		\begin{center}
+		\begin{tabular}{*{4}{>{\centering\arraybackslash}m{3cm}}}
+			 &
+			{a} &
+			{b} &
+			{c}\\\hline			
+		\end{tabular}
+		\begin{tabular}{|m{3cm}|*{3}{>{\centering\arraybackslash}m{3cm}|}}
+			{\pseudocode{a, b, c~:~entiers}} &
+			{indéfini} &
+			{indéfini} &
+			{indéfini}\\\hline
+			
+			{\pseudocode{a}{ $\gets$ } 12} &
+			{12} &
+			{indéfini} &
+			{indéfini}\\\hline
+			
+			{\pseudocode{b}{ $\gets$ } 5} &
+			{12} &
+			{5} &
+			{indéfini}\\\hline
+			
+			{\pseudocode{c}{ $\gets$ }  \pseudocode{a - b}} &
+			{12} &
+			{5} &
+			{7}\\\hline
+			
+			{\pseudocode{a}{ $\gets$ }  \pseudocode{a + c}} &
+			{19} &
+			{5} &
+			{7}\\\hline
+			
+			{\pseudocode{b}{ $\gets$ }  \pseudocode{a}} &
+			{19} &
+			{19} &
+			{7}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\bigskip
+
+		\begin{Pseudocode}
+		\Module{exempleInvalide}{}{}
+			\Decl a, b, c : entiers
+			\Let a \Gets 12
+			\Let c \Gets a - b
+			\Let d \Gets c - 2
+		\EndModule
+		\end{Pseudocode}
+		
+		\begin{center}
+		\begin{tabular}{*{4}{>{\centering\arraybackslash}m{3cm}}}
+			 &
+			{a} &
+			{b} &
+			{c}\\\hline			
+		\end{tabular}
+		\begin{tabular}{|m{3cm}|*{3}{>{\centering\arraybackslash}m{3cm}|}}
+			{\pseudocode{a, b, c~:~entiers}} &
+			{indéfini} &
+			{indéfini} &
+			{indéfini}\\\hline
+			
+			{\pseudocode{a}{ $\gets$ } 12} &
+			{12} &
+			{indéfini} &
+			{indéfini}\\\hline
+			
+			{\pseudocode{c}{ $\gets$ }  \pseudocode{a - b}} &
+			{12} &
+			{indéfini} &
+			{???}\\\hline
+			
+			{\pseudocode{d}{ $\gets$ }  \pseudocode{c - 2}} &
+			{12} &
+			{indéfini} &
+			{???}\\\hline
+		\end{tabular}
+		\end{center}
+		
+		\pseudocode{c} ne peut pas être calculé car b n’a pas été initialisé;
+		quant à \pseudocode{d}, il n’est même pas déclaré~!
+
+		\bigskip
+			
+		À titre d’exemple, récrivons l’algorithme d’addition de fractions décrit
+		en début de chapitre~:
+
+		\begin{Pseudocode}
+		\Module{additionnerFractions}{}{}
+			\Decl num1, den1, num2, den2, numRes, denRes : entiers
+			\Read num1, den1, num2, den2
+			\Let denRes \Gets den1 * den2
+			\Let numRes \Gets num1*den2 + num2*den1
+			\Write numRes, "/", denRes
+		\EndModule
+		\end{Pseudocode}
+		
+		\textbf{Remarque~:}
+		rappelons que la fraction affichée n’est sans doute pas simplifiée. 
+		Nous n’avons pas encore tous les atouts suffisants pour réaliser 
+		cela à ce niveau. Patience~!
+
+	\section{Commenter un algorithme}
+
+		On n’insistera jamais assez sur la nécessité de \textbf{documenter} un
+		algorithme en y insérant des \textbf{commentaires} judicieux, clairs et
+		suffisants~! Un commentaire est un texte placé dans
+		l’algorithme et destiné à faciliter au maximum la
+		compréhension d’un algorithme par le lecteur (parfois une autre
+		personne, mais aussi souvent l’auteur qui se perd dans
+		son propre texte lorsqu’il s’y replonge après une
+		interruption). Ces commentaires (introduits par
+		«~\pseudocode{//~»}) seront bien entendu ignorés par
+		l’exécutant de l’algorithme.
+
+		\begin{Pseudocode}
+		\LComment Lit les contenus de 2 fractions et affiche leur somme
+		\Module{additionnerFractions}{}{}
+			\Decl num1, den1, num2, den2, numRes, denRes : entiers
+			\Read num1, den1, num2, den2
+			\Let denRes \Gets den1 * den2
+				\RComment calcul du dénominateur
+			\Let numRes \Gets num1*den2 + num2*den1
+				\RComment calcul du numérateur
+			\Empty \RComment la fraction n’est sans doute pas simplifiée
+			\Write numRes, "/", denRes
+		\EndModule
+		\end{Pseudocode}
+
+		Notez qu’un excès de commentaires peut être aussi nuisible qu’un
+		trop-peu pour la compréhension d’un algorithme. Par exemple, un choix
+		judicieux de noms de variables peut s’avérer bien plus efficace que des
+		commentaires superflus. Ainsi, l’instruction
+
+		\begin{Pseudocode}
+		\Let nouveauCapital \Gets ancienCapital * (1 + taux / 100)
+		\end{Pseudocode}
+
+		dépourvue de commentaires est bien préférable aux lignes suivantes~:
+
+		\begin{Pseudocode}
+		\Let c1 \Gets c0 * (1 + t / 100) \RComment calcul du nouveau capital
+		\Empty \RComment c1 est le nouveau capital, c0 est l’ancien capital, t est le taux
+		\end{Pseudocode}
+		
+		Nous prendrons l’habitude de commenter chaque module en précisant ce qu’il fait.
+
+	\section{Compléments de pseudo-code}
+
+		Présentons quelques notions algorithmiques peu
+		utilisées en première mais qui vous seront peut-être utiles dans
+		l’un ou l’autre des exercices.
+
+		\subsection{Constantes}
+
+			Une \textbf{constante} est une information pour laquelle nom, type et
+			valeur sont figés. La liste des constantes utilisées dans un algorithme
+			apparaitra dans la section déclaration des variables sous la forme
+			suivante~:
+
+			\begin{Pseudocode}
+			\Stmt \K{constante} PI = 3,14
+			\Stmt \K{constante} ESI 
+				= {\textquotedbl}École Supérieure d’Informatique{\textquotedbl}
+			\end{Pseudocode}
+
+			Il est inutile de spécifier leur type, celui-ci
+			étant défini implicitement par la valeur de la constante.
+
+		\subsection{Énumération}
+
+			Parfois, une variable ne peut prendre qu’un ensemble
+			fixe et fini de valeurs. Par exemple une variable représentant une
+			saison ne peut prendre que quatre valeurs (HIVER, PRINTEMPS, ÉTÉ,
+			AUTOMNE). On va l’indiquer grâce à
+			l’énumération qui introduit un \textbf{nouveau type}
+			de donnée.
+
+			\begin{Pseudocode}
+			\Stmt \K{énumération} Saison \{ HIVER, PRINTEMPS, ÉTÉ, AUTOMNE \}
+			\end{Pseudocode}
+
+			Il y a deux avantages à cela~:~une indication claire des possibilités de
+			la variable lors de la déclaration et une lisibilité du code grâce à
+			l’utilisation des valeurs explicites.
+			
+			Par exemple, 
+			
+			\begin{Pseudocode}
+				\LComment Lit une saison et affiche sa particularité
+				\Module{particularitéSaisonnière}{}{}
+					\Decl uneSaison~:~Saison
+					\Read uneSaison
+					\RComment on lira la valeur HIVER ou PRINTEMPS ou ÉTÉ ou AUTOMNE
+					\If{uneSaison = HIVER}
+						\Write "il neige"
+					\Else
+						\If{uneSaison = PRINTEMPS}
+							\Write "les fleurs poussent"
+						\Else
+							\If{uneSaison = ÉTÉ}
+								\Write "le soleil brille"
+							\Else
+								\Write "les feuilles tombent"
+							\EndIf
+						\EndIf
+					\EndIf
+				\EndModule
+			\end{Pseudocode}
+
+
+			\begin{Emphase}[exercice]{Exercice~:~Autres situations}
+
+				Pouvez-vous identifier d’autres données qui pourraient
+				avantageusement s’exprimer avec une énumération~?
+
+			\end{Emphase}
+			
+			\subsubsection*{Quid des langages de programmation~?}
+
+				Certains langages (comme Java) proposent un type énuméré complet.
+				D’autres (comme C et C++) proposent un type énuméré
+				incomplet mais qui permet néanmoins une écriture comme celle ci-dessus.
+				Cobol propose des «~noms conditions~» qui représentent
+				l’ensemble des valeurs possibles
+				d’une variable. D’autres langages,
+				enfin, ne proposent rien. Pour ces langages, le truc est de définir des
+				constantes entières qui vont permettre une écriture proche de celle
+				ci-dessus (mais sans une déclaration explicite).
+
+			\subsubsection*{Lien avec les entiers}
+
+				Dans l’exemple ci-dessus, on lit une Saison mais souvent,
+				si on travaille avec les Mois par exemple,
+				on disposera plutôt d’un entier. Il faut pouvoir
+				convertir les valeurs. Chaque langage de programmation propose sa
+				propre technique; nous allons adopter la syntaxe suivante~:
+
+				\begin{Pseudocode}
+				\Stmt Saison(3) 
+					\RComment donne l’énumération de la saison numéro 3 (on commence à 1);
+				\Stmt 
+					\RComment donne ÉTÉ dans notre exemple.
+				\Stmt position(uneSaison)
+					\RComment donne l’entier associé à une saison;
+				\Stmt 
+					\RComment si on a lu HIVER comme valeur pour uneSaison, donne la valeur 1.
+				\end{Pseudocode}
+
+% -----------------------
+	\section{Exercices}
+% -----------------------
+
+		\subsection{Pour s’échauffer}
+
+\begin{Exercice}{Compréhension d’algorithme}
+
+	Pour ces exercices, nous vous demandons de comprendre des algorithmes
+	donnés. Plus précisément, que vont-ils afficher si à chaque fois les
+	deux nombres lus au départ sont successivement $2$ et $3$~?
+
+	\begin{Pseudocode}
+	\Module{exerciceA}{}{}
+		\Decl a,b~:~entiers
+		\Read a,b
+		\Let a \Gets a + 2 * b
+		\Write a
+	\EndModule
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+	\Module{exerciceB}{}{}
+		\Decl a,b~:~entiers
+		\Decl quotient~:~réel
+		\Read b,a
+		\Let quotient \Gets a / b
+		\Write quotient
+	\EndModule
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+	\Module{exerciceC}{}{}
+		\Decl a,b,c,d~:~entiers
+		\Read c,d
+		\Let a \Gets 2 * c + 5 * d
+		\Let b \Gets 2 + c * 3 + d
+		\Let c \Gets a MOD b 
+		\Write a DIV c
+	\EndModule
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+	\Module{exerciceD}{}{}
+		\Decl x,y~:~réels
+		\Read x,y
+		\Let x \Gets x * x
+		\Let x \Gets x * x + y * y
+        \Let x \Gets $\sqrt{x}$ 
+		\Write x
+	\EndModule
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+	\Module{exerciceE}{}{}
+		\Decl x,y~:~réels
+		\Read x,x
+		\Let x \Gets x MOD x + (x + 1) DIV 2
+		\Write x + 3
+	\EndModule
+	\end{Pseudocode}
+
+\end{Exercice}
+
+\begin{Exercice}{Le jeu des $n$ erreurs}
+
+	Identifier les erreurs et/ou les
+	problèmes dans les modules suivants~:
+
+	\begin{Pseudocode}
+	\Module{exA}{}{} \Comment Division
+		\Decl nb1, nb2~:~réels
+		\Write nb1 / nb2
+	\EndModule
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+	\Module{exB}{}{} \Comment Somme
+		\Decl nb1, nb2~:~réels
+		\Read nb1, nb2
+		\Let m \Gets (nb1 + nb2) / 2
+		\Write m
+	\EndModule
+	\end{Pseudocode}
+
+
+\end{Exercice}
+
+\begin{Exercice}{Simplification d’algorithme}
+
+	Voici quelques extraits d’algorithmes corrects du point de vue de la
+	syntaxe mais contenant des lignes inutiles ou des lourdeurs d’écriture.
+	Remplacer chacune de ces portions d’algorithme par un minimum
+	d’instructions qui auront un effet équivalent.
+
+	\begin{Pseudocode}
+	\Let hauteur \Gets largeur * 50 \Comment les deux variables sont des entiers
+	\Let hauteur \Gets hauteur MOD 5 + 7
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+	\Read var
+	\Let var \Gets 0
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+	\Let var \Gets 0
+	\Read var
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+	\Let ok2 \Gets NON (ok1 = vrai) ET NON (ok1 = faux)
+	\end{Pseudocode}
+
+\end{Exercice}
+
+\subsection{Exercices d’apprentissage}
+
+	Il est temps de se lancer et d’écrire vos premiers
+	modules. Voici quelques précieux conseils pour vous 
+	guider dans la résolution de tels problèmes~:
+
+	\begin{liste}
+	\item {
+		il convient d’abord de bien comprendre le problème posé; assurez-vous
+		qu’il est parfaitement spécifié ;}
+	\item {
+		déclarez ensuite les variables (et leur type) qui interviennent dans
+		l’algorithme ; les noms des variables risquant de ne pas être
+		suffisamment explicites;}
+	\item {
+		mettez en évidence les variables «~données~», les variables
+		«~résultats~» et les variables de travail ;}
+	\item {
+		n’hésitez pas à faire une ébauche de résolution en français avant
+		d’élaborer l’algorithme définitif pseudo-codé.}
+	\end{liste}
+
+\begin{Exercice}{Surface d’un triangle}
+	\marginicon{java}
+	Écrire un algorithme qui calcule et affiche la surface
+	d’un triangle connaissant sa base et sa hauteur.
+\end{Exercice}
+
+\begin{Exercice}{Placement}
+	Écrire un algorithme qui, étant donné le montant d’un capital placé 
+	(en \euro) 
+	et le taux d’intérêt annuel (en \%), calcule et affiche la valeur
+	nouvelle de ce capital après un an de ce placement.
+\end{Exercice}
+
+\begin{Exercice}{Prix TTC}
+	Écrire un algorithme qui, étant donné le prix unitaire d’un produit
+	(hors TVA), le taux de TVA (en \%) et la quantité de produit vendue à
+	un client, calcule et affiche le prix total à payer par ce client.
+\end{Exercice}
+
+\begin{Exercice}{Durée de trajet}
+	Écrire un algorithme qui, étant donné la vitesse moyenne en \textbf{m/s}
+	d’un véhicule et la distance parcourue en \textbf{km} par ce véhicule,
+	calcule et affiche la durée en secondes du trajet de ce véhicule.
+\end{Exercice}
+
+\begin{Exercice}{Permutation}
+	\marginicon{java}
+	Écrire une séquence d’instructions qui réalise la permutation du contenu
+	de deux variables.
+\end{Exercice}
+
+\begin{Exercice}{Cote moyenne}
+	Écrire un algorithme qui, étant donné les résultats (cote entière sur
+	20) de trois examens passés par un étudiant (exprimés par six nombres,
+	à savoir, la cote et la pondération de chaque examen), calcule et
+	affiche la moyenne globale exprimée en pourcentage. Vérifiez bien votre
+	algorithme avec des valeurs concrètes ; il est facile de se tromper dans
+	la formule~!
+\end{Exercice}
+
+\begin{Exercice}{Somme des chiffres}
+	\marginicon{java}
+	Écrire un algorithme qui calcule la somme des chiffres
+	d’un nombre entier de 3 chiffres.
+	Réflexion~:~l’algorithme est-il aussi valide pour les entiers inférieurs
+	à 100~?
+\end{Exercice}
+
+\begin{Exercice}{Conversion HMS en secondes}
+	\marginicon{java}
+	Écrire un algorithme qui, étant donné un moment dans la journée donné
+	par trois nombres lus, à savoir, heure, minute et seconde, calcule le
+	nombre de secondes écoulées depuis minuit.
+\end{Exercice}
+
+\begin{Exercice}{Conversion secondes en HMS}
+	\marginicon{java}
+	Écrire un algorithme qui, étant donné un temps écoulé dans la journée
+	exprimé en secondes, calcule et affiche ce temps sous la forme de trois
+	nombres (heure, minute et seconde).
+
+	Ex~:~10000 secondes donnera 2h 46'40''
+\end{Exercice}

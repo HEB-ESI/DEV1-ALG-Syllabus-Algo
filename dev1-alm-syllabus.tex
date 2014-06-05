@@ -1,0 +1,62 @@
+% Algorithmique I à la HEB-ESI
+% ----------------------------------
+\documentclass[a4paper,oneside]{book}
+
+% Les styles
+% ----------------------------------
+\input{style/log1.sty}      % Style principal pour le bouquin
+\input{style/algoesi.sty}   % Définition pour les algorithmes
+
+% Identité de l'école
+% ----------------------------------
+\newcommand{\ecole}{Haute École de Bruxelles}
+\newcommand{\entite}{École Supérieure d'Informatique}
+\newcommand{\entiteadresse}{Rue Royale, 67 – 1000 Bruxelles}
+\newcommand{\entitesite}{www.heb.be/esi}
+\newcommand{\entitetel}{02/219.15.46}
+\newcommand{\entitemail}{esi@heb.be}
+\newcommand{\etude}{Bachelor en Informatique}
+
+% Identité de l'AA
+% ----------------------------------
+\newcommand{\ue}{DEV1}
+\newcommand{\cours}{Algorithmique I}
+
+% Éléments temporels : année - prof
+% ----------------------------------
+\newcommand{\annee}{2014}
+\newcommand{\auteura}{L. Beeckmans}
+\newcommand{\auteurb}{M. Codutti}
+\newcommand{\auteurc}{G. Cuvelier}
+\newcommand{\auteurd}{J. Dossogne}
+\newcommand{\auteure}{A. Hallal}
+\newcommand{\auteurf}{C. Leruste}
+\newcommand{\auteurg}{E. Levy}
+\newcommand{\auteurh}{N. Pettiaux}
+\newcommand{\auteuri}{F. Servais}
+\newcommand{\auteurj}{W. Willame}
+\newcommand{\contact}{mcodutti@heb.be}
+\newcommand{\ladate}{\today}
+
+% Index (attendre qu'il soit suffisament rempli)
+% ----------------------------------
+%\usepackage{makeidx} % pour générer un index
+%\makeindex
+
+% Les différentes parties du document
+% -----------------------------------
+\begin{document}
+\include{partie/algoI-debut}
+\include{partie/algoI-chapitre-intro}
+\include{partie/algoI-chapitre-sequentiel}
+\include{partie/algoI-chapitre-alternative}
+\include{partie/algoI-chapitre-module}
+\include{partie/algoI-chapitre-structure}
+\include{partie/algoI-chapitre-boucle}
+\include{partie/algoI-chapitre-tableau}
+\include{partie/algoI-chapitre-tri}
+
+%\printindex
+%\addcontentsline{toc}{chapter}{Index}
+
+\end{document}

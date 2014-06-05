@@ -1,0 +1,7 @@
+========================================================================
+  Slides pour le cours d'Algorithmique 1 (DEV1) en 1ère année à l’ESI 
+  http://www.heb.be/esi                               mcodutti@heb.be
+========================================================================
+
+Issu du repository https://github.com/mcodutti/Logique1-Syllabus
+Pour produire le document : pdflatex dev1-alm-syllabus.tex

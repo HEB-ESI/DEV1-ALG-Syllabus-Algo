@@ -1,0 +1,1775 @@
+%===============
+\chapter{Le tri}
+%===============
+
+	\marginicon{objectif}
+	Dans ce chapitre nous voyons quelques algorithmes simples pour trier un
+	ensemble d'informations~: recherche des maxima, tri
+	par insertion et tri bulle dans un tableau. 
+	Des algorithmes plus efficaces seront vus
+	en deuxième année.
+
+%===================
+\section{Motivation}
+%===================
+
+	Une application importante de l’informatique est le tri d’informations.
+	La conception d’algorithmes efficaces pour ce type de traitement s’est
+	imposée avec l’apparition de bases de données de taille importante. On
+	citera par exemple la recherche d’un numéro de téléphone ou une adresse
+	dans la version informatisée des pages blanches, ou de façon plus
+	spectaculaire l’efficacité de certains moteurs de recherche qui
+	permettent de retrouver en quelques secondes des mots clés arbitraires
+	parmi plusieurs millions de pages sur le web.
+
+	La recherche efficace d’information implique un tri préalable de
+	celle-ci. En effet, si les données ne sont pas classées ou triées, le
+	seul algorithme possible reviendrait à parcourir entièrement l’ensemble
+	des informations. Pour exemple, il suffit d’imaginer un dictionnaire
+	dans lequel les mots seraient mélangés de façon aléatoire au lieu
+	d’être classés par ordre alphabétique. Pour trouver le moindre mot dans
+	ce dictionnaire, il faudrait à chaque fois le parcourir entièrement !
+	Il est clair que le classement préalable (ordre alphabétique) accélère
+	grandement la recherche.
+
+	Ainsi, recherche et tri sont étroitement liés, et la façon dont les
+	informations sont triées conditionne bien entendu la façon de
+	rechercher l’information (cf. algorithme de recherche dichotomique).
+	Pour exemple, prenons cette fois-ci un dictionnaire des mots croisés
+	dans lequel les mots sont d’abord regroupés selon leur longueur et
+	ensuite par ordre alphabétique. La façon de rechercher un mot dans ce
+	dictionnaire est bien sûr différente de la recherche dans un
+	dictionnaire usuel. 
+
+	Le problème central est donc le tri des informations. Celui-ci a pour
+	but d’organiser un ensemble d’informations qui ne l’est pas 
+	\textit{à priori}. 
+	On peut distinguer trois grands cas de figure~:
+
+	\begin{enumerate}
+		\item 
+			D’abord les situations impliquant le classement total d’un ensemble de
+			données «~bru-tes~», c’est-à-dire complètement désordonnées. Prenons
+			pour exemple les feuilles récoltées en vrac à l’issue d’un examen ; il
+			y a peu de chances que celles-ci soient remises à l’examinateur de
+			manière ordonnée ; celui-ci devra donc procéder au tri de l’ensemble
+			des copies, par exemple par ordre alphabétique des noms des étudiants,
+			ou par numéro de groupe etc.
+		\item 
+			Ensuite les situations où on s’arrange pour ne jamais devoir trier la
+			totalité des éléments d’un ensemble, qui resterait cependant à tout
+			moment ordonné. Imaginons le cas d’une bibliothèque dont les livres
+			sont rangés par ordre alphabétique des auteurs~: à l’achat d’un nouveau
+			livre, ou au retour de prêt d’un livre, celui-ci est immédiatement
+			rangé à la bonne place. Ainsi, l’ordre global de la bibliothèque est
+			maintenu par la répétition d’une seule opération élémentaire consistant
+			à insérer à la bonne place un livre parmi la collection. C’est la
+			situation que nous considérerions dans le cas d'une structure
+			où les éléments sont ordonnés.
+		\item 
+			Enfin, les situations qui consistent à devoir re-trier des données
+			préalablement ordonnées sur un autre critère. Prenons l’exemple d’un
+			paquet de copies d’examen déjà triées sur l’ordre alphabétique des noms
+			des étudiants, et qu’on veut re-trier cette fois-ci sur les numéros de
+			groupe. Il est clair qu’une méthode efficace veillera à conserver
+			l’ordre alphabétique déjà présent dans la première situation afin que
+			les copies apparaissent dans cet ordre dans chacun des groupes.
+	\end{enumerate}
+	
+	Le dernier cas illustre un classement sur une \textbf{clé complexe}
+	(ou \textbf{composée}) impliquant la comparaison de plusieurs champs
+	d’une même structure~: le premier classement se fait sur le numéro de
+	groupe, et à numéro de groupe égal, l’ordre se départage sur le nom de
+	l’étudiant. On dira de cet ensemble qu’il est classé en \textbf{majeur}
+	sur le numéro de groupe et en \textbf{mineur} sur le nom d’étudiant.
+
+	Notons que certains tris sont dits \textbf{stables} parce
+	qu'en cas de tri sur une nouvelle clé, l’ordre de la
+	clé précédente est préservé pour des valeurs identiques de la nouvelle
+	clé, ce qui évite de faire des comparaisons sur les deux champs à la
+	fois. Les méthodes nommées \textbf{tri par insertion}, \textbf{tri
+	bulle} et \textbf{tri par recherche de minima successifs }(que nous
+	allons aborder dans ce chapitre) sont stables.
+
+	Le tri d’un ensemble d’informations n’offre que des avantages. Outre le
+	fait déjà mentionné de permettre une recherche et une obtention rapide
+	de l’information, il permet aussi l’application de traitements
+	algorithmiques efficaces (comme par exemple celui des ruptures que nous
+	verrons plus loin) qui s’avéreraient trop coûteux (en temps, donc en
+	argent !) s’ils s’effectuaient sur des ensembles non triés.
+
+	Certains tris sont évidemment plus performants que d’autres. Le choix
+	d’un tri particulier dépend de la taille de l’ensemble à trier et de la
+	manière dont il se présente, c’est-à-dire déjà plus ou moins ordonné.
+	La performance quant à elle se juge sur deux critères~: le nombre de
+	tests effectués (comparaisons de valeurs) et le nombre de transferts de
+	valeurs réalisés. 
+	
+	Les algorithmes classiques de tri présentés dans ce chapitre le sont
+	surtout à titre pédagogique. Ils ont tous une «~complexité en
+	$n^2$~», ce qui veut dire que si $n$ est le nombre
+	d’éléments à trier, le nombre d’opérations élémentaires (tests et
+	transferts de valeurs) est proportionnel à $n^2$. Ils conviennent
+	donc pour des ensembles de taille «~raisonnable~», mais peuvent devenir
+	extrêmement lents à l’exécution pour le tri de grands ensembles, comme
+	par exemple les données de l’annuaire téléphonique. Plusieurs solutions
+	existent, comme la méthode de tri \textbf{Quicksort}. Cet algorithme
+	très efficace faisant appel à la récursivité et qui sera étudié en
+	deuxième année a une complexité en $n \log(n)$. 
+
+	\marginicon{attention}
+	Dans ce chapitre, les algorithmes traiteront du tri dans un
+	\textbf{tableau d’entiers à une }\textbf{dimension}. Toute autre
+	situation peut bien entendu se ramener à celle-ci moyennant la
+	définition de la relation d’ordre propre au type de données utilisé. Ce
+	sera par exemple, l’ordre alphabétique pour les chaines de caractères,
+	l’ordre chronologique pour des objets \pseudocode{Date} ou
+	\pseudocode{Moment} (que nous verrons
+	plus tard), etc. De plus, le seul ordre envisagé sera l’ordre
+	\textbf{croissant} des données. Plus loin, on envisagera le tri 
+	d'autres structures de données.
+
+	Enfin, dans toutes les méthodes de tri abordées, nous supposerons la
+	taille physique du tableau à trier (notée $n$) égale à sa taille
+	logique, celle-ci n’étant pas modifiée par l’action de tri.
+
+%==========================
+\section{Tri par insertion}
+%===========================
+
+	Cette méthode de tri repose sur le principe d’insertion de valeurs dans
+	un tableau ordonné. 
+
+	{\sffamily\bfseries\upshape
+	Description de l’algorithme}
+
+	Le tableau à trier sera à chaque étape subdivisé en deux sous-tableaux~:
+	le premier cadré à gauche contiendra des éléments déjà ordonnés, et le
+	second, cadré à droite, ceux qu’il reste à insérer dans le sous-tableau
+	trié. Celui-ci verra sa taille s’accroitre au fur et à mesure des
+	insertions, tandis que celle du sous-tableau des éléments non triés
+	diminuera progressivement.
+
+	Au départ de l’algorithme, le sous-tableau trié est le premier élément
+	du tableau. Comme il ne possède qu’un seul élément, ce sous-tableau est
+	donc bien ordonné ! Chaque étape consiste ensuite à prendre le premier
+	élément du sous-tableau non trié et à l’insérer à la bonne place dans
+	le sous-tableau trié.
+
+	Prenons comme exemple un tableau \pseudocode{tab} de 20 entiers. 	
+	Au départ, le	sous-tableau trié est formé du premier élément, 
+	\pseudocode{tab[1]} qui vaut 20~:
+
+	\begin{center}
+	\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{0.47cm}}}
+		 \textcolor{gray}{\scriptsize 1} &
+		 \textcolor{gray}{\scriptsize 2} &
+		 \textcolor{gray}{\scriptsize 3} &
+		 \textcolor{gray}{\scriptsize 4} &
+		 \textcolor{gray}{\scriptsize 5} &
+		 \textcolor{gray}{\scriptsize 6} &
+		 \textcolor{gray}{\scriptsize 7} &
+		 \textcolor{gray}{\scriptsize 8} &
+		 \textcolor{gray}{\scriptsize 9} &
+		 \textcolor{gray}{\scriptsize 10} &
+		 \textcolor{gray}{\scriptsize 11} &
+		 \textcolor{gray}{\scriptsize 12} &
+		 \textcolor{gray}{\scriptsize 13} &
+		 \textcolor{gray}{\scriptsize 14} &
+		 \textcolor{gray}{\scriptsize 15} &
+		 \textcolor{gray}{\scriptsize 16} &
+		 \textcolor{gray}{\scriptsize 17} &
+		 \textcolor{gray}{\scriptsize 18} &
+		 \textcolor{gray}{\scriptsize 19} &
+		 \textcolor{gray}{\scriptsize 20}
+		 \\
+	\end{tabular}
+	\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.46cm}|}}
+		\hline
+		\multicolumn{1}{|m{0.49700004cm}|}{\cellcolor{gray!25}20} &
+		{ 12} &
+		{ 18} &
+		{ 17} &
+		{ 15} &
+		{ 14} &
+		{ 15} &
+		{ 16} &
+		{ 18} &
+		{ 17} &
+		{ 12} &
+		{ 14} &
+		{ 16} &
+		{ 18} &
+		{ 15} &
+		{ 15} &
+		{ 19} &
+		{ 11} &
+		{ 11} &
+		{ 13}\\\hline
+	\end{tabular}
+	\end{center}
+
+	\medskip
+	
+	L’étape suivante consiste à insérer \pseudocode{tab[2]}, qui vaut 12, dans ce sous-tableau, de
+	taille 2~:
+
+	\begin{center}
+	\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{0.47cm}}}
+		 \textcolor{gray}{\scriptsize 1} &
+		 \textcolor{gray}{\scriptsize 2} &
+		 \textcolor{gray}{\scriptsize 3} &
+		 \textcolor{gray}{\scriptsize 4} &
+		 \textcolor{gray}{\scriptsize 5} &
+		 \textcolor{gray}{\scriptsize 6} &
+		 \textcolor{gray}{\scriptsize 7} &
+		 \textcolor{gray}{\scriptsize 8} &
+		 \textcolor{gray}{\scriptsize 9} &
+		 \textcolor{gray}{\scriptsize 10} &
+		 \textcolor{gray}{\scriptsize 11} &
+		 \textcolor{gray}{\scriptsize 12} &
+		 \textcolor{gray}{\scriptsize 13} &
+		 \textcolor{gray}{\scriptsize 14} &
+		 \textcolor{gray}{\scriptsize 15} &
+		 \textcolor{gray}{\scriptsize 16} &
+		 \textcolor{gray}{\scriptsize 17} &
+		 \textcolor{gray}{\scriptsize 18} &
+		 \textcolor{gray}{\scriptsize 19} &
+		 \textcolor{gray}{\scriptsize 20}
+		 \\
+	\end{tabular}
+	\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.46cm}|}}
+		\hline
+		\multicolumn{1}{|m{0.49700004cm}|}{\cellcolor{gray!25}12} &
+		{\cellcolor{gray!25}20} &
+		{18} &
+		{ 17} &
+		{ 15} &
+		{ 14} &
+		{ 15} &
+		{ 16} &
+		{ 18} &
+		{ 17} &
+		{ 12} &
+		{ 14} &
+		{ 16} &
+		{ 18} &
+		{ 15} &
+		{ 15} &
+		{ 19} &
+		{ 11} &
+		{ 11} &
+		{ 13}\\\hline
+	\end{tabular}
+	\end{center}
+
+	\medskip
+
+	Ensuite, c’est au tour de \pseudocode{tab[3]}, qui vaut 18, d’être inséré~:
+
+	\begin{center}
+	\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{0.47cm}}}
+		 \textcolor{gray}{\scriptsize 1} &
+		 \textcolor{gray}{\scriptsize 2} &
+		 \textcolor{gray}{\scriptsize 3} &
+		 \textcolor{gray}{\scriptsize 4} &
+		 \textcolor{gray}{\scriptsize 5} &
+		 \textcolor{gray}{\scriptsize 6} &
+		 \textcolor{gray}{\scriptsize 7} &
+		 \textcolor{gray}{\scriptsize 8} &
+		 \textcolor{gray}{\scriptsize 9} &
+		 \textcolor{gray}{\scriptsize 10} &
+		 \textcolor{gray}{\scriptsize 11} &
+		 \textcolor{gray}{\scriptsize 12} &
+		 \textcolor{gray}{\scriptsize 13} &
+		 \textcolor{gray}{\scriptsize 14} &
+		 \textcolor{gray}{\scriptsize 15} &
+		 \textcolor{gray}{\scriptsize 16} &
+		 \textcolor{gray}{\scriptsize 17} &
+		 \textcolor{gray}{\scriptsize 18} &
+		 \textcolor{gray}{\scriptsize 19} &
+		 \textcolor{gray}{\scriptsize 20}
+		 \\
+	\end{tabular}
+	\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.46cm}|}}
+		\hline
+		{\cellcolor{gray!25}12} &
+		{\cellcolor{gray!25}18} &
+		{\cellcolor{gray!25}20} &
+		{ 17} &
+		{ 15} &
+		{ 14} &
+		{ 15} &
+		{ 16} &
+		{ 18} &
+		{ 17} &
+		{ 12} &
+		{ 14} &
+		{ 16} &
+		{ 18} &
+		{ 15} &
+		{ 15} &
+		{ 19} &
+		{ 11} &
+		{ 11} &
+		{ 13}\\\hline
+	\end{tabular}
+	\end{center}
+	
+	\medskip
+
+	Et ainsi de suite jusqu’à insertion du dernier élément dans le
+	sous-tableau trié. 
+
+	{\sffamily\bfseries
+	Algorithme}
+
+	On combine la recherche de la position d’insertion et le décalage
+	concomitant de valeurs.
+
+	\begin{Pseudocode}
+		\LComment Trie le tableau reçu en paramètre (via un tri par insertion).
+		\Module{triInsertion}{tab\InOut~: tableau[1 à n] d’entiers}{}
+			\Decl i, j, valAInsérer~: entiers
+			\For{i \K{de} 2 \K{à} n}
+				\Let valAInsérer \Gets tab[i]
+				\LComment recherche de l’endroit où insérer valAInsérer dans le 
+				\LComment sous-tableau trié et décalage simultané des éléments
+				\Let j \Gets i - 1
+				\While{j ${\geq}$ 1 ET valAInsérer < tab[j]}
+					\Let tab[j+1] \Gets tab[j]
+					\Let j \Gets j – 1
+				\EndWhile
+				\Let tab[j+1] \Gets valAInsérer
+			\EndFor
+		\EndModule
+	\end{Pseudocode}
+
+%================================================
+\clearpage
+\section{Tri par sélection des minima successifs}
+%=================================================
+	
+	Dans ce tri, on recherche à chaque étape la plus petite valeur de
+	l’ensemble non encore trié et on peut la placer immédiatement 
+	à sa position	définitive.
+
+	{\sffamily\bfseries\upshape
+	Description de l’algorithme}
+
+	Prenons par exemple un tableau de 20 entiers. 
+	
+	La première étape consiste
+	à rechercher la valeur minimale du tableau. Il s’agit de l’élément
+	d’indice 10 et de valeur 17.
+	
+	\begin{center}
+	\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{0.47cm}}}
+		 \textcolor{gray}{\scriptsize 1} &
+		 \textcolor{gray}{\scriptsize 2} &
+		 \textcolor{gray}{\scriptsize 3} &
+		 \textcolor{gray}{\scriptsize 4} &
+		 \textcolor{gray}{\scriptsize 5} &
+		 \textcolor{gray}{\scriptsize 6} &
+		 \textcolor{gray}{\scriptsize 7} &
+		 \textcolor{gray}{\scriptsize 8} &
+		 \textcolor{gray}{\scriptsize 9} &
+		 \textcolor{gray}{\scriptsize 10} &
+		 \textcolor{gray}{\scriptsize 11} &
+		 \textcolor{gray}{\scriptsize 12} &
+		 \textcolor{gray}{\scriptsize 13} &
+		 \textcolor{gray}{\scriptsize 14} &
+		 \textcolor{gray}{\scriptsize 15} &
+		 \textcolor{gray}{\scriptsize 16} &
+		 \textcolor{gray}{\scriptsize 17} &
+		 \textcolor{gray}{\scriptsize 18} &
+		 \textcolor{gray}{\scriptsize 19} &
+		 \textcolor{gray}{\scriptsize 20}
+		 \\
+	\end{tabular}
+	\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.46cm}|}}
+		\hline
+		{20} &
+		{ 52} &
+		{ 61} &
+		{ 47} &
+		{ 82} &
+		{ 64} &
+		{ 95} &
+		{ 66} &
+		{ 84} &
+		{\cellcolor{gray!25}17} &
+		{ 32} &
+		{ 24} &
+		{ 46} &
+		{ 48} &
+		{ 75} &
+		{ 55} &
+		{ 19} &
+		{ 61} &
+		{ 21} &
+		{ 30}\\\hline
+	\end{tabular}
+	\end{center}
+
+	Celui-ci devrait donc apparaitre en 1\textsuperscript{ère }position du
+	tableau. Hors, cette position est occupée par la valeur 20. Comment
+	procéder dès lors pour ne perdre aucune valeur et sans faire appel à un
+	second tableau ? La solution est simple, il suffit d’échanger le
+	contenu des deux éléments d’indices 1 et 10~:
+	
+	\begin{center}
+	\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{0.47cm}}}
+		 \textcolor{gray}{\scriptsize 1} &
+		 \textcolor{gray}{\scriptsize 2} &
+		 \textcolor{gray}{\scriptsize 3} &
+		 \textcolor{gray}{\scriptsize 4} &
+		 \textcolor{gray}{\scriptsize 5} &
+		 \textcolor{gray}{\scriptsize 6} &
+		 \textcolor{gray}{\scriptsize 7} &
+		 \textcolor{gray}{\scriptsize 8} &
+		 \textcolor{gray}{\scriptsize 9} &
+		 \textcolor{gray}{\scriptsize 10} &
+		 \textcolor{gray}{\scriptsize 11} &
+		 \textcolor{gray}{\scriptsize 12} &
+		 \textcolor{gray}{\scriptsize 13} &
+		 \textcolor{gray}{\scriptsize 14} &
+		 \textcolor{gray}{\scriptsize 15} &
+		 \textcolor{gray}{\scriptsize 16} &
+		 \textcolor{gray}{\scriptsize 17} &
+		 \textcolor{gray}{\scriptsize 18} &
+		 \textcolor{gray}{\scriptsize 19} &
+		 \textcolor{gray}{\scriptsize 20}
+		 \\
+	\end{tabular}
+	\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.46cm}|}}
+		\hline
+		{\cellcolor{gray!25}17} &
+		{ 52} &
+		{ 61} &
+		{ 47} &
+		{ 82} &
+		{ 64} &
+		{ 95} &
+		{ 66} &
+		{ 84} &
+		{ 20} &
+		{ 32} &
+		{ 24} &
+		{ 46} &
+		{ 48} &
+		{ 75} &
+		{ 55} &
+		{ 19} &
+		{ 61} &
+		{ 21} &
+		{ 30}\\\hline
+	\end{tabular}
+	\end{center}
+	
+	Le tableau se subdivise à présent en deux sous-tableaux, un sous-tableau
+	déjà trié (pour le moment réduit au seul élément $tab[1]$) et le
+	sous-tableau des autres valeurs non encore triées (de l’indice 2 à 20).
+	On recommence ce processus dans ce second sous-tableau~: le minimum est
+	à présent l'élément d’indice 17 et de valeur 19.
+	Celui-ci viendra donc en 2\textsuperscript{ème} position, échangeant sa
+	place avec la valeur 52 qui s’y trouvait~:
+
+	\begin{center}
+	\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{0.47cm}}}
+		 \textcolor{gray}{\scriptsize 1} &
+		 \textcolor{gray}{\scriptsize 2} &
+		 \textcolor{gray}{\scriptsize 3} &
+		 \textcolor{gray}{\scriptsize 4} &
+		 \textcolor{gray}{\scriptsize 5} &
+		 \textcolor{gray}{\scriptsize 6} &
+		 \textcolor{gray}{\scriptsize 7} &
+		 \textcolor{gray}{\scriptsize 8} &
+		 \textcolor{gray}{\scriptsize 9} &
+		 \textcolor{gray}{\scriptsize 10} &
+		 \textcolor{gray}{\scriptsize 11} &
+		 \textcolor{gray}{\scriptsize 12} &
+		 \textcolor{gray}{\scriptsize 13} &
+		 \textcolor{gray}{\scriptsize 14} &
+		 \textcolor{gray}{\scriptsize 15} &
+		 \textcolor{gray}{\scriptsize 16} &
+		 \textcolor{gray}{\scriptsize 17} &
+		 \textcolor{gray}{\scriptsize 18} &
+		 \textcolor{gray}{\scriptsize 19} &
+		 \textcolor{gray}{\scriptsize 20}
+		 \\
+	\end{tabular}
+	\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.46cm}|}}
+		\hline
+		{\cellcolor{gray!25}17} &
+		{\cellcolor{gray!25}19} &
+		{ 61} &
+		{ 47} &
+		{ 82} &
+		{ 64} &
+		{ 95} &
+		{ 66} &
+		{ 84} &
+		{ 20} &
+		{ 32} &
+		{ 24} &
+		{ 46} &
+		{ 48} &
+		{ 75} &
+		{ 55} &
+		{ 52} &
+		{ 61} &
+		{ 21} &
+		{ 30}\\\hline
+	\end{tabular}
+	\end{center}
+
+	Le sous-tableau trié est maintenant formé des deux premiers éléments, et
+	le sous-tableau non trié par les 18 éléments suivants. 
+	
+	Pour un tableau de taille $n$, 
+	à l’étape $i$ de cet algorithme, on sélectionne donc le minimum du
+	sous-tableau non trié (entre les indices $i$ et $n$). Une
+	fois le minimum localisé, on l’échange avec l’élément d’indice
+	$i$. À chaque étape, la taille du sous-tableau trié augmente de
+	1 et celle du sous-tableau non trié diminue de 1. L’algorithme s’arrête
+	à la $n$\textsuperscript{ème} étape, lorsque le sous-tableau
+	trié correspond au tableau de départ. En pratique l’arrêt se fait après
+	l’étape $n - 1$, car lorsque le sous-tableau non trié n’est plus
+	que de taille 1, il contient nécessairement le maximum de l’ensemble.
+
+	{\sffamily\bfseries\upshape
+	Algorithme}
+	
+	\begin{Pseudocode}
+		\LComment Trie le tableau reçu en paramètre (via un tri par sélection des minima successifs).
+		\Module{triSélectionMinimaSuccessifs}{tab\InOut~: tableau[1 à n] d’entiers}{}
+			\Decl i, indiceMin~: entier
+			\For{i \K{de} 1 \K{à} n – 1}
+			\RComment i correspond à l’étape de l’algorithme
+				\Let indiceMin \Gets positionMin( tab, i, n )
+				\Stmt swap( tab[i], tab[indiceMin] )
+			\EndFor
+		\EndModule
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+		\LComment {Échange le contenu de 2 variables.}
+		\Module{swap}{a\InOut, b\InOut~: entiers}{}
+			\Decl aux~: entiers
+			\Let aux \Gets a
+			\Let a \Gets b
+			\Let b \Gets aux
+		\EndModule
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+		\LComment Retourne l’indice du minimum entre les indices début et fin du tableau reçu.
+		\Module{positionMin}{tab\In~: tableau[1 à n] d’entiers, début, fin~: entiers}{entier}
+			\Decl indiceMin, i~: entiers
+			\Let indiceMin \Gets début
+			\For{i \K{de} début+1 \K{à} fin}
+				\If{tab[i] < tab[indiceMin]}
+					\Decl indiceMin \Gets i
+				\EndIf
+			\EndFor
+			\Return indiceMin
+		\EndModule
+	\end{Pseudocode}
+
+
+%==================
+\section{Tri bulle}
+%===================
+	
+	Il s’agit d’un tri par \textbf{permutations} ayant pour but d’amener à
+	chaque étape à la «~surface~» du sous-tableau non trié (on entend par
+	là l’élément d’indice minimum) la valeur la plus petite, appelée la
+	\textbf{bulle}. La caractéristique de cette méthode est que les
+	comparaisons ne se font qu’entre éléments consécutifs du tableau.
+
+	{\sffamily\bfseries\upshape
+	Description de l’algorithme}
+
+	Prenons pour exemple un tableau de taille 14. En partant de la fin du
+	tableau, on le parcourt vers la gauche en comparant chaque couple de
+	valeurs consécutives. Quand deux valeurs sont dans le désordre, on les
+	permute. Le premier parcours s’achève lorsqu’on arrive à l’élément
+	d’indice 1 qui contient alors la «~bulle~»,
+	c'est-à-dire la plus petite valeur du tableau, soit 1~:
+
+	\begin{center}
+	\begin{tabular}{*{14}{>{\centering\sffamily\itshape\arraybackslash}m{0.75cm}}}
+		 \textcolor{gray}{\scriptsize 1} &
+		 \textcolor{gray}{\scriptsize 2} &
+		 \textcolor{gray}{\scriptsize 3} &
+		 \textcolor{gray}{\scriptsize 4} &
+		 \textcolor{gray}{\scriptsize 5} &
+		 \textcolor{gray}{\scriptsize 6} &
+		 \textcolor{gray}{\scriptsize 7} &
+		 \textcolor{gray}{\scriptsize 8} &
+		 \textcolor{gray}{\scriptsize 9} &
+		 \textcolor{gray}{\scriptsize 10} &
+		 \textcolor{gray}{\scriptsize 11} &
+		 \textcolor{gray}{\scriptsize 12} &
+		 \textcolor{gray}{\scriptsize 13} &
+		 \textcolor{gray}{\scriptsize 14}
+		\\
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{|*{14}{>{\centering\arraybackslash}m{0.75cm}|}}
+		\hline
+		{10} &
+		{  5} &
+		{ 12} &
+		{ 15} &
+		{  4} &
+		{  8} &
+		{  1} &
+		{  7} &
+		{ 12} &
+		{ 11} &
+		{  3} &
+		{  6} &
+		{  5} &
+		{\cellcolor{gray!25}4}\\\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{|*{14}{>{\centering\arraybackslash}m{0.75cm}|}}
+		\hline
+		{10} &
+		{  5} &
+		{ 12} &
+		{ 15} &
+		{  4} &
+		{  8} &
+		{  1} &
+		{  7} &
+		{ 12} &
+		{ 11} &
+		{  3} &
+		{  6} &
+		{\cellcolor{gray!25}4} &
+		{  5}\\\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{|*{14}{>{\centering\arraybackslash}m{0.75cm}|}}
+		\hline
+		{10} &
+		{  5} &
+		{ 12} &
+		{ 15} &
+		{  4} &
+		{  8} &
+		{  1} &
+		{  7} &
+		{ 12} &
+		{ 11} &
+		{  3} &
+		{\cellcolor{gray!25}4} &
+		{  6} &
+		{  5}\\\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{|*{14}{>{\centering\arraybackslash}m{0.75cm}|}}
+		\hline
+		{10} &
+		{  5} &
+		{ 12} &
+		{ 15} &
+		{  4} &
+		{  8} &
+		{  1} &
+		{  7} &
+		{ 12} &
+		{ 11} &
+		{\cellcolor{gray!25}3} &
+		{  4} &
+		{  6} &
+		{  5}\\\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{|*{14}{>{\centering\arraybackslash}m{0.75cm}|}}
+		\hline
+		{10} &
+		{  5} &
+		{ 12} &
+		{ 15} &
+		{  4} &
+		{  8} &
+		{  1} &
+		{  7} &
+		{ 12} &
+		{\cellcolor{gray!25}3} &
+		{ 11} &
+		{  4} &
+		{  6} &
+		{  5}\\\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{|*{14}{>{\centering\arraybackslash}m{0.75cm}|}}
+		\hline
+		{10} &
+		{  5} &
+		{ 12} &
+		{ 15} &
+		{  4} &
+		{  8} &
+		{  1} &
+		{  7} &
+		{\cellcolor{gray!25}3} &
+		{ 12} &
+		{ 11} &
+		{  4} &
+		{  6} &
+		{  5}\\\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{|*{14}{>{\centering\arraybackslash}m{0.75cm}|}}
+		\hline
+		{10} &
+		{  5} &
+		{ 12} &
+		{ 15} &
+		{  4} &
+		{  8} &
+		{  1} &
+		{\cellcolor{gray!25}3} &
+		{  7} &
+		{ 12} &
+		{ 11} &
+		{  4} &
+		{  6} &
+		{  5}\\\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{|*{14}{>{\centering\arraybackslash}m{0.75cm}|}}
+		\hline
+		{10} &
+		{  5} &
+		{ 12} &
+		{ 15} &
+		{  4} &
+		{  8} &
+		{\cellcolor{gray!25}1} &
+		{  3} &
+		{  7} &
+		{ 12} &
+		{ 11} &
+		{  4} &
+		{  6} &
+		{  5}\\\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{|*{14}{>{\centering\arraybackslash}m{0.75cm}|}}
+		\hline
+		{10} &
+		{  5} &
+		{ 12} &
+		{ 15} &
+		{  4} &
+		{\cellcolor{gray!25}1} &
+		{  8} &
+		{  3} &
+		{  7} &
+		{ 12} &
+		{ 11} &
+		{  4} &
+		{  6} &
+		{  5}\\\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{|*{14}{>{\centering\arraybackslash}m{0.75cm}|}}
+		\hline
+		{10} &
+		{  5} &
+		{ 12} &
+		{ 15} &
+		{\cellcolor{gray!25}1} &
+		{  4} &
+		{  8} &
+		{  3} &
+		{  7} &
+		{ 12} &
+		{ 11} &
+		{  4} &
+		{  6} &
+		{  5}\\\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{|*{14}{>{\centering\arraybackslash}m{0.75cm}|}}
+		\hline
+		{10} &
+		{  5} &
+		{ 12} &
+		{\cellcolor{gray!25}1} &
+		{ 15} &
+		{  4} &
+		{  8} &
+		{  3} &
+		{  7} &
+		{ 12} &
+		{ 11} &
+		{  4} &
+		{  6} &
+		{  5}\\\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{|*{14}{>{\centering\arraybackslash}m{0.75cm}|}}
+		\hline
+		{10} &
+		{  5} &
+		{\cellcolor{gray!25}1} &
+		{ 12} &
+		{ 15} &
+		{  4} &
+		{  8} &
+		{  3} &
+		{  7} &
+		{ 12} &
+		{ 11} &
+		{  4} &
+		{  6} &
+		{  5}\\\hline
+	\end{tabular}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{|*{14}{>{\centering\arraybackslash}m{0.75cm}|}}
+		\hline
+		{10} &
+		{\cellcolor{gray!25}1} &
+		{  5} &
+		{ 12} &
+		{ 15} &
+		{  4} &
+		{  8} &
+		{  3} &
+		{  7} &
+		{ 12} &
+		{ 11} &
+		{  4} &
+		{  6} &
+		{  5}\\\hline
+	\end{tabular}
+	\end{center}
+
+	\begin{center}
+	\begin{tabular}{|*{14}{>{\centering\arraybackslash}m{0.75cm}|}}
+		\hline
+		\cellcolor{gray!25}1 & 
+		10 & 
+		5 & 
+		12 & 
+		15 &
+		4 &
+		8 &
+		3 &
+		7 &
+		12 &
+		11 &
+		4 &
+		6 &
+		5
+		\\\hline
+	\end{tabular}
+	\end{center}
+
+	Ceci achève le premier parcours. On recommence à présent le même
+	processus dans le sous-tableau débutant au deuxième élément, ce qui
+	donnera le contenu suivant~:
+
+	\begin{center}
+	\begin{tabular}{|*{14}{>{\centering\arraybackslash}m{0.75cm}|}}
+		\hline
+		\cellcolor{gray!25}1 & \cellcolor{gray!25}3 & 10 & 5 & 12 & 15 & 4 & 8 & 4 & 7 & 12 & 11 & 5 & 6
+		\\\hline
+	\end{tabular}
+	\end{center}
+
+	Comme pour le tri par recherche des minima successifs, à l’issue de
+	l’étape $i$ de l’algorithme, on obtient un sous-tableau trié
+	(entre les indices 1 et \textit{i }) et un tableau non encore trié
+	(entre les indices $i + 1$ et $n$). Le tri est donc
+	achevé à l’issue de l’étape $n - 1$. Cependant, on notera que
+	petit à petit, outre le déplacement de la bulle, les éléments plus
+	petits évoluent progressivement vers la gauche, et les plus gros vers
+	la droite, de sorte qu’il est fréquent que le nombre d’étapes effectif
+	est inférieur au nombre d’étapes théorique.
+
+	{\sffamily\bfseries\upshape
+	Algorithme}
+
+	Dans cet algorithme, la variable \pseudocode{indiceBulle} est à
+	la fois le compteur d’étapes et aussi l’indice de l’élément récepteur
+	de la bulle à la fin d’une étape donnée.
+	
+	\begin{Pseudocode}
+	\LComment Trie le tableau reçu en paramètre (via un tri bulle).
+		\Module{triBulle}{tab\InOut~: tableau[1 à n] d’entiers}{}
+			\Decl indiceBulle, i~: entiers
+			\For{indiceBulle \K{de} 1 \K{à} n}
+				\For{i \K{de} n – 1 \K{à} indiceBulle \K{par} – 1}
+					\If{tab[i] > tab[i + 1]}
+						\Stmt swap( tab[i], tab[i + 1] )
+						\RComment voir algorithme précédent
+					\EndIf
+				\EndFor
+			\EndFor
+		\EndModule
+	\end{Pseudocode}
+
+%=========================
+\section{Cas particuliers}
+%==========================
+
+	{\sffamily\bfseries\upshape
+	Tri partiel}
+
+		Parfois, on n’est pas intéressé par un tri complet de l’ensemble mais on
+		veut uniquement les «~$k$~» plus petites (ou plus grandes) valeurs. Le
+		tri par recherche des minima et le tri bulle sont particulièrement
+		adaptés à cette situation ; il suffit de les arrêter plus tôt. Par
+		contre, le tri par insertion est inefficace car il ne permet pas un
+		arrêt anticipé.
+
+%--------------------------------------------
+% @mcd : le chef demande si on peut virer 
+% le paragraphe qui suit ?
+% --------------------------------------------
+	%{\sffamily\bfseries\upshape
+	%Ensemble (presque) trié}
+
+		%Les trois tris que nous avons vus ont la même complexité quadratique
+		%(voir plus loin) dans le cas général mais comment se comportent-ils
+		%dans le cas d’un tableau (presque) trié ? Dans ce cas, on peut vérifier
+		%que le tri par recherche des minima successifs reste quadratique alors
+		%que les deux autres deviennent linéaires (en $n$).
+
+	{\sffamily\bfseries\upshape
+	Sélection des meilleurs}
+
+		Une autre situation courante est la suivante~: un ensemble de valeurs
+		sont traitées (lues, calculées\dots) et il ne faut garder que les
+		$k$ plus petites (ou plus grandes).
+		L'algorithme est plus simple à écrire si on utilise
+		une position supplémentaire en fin de tableau. Notons aussi qu’il faut
+		tenir compte du cas où il y a moins de valeurs que le nombre de valeurs
+		voulues ; c’est pourquoi on ajoute une variable indiquant le nombre
+		exact de valeurs dans le tableau.
+
+		Exemple~:
+		on lit un ensemble de valeurs strictement positives (un 0 indique la fin
+		de la lecture) et on ne garde que les $k$ plus petites valeurs.
+
+		\begin{Pseudocode}
+			\Module{meilleurs}{plusPetits\InOut~: tableau[1 à k + 1] d’entiers, nbValeurs\Out~: entier}{}
+				\Decl val~: entier
+				\Let nbValeurs \Gets 0
+				\Read val
+				\While{val ${\neq}$ 0}
+					\Stmt insérer( val, plusPetits, nbValeurs )
+					\Read val
+				\EndWhile
+			\EndModule	
+		\end{Pseudocode}
+		
+		\begin{Pseudocode}			
+			\Module{insérer}{val\In~: entier, plusPetits\InOut~: tableau[1 à k + 1] d’entiers, nbValeurs\InOut~: entier}{}
+				\Decl i~: entiers
+				\Let i \Gets nbValeurs
+				\While{i > 0 ET val < plusPetits[i]}
+					\Let plusPetits[i + 1] \Gets plusPetits[i]
+					\Let i \Gets i - 1
+				\EndWhile
+				\Let plusPetits[i + 1] \Gets val
+				\If{nbValeurs < k}
+					\Let nbValeurs \Gets nbValeurs + 1
+				\EndIf
+			\EndModule
+		\end{Pseudocode}
+		
+
+%===============================
+\section{Recherche dichotomique}
+%================================
+
+	La recherche dichotomique a pour essence de réduire à
+	chaque étape la taille de l’ensemble de recherche de moitié, jusqu’à ce
+	qu’il ne reste qu’un seul élément dont la valeur devrait être celle
+	recherchée, sauf bien entendu en cas d’inexistence de cette valeur dans
+	l’ensemble de départ. Nous l’expliquons pour un tableau ordonné mais
+	elle peut s’appliquer aussi avec des changements mineurs pour
+	d'autres structures (par exemple la liste ordonnée que
+	nous étudierons plus tard).
+
+	{\sffamily\bfseries\upshape
+	Description de l’algorithme}
+
+	Soit \pseudocode{val} la valeur recherchée dans une zone
+	délimitée par les indices \pseudocode{indiceGauche} et
+	\pseudocode{indiceDroit}. On commence par déterminer l’élément
+	médian, c’est-à-dire celui qui se trouve « au milieu » de la zone de
+	recherche ; son indice sera déterminé par la formule
+
+	{\centering
+	\pseudocode{indiceMédian \Gets (indiceGauche + indiceDroit) DIV 2}\par{}
+	}
+
+	N.B.~: cet élément médian n'est pas tout à fait au milieu dans 
+	le cas d'une zone contenant un nombre pair d'éléments.
+	On compare alors \pseudocode{val}
+	avec la valeur de cet élément médian ; il est possible qu’on ait trouvé
+	la valeur cherchée; sinon, on partage la zone de recherche en deux
+	parties~: une qui \textbf{ne contient certainement pas}
+	la valeur cherchée et une qui \textbf{pourrait la
+	contenir}. C’est cette deuxième partie qui 
+	devient la nouvelle zone de recherche. On
+	réitère le processus jusqu’à ce que la valeur cherchée soit trouvée ou
+	que la zone de recherche soit réduite à sa plus simple expression,
+	c’est-à-dire un seul élément.
+
+	{\sffamily\bfseries
+	Algorithme}
+	
+	\begin{Pseudocode}
+		\Module{rechercheDichotomique}{tab\InOut~: tableau[1 à n] de T, valeur\In~: T, pos\Out~: entier}{booléen}
+			\Decl indiceDroit, indiceGauche, indiceMédian~: entiers
+			\Decl candidat~: T
+			\Decl trouvé~: booléen
+			\Empty
+			\Let indiceGauche \Gets 1
+			\Let indiceDroit \Gets n
+			\Let trouvé \Gets faux
+			\Empty
+			\While{NON trouvé ET indiceGauche {${\leq}$} indiceDroit}
+				\Let indiceMédian \Gets (indiceGauche + indiceDroit) DIV 2
+				\Let candidat \Gets tab[indiceMédian]
+				\Switch{}
+					\Case{candidat = valeur} 
+						trouvé \Gets vrai
+					\Case{candidat < valeur}
+						indiceGauche \Gets indiceMédian + 1
+						\RComment on garde la partie droite
+					\Case{candidat > valeur}
+						indiceDroit \Gets indiceMédian – 1
+						\RComment on garde la partie gauche
+				\EndSwitch
+			\EndWhile{}
+			\Empty
+			\If{trouvé}
+				\Let pos \Gets indiceMédian
+			\Else
+				\Let pos \Gets indiceGauche
+				\RComment dans le cas où la valeur n’est pas trouvée,
+				\Empty 
+				\RComment on vérifiera que indiceGauche donne la valeur où elle pourrait être insérée.
+			\EndIf{}
+			\Empty
+			\Return trouvé
+		\EndModule
+	\end{Pseudocode}
+		
+		{\sffamily\bfseries\upshape
+		Exemple de recherche fructueuse}
+
+		Supposons que l’on recherche la valeur
+		\textbf{23} dans un
+		tableau de 20 entiers. La zone ombrée représente à chaque fois la
+		partie de recherche, qui est au départ le tableau dans son entièreté.
+		Au départ,
+		\pseudocode{indiceGauche} vaut 1 et
+		\pseudocode{indiceDroit}	vaut 20.
+			
+		\begin{center}
+		\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{0.47cm}}}
+		 \textcolor{gray}{\scriptsize 1} &
+		 \textcolor{gray}{\scriptsize 2} &
+		 \textcolor{gray}{\scriptsize 3} &
+		 \textcolor{gray}{\scriptsize 4} &
+		 \textcolor{gray}{\scriptsize 5} &
+		 \textcolor{gray}{\scriptsize 6} &
+		 \textcolor{gray}{\scriptsize 7} &
+		 \textcolor{gray}{\scriptsize 8} &
+		 \textcolor{gray}{\scriptsize 9} &
+		 \textcolor{gray}{\scriptsize 10} &
+		 \textcolor{gray}{\scriptsize 11} &
+		 \textcolor{gray}{\scriptsize 12} &
+		 \textcolor{gray}{\scriptsize 13} &
+		 \textcolor{gray}{\scriptsize 14} &
+		 \textcolor{gray}{\scriptsize 15} &
+		 \textcolor{gray}{\scriptsize 16} &
+		 \textcolor{gray}{\scriptsize 17} &
+		 \textcolor{gray}{\scriptsize 18} &
+		 \textcolor{gray}{\scriptsize 19} &
+		 \textcolor{gray}{\scriptsize 20}
+			 \\
+		\end{tabular}
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.46cm}|}}
+			\hline
+			{\cellcolor{gray!25} 1} &
+			{\cellcolor{gray!25}  3} &
+			{\cellcolor{gray!25}  5} &
+			{\cellcolor{gray!25}  7} &
+			{\cellcolor{gray!25}  7} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25} 10} &
+			{\cellcolor{gray!25} 10} &
+			{\cellcolor{gray!25} 15} &
+			{\cellcolor{gray!25} 16} &
+			{\cellcolor{gray!25} 20} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 25} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 29} &
+			{\cellcolor{gray!25} 29}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\bigskip
+
+		\textit{Première étape}~:
+		\pseudocode{indiceMédian \Gets (1 + 20) DIV	2}, 
+		c’est-à-dire 10. 
+		Comme la valeur en position 10 est 15, 
+		la valeur cherchée doit se trouver à sa droite, et
+		on prend comme nouvelle zone de recherche celle délimitée par
+		\pseudocode{indiceGauche} qui vaut 11 et
+		\pseudocode{indiceDroit} qui vaut 20.
+		
+		\bigskip
+		
+		\begin{center}
+		\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{0.47cm}}}
+		 \textcolor{gray}{\scriptsize 1} &
+		 \textcolor{gray}{\scriptsize 2} &
+		 \textcolor{gray}{\scriptsize 3} &
+		 \textcolor{gray}{\scriptsize 4} &
+		 \textcolor{gray}{\scriptsize 5} &
+		 \textcolor{gray}{\scriptsize 6} &
+		 \textcolor{gray}{\scriptsize 7} &
+		 \textcolor{gray}{\scriptsize 8} &
+		 \textcolor{gray}{\scriptsize 9} &
+		 \textcolor{gray}{\scriptsize 10} &
+		 \textcolor{gray}{\scriptsize 11} &
+		 \textcolor{gray}{\scriptsize 12} &
+		 \textcolor{gray}{\scriptsize 13} &
+		 \textcolor{gray}{\scriptsize 14} &
+		 \textcolor{gray}{\scriptsize 15} &
+		 \textcolor{gray}{\scriptsize 16} &
+		 \textcolor{gray}{\scriptsize 17} &
+		 \textcolor{gray}{\scriptsize 18} &
+		 \textcolor{gray}{\scriptsize 19} &
+		 \textcolor{gray}{\scriptsize 20}
+			 \\
+		\end{tabular}
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.46cm}|}}
+			\hline
+			{ 1} &
+			{  3} &
+			{  5} &
+			{  7} &
+			{  7} &
+			{  9} &
+			{  9} &
+			{ 10} &
+			{ 10} &
+			{ 15} &
+			{\cellcolor{gray!25} 16} &
+			{\cellcolor{gray!25} 20} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 25} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 29} &
+			{\cellcolor{gray!25} 29}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\bigskip
+
+		\textit{Deuxième étape}~:
+		\pseudocode{indiceMédian \Gets (11 + 20) DIV 2}, c’est-à-dire 15. 
+		Comme on y trouve la valeur 25, 
+		on garde les éléments situées à la gauche de celui-ci ; la
+		nouvelle zone de recherche est [11, 14].
+				
+		\begin{center}
+		\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{0.47cm}}}
+		 \textcolor{gray}{\scriptsize 1} &
+		 \textcolor{gray}{\scriptsize 2} &
+		 \textcolor{gray}{\scriptsize 3} &
+		 \textcolor{gray}{\scriptsize 4} &
+		 \textcolor{gray}{\scriptsize 5} &
+		 \textcolor{gray}{\scriptsize 6} &
+		 \textcolor{gray}{\scriptsize 7} &
+		 \textcolor{gray}{\scriptsize 8} &
+		 \textcolor{gray}{\scriptsize 9} &
+		 \textcolor{gray}{\scriptsize 10} &
+		 \textcolor{gray}{\scriptsize 11} &
+		 \textcolor{gray}{\scriptsize 12} &
+		 \textcolor{gray}{\scriptsize 13} &
+		 \textcolor{gray}{\scriptsize 14} &
+		 \textcolor{gray}{\scriptsize 15} &
+		 \textcolor{gray}{\scriptsize 16} &
+		 \textcolor{gray}{\scriptsize 17} &
+		 \textcolor{gray}{\scriptsize 18} &
+		 \textcolor{gray}{\scriptsize 19} &
+		 \textcolor{gray}{\scriptsize 20}
+			 \\
+		\end{tabular}
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.46cm}|}}
+			\hline
+			{ 1} &
+			{  3} &
+			{  5} &
+			{  7} &
+			{  7} &
+			{  9} &
+			{  9} &
+			{ 10} &
+			{ 10} &
+			{ 15} &
+			{\cellcolor{gray!25} 16} &
+			{\cellcolor{gray!25} 20} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 23} &
+			{ 25} &
+			{ 28} &
+			{ 28} &
+			{ 28} &
+			{ 29} &
+			{ 29}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\bigskip
+
+		\textit{Troisième étape}~:
+		\pseudocode{indiceMédian \Gets (11 + 14) DIV 2}, c’est-à-dire 12 
+		où se trouve l’élément 20. La zone de recherche devient
+		\pseudocode{indiceGauche} vaut 13 et
+		\pseudocode{indiceDroit} vaut 14.
+
+		
+		\begin{center}
+		\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{0.47cm}}}
+		 \textcolor{gray}{\scriptsize 1} &
+		 \textcolor{gray}{\scriptsize 2} &
+		 \textcolor{gray}{\scriptsize 3} &
+		 \textcolor{gray}{\scriptsize 4} &
+		 \textcolor{gray}{\scriptsize 5} &
+		 \textcolor{gray}{\scriptsize 6} &
+		 \textcolor{gray}{\scriptsize 7} &
+		 \textcolor{gray}{\scriptsize 8} &
+		 \textcolor{gray}{\scriptsize 9} &
+		 \textcolor{gray}{\scriptsize 10} &
+		 \textcolor{gray}{\scriptsize 11} &
+		 \textcolor{gray}{\scriptsize 12} &
+		 \textcolor{gray}{\scriptsize 13} &
+		 \textcolor{gray}{\scriptsize 14} &
+		 \textcolor{gray}{\scriptsize 15} &
+		 \textcolor{gray}{\scriptsize 16} &
+		 \textcolor{gray}{\scriptsize 17} &
+		 \textcolor{gray}{\scriptsize 18} &
+		 \textcolor{gray}{\scriptsize 19} &
+		 \textcolor{gray}{\scriptsize 20}
+			 \\
+		\end{tabular}
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.46cm}|}}
+			\hline
+			{ 1} &
+			{  3} &
+			{  5} &
+			{  7} &
+			{  7} &
+			{  9} &
+			{  9} &
+			{ 10} &
+			{ 10} &
+			{ 15} &
+			{ 16} &
+			{ 20} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 23} &
+			{ 25} &
+			{ 28} &
+			{ 28} &
+			{ 28} &
+			{ 29} &
+			{ 29}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\bigskip
+
+
+		\textit{Quatrième étape~:}
+		\pseudocode{indiceMédian \Gets (13 + 14) DIV 2}, 
+		c’est-à-dire 13 où se trouve la valeur
+		cherchée ; la recherche est terminée.
+
+	{\sffamily\bfseries\upshape
+	Exemple de recherche infructueuse}
+
+		Recherchons à présent la valeur \textbf{8}. Les étapes de la recherche 
+		vont donner successivement
+		
+		\begin{center}
+		\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{0.47cm}}}
+		 \textcolor{gray}{\scriptsize 1} &
+		 \textcolor{gray}{\scriptsize 2} &
+		 \textcolor{gray}{\scriptsize 3} &
+		 \textcolor{gray}{\scriptsize 4} &
+		 \textcolor{gray}{\scriptsize 5} &
+		 \textcolor{gray}{\scriptsize 6} &
+		 \textcolor{gray}{\scriptsize 7} &
+		 \textcolor{gray}{\scriptsize 8} &
+		 \textcolor{gray}{\scriptsize 9} &
+		 \textcolor{gray}{\scriptsize 10} &
+		 \textcolor{gray}{\scriptsize 11} &
+		 \textcolor{gray}{\scriptsize 12} &
+		 \textcolor{gray}{\scriptsize 13} &
+		 \textcolor{gray}{\scriptsize 14} &
+		 \textcolor{gray}{\scriptsize 15} &
+		 \textcolor{gray}{\scriptsize 16} &
+		 \textcolor{gray}{\scriptsize 17} &
+		 \textcolor{gray}{\scriptsize 18} &
+		 \textcolor{gray}{\scriptsize 19} &
+		 \textcolor{gray}{\scriptsize 20}
+			 \\
+		\end{tabular}
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.46cm}|}}
+			\hline
+			{\cellcolor{gray!25}  1} &
+			{\cellcolor{gray!25}  3} &
+			{\cellcolor{gray!25}  5} &
+			{\cellcolor{gray!25}  7} &
+			{\cellcolor{gray!25}  7} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25} 10} &
+			{\cellcolor{gray!25} 10} &
+			{\cellcolor{gray!25} 15} &
+			{\cellcolor{gray!25} 16} &
+			{\cellcolor{gray!25} 20} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 25} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 29} &
+			{\cellcolor{gray!25} 29}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\begin{center}
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.46cm}|}}
+			\hline
+			{\cellcolor{gray!25}  1} &
+			{\cellcolor{gray!25}  3} &
+			{\cellcolor{gray!25}  5} &
+			{\cellcolor{gray!25}  7} &
+			{\cellcolor{gray!25}  7} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25} 10} &
+			{\cellcolor{gray!25} 10} &
+			{ 15} &
+			{ 16} &
+			{ 20} &
+			{ 23} &
+			{ 23} &
+			{ 25} &
+			{ 28} &
+			{ 28} &
+			{ 28} &
+			{ 29} &
+			{ 29}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\begin{center}
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.46cm}|}}
+			\hline
+			{ 1} &
+			{  3} &
+			{  5} &
+			{  7} &
+			{  7} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25} 10} &
+			{\cellcolor{gray!25} 10} &
+			{ 15} &
+			{ 16} &
+			{ 20} &
+			{ 23} &
+			{ 23} &
+			{ 25} &
+			{ 28} &
+			{ 28} &
+			{ 28} &
+			{ 29} &
+			{ 29}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\begin{center}
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.46cm}|}}
+			\hline
+			{ 1} &
+			{  3} &
+			{  5} &
+			{  7} &
+			{  7} &
+			{\cellcolor{gray!25}  9} &
+			{  9} &
+			{ 10} &
+			{ 10} &
+			{ 15} &
+			{ 16} &
+			{ 20} &
+			{ 23} &
+			{ 23} &
+			{ 25} &
+			{ 28} &
+			{ 28} &
+			{ 28} &
+			{ 29} &
+			{ 29}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\smallskip
+
+		Arrivé à ce stade, la zone de recherche s’est réduite à un seul élément.
+		Ce n’est pas celui qu’on recherche mais c’est à cet endroit qu’il se
+		serait trouvé ; c’est donc là qu’on pourra éventuellement
+		l'insérer. Le paramètre de sortie prend la valeur 6.
+
+%=====================================
+\section{Introduction à la complexité}
+%======================================
+
+	L’algorithme de recherche dichotomique est beaucoup plus rapide que
+	l’algorithme de recherche linéaire. Mais qu’est-ce que cela veut dire
+	exactement ? Comment le mesure-t-on ? Quels critères utilise-t-on ?
+
+	On pourrait se dire que pour comparer deux algorithmes, il suffit de les
+	traduire tous les deux dans un langage de programmation, de les
+	exécuter et de comparer leur temps d’exécution. Cela pose toutefois
+	quelques problèmes
+			
+	\begin{liste}
+		\item 
+			Il faut que les programmes soient exécutés dans des environnements
+			strictement identiques ce qui n’est pas toujours le cas ou facile 
+			à vérifier.
+		\item 
+			Le test ne porte que sur un (voir quelques uns) jeu(x) de tests. Comment
+			en tirer un enseignement général ? Que se passerait-il avec des données
+			plus importantes ? Avec des données différentes ?
+	\end{liste}
+	
+	En fait, un chiffre précis ne nous intéresse pas. Ce qui est intéressant
+	à connaitre, c’est l’évolution de la rapidité de l’algorithme (plus
+	précisément, le nombre d’opérations de base) en fonction de la
+	\textbf{taille} du problème à résoudre. Comment va-t-il se comporter
+	sur de «~gros~» problèmes ?
+
+	Dans le cas de la recherche dans un tableau, 
+	la taille du problème est la taille du
+	tableau dans lequel on recherche un élément. On peut considérer que
+	l’opération de base est la comparaison avec un élément du tableau. La
+	question est alors la suivante~: pour un tableau de taille $n$, à combien
+	de comparaisons faut-il procéder pour trouver l’élément (ou se rendre
+	compte de son absence) ?
+
+	{\bfseries
+	Pour la recherche linéaire}
+
+		Cela dépend évidemment de la position de la valeur à trouver. Dans le
+		meilleur des cas c’est 1, dans le pire c’est $n$ mais on peut dire, qu’en
+		moyenne, cela entraine «~$n/2$~» comparaisons (que ce soit pour la
+		trouver ou se rendre compte de son absence).
+
+	{\bfseries
+	Pour la recherche dichotomique}
+
+		Ici, la zone de recherche est divisée par 2, à chaque étape. Imaginons
+		une liste de 64 éléments~: après 6 étapes, on arrive à un élément
+		isolé. Pour une liste de taille $n$, on peut en déduire que le nombre de
+		comparaisons est au maximum l'exposant
+		qu'il faut donner à 2 pour obtenir $n$, soit
+		«~$\log_2(n)$~».
+
+	{\sffamily\bfseries\upshape
+	Comparaisons}
+
+	
+	Voici un tableau comparatif du nombre de comparaison en fonction de la
+	taille $n$
+
+	\begin{center}
+	\begin{tabular}{|m{4.4300003cm}|m{0.507cm}|m{0.71900004cm}|m{0.93100005cm}|m{1.2479999cm}|m{1.4599999cm}|m{1.671cm}|}
+	\hline
+	\raggedright \bfseries $n$ &
+	\raggedleft \bfseries 10 &
+	\raggedleft \bfseries 100 &
+	\raggedleft \bfseries 1000 &
+	\raggedleft \bfseries 10.000 &
+	\raggedleft \bfseries 100.000 &
+	\raggedleft\arraybslash \bfseries 1
+	million\\\hline
+	\raggedright \bfseries recherche linéaire &
+	\raggedleft  5 &
+	\raggedleft  50 &
+	\raggedleft  500 &
+	\raggedleft  5.000 &
+	\raggedleft  50.000 &
+	\raggedleft\arraybslash  500.000\\\hline
+	\raggedright \bfseries recherche dichotomique &
+	\raggedleft  4 &
+	\raggedleft  7 &
+	\raggedleft  10 &
+	\raggedleft  14 &
+	\raggedleft  17 &
+	\raggedleft\arraybslash  20\\\hline
+	\end{tabular}
+	\end{center}
+	
+	On voit que c’est surtout pour des grands problèmes que la recherche
+	dichotomique montre toute son efficacité. On voit aussi que ce qui est
+	important pour mesurer la complexité c'est
+	l'ordre de grandeur du nombre de comparaisons. 
+
+	
+	On dira que la recherche simple est un algorithme de complexité linéaire
+	(c'est-à-dire que le nombre
+	d'opérations est de l'ordre de $n$ ou
+	proportionnel à $n$) ce qu’on note en langage plus mathématique $O(n)$
+	(prononcé «~grand $O$ de $n$~»). Pour la recherche dichotomique, la
+	complexité est logarithmique, et on le note $O(\log_2(n))$.
+
+	Comparons les complexités les plus courantes.
+
+	\begin{center}
+	\begin{tabular}{|m{3.1cm}|m{1.0cm}|m{1.3cm}|m{1.074cm}|m{1.3cm}|m{1.287cm}|m{1.425cm}|m{1.714cm}|}
+	\hline
+	\centering \bfseries $n$ &
+	\raggedleft \bfseries 10 &
+	\raggedleft \bfseries 100 &
+	\raggedleft \bfseries 1000 &
+	\raggedleft \bfseries 10\textsuperscript{4} &
+	\raggedleft \bfseries 10\textsuperscript{5} &
+	\raggedleft \bfseries 10\textsuperscript{6} &
+	\raggedleft\arraybslash \bfseries
+	10\textsuperscript{9}\\\hline
+	\centering  $O(1)$ &
+	\raggedleft  1 &
+	\raggedleft  1 &
+	\raggedleft  1 &
+	\raggedleft  1 &
+	\raggedleft  1 &
+	\raggedleft  1 &
+	\raggedleft\arraybslash  1\\\hline
+	\centering  $O(\log_2(n))$ &
+	\raggedleft  4 &
+	\raggedleft  7 &
+	\raggedleft  10 &
+	\raggedleft  14 &
+	\raggedleft  17 &
+	\raggedleft  20 &
+	\raggedleft\arraybslash  30\\\hline
+	\centering  $O(n)$ &
+	\raggedleft  10 &
+	\raggedleft  100 &
+	\raggedleft  1000 &
+	\raggedleft  10.000 &
+	\raggedleft  10\textsuperscript{5} &
+	\raggedleft  10\textsuperscript{6} &
+	\raggedleft\arraybslash 
+	10\textsuperscript{9}\\\hline
+	\centering  $O(n^2)$ &
+	\raggedleft  100 &
+	\raggedleft  10.000 &
+	\raggedleft  10\textsuperscript{6} &
+	\raggedleft  10\textsuperscript{8} &
+	\raggedleft  10\textsuperscript{10} &
+	\raggedleft  10\textsuperscript{12} &
+	\raggedleft\arraybslash 
+	10\textsuperscript{18}\\\hline
+	\centering  $O(n^3)$ &
+	\raggedleft  1000 &
+	\raggedleft  10\textsuperscript{6} &
+	\raggedleft  10\textsuperscript{9} &
+	\raggedleft  10\textsuperscript{12} &
+	\raggedleft  10\textsuperscript{15} &
+	\raggedleft  10\textsuperscript{18} &
+	\raggedleft\arraybslash 
+	10\textsuperscript{27}\\\hline
+	\centering  $O(2^n)$ &
+	\raggedleft  1024 &
+	\raggedleft  10\textsuperscript{30} &
+	\raggedleft  10\textsuperscript{301} &
+	\raggedleft  10\textsuperscript{3010} &
+	\raggedleft  10\textsuperscript{30102} &
+	\raggedleft  10\textsuperscript{301029} &
+	\raggedleft\arraybslash 
+	10\textsuperscript{301029995}\\\hline
+	\end{tabular}
+	\end{center}
+	
+	On voit ainsi que si on trouve un algorithme correct pour résoudre un
+	problème mais que cet algorithme est de complexité exponentielle alors
+	cet algorithme ne sert à rien en pratique. Par exemple un algorithme de
+	recherche de complexité exponentielle, exécuté sur une machine pouvant
+	effectuer un milliard de comparaisons par secondes, prendrait plus de
+	dix mille milliards d’années pour trouver une valeur dans un tableau de
+	100 éléments.
+
+%====================
+\section{Exercices}
+%=====================
+
+	\begin{Exercice}{Sélection des maxima}
+		Développez un algorithme similaire consistant à trier un tableau par
+		ordre croissant par sélection des \textbf{maxima} successifs. Le
+		sous-tableau trié apparaitra donc à droite du tableau, et les maxima
+		sélectionnés seront à chaque étape positionnés à droite du sous-tableau
+		non trié. 
+	\end{Exercice}
+	
+	\begin{Exercice}{Maxima et minima}
+		Développez un algorithme combinant les deux recherches. À chaque étape,
+		on sélectionne donc le minimum et le maximum du sous-tableau restant à
+		trier et on les positionnera à l’endroit \textit{ad hoc}. 
+		Cette méthode apporte-t-elle une amélioration en temps ou
+		en simplicité aux deux algorithmes de base ?
+	\end{Exercice}
+
+	\begin{Exercice}{Amélioration 1}
+			Écrire une amélioration du tri bulle consistant à mémoriser à chaque
+			étape l’indice de la dernière permutation, celui-ci délimitant en fait
+			la véritable taille du sous-tableau trié à l’issue d’une étape. En lieu
+			et place de la boucle \pseudocode{pour} n’incrémentant l’indice
+			bulle que de 1 à la fois, on écrira une boucle \pseudocode{tant
+			que} à l’issue de laquelle \pseudocode{indiceBulle} prendra la
+			valeur de l’indice de dernière permutation + 1.
+	\end{Exercice}
+	
+	\begin{Exercice}{Amélioration 2}
+			L’amélioration précédente est issue de l’observation du sous-tableau
+			déjà trié en début du tableau initial. On peut de même étudier la
+			possibilité d’avoir un sous-tableau, trié également, mais cadré à
+			droite dans le tableau à trier. Cette symétrie suggère une amélioration
+			supplémentaire qui consiste à changer de sens à la fin d’un parcours
+			pour entamer le parcours suivant. Lorsqu’on change de sens, on amènera
+			l’élément le plus grand (qu’on peut nommer le «~plomb~») au fond du
+			tableau non trié. L’association des deux méthodes donne ce qu’on
+			appelle le \textbf{tri shaker}, dont le but est de restreindre le
+			sous-tableau non trié en augmentant sa borne inférieure et en diminuant
+			sa borne supérieure. Écrire l’algorithme qui réalise cette méthode de
+			tri.
+	\end{Exercice}
+	
+	\begin{Exercice}{Tri de dates}
+			Écrire un algorithme qui trie un tableau de 
+			dates par ordre chronologique croissant.
+			Les dates sont des structures Date (cfr. chap. 6)
+	\end{Exercice}
+	
+	\begin{Exercice}{Tri de personnes}
+			Écrire un algorithme qui trie un tableau de personnes sur leur date
+			d'anniversaire (sans tenir compte de
+			l'année). Deux personnes nées le même jour seront
+			départagées par leur nom.
+
+			Une personne est représentée par la structure 
+			
+			\begin{Pseudocode}
+				\Struct{Personne}
+					\Decl nom~: chaine
+					\Decl dateNaissance~: Date
+				\EndStruct
+			\end{Pseudocode}
+			
+	\end{Exercice}
+	
+	\begin{Exercice}{Tableau de Point}
+		Écrire un algorithme qui reçoit un tableau de structures Point 
+		et trie celui-ci sur l'ordre d'éloignement de ces points par 
+		rapport à l'origine du plan. Les premiers éléments seront donc
+		ceux les plus proches du point (0, 0) et les derniers seront 
+		les points les plus éloignés.
+	\end{Exercice}
+
+	\begin{Exercice}{Calcul de complexités}
+	
+	Quelle est la complexité d'un algorithme qui :		
+			\begin{enumerate}[label=\alph*)]
+				\item 
+					recherche le maximum d'un tableau de $n$ éléments ?
+				\item 
+					remplace par 0 toutes les occurrences du maximum 
+					d'un tableau de $n$ éléments ?
+				\item 
+					vérifie si un tableau contient deux éléments égaux ?
+				\item 
+					trie par recherche des minima successifs ?
+				\item 
+					vérifie si les éléments d'un tableau forment un palindrome ?
+			\end{enumerate}
+		\end{Exercice}
+		
+		\begin{Exercice}{Réflexion}
+				L’algorithme de recherche dichotomique est-il toujours à préférer à
+				l’algorithme de recherche linéaire ?
+		\end{Exercice}
+
+
+%====================
+\section{Références}
+%====================
+
+	\begin{liste}
+		\item {
+			\url{http://interstices.info/jcms/c_6973/les-algorithmes-de-tri}
+
+			\textit{Ce site permet de visualiser les méthodes de tris en
+			fonctionnement. Il présente tous les tris vus en première plus quelques
+			autres comme le «~tri rapide~» («~quicksort~») que vous verrez en
+			deuxième année. }}
+	\end{liste}

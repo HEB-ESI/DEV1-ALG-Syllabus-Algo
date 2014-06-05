@@ -1,0 +1,193 @@
+% ===============================================================
+% Feuille de style LaTeX pour le cours d'algorithmique 1ère à l'ESI
+% ===============================================================
+
+% ===================================================
+%   Les gros éléments de mise en page
+% ===================================================
+
+% Spécifie que les fichiers sources sont codés en UTF8
+% http://www.ctan.org/pkg/inputenc
+% ----------------------------------------------------
+\usepackage[utf8]{inputenc}
+
+% Francisation des textes
+% http://en.wikibooks.org/wiki/LaTeX/Internationalization#Babel
+% -------------------------------------------------------------
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}		% Permet de taper des accents
+
+% Plus belles polices vectorielles que computer roman
+% http://www.tug.dk/FontCatalogue/lmodern/
+% -------------------------------------------------------------
+\usepackage{lmodern}			
+
+% Régler les marges des pages
+% http://www.ctan.org/pkg/geometry
+% vmargin: 1cm de plus automatique
+% -------------------------------------------------------------
+\usepackage[lmargin=3.5cm,rmargin=3.5cm,vmargin=3cm,footskip=4\baselineskip]{geometry}
+
+% Enlever l'indentation de chaque première ligne de paragraphe
+% + léger espace entre les paragraphes.
+% http://www.ctan.org/pkg/parskip
+% -------------------------------------------------------------
+\usepackage{parskip}
+
+% Permet d'avoir des couleurs
+% usenames et dvipsnames pour noms prédéfinis
+% http://www.ctan.org/pkg/xcolor
+% -------------------------------------------------------------
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% Permet de barrer, souligner, ...
+% Pour barrer : \sout{texte}
+% -------------------------------------------------------------
+\usepackage[normalem]{ulem}
+
+% Gestion des images.
+% http://www.ctan.org/pkg/graphicx
+% -------------------------------------------------------------
+\usepackage{graphicx}
+
+% Pour disposer du symbole Euro
+% -------------------------------------------------------------
+\usepackage[official]{eurosym}
+
+% subscript facile
+% -------------------------------------------------------------
+\newcommand\textsubscript[1]{\ensuremath{{}_{\mathrm{#1}}}}
+
+% Hyperliens et URL
+% http://www.ctan.org/pkg/hyperref
+% -------------------------------------------------------------
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks = true,  % Colours links instead of ugly boxes
+  urlcolor   = blue,  % Colour for external hyperlinks
+  linkcolor  = black  % Colour of internal links
+}
+
+% Permet d'avoir les numéros de (sub)sections dans la marge
+% Tiré de "Latex Howtos" de Sébastien Combéfis
+% -------------------------------------------------------------
+\makeatletter
+\def\@seccntformat#1{\protect\makebox[0pt][r]{\csname the#1\endcsname\quad}}
+\makeatother
+
+% Framed permet d'avoir du texte avec une barre à gauche
+%\usepackage{framed}
+%\colorlet{shadecolor}{gray!50}
+%\renewenvironment{leftbar}{%
+  %\def\FrameCommand{\textcolor{shadecolor}{\vrule width 1pt} \hspace{10pt}}%
+  %\MakeFramed {\advance\hsize-\width \FrameRestore}}%
+%{\endMakeFramed}
+
+% Modification du style pour les captions des figures
+\usepackage[font=scriptsize,labelfont=sc,position=below]{caption}
+
+% Plus d'options pour les notes/icones en marge
+\usepackage{marginnote}
+\reversemarginpar
+
+% Pour un plus beau style pour le titre de chapitre
+\usepackage[Lenny]{fncychap}
+
+% Pour avoir Ovalbox
+\usepackage{fancybox}
+
+% Un grand contrôle sur l'aspect des listes
+% Note: bizarrement, \setlist ne fonctionne pas (\itemize avec options non plus) 
+% (clash avec un autre package ?)
+% -------------------------------------------------------------
+\usepackage{enumitem}
+\setdescription{font=\sffamily\bfseries, style=nextline, leftmargin=*}
+% Environnement liste, alternative à itemize, plus aéré.
+\newlist{liste}{itemize}{3}
+\setlist[liste]{label=$\triangleright$,leftmargin=8mm,itemsep=1mm}
+
+% Permet d'avoir des références plus lisibles 
+% ex: cf. figure 1 page suivante.
+% http://www.ctan.org/pkg/varioref
+% -------------------------------------------------------------
+\usepackage[french]{varioref}
+
+% Gestion de l'entête et du pied de page
+% http://www.ctan.org/pkg/fancyhdr
+% -------------------------------------------------------------
+\usepackage{fancyhdr}
+\setlength{\headheight}{13pt} 
+\fancyhf{} % Enlever tout
+\renewcommand{\headrulewidth}{0pt} % pas de ligne en entête
+\fancyfoot[C]{\textcolor{gray}{---\ \thepage\ ---}}
+\fancyhead[R]{\ifnum\value{chapter}>0 \textcolor{gray}{\up{\leftmark}} \fi}
+\fancypagestyle{plain}{				% Redéfinir le style plain
+	\fancyhf{} 						% Enlever tout
+	\fancyfoot[C]{\textcolor{gray}{---\ \thepage\ ---}}
+	\renewcommand{\headrulewidth}{0pt} % pas de ligne en entête
+}
+
+
+% ===================================================
+%   Commandes et environnements
+% ===================================================
+
+% Met en évidence un ou des paragraphes
+% titre en gras encadré + croix
+% cf. http://tex.stackexchange.com/questions/33078/frame-with-only-crosses-in-two-opposite-corners
+\newenvironment{Emphase}[2][]{%
+	\section*{\ifthenelse{\not\equal{#1}{}}{\marginnote{\includegraphics[width=25px]{icon/#1}}[2pt]}{}\ovalbox{\normalsize\textbf{#2}}}
+	\vspace{-10mm}
+	{\color{gray}\par\hfill\rlap{\kern-0.5cm\rule{1cm}{0.4pt}\kern-0.2cm\rule[-0.8cm]{0.4pt}{1cm}}}%
+    \vskip-\baselineskip
+}{
+	{\color{gray}\par\kern-0.8cm\hskip-0.25cm\rule{0.4pt}{1cm}\kern-0.2cm\rule[0.2cm]{1cm}{0.4pt}\par}
+	\smallskip
+}
+
+% Pour mettre une icone en marge
+% Utilisation: \marginicon{nomIcone}
+% L'icone doit être présente dans le dossier icon
+% dans un format reconnu (pas de gif)
+\newcommand{\marginicon}[1]{
+	\marginnote{\includegraphics[width=25px]{icon/#1}}[8pt]
+}
+
+% Affiche un cadre ovale coloré autour de texte, coloré aussi et en sansserif.
+% Pour encadré numéro d'exercice, de tutoriel, ....
+% -------------------------------------------------------------
+\newcommand{\Cadre}[1]{{\sffamily\Ovalbox{#1}}}
+
+% Pour un exercice avec numérotation automatique
+\newcounter{exercicenum}[chapter]
+\setcounter{exercicenum}{0}
+\newenvironment{Exercice}[1]{%
+	\refstepcounter{exercicenum}%
+	%\renewcommand{\Currentlabel}{\arabic{chapter}.\theexercicenum}% Pour référence dans la solution
+	\vspace{-2mm}
+	\subsection*{\normalsize{\color{MidnightBlue}\Cadre{\theexercicenum}}\quad{\sffamily\bfseries#1}}
+	\vspace{-2mm}
+	}{%
+	}
+	
+% Citation en début de chapitre
+\newenvironment{Exergue}{%
+	\begin{quote}
+	\itshape
+	}{
+	\end{quote}
+	\vskip2\baselineskip
+	}
+
+% Permet d'avoir plusieurs colonnes
+% Utilisé dans les tableaux pour avoir un contrôle fin des |
+\usepackage{multicol}
+
+% Pour les tableaux
+% ------------------
+\usepackage{hhline} % Permet une gestion fine des barres horizontales 
+% Aucune udée de l'intérêt pour les 3 lignes suivantes
+\makeatletter
+\newcommand\arraybslash{\let\\\@arraycr}
+\makeatother{}
+\setlength\tabcolsep{1mm} % aére le texte dans les cases de tableau

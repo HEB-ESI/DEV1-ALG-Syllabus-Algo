@@ -1,0 +1,451 @@
+\chapter{Les alternatives}
+% ========================
+
+\marginicon{objectif}
+Dans ce chapitre, nous abordons les structures alternatives qui
+permettent de conditionner des parties d’algorithmes.
+Elles ne seront exécutées que si une condition est satisfaite.
+
+\section{«~si~–~alors~–~sinon~»}
+% ==============================
+
+	Cette structure permet d’exécuter une partie de code ou
+	une autre en fonction de la valeur de vérité d’une condition.
+	
+	\begin{Emphase}[definition]{si – alors}
+	\begin{Pseudocode}
+	\If{condition}
+		\LComment instructions à réaliser si la condition est VRAIE
+	\EndIf
+	\end{Pseudocode}
+	\end{Emphase}
+	
+	La \textbf{condition} est une expression délivrant un résultat booléen
+	(\textbf{vrai} ou \textbf{faux}) ; 
+	elle associe des variables, constantes, expressions arithmétiques, 
+	au moyen des opérateurs logiques ou de comparaison. 
+	En particulier, cette condition peut être réduite à
+	une seule variable booléenne.
+	
+	Dans cette structure, lorsque la condition est vraie,
+	il y a exécution de la séquence d’instructions contenue 
+	entre les mots \pseudocode{\K{alors}} et \pseudocode{\K{fin si}} ; 
+	ensuite, l’algorithme continue de façon séquentielle.
+	
+	Lorsque la condition est fausse, les instructions se trouvant entre 
+	\pseudocode{\K{alors}} et \pseudocode{\K{fin si}} 
+	sont tout simplement ignorées.
+	
+	\begin{Emphase}[definition]{si – alors – sinon}
+		\begin{Pseudocode}
+		\If{condition}
+			\LComment instructions à réaliser si la condition est VRAIE
+		\Else
+			\LComment instructions à réaliser si la condition est FAUSSE
+		\EndIf
+		\end{Pseudocode}
+	\end{Emphase}
+	
+	Dans cette structure, une et une seule des deux séquences est exécutée.
+	
+	\begin{Emphase}[exercice]{Exemple~:~Signe d’un nombre}
+		Écrire un algorithme qui affiche si un nombre lu est positif 
+		(zéro inclus) ou strictement négatif.
+		
+		{\bfseries Solution}
+		
+		\begin{Pseudocode}
+		\LComment Lit un nombre et affiche si ce nombre est positif (zéro inclus)
+		ou strictement négatif
+		\Module{signeNombre}{}{}
+			\Decl nb : entier
+			\Read nb
+			\If{nb < 0}
+				\Write "le nombre", nb, " est négatif"
+			\Else
+				\Write "le nombre", nb, " est positif ou nul"
+			\EndIf
+		\EndModule
+		\end{Pseudocode}
+	\end{Emphase}
+	
+	
+	\begin{Emphase}[exercice]{Exercice~:~Signe d’un nombre (amélioré)}
+		Écrire un algorithme qui dit si un nombre lu est positif, 
+		négatif ou nul.
+	\end{Emphase}
+	
+\section{Indentation}
+% ==============================
+	
+	Dans l’écriture de tout algorithme, on veillera à \textbf{indenter}
+	correctement les lignes de codes afin de faciliter sa lecture ; cela
+	veut dire que~:
+	
+	\begin{liste}
+	\item
+		Les \textbf{balises} encadrant toute structure de contrôle 
+		devront être parfaitement à la verticale l’une de l’autre~:~
+		\pseudocode{\K{module}} et \pseudocode{\K{fin module}} ; 
+		\pseudocode{\K{si}} [, \pseudocode{\K{sinon}}] 
+		et \pseudocode{\K{fin si}}.
+		Ce sera aussi vrai pour celles que nous allons voir plus tard~: 
+		\emph{selon que}, \emph{tant que}, \emph{faire jusqu’à ce},
+		\emph{pour}\dots	
+	\item
+		Les lignes situées entre toute paire de balises 
+		devront être décalées d’une tabulation vers la droite.
+	\item
+		On pensera aussi à tracer une \textbf{ligne verticale} 
+		entre le début et la fin d’une structure de contrôle 
+		afin de mieux la délimiter encore 
+		(surtout lorsqu’on travaille sur papier).
+	\end{liste}
+	
+	\section{«~selon que~»}
+	
+	Avec ces structures, plusieurs branches d’exécution
+	sont disponibles. L’ordinateur choisit la branche à
+	exécuter en fonction de la valeur d’une variable 
+	(ou parfois d’une expression) ou de
+	la condition qui est vraie.
+	
+	\begin{Emphase}[definition]{selon que (version avec listes de valeurs)}
+
+	\begin{Pseudocode}
+		\Switch{variable \K{vaut}}
+			\Case{liste\_1 de valeurs séparées par des virgules }
+				\LComment instructions lorsque la valeur de la variable est dans liste\_1
+			\Case{liste\_2 de valeurs séparées par des virgules }
+				\LComment instructions lorsque la valeur de la variable est dans liste\_2		
+			\Empty \dots
+			\Case{liste\_n de valeurs séparées par des virgules }
+				\LComment instructions lorsque la valeur de la variable est dans liste\_n
+			\Case{\K{autres }}
+				\LComment instructions lorsque la valeur de la variable 
+				\LComment ne se trouve dans aucune des listes précédentes
+		\EndSwitch
+	\end{Pseudocode}
+
+	\end{Emphase}
+	
+	Dans ce type de structure, comme pour la structure
+	\textbf{si-alors-sinon}, une seule des séquences d’instructions
+	sera exécutée. On veillera à ne pas faire apparaitre une même valeur
+	dans plusieurs listes. Cette structure est une simplification
+	d’écriture de plusieurs alternatives imbriquées. Elle est équivalente à~:
+	
+	\begin{Pseudocode}
+	\If{variable = une des valeurs de la liste\_1}
+		\LComment instructions lorsque la valeur est dans liste\_1
+	\Else
+		\If{variable = une des valeurs de la liste\_2}
+			\LComment instructions lorsque la valeur est dans liste\_2
+		\Else
+			\Empty\dots
+			\If{variable = une des valeurs de la liste\_n}
+				\LComment instructions lorsque la valeur est dans liste\_n
+			\Else
+				\LComment instructions lorsque la valeur de la variable
+				\LComment ne se trouve dans aucune des listes précédentes
+			\EndIf
+		\EndIf
+	\EndIf
+	\end{Pseudocode}
+	
+	Notez que le cas \pseudocode{\K{autres}} est facultatif.
+	
+	\begin{Emphase}[definition]{selon que (version avec conditions)}
+	\begin{Pseudocode}
+	\Switch{}
+		\Case{condition\_1 }
+			\LComment instructions lorsque la condition\_1 est vraie
+		\Case{condition\_2 }
+			\LComment instructions lorsque la condition\_2 est vraie
+		\Empty \dots
+		\Case{condition\_n }
+			\LComment instructions lorsque la condition\_n est vraie
+		\Case{\K{autres }}
+			\LComment instructions à exécuter quand aucune
+			\LComment des conditions précédentes n’est vérifiée
+	\EndSwitch
+	\end{Pseudocode}
+	\end{Emphase}
+	
+	Comme précédemment, une et une seule des séquences d’instructions est
+	exécutée. On veillera à ce que les conditions ne se «~recouvrent~» pas,
+	c’est-à-dire que deux d’entre elles ne soient jamais vraies
+	simultanément. C’est équivalent à~:
+	
+	\begin{Pseudocode}
+	\If{condition\_1}
+		\LComment instructions lorsque la condition\_1 est vraie
+	\Else
+		\If{condition\_2}
+			\LComment instructions lorsque la condition\_2 est vraie
+		\Else
+			\Empty \dots
+			\If{condition\_n}
+				\LComment instructions lorsque la condition\_n est vraie
+			\Else
+				\LComment instructions à exécuter quand aucune
+				\LComment des conditions précédentes n’est vérifiée
+			\EndIf
+		\EndIf
+	\EndIf
+	\end{Pseudocode}
+	
+	\begin{Emphase}[exercice]{Exemple~:~Jour de la semaine en clair}
+	Écrire un algorithme qui lit un jour de la semaine sous forme
+	d’un nombre entier 
+	(1 pour lundi, \dots, 7 pour dimanche) 
+	et qui affiche en clair ce jour de la semaine.
+	
+	{\bfseries Solution}
+	
+	\begin{Pseudocode}
+	\LComment Lit un nombre entre 1 et 7 et affiche en clair le jour de la semaine correspondant.
+	\Module{jourSemaine}{}{}
+	\Decl jour : entier
+	\Read jour
+		\Switch{jour \K{vaut}}
+			\Stmt 1 : \K{afficher} "lundi"
+			\Stmt 2 : \K{afficher} "mardi"
+			\Stmt 3 : \K{afficher} "mercredi"
+			\Stmt 4 : \K{afficher} "jeudi"
+			\Stmt 5 : \K{afficher} "vendredi"
+			\Stmt 6 : \K{afficher} "samedi"
+			\Stmt 7 : \K{afficher} "dimanche"
+		\EndSwitch
+	\EndModule
+	\end{Pseudocode}
+	\end{Emphase}
+	
+	
+	\begin{Emphase}[exercice]{Exemple~:~Nombre de jours (avec énumération)}
+	
+	Reprendre l’algorithme qui affiche le nombre de jours
+	dans un mois en utilisant une énumération.
+	
+	{\bfseries Solution}
+	
+	\begin{Pseudocode}
+	\footnotesize
+	\Stmt \K{énumération} Mois \{JANVIER, FÉVRIER, MARS, AVRIL, MAI, JUIN, JUILLET, AOÛT, SEPTEMBRE, OCTOBRE, NOVEMBRE, DÉCEMBRE\}
+	\end{Pseudocode}
+	
+	\begin{Pseudocode}
+	\LComment Lit un Mois et affiche le nombre de jours correspondant
+	\LComment (en ne tenant pas compte des années bissextiles).
+	\Module{nbJours}{}{}
+		\Decl unMois : Mois
+		\Read unMois
+		\RComment on lira la valeur JANVIER ou FÉVRIER ou \dots{} ou DÉCEMBRE
+		\Switch{unMois \K{vaut}}
+			\Case{JANVIER, MARS, MAI, JUILLET, AOÛT, OCTOBRE, DÉCEMBRE}
+				\Write 31
+			\Case{AVRIL, JUIN, SEPTEMBRE, NOVEMBRE}
+				\Write 30
+			\Case{FÉVRIER} \RComment{on ne tient pas compte ici des années bissextiles}
+				\Write 28
+		\EndSwitch
+		\LComment{Pas de clause \og{}autre\fg{} car toutes les valeurs possibles ont été envisagées}
+	\EndModule
+	\end{Pseudocode}
+	\end{Emphase}
+
+\section{Exercices}
+% ================================
+
+\begin{Exercice}{Compréhension}
+
+	Qu’affichent les algorithmes suivants si à chaque fois les deux nombres
+	lus au départ sont, dans l’ordre, 2 et 3~? Même question avec 4 et 1.
+	
+	\begin{Pseudocode}
+	\Module{exerciceA}{}{}
+		\Decl a,b : entier
+		\Read a,b
+		\If{a > b}
+			\Let a \Gets a + 2 * b
+		\EndIf
+		\Write a
+	\EndModule
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+	\Module{exerciceB}{}{}
+		\Decl a,b,c : entier
+		\Read b,a
+		\If{a > b}
+			\Let c \Gets a DIV b
+		\Else
+			\Let c \Gets b MOD a	
+		\EndIf
+		\Write c
+	\EndModule
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+	\Module{exerciceC}{}{}
+		\Decl x1,x2 : entier
+		\Decl ok : booléen
+		\Read x1,x2
+		\Let ok \Gets x1 > x2
+		\If{ok}
+			\Let ok \Gets ok ET x1 = 4
+		\Else
+			\Let ok \Gets ok OU x2 = 3
+		\EndIf
+		\If{ok}
+			\Let x1 \Gets x1 * 1000
+		\EndIf
+		\Write x1 + x2
+	\EndModule
+	\end{Pseudocode}
+\end{Exercice}
+
+\begin{Exercice}{Simplification d’algorithmes}
+	Voici quelques extraits d’algorithmes corrects du point de vue de la
+	syntaxe mais contenant des lignes inutiles ou des lourdeurs d’écriture.
+	Remplacer chacune de ces portions d’algorithme par un minimum
+	d’instructions qui auront un effet équivalent.
+	
+	\begin{Pseudocode}
+	\If{ok = vrai}
+		\Write nombre
+	\EndIf
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+	\If{ok = faux}
+		\Write nombre
+	\EndIf
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+	\If{condition}
+		\Let ok \Gets vrai
+	\Else
+		\Let ok \Gets faux
+	\EndIf
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+	\If{a $>$ b}
+		\Let ok \Gets faux
+	\Else
+		\If{a $\leq$ b}
+			\Let ok \Gets vrai
+		\EndIf
+	\EndIf
+	\end{Pseudocode}
+
+	\begin{Pseudocode}
+	\If{ok1 = vrai ET ok2 = vrai}
+		\Write x
+	\EndIf
+	\end{Pseudocode}
+\end{Exercice}
+
+\begin{Exercice}{Maximum de 2 nombres}
+	\marginicon{java}
+	Écrire un algorithme qui, étant donné deux nombres quelconques,
+	recherche et affiche le plus grand des deux. Attention~! On ne veut
+	pas savoir si c’est le premier ou le deuxième qui est
+	le plus grand mais bien quelle est cette plus grande valeur. Le
+	problème est donc bien défini même si les deux nombres sont
+	identiques.
+\end{Exercice}
+
+\begin{Exercice}{Maximum de 3 nombres}
+	\marginicon{java}
+	Écrire un algorithme qui, étant donné trois nombres quelconques,
+	recherche et affiche le plus grand des trois.
+\end{Exercice}
+
+\begin{Exercice}{Le signe}
+	\marginicon{java}
+	Écrire un algorithme qui affiche un message indiquant
+	si un entier est strictement négatif, nul ou strictement
+	positif.
+\end{Exercice}
+
+\begin{Exercice}{La fourchette}
+	Écrire un algorithme qui, étant donné trois nombres, 
+	recherche et affiche si le premier des trois 
+	appartient à l’intervalle donné par le plus petit et le plus grand 
+	des deux autres (bornes exclues). 
+	Qu’est-ce qui change si on inclut les bornes~?
+\end{Exercice}
+
+\begin{Exercice}{Équation du deuxième degré}
+	Écrire un algorithme qui, 
+	étant donné une équation du deuxième degré, 
+	déterminée par le coefficient de \textit{x}\up{2},
+	le coefficient de \textit{x} et le terme indépendant, 
+	recherche et affiche la (ou les) racine(s) de l’équation 
+	(ou un message adéquat s’il n’existe pas de racine réelle).
+\end{Exercice}
+
+\begin{Exercice}{Une petite minute}
+	Écrire un algorithme qui, à partir d’un moment exprimé par 2 entiers, 
+	heure et minute, affiche le moment qu’il sera une minute plus tard.
+\end{Exercice}
+
+\begin{Exercice}{Calcul de salaire}
+	Dans une entreprise, 
+	une retenue spéciale de 15\% est pratiquée 
+	sur la partie du salaire mensuel qui dépasse 1200~\euro. 
+	Écrire un algorithme qui calcule le salaire net à partir du salaire brut. 
+	En quoi l’utilisation de constantes convient-elle pour améliorer cet algorithme~?
+\end{Exercice}
+
+\begin{Exercice}{Nombre de jours dans un mois}
+	Écrire un algorithme qui donne le nombre de jours dans un mois. 
+	Le mois est lu sous forme d’un entier (1 pour janvier\dots).
+	On considère dans cet exercice que le mois de février
+	comprend toujours 28 jours.
+\end{Exercice}
+
+\begin{Exercice}{Année bissextile}
+	\marginicon{java}
+	Écrire un algorithme qui vérifie si une année est bissextile. 
+	Pour rappel, les années bissextiles sont les années multiples de 4. 
+	Font exception, les multiples de 100 
+	(sauf les multiples de 400 qui sont bien bissextiles). 
+	Ainsi $2012$ et $2400$ sont bissextile mais pas $2010$ ni $2100$.
+\end{Exercice}
+
+\begin{Exercice}{Valider une date}
+	Écrire un algorithme qui valide une date donnée par trois entiers~:~
+	l’année, le mois et le jour.
+\end{Exercice}
+
+\begin{Exercice}{Le jour de la semaine}
+	\marginicon{java}
+	Écrire un algorithme qui lit un jour du mois de novembre de cette année
+	(sous forme d’un entier entre 1 et 30) 
+	et qui affiche le nom du jour («~lundi~», «~mardi~»\dots)
+\end{Exercice}
+
+\begin{Exercice}{Quel jour serons-nous~?}
+	Écrire un algorithme qui indique le nom du jour 
+	qui sera \textit{n} jours plus tard qu’un jour donné. 
+	Par exemple si le jour donné est «~mercredi~» et \textit{n} = 10, 
+	l’algorithme indiquera «~samedi~».
+\end{Exercice}
+
+\begin{Exercice}{Un peu de trigono}
+	Écrire un algorithme qui pour un entier \textit{n} donné, 
+	affiche la valeur de $cos(n * \pi/2)$.
+\end{Exercice}
+
+\begin{Exercice}{Le stationnement alternatif}
+	Dans une rue où se pratique le stationnement alternatif, 
+	du 1 au 15 du mois, on se gare du côté des maisons ayant un numéro impair, 
+	et le reste du mois, on se gare de l’autre côté. 
+	Écrire un algorithme qui, sur base de la date du jour et du numéro de maison
+	devant laquelle vous vous êtes arrêté, 
+	indique si vous êtes bien stationné ou non.
+\end{Exercice}

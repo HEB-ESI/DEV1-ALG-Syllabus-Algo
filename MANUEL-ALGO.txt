@@ -1,0 +1,110 @@
+======================================================
+   Petit manuel pour aider à écrire des algorithmes 
+======================================================
+
+------------------------------------------------------
+ Structure générale
+------------------------------------------------------
+
+\begin{Pseudocode}
+	% L'algorithme ici
+\end{Pseudocode}
+
+ou
+
+\pseudocode{un bout d'algo qui est inséré dans le texte normal}
+
+------------------------------------------------------
+ Les instructions
+------------------------------------------------------
+
+- Déclaration 		: \Decl ...					
+- Lire 				: \Read ...
+- Écrire 			: \Write ...
+- Assignation		: \Let var \Gets expression
+- Erreur			: \Error message erreur
+- Ouvrir fichier	: \Open ...
+- Fermer			: \Close ...
+- Lire fichier		: \Readf ...
+- Écrire fichier	: \Writef ...
+- ligne vide		: \Empty
+- Divers			: \Stmt ...
+	
+On peut utiliser \K{mot} pour un mot clé non prévu
+
+------------------------------------------------------
+ Modules et autres
+------------------------------------------------------
+
+\Module{nom}{paramètres}{retour}
+	...
+	\Return valeur retour		// facultatif
+\EndModule
+
+Pour les paramètres, on peut utiliser \In, \Out et \InOut
+
+On a aussi
+
+\Block{nom}
+	...
+\EndBlock
+
+\Struct{Nom}
+	\Decl champ : type
+	...
+\EndStruct
+
+------------------------------------------------------
+ Structures de contrôle
+------------------------------------------------------
+
+\If{condition}
+	...
+\Else
+	...
+\EndIf
+
+Les selon que j'en suis pas encore content
+
+\Switch{var \K{vaut}}		// ou \Switch{} pour la seconde forme
+	\Case{...}				// ou \LCase{...}{instruction} pour placer sur une meme ligne
+		...
+\EndSwitch
+
+\While{condition}
+	...
+\EndWhile
+
+\Repeat
+	...
+\Until{condition}
+
+\For{i \K{de} 1 \K{à} n}
+	...
+\EndFor
+
+------------------------------------------------------
+ OO
+------------------------------------------------------
+
+\Class{Test}
+\Private
+	\Decl a : entier
+	\Decl b : entier
+\Public
+	\ConstrSign{Test}{a: entier}
+	\MethodSign{brol2}{a,b: entiers}{}
+\EndClass
+
+\Empty
+\Constr{Test}{a:entier}
+	\Read a
+	\Read b
+\EndConstr
+
+\Empty
+\LComment Cette méthode blablabla
+\Method{brol}{a}{b}
+	\Read a
+	\Read b
+\EndMethod

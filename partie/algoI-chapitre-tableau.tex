@@ -1,0 +1,949 @@
+%======================
+\chapter{Les tableaux}
+%======================
+
+	\marginicon{objectif}
+	Dans ce chapitre nous étudions les tableaux, 
+	une structure qui peut contenir 
+	plusieurs exemplaires de données similaires.
+
+% =============================
+\section{Utilité des tableaux}
+% =============================
+
+	Nous allons introduire la notion de tableau à partir d’un exemple 
+	dans lequel l’utilité de cette structure de données 
+	apparaitra de façon naturelle.
+
+	\begin{Emphase}{Exemple~: Statistiques de vente}
+
+		{\itshape
+		Un gérant d’une entreprise commerciale souhaite connaitre l’impact d’une
+		journée de promotion publicitaire sur la vente de dix de ses produits.
+		Pour ce faire, les numéros de ces produits (numérotés de 1 à 10 pour
+		simplifier) ainsi que les quantités vendues pendant cette journée de
+		promotion sont encodés au fur et à mesure de leurs ventes. En fin de
+		journée, le vendeur entrera la valeur 0 pour signaler la fin de
+		l’introduction des données. Ensuite, les statistiques des ventes seront
+		affichées.}
+
+	\end{Emphase}
+
+	La démarche générale se décompose en trois parties~:
+
+	\begin{liste}
+	\item
+		le traitement de début de journée, qui consiste essentiellement à mettre
+		les compteurs des quantités vendues pour chaque produit à 0
+	\item
+		le traitement itératif durant toute la journée~: 
+		au fur et à mesure des ventes, 
+		il convient de les enregistrer, 
+		c’est-à-dire d’ajouter au compteur des ventes d’un produit 
+		la quantité vendue de ce produit ; 
+		ce traitement itératif s’interrompra lorsque la valeur 0 sera introduite
+	\item
+		le traitement final, consistant à communiquer les valeurs des compteurs
+		pour chaque produit.
+	\end{liste}
+
+	Vous trouverez sur la page suivante
+	une version possible de cet algorithme.
+
+	\begin{Pseudocode}
+	\LComment Calcule et affiche la quantité vendue de 10 produits.
+	\Module{statistiquesVentesSansTableau}{}{}
+		\Empty
+		\Decl cpt1, cpt2, cpt3, cpt4, cpt5, cpt6, cpt7, cpt8, cpt9, cpt10~: entiers
+		\Decl numéroProduit, quantité~: entiers
+		\Empty
+		\Let cpt1 \Gets 0
+		\Let cpt2 \Gets 0
+		\Let cpt3 \Gets 0
+		\Let cpt4 \Gets 0
+		\Let cpt5 \Gets 0
+		\Let cpt6 \Gets 0
+		\Let cpt7 \Gets 0
+		\Let cpt8 \Gets 0
+		\Let cpt9 \Gets 0
+		\Let cpt10 \Gets 0
+		\Empty
+		\Write "Introduisez le numéro du produit~:"
+		\Read numéroProduit
+		\Empty
+		\While{numéroProduit > 0}
+		\Empty
+			\Write "Introduisez la quantité vendue~:"
+			\Read quantité
+			\Empty
+			\Switch{numéroProduit \K{vaut}}
+				\Stmt 1~: cpt1 \Gets cpt1 + quantité
+				\Stmt 2~: cpt2 \Gets cpt2 + quantité
+				\Stmt 3~: cpt3 \Gets cpt3 + quantité
+				\Stmt 4~: cpt4 \Gets cpt4 + quantité
+				\Stmt 5~: cpt5 \Gets cpt5 + quantité
+				\Stmt 6~: cpt6 \Gets cpt6 + quantité
+				\Stmt 7~: cpt7 \Gets cpt7 + quantité
+				\Stmt 8~: cpt8 \Gets cpt8 + quantité
+				\Stmt 9~: cpt9 \Gets cpt9 + quantité
+				\Stmt 10~:cpt10 \Gets cpt10 + quantité
+			\EndSwitch
+			\Empty
+			\Write "Introduisez le numéro du produit~:"
+			\Read numéroProduit
+			\Empty
+		\EndWhile
+		\Empty
+		\Write "quantité vendue de produit 1~:", cpt1
+		\Write "quantité vendue de produit 2~:", cpt2
+		\Write "quantité vendue de produit 3~:", cpt3
+		\Write "quantité vendue de produit 4~:", cpt4
+		\Write "quantité vendue de produit 5~:", cpt5
+		\Write "quantité vendue de produit 6~:", cpt6
+		\Write "quantité vendue de produit 7~:", cpt7
+		\Write "quantité vendue de produit 8~:", cpt8
+		\Write "quantité vendue de produit 9~:", cpt9
+		\Write "quantité vendue de produit 10~:", cpt10
+		\Empty
+	\EndModule
+	\end{Pseudocode}
+
+%	\clearpage
+	Il est clair, à la lecture de cet algorithme, qu’une simplification
+	d’écriture s’impose ! Et que ce passerait-il si le nombre de produits à
+	traiter était de 20 ou 100 ? Le but de l’informatique étant de
+	dispenser l’humain des tâches répétitives, le programmeur peut en
+	espérer autant de la part d’un langage de programmation ! La solution
+	est apportée par un nouveau type de variables~: les \textbf{variables
+	indicées} ou \textbf{tableaux}.
+
+	Au lieu d’avoir à manier dix compteurs distincts
+	(\pseudocode{cpt1}, \pseudocode{cpt2}, etc.), nous allons
+	envisager une seule «~grande~» variable \pseudocode{cpt} 
+	compartimentée en dix «~sous-variables~» qui se distingueront 
+	les unes des autres par un indice~: \pseudocode{cpt1} 
+	deviendrait ainsi \pseudocode{cpt[1]}, \pseudocode{cpt2} 
+	deviendrait	\pseudocode{cpt[2]}, et ainsi de suite jusqu’à
+	\pseudocode{cpt10} qui deviendrait \pseudocode{cpt[10]}.
+
+	\begin{center}
+		\begin{tabular}{*{11}{>{\centering\arraybackslash}m{1cm}}}
+			{} &
+			\pseudocode{cpt[1]} &
+			\pseudocode{cpt[2]} &
+			\pseudocode{cpt[3]} &
+			\pseudocode{cpt[4]} &
+			\pseudocode{cpt[5]} &
+			\pseudocode{cpt[6]} &
+			\pseudocode{cpt[7]} &
+			\pseudocode{cpt[8]} &
+			\pseudocode{cpt[9]} &
+			\pseudocode{cpt[10]}
+			\\\hhline{~*{10}{-}}
+			\multicolumn{1}{m{1cm}|}{\pseudocode{cpt}} &
+			\multicolumn{1}{m{1cm}|}{~} &
+			\multicolumn{1}{m{1cm}|}{~} &
+			\multicolumn{1}{m{1cm}|}{~} &
+			\multicolumn{1}{m{1cm}|}{~} &
+			\multicolumn{1}{m{1cm}|}{~} &
+			\multicolumn{1}{m{1cm}|}{~} &
+			\multicolumn{1}{m{1cm}|}{~} &
+			\multicolumn{1}{m{1cm}|}{~} &
+			\multicolumn{1}{m{1cm}|}{~} &
+			\multicolumn{1}{m{1cm}|}{~}
+			\\\hhline{~*{10}{-}}
+		\end{tabular}
+	\end{center}
+
+	Un des intérêts de cette notation est la possibilité de faire apparaitre
+	une variable entre les crochets, par exemple
+	\pseudocode{cpt[i]}, ce qui permet une grande économie de lignes
+	de code.
+	
+	Voici la version avec tableau.
+
+	\label{tableau:tab1DStock10Articles}
+	\begin{Pseudocode}
+	\label{tableau:tab1DStock10Articles}
+	\LComment Calcule et affiche la quantité vendue de 10 produits.
+	\Module{statistiquesVentesAvecTableau}{}{}
+		\Empty
+		\Decl cpt~: \K{tableau} [1 à 10] d’entiers
+		\Decl i, numéroProduit, quantité~: entiers
+		\Empty
+		\For{i \K{de} 1 \K{à} 10}
+			\Let cpt[i] \Gets 0
+		\EndFor
+		\Empty
+		\Write "Introduisez le numéro du produit~:"
+		\Read numéroProduit
+		\Empty
+		\While{numéroProduit > 0}
+		\Empty
+			\Write "Introduisez la quantité vendue~:"
+			\Read quantité
+			\Empty
+			\Let cpt[numéroProduit] \Gets cpt[numéroProduit] + quantité
+			\Empty
+			\Write "Introduisez le numéro du produit~:"
+			\Read numéroProduit
+			\Empty
+		\EndWhile
+		\Empty
+		\For{i \K{de} 1 \K{à} 10}
+			\Write "quantité vendue de produit ", i, ": ", cpt[i]
+		\EndFor
+		\Empty
+	\EndModule
+	\end{Pseudocode}
+
+% ====================
+\section{Définitions}
+% ====================
+
+	\marginicon{definition}
+	Un \textbf{tableau} est une suite d’éléments de même type 
+	portant tous le même nom mais se distinguant 
+	les uns des autres par un indice.
+
+	L’\textbf{indice} est un entier 
+	donnant la position d’un élément dans la suite. 
+	Cet indice varie entre la position du premier élément 
+	et la position du dernier élément, 
+	ces positions correspondant aux bornes de l’indice.
+	Notons qu'il n'y a pas de «~trou~»~: 
+	tous les éléments existent entre le premier et le dernier indice.
+
+	\marginicon{definition}
+	La \textbf{taille} d’un tableau 
+	est le nombre (strictement positif) de ses éléments.
+	Attention ! la taille d’un tableau ne peut pas être modifiée pendant
+	son utilisation.
+
+	Souvent on utilise un tableau plus grand que
+	le nombre utile de ses éléments. 
+	Seule une partie du tableau est utilisée. 
+	On parle alors de taille \textbf{physique}
+	(la taille maximale du tableau) 
+	et de taille \textbf{logique}
+	(le nombre d'éléments effectivement utilisés)
+
+% ==================
+\section{Notations}
+% ==================
+
+	\marginicon{definition}
+	Pour déclarer un tableau, on écrit~:
+
+	\begin{Pseudocode}
+	\Decl nomTableau~: \K{tableau} [borneMin à borneMax] de TypeElément
+	\end{Pseudocode}
+	
+	où \pseudocode{TypeElément} est le type des éléments que l’on
+	trouvera dans le tableau. Les éléments sont d’un des types élémentaires
+	vus précédemment (entier, réel, booléen, chaine, caractère) ou encore
+	des variables structurées. À ce propos, remarquons aussi
+	qu'un tableau peut être un champ d'une structure. 
+	D'autres possibilités apparaitront lors de l'étude de
+	l'orienté objet.
+
+	Les bornes apparaissant dans la déclaration sont des constantes ou des
+	paramètres ayant une valeur connue lors de la déclaration. Une fois un
+	tableau déclaré, seuls les éléments d’indice compris entre
+	\pseudocode{borneMin} et \pseudocode{borneMax} peuvent
+	être utilisés. Par exemple, si on déclare~:
+
+	\begin{Pseudocode}
+	\Decl tabEntiers~: \K{tableau} [1 à 100] d’entiers
+	\end{Pseudocode}
+	
+	Il est interdit d’utiliser \pseudocode{tabEntiers[0]} ou
+	\pseudocode{tabEntiers[101]}. De plus, chaque élément
+	\pseudocode{tabEntiers[i]} (avec $1 \leq i \leq 100$) doit
+	être manié avec la même précaution qu’une variable simple, c’est-à-dire
+	qu’on ne peut utiliser un élément du tableau qui n’aurait pas été
+	préalablement affecté ou initialisé.
+
+	N.B.~: Il n'est pas interdit de prendre 0 pour la borne
+	inférieure ou même d'utiliser des bornes négatives
+	(par exemple~: \pseudocode{tabTempératures~: 
+	\textbf{tableau} [-20 à 50] de réels}).
+
+	\marginicon{attention}
+	En Java, un tableau est défini par sa taille $n$ et les bornes sont
+	automatiquement $0$ et $n-1$. Ce n'est pas le cas en
+	Logique où on a plus de liberté dans le choix des bornes.
+
+% ==============================================
+\section{Tableau statique vs tableau dynamique}
+% ==============================================
+
+	Les tableaux étudiés jusqu'ici sont dit \textbf{statiques}.
+	Un tableau est dit \textbf{statique} si sa taille 
+	est connue lors de l’écriture du programme
+
+	Un tableau est dit \textbf{dynamique}
+	si sa taille n’est connue qu’à l’exécution du programme (elle est
+	calculée, donnée par l’utilisateur, lue dans un fichier de
+	configuration, fournie par une autre partie du programme, \dots)
+
+	\textbf{Exemples}
+
+	\begin{liste}
+	\item
+		Reprenons l’exemple ci-dessus. 
+		S’il y a toujours exactement 10 produits, 
+		alors on peut utiliser un tableau statique. 
+	\item
+		Dans la pratique, il est probable que ce nombre puisse évoluer 
+		au cours de l’histoire de l’entreprise.
+		On peut au moins demander au gérant le nombre d'articles dans son stock.
+		On utilisera alors un tableau dynamique.
+	\item 
+		Si on désire stocker le chiffre d’affaire d’une entreprise 
+		pour une année donnée, mois par mois, un tableau de
+		taille 12 est suffisant (tableau statique)
+	
+	\end{liste}
+	
+	\textbf{Concrètement, comment choisir?}
+	Le choix dépend du langage.
+
+	Certains langages (c’est le cas de Cobol) ne permettent 
+	que des tableaux statiques. Dans ce cas, il faudra souvent
+	imposer une \textbf{taille maximale} au tableau. 
+	Il sera également nécessaire d’utiliser une variable 
+	pour retenir la taille utile (ou logique) du tableau, 
+	à savoir la partie du tableau réellement utilisée.
+	Bien sûr cette solution entraine souvent une perte de place mémoire due
+	à une réservation inutilement grande (ou, pire, une saturation du
+	tableau qui n’aura pas été prévu assez grand).
+	
+	D'autres, comme Java, n'ont que des tableaux dynamiques. La taille ne doit 
+	pas forcément être connue à la compilation, mais doit être connue à
+	l'exécution. Vous verrez les détails dans votre cours de Java.
+
+	\textbf{Exemple statique}
+
+	Reprenons encore l’exemple de la vente de produits. 
+	Si on ne dispose pas de tableau dynamique, on peut réserver
+	un tableau de taille 1000 par exemple (si on est sûr qu’on ne vendra
+	pas plus de 1000 produits différents) et ajouter une variable entière
+	(\pseudocode{nbProduits}) pour retenir 
+	le nombre exact de produits différents actuellement en vente.
+	
+	\begin{Pseudocode}
+	\LComment Calcule et affiche la quantité vendue de x produits.
+	\Module{statistiquesVentes}{}{}
+		\Empty
+		\Decl cpt~: \K{tableau} [1 à 1000] d’entiers
+		\Decl i, numéroProduit, quantité~: entiers
+		\Decl nbArticles~: entier
+		\Read nbArticles
+		\Empty
+		\For{i \K{de} 1 \K{à} nbArticles}
+			\Let cpt[i] \Gets 0
+		\EndFor
+		\Empty
+		\Write "Introduisez le numéro du produit~:"
+		\Read numéroProduit
+		\Empty
+		\While{numéroProduit > 0 ET numéroProduit <= nbArticles}
+		\Empty
+			\Write "Introduisez la quantité vendue~:"
+			\Read quantité
+			\Empty
+			\Let cpt[numéroProduit] \Gets cpt[numéroProduit] + quantité
+			\Empty
+			\Write "Introduisez le numéro du produit~:"
+			\Read numéroProduit
+			\Empty
+		\EndWhile
+		\Empty
+		\For{i \K{de} 1 \K{à} nbArticles}
+			\Write "quantité vendue de produit ", i, ": ", cpt[i]
+		\EndFor
+		\Empty
+	\EndModule
+	\end{Pseudocode}
+
+	\textbf{Exemple dynamique}
+	
+	Pour déclarer un tableau dynamique, on sépare la déclaration du tableau
+	(où la taille n’est pas donnée) de sa création effective~(où on donne
+	la taille)
+
+	\begin{Pseudocode}
+	\Decl nomTableau~: \K{tableau} de TypeElément
+	\LComment Le code peut déterminer ici les bornes
+	\Let nomTableau \Gets \K{nouveau} \K{tableau} [ borneMin à borneMax ] de TypeElément
+	\end{Pseudocode}
+
+	où \pseudocode{borneMin} et \pseudocode{borneMax} sont des
+	expressions entières quelconques.
+	
+	\begin{Pseudocode}
+	\LComment Calcule et affiche la quantité vendue de x produits.
+	\Module{statistiquesVentesAvecTableau}{}{}
+		\Empty
+		\Decl cpt~: \K{tableau} d’entiers
+		\Decl i, numéroProduit, quantité~: entiers
+		\Decl nbArticles~: entier
+		\Read nbArticles
+		\Let cpt \Gets \K{nouveau} \K{tableau} [1 à nbArticles] d'entiers
+		\Empty
+		\For{i \K{de} 1 \K{à} nbArticles}
+			\Let cpt[i] \Gets 0
+		\EndFor
+		\Empty
+		\Write "Introduisez le numéro du produit~:"
+		\Read numéroProduit
+		\Empty
+		\While{numéroProduit > 0 ET numéroProduit <= nbArticles}
+		\Empty
+			\Write "Introduisez la quantité vendue~:"
+			\Read quantité
+			\Empty
+			\Let cpt[numéroProduit] \Gets cpt[numéroProduit] + quantité
+			\Empty
+			\Write "Introduisez le numéro du produit~:"
+			\Read numéroProduit
+			\Empty
+		\EndWhile
+		\Empty
+		\For{i \K{de} 1 \K{à} nbArticles}
+			\Write "quantité vendue de produit ", i, ": ", cpt[i]
+		\EndFor
+		\Empty
+	\EndModule
+	\end{Pseudocode}
+
+% ==============================
+\section{Tableau et paramètres}
+% ==============================
+
+	Un tableau peut être passé en paramètre à un module mais qu’en est-il de
+	sa taille ? Il serait utile de pouvoir appeler le même module avec des
+	tableaux de tailles différentes. Pour permettre cela, la taille du
+	tableau reçu en paramètre est déclarée avec une variable (qui peut être
+	considéré comme un paramètre entrant).
+
+	\textbf{Exemples~:}
+	
+	\begin{Pseudocode}
+	\Module{brol}{tab\In~: \K{tableau} [1 à n] d'entiers}{}
+		\Write "J’ai reçu un tableau de ", n, " éléments".
+	\EndModule
+	\end{Pseudocode}
+
+	Ce $n$ va prendre la taille précise du tableau
+	(statique ou dynamique) utilisé à chaque appel et peut être utilisé
+	dans le corps du module. Bien sûr il s’agit là de la taille physique du
+	tableau. Si une partie seulement du tableau doit être traitée, il
+	convient de passer également la taille logique en paramètre.
+	
+	\begin{Pseudocode}
+	\Module{brol}{tab\In~: \K{tableau} [1 à n] d'entiers, tailleLogique~: entier}{}
+		\Write "J’ai reçu un tableau rempli de ", tailleLogique, " éléments "
+		\Write "sur ", n, " éléments au total."
+	\EndModule
+	\end{Pseudocode}
+
+	Notons qu’on admet également qu’un module retourne un tableau. 
+	
+	\begin{Pseudocode}
+	\LComment Crée un tableau statique d'entiers de taille 10, l'initialise à 0 et le retourne.
+	\Module{créerTableau}{}{\K{tableau} [1 à 10] d'entiers}
+		\Decl tab~: \K{tableau} [1 à 10] d'entiers
+		\Decl i~: entier
+		\For{i \K{de} 1 \K{à} 10}
+			\Let tab[i] \Gets 0
+		\EndFor
+		\Return tab
+	\EndModule
+	\Empty
+	\Module{principalAppelTableau}{}{}
+		\Decl entiers~: \K{tableau} [1 à 10] d'entiers
+		\Decl i~: entier
+		\Empty
+		\Let entiers \Gets créerTableau()
+		\Empty
+		\For{i \K{de} 1 \K{à} 10}
+			\Write entiers[i]
+		\EndFor
+	\EndModule
+	\end{Pseudocode}
+	
+	Par contre, on ne peut pas lire ou afficher un tableau en une seule
+	instruction; il faut des instructions de lecture ou
+	d'affichage individuelles pour chacun de ses éléments.
+		
+% ==============================================
+\section{Parcours d'un tableau à une dimension} 
+\label{Les parcours de tableaux}
+% ==============================================
+
+	Soit le tableau statique \textit{tab} déclaré ainsi
+	
+	\begin{Pseudocode}
+		\Decl tab~: \K{tableau} [1 à n] de T \RComment où T est un type quelconque
+	\end{Pseudocode}
+	
+	ou soit le tableau dynamique \textit{tab} déclaré ainsi
+	
+	\begin{Pseudocode}
+		\Decl tab~: \K{tableau} de T \RComment où T est un type quelconque
+		\Let tab \Gets \K{nouveau} \K{tableau} [1 à n] de T
+	\end{Pseudocode}
+	
+	
+	Envisageons d'abord le parcours complet
+	et voyons ensuite les parcours avec arrêt prématuré.
+
+\subsection{Parcours complet}
+
+	Les tableaux interviennent dans de nombreux problèmes 
+	et il est primordial de savoir les parcourir 
+	en utilisant des algorithmes
+	corrects, efficaces et lisibles.
+	
+	Examinons les situations courantes et voyons quelles solutions conviennent.
+	On pourrait aussi envisager d'autres parcours
+	(à l'envers, une case sur deux, \dots) 
+	mais ils ne représentent aucune difficulté nouvelle.
+	
+	Pour parcourir complètement un tableau, 
+	on peut utiliser la boucle \K{pour}
+	comme dans l'algorithme suivant
+	où \og{}traiter\fg{} va dépendre du problème concret posé~:
+	afficher, modifier, sommer, \dots
+	
+	\begin{Pseudocode}
+		\LComment{Parcours complet d'un tableau via une boucle pour}
+		\LComment Les déclarations sont omises pour ne pas alourdir les algorithmes.
+		\For{i de 1 à n}
+			\Stmt traiter tab[i]
+		\EndFor
+	\end{Pseudocode}
+
+\subsection{Parcours avec sortie prématurée}
+
+	Parfois, on ne doit pas forcément parcourir le tableau jusqu'au bout
+	mais on pourra s'arrêter prématurément si une certaine condition est remplie.
+	Par exemple~:
+	\begin{liste}
+	\item on cherche la présence d'un élément et on vient de le trouver ;
+	\item on vérifie qu'il n'y a pas de $0$ et on vient d'en trouver un.
+	\end{liste}
+	
+	La première étape est de transformer le \K{pour} en \K{tant que}
+	ce qui donne l'algorithme 
+	
+	\begin{Pseudocode}
+		\LComment{Parcours complet d'un tableau via une boucle tant-que}
+		\Let i \Gets 1
+		\While{i $\le$ n}
+			\Stmt traiter tab[i]
+			\Let i \Gets i + 1
+		\EndWhile
+	\end{Pseudocode}
+	
+	On peut à présent introduire le test d'arrêt.
+	Une contrainte est qu'on voudra, à la fin de la boucle, savoir
+	si oui ou non on s'est arrêté prématurément et, si c'est le cas,
+	à quel indice.
+	
+	Il existe essentiellement deux solutions, avec ou sans variable booléenne.
+	En général, la solution [A] sera plus claire si le test est court.
+
+\subsubsection*{[A] Sans variable booléenne}
+
+	\begin{Pseudocode}
+		\LComment{Parcours partiel d'un tableau sans variable booléenne}
+		\Let i \Gets 1
+		\While{i $\le$ n ET \textit{test sur tab[i] dit que on continue}}
+			\Let i \Gets i + 1
+		\EndWhile
+		\If{i $>$ n}
+			\LComment on est arrivé au bout
+		\Else
+			\LComment arrêt prématuré à l'indice i.
+		\EndIf
+	\end{Pseudocode}
+	
+	On pourrait inverser les deux branches du \K{si-sinon} en inversant le test
+	mais attention à ne pas tester tab[i] car $i$ n'est peut-être pas valide.
+
+\subsubsection*{[B] Avec variable booléenne}
+
+	\begin{Pseudocode}
+		\LComment{Parcours partiel d'un tableau avec variable booléenne}
+		\Let i \Gets 1
+		\Let trouvé \Gets faux
+		\While{i $\le$ n ET NON trouvé}
+			\If{\textit{test sur tab[i] dit que on a trouvé}}
+				\Let trouvé \Gets vrai
+			\Else
+				\Let i \Gets i + 1
+			\EndIf
+		\EndWhile
+		\LComment tester le booléen pour savoir si arrêt prématuré.
+	\end{Pseudocode}
+	
+	Attention à bien choisir un nom de booléen adapté au problème
+	et à l'initialiser à la bonne valeur. 
+	Par exemple, si la variable s'appelle \og{}continue\fg{}
+	\begin{liste}
+	\item initialiser la variable à vrai ;
+	\item le test de la boucle est \og\pseudocode{\dots ET continue}\fg{} ;
+	\item mettre la variable à faux pour sortir de la boucle.
+	\end{liste}
+
+% ==================
+\section{Exercices}
+% ==================
+
+\subsection{Exercices de base}
+% -----------------------------
+
+\begin{Exercice}{Somme}
+	\marginicon{java}
+	Écrire un module qui reçoit en paramètre le tableau
+	\pseudocode{tabEnt} de $n$ entiers 
+	et qui retourne la somme de ses éléments.
+\end{Exercice}
+
+\begin{Exercice}{Maximum/minimum}
+	\marginicon{java}
+	Écrire un module qui reçoit en paramètre le tableau
+	\pseudocode{tabEnt} de $n$ entiers et qui
+	retourne la plus grande valeur de ce tableau. Idem pour le minimum.
+\end{Exercice}
+
+\begin{Exercice}{Indice du maximum/minimum}
+	\label{ex:indiceminmax}
+	\marginicon{java}
+	Écrire un module qui reçoit en paramètre le tableau
+	\pseudocode{tabEnt} de $n$ entiers et qui
+	retourne l’indice de l’élément contenant la plus grande valeur de ce
+	tableau. 
+	En cas d’ex-æquo, c’est l’indice le plus petit qui sera renvoyé.
+	
+	Que faut-il changer pour renvoyer l’indice le plus grand ?
+	Et pour retourner l’indice du minimum ? 
+	Réécrire l’algorithme de l’exercice précédent en utilisant celui-ci.
+\end{Exercice}
+
+\begin{Exercice}{Nombre d'éléments d'un tableau}
+	Écrire un module qui reçoit en paramètre le tableau
+	\pseudocode{tabRéels} de $n$ réels et qui
+	retourne le nombre d’éléments du tableau.
+\end{Exercice}
+
+\begin{Exercice}{Y a-t-il un pilote dans l'avion}
+	Écrire un module qui reçoit en paramètre le tableau
+	\pseudocode{avion} de $n$ chaines 
+	et qui retourne un booléen 
+	indiquant s'il contient au moins un élément de 
+	valeur <<pilote>>. 
+\end{Exercice}
+
+\begin{Exercice}{Plus grand écart absolu}
+	Écrire un module qui reçoit en paramètre le tableau
+	\pseudocode{températures} de $n$ réels et qui
+	retourne le plus grand écart absolu entre deux températures 
+	consécutives de ce tableau.
+	Et si on veut le plus petit écart ?
+\end{Exercice}
+
+\begin{Exercice}{Remplacement de valeurs}
+	Écrire un module qui reçoit en paramètre le tableau
+	\pseudocode{prénoms} de $n$ chaines et qui
+	contrôle si tous les prénoms commencent par une majuscule.
+	Dans la négative, il remplacera la première lettre du prénom 
+	par une majuscule.
+	
+	\textit{Rappel}~: pour manipuler les chaines et les caractères,
+	vous avez à votre disposition les modules fournis en annexe.
+\end{Exercice}
+
+\begin{Exercice}{Tableau ordonné ?}
+	\marginicon{java}
+	Écrire un module qui reçoit en paramètre le tableau
+	\pseudocode{valeurs} de $n$ entiers et qui
+	vérifie si ce tableau est ordonné (strictement) croissant sur les
+	valeurs. Le module retournera \textbf{vrai} si le tableau est ordonné,
+	\textbf{faux} sinon.
+\end{Exercice}
+
+\begin{Exercice}{Positions du minimum}
+	\marginicon{java}
+	Écrire un module qui reçoit en paramètre le tableau
+	\pseudocode{cotes} de $n$ entiers et qui
+	affiche le ou les indice(s) des éléments contenant la valeur minimale
+	du tableau.
+
+	\begin{enumerate}[label=\alph*)]
+	\item 
+		Écrire une première version «~classique~» avec deux parcours de tableau
+	\item
+		Écrire une deuxième version qui ne parcourt qu’une seule fois 
+		\pseudocode{cotes} en
+		stockant dans un deuxième tableau (de quelle taille ?)
+		les indices du plus petit élément
+		rencontrés (ce tableau étant à chaque fois réinitialisé lorsqu’un
+		nouveau minimum est rencontré)
+	\item
+		Écrire une troisième version qui \textbf{retourne} 
+		le tableau contenant les indices.
+		Écrire également un module qui appelle cette version
+		puis affiche les indices reçus. 
+	\end{enumerate}
+\end{Exercice}
+
+\begin{Exercice}{Renverser un tableau}
+	\marginicon{java}
+	Écrire un module qui reçoit en paramètre le tableau
+	\pseudocode{tabCar} de $n$ caractères, et qui
+	«~renverse~» ce tableau, c’est-à-dire qui permute le premier élément
+	avec le dernier, le deuxième élément avec l’avant-dernier et ainsi de
+	suite.
+\end{Exercice}
+
+\begin{Exercice}{Tableau symétrique ?}
+	Écrire un module qui reçoit en paramètre le tableau
+	\pseudocode{tabChaines} de $n$ chaines et qui
+	vérifie si ce tableau est symétrique, c’est-à-dire si le premier
+	élément est identique au dernier, le deuxième à l’avant-dernier et
+	ainsi de suite.
+\end{Exercice}
+
+\begin{Exercice}{Cumul des ventes}
+	Soit le tableau \pseudocode{ventes~: 
+	\textbf{tableau} [1~à 12]} d’entiers où le
+	premier élément contient le montant total des ventes pour janvier, le
+	second pour février, et ainsi de suite jusqu'à
+	décembre. Écrire l’algorithme qui reçoit ce tableau en paramètre, et
+	renvoie le tableau \pseudocode{cumul~: 
+	\textbf{tableau}[1~à 12]} ; chaque élément
+	de ce tableau devra contenir le cumul de toutes les ventes depuis le
+	début de l’année jusqu’au mois correspondant à
+	l'indice de l’élément en question. Le dernier élément
+	de cumul devra donc contenir le total des ventes de l’année.
+\end{Exercice}
+
+\bigskip
+\begin{Exercice}{Occurrence des chiffres}
+	\marginicon{java}
+	Écrire un module qui reçoit un nombre entier positif ou nul en paramètre
+	et qui affiche pour chacun de ses chiffres le nombre de fois qu’il
+	apparait dans ce nombre. Ainsi, pour le nombre 10502851125, l’affichage
+	mentionnera que le chiffre 0 apparait 2 fois, 1 apparait 3 fois, 2
+	apparait 2 fois, 5 apparait 3 fois et 8 apparait une fois (l’affichage
+	ne mentionnera donc pas les chiffres qui n’apparaissent pas).
+\end{Exercice}
+
+\begin{Exercice}{Palindrome}
+	Soit le tableau \pseudocode{phrase~: 
+	\textbf{tableau}[1 à n]} de caractères 
+	(caractère alphabétique, le caractère d’espacement ou un
+	caractère de ponctuation). Dans ce tableau, des lettres qui se suivent
+	constituent un mot. Ces mots sont séparés les uns des autres par un ou
+	plusieurs caractères d’espacement ou de ponctuation. Écrire un module
+	qui reçoit en paramètre ce tableau et qui vérifie si la phrase formée
+	par les mots de ce tableau est un palindrome. Le résultat sera
+	communiqué par le renvoi d’une valeur booléenne. Pour rappel, une
+	phrase palindrome est une phrase qui peut se lire dans les deux sens
+	sans tenir compte des espacements et de la ponctuation.
+	
+	Exemple du contenu du tableau phrase~:
+
+	\begin{center}
+	\begin{tabular}{|*{21}{>{\small\centering\arraybackslash}m{0.30cm}|}}
+	\hline
+	  A &
+	  ~ &
+	  L &
+	  ' &
+	  E &
+	  T &
+	  A &
+	  P &
+	  E &
+	  , &
+	  ~ &
+	  ~ &
+	  E &
+	  P &
+	  A &
+	  T &
+	  E &
+	  - &
+	  L &
+	  A &
+	  ! \\
+	\hline
+	\end{tabular}
+	\end{center}
+\end{Exercice}
+
+\begin{Exercice}{Moyenne d'éléments}
+	\marginicon{java}
+	Soit le tableau \pseudocode{tabEnt} contenant
+	$n$ entiers \textbf{différents}. Écrire l’algorithme
+	qui calcule et affiche la moyenne des éléments situés entre les valeurs
+	minimale et maximale du tableau (ces deux valeurs participant au calcul
+	de cette moyenne). Dans l’exemple ci-dessous, le maximum est 85, le
+	minimum 5 et la moyenne des 8 éléments concernés est 21. Exploitez
+	l'exercice \vref{ex:indiceminmax} pour réaliser cet algorithme. 
+	
+	\begin{center}
+	\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.4cm}|}}
+	\hline
+	  12 &
+	  \cellcolor{gray!25}85 &
+	  \cellcolor{gray!25}21 &
+	  \cellcolor{gray!25}17 &
+	  \cellcolor{gray!25}8 &
+	  \cellcolor{gray!25}6 &
+	  \cellcolor{gray!25}10 &
+	  \cellcolor{gray!25}16 &
+	  \cellcolor{gray!25}5 &
+	  74 &
+	  64 &
+	  29 &
+	  41 &
+	  11 &
+	  73 &
+	  72 &
+	  28 &
+	  66 &
+	  55 &
+	  44
+	\\\hline
+	\end{tabular}
+	\end{center}
+\end{Exercice}
+
+\begin{Exercice}{OXO}
+	Soit le tableau \pseudocode{oxo} contenant $n$
+	caractères. Chaque élément est le caractère ‘O’ ou ‘X’. Écrire
+	l’algorithme qui permet de compter et d’afficher le nombre de séquences
+	distinctes des valeurs consécutives ‘O’, ‘X’, ‘O’. Lorsqu’un ‘O’ fait
+	partie de deux séquences, on ne comptabilise qu’une seule séquence
+	(ainsi le ‘O’ en position 6 ci-dessous est le dernier d’une séquence et
+	le premier d’une autre~: on ne comptabilisera qu’une seule séquence
+	pour ces deux séquences qui se chevauchent). Dans l’exemple ci-dessous,
+	il y a donc 3 séquences à comptabiliser~:
+
+	\begin{center}
+	\begin{tabular}{*{20}{>{\centering\arraybackslash}m{0.4cm}}}
+	 \itshape 1 &
+	 \itshape 2 &
+	 \itshape 3 &
+	 \itshape 4 &
+	 \itshape 5 &
+	 \itshape 6 &
+	 \itshape 7 &
+	 \itshape 8 &
+	 \itshape 9 &
+	 \itshape 10 &
+	 \itshape 11 &
+	 \itshape 12 &
+	 \itshape 13 &
+	 \itshape 14 &
+	 \itshape 15 &
+	 \itshape 16 &
+	 \itshape 17 &
+	 \itshape 18 &
+	 \itshape 19 &
+	 \itshape 20
+	 \\\hline
+	\multicolumn{1}{|>{\centering\arraybackslash}m{0.35cm}|}{ O} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{  X} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{  X} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{ \cellcolor{gray!25} O} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{ \cellcolor{gray!25} X} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{ \cellcolor{gray!25} O} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{  X} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{ \cellcolor{gray!25} O} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{ \cellcolor{gray!25} X} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{ \cellcolor{gray!25} O} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{  O} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{  O} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{  O} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{  X} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{  X} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{ \cellcolor{gray!25} O} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{ \cellcolor{gray!25} X} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{ \cellcolor{gray!25} O} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{  O} &
+	\multicolumn{1}{>{\centering\arraybackslash}m{0.35cm}|}{  X}\\
+	\hline
+	\end{tabular}
+	\end{center}
+\end{Exercice}
+
+\begin{Exercice}{Les doublons}
+	\marginicon{java}
+	Vérifiez si un tableau contient au moins 2 éléments égaux.
+\end{Exercice}
+
+\bigskip
+\bigskip
+
+\begin{Exercice}{Mastermind}
+	\marginicon{java}
+	Dans le jeu du Mastermind, un joueur A doit trouver une combinaison de k
+	pions de couleur, choisie et tenue secrète par un autre joueur B. Cette
+	combinaison peut contenir éventuellement des pions de même couleur. À
+	chaque proposition du joueur A, le joueur B indique le nombre de pions
+	de la proposition qui sont corrects et bien placés et le nombre de
+	pions corrects mais mal placés. 
+	
+	Pour implémenter une simulation de ce jeu, on utilise le type Couleur,
+	dont les valeurs possibles sont les couleurs des pions utilisés.
+	(Attention, le nombre exact de couleurs n’est pas précisé.) Les seules
+	manipulations permises avec ce type sont la comparaison (tester si deux
+	couleurs sont identiques ou non) et l’affectation (affecter le contenu
+	d’une variable de type Couleur à une autre variable de ce type). Les
+	propositions du joueur A, ainsi que la combinaison secrète du joueur B
+	sont contenues dans des tableaux de k composantes de type Couleur.
+	
+	Écrire le module suivant qui renvoie dans les variables
+	\pseudocode{bienPlacés} et \pseudocode{malPlacés}
+	respectivement le nombre de pions bien placés et mal placés dans la
+	«~proposition~» du joueur A en la comparant à la «~solution~» cachée du
+	joueur B.
+
+	\begin{Pseudocode}
+	\ModuleSign{testerProposition}{
+		proposition\In, solution\In~: 
+		\K{tableau} [1 à k ] de Couleur,
+		\\\hfill bienPlacés\Out, malPlacés\Out: entiers}{}
+	\end{Pseudocode}
+\end{Exercice}
+
+\begin{Exercice}{Casser le chiffre de César}
+	Dans le chapitre sur les boucles, l'exercice \vref{ex:cesar}
+	vous a montré la technique de César pour chiffrer ses messages.
+	
+	Ce chiffre est en fait assez facile à casser grâce à l'analyse statistique.
+	En effet, dans un texte général, les lettres de l'alphabet ne sont pas
+	présentes avec la même fréquence. 
+	Par exemple, en français, la lettre 'E' est la plus présente%
+	\footnote{%
+		Il y a évidemment des exceptions, cf. "La disparition" de Georges Perec.
+	}.
+	Ainsi, si on trouve un message chiffré 
+	(et si on sait que c'est du français et que c'est chiffré par le chiffre de César)
+	on peut tenter de le comprendre via une analyse statistique. 
+	On analyse la fréquence de chaque lettre du message et la plus fréquente remplace
+	probablement le 'E'. Par exemple, si la lettre la plus fréquente est le 'B',
+	il est probable que le message soit chiffré avec un décalage de 3.
+	
+	Écrivez un module qui reçoit une chaine 
+	- le message chiffré par le chiffre de César -
+	et retourne une valeur probable pour le déplacement utilisé pour le chiffrer.
+\end{Exercice}
+
