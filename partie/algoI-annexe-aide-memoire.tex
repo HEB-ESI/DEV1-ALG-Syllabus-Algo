@@ -1,0 +1,42 @@
+\chapter{Aide-mémoire}
+
+Cet aide-mémoire peut vous accompagner lors d'une
+interrogation ou d'un examen. 
+Il vous est permis d’utiliser ces méthodes sans les développer.
+Par contre, si vous sentez le besoin d’utiliser 
+une méthode qui n'apparait pas ici, 
+il faudra en écrire explicitement le contenu.
+
+\section{Pour manipuler les chaines et les caractères}
+
+\begin{Pseudocode}
+	\Stmt {\large // Est-ce ?}
+	\Empty
+	\Stmt estLettre(car: caractère) \Gives~booléen		\RComment{est-ce une lettre ?}
+	\Stmt estChiffre(car: caractère) \Gives~booléen		\RComment{est-ce un chiffre ?}
+	\Stmt estMajuscule(car: caractère) \Gives~booléen	\RComment{est-ce une majuscule ?}
+	\Stmt estMinuscule(car: caractère) \Gives~booléen	\RComment{est-ce une minuscule ?}
+	\Empty
+	\Stmt {\large // Conversions}
+	\Empty
+	\Stmt majuscule(car: caractère) \Gives~caractère	\RComment{convertit une minuscule en une majuscule.}
+	\Stmt minuscule(car: caractère) \Gives~caractère	\RComment{convertit une majuscule en une minuscule.}
+	\Stmt numLettre(car: caractère) \Gives~entier		\RComment{donne la position de la lettre dans l'alphabet.}
+	\Stmt lettreMaj(n: entier) \Gives~caractère			\RComment{donne la lettre majuscule de position donnée.}
+	\Stmt lettreMin(n: entier) \Gives~caractère			\RComment{donne la lettre minuscule de position donnée.}
+	\Stmt chaine(car: caractère) \Gives~chaine			\RComment{convertit le caractère en une chaine.}
+	\Let varChaine \Gets~varCaractère					\RComment{idem}
+	\Stmt chaine(n : entier) \Gives~chaine				\RComment{convertit un entier en une chaine.}
+	\Stmt chaine(x : réelr) \Gives~chaine				\RComment{convertit un réel en une chaine.}
+	\Stmt nombre(ch : chaine) \Gives~réel				\RComment{convertit une chaine en un nombre.}
+	\Empty
+	\Stmt {\large // Manipulations}
+	\Empty
+	\Stmt longueur(ch : chaine) \Gives~entier			\RComment{donne la taille de la chaine.}
+	\Stmt car(ch: chaine, n: entier) \Gives~caractère	\RComment{donne le caractère à une position donnée.}
+	\Stmt sousChaine(ch: chaine, pos: entier, long: entier) \Gives~chaine \RComment{extrait une sous-chaine}
+	\Stmt estDansChaine(ch: chaine, sous-chaine: chaine [ou caractère]) \Gives~entier 
+	\Stmt 	\RComment{dit où commence une sous-chaine dans une chaine donnée (0 si pas trouvé)}
+	\Stmt concat(ch1, ch2, \dots, chN: chaine) \Gives~chaine 	\RComment{concatène des chaines}
+	\Let  ch \Gets~ch1 + ch2 + \dots + chN						\RComment{idem}
+\end{Pseudocode}

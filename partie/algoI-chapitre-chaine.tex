@@ -1,0 +1,524 @@
+% ====================
+\chapter{Les chaines}
+% ====================
+
+	Dans ce chapitre, 
+	nous allons apprendre à manipuler du texte 
+	en étudiant les différentes fonctions associées 
+	aux variables de type chaine et caractère. 
+	Ce sera aussi l'occasion de revoir quelques techniques algorithmiques 
+	déjà acquises pour les nombres (alternatives, boucles) 
+	afin de les consolider dans un contexte plus \og littéraire \fg.
+	
+\section{Introduction}
+% ====================
+
+	Nous avons définis au chapitre 2 deux types de variables 
+	qui permettent de stocker du texte : 
+	le caractère 
+	(pour les différentes lettres et symboles 
+	qui apparaissent sur le clavier de votre ordinateur, 
+	par exemple 'a', 'B', '?', '3', '@', etc.) 
+	et la chaine (qui est un assemblage de plusieurs caractères) 
+	comme par exemple "Nous voici déjà arrivés au chapitre 7 !".
+
+	Observez la petite nuance d'écriture :
+	un caractère sera entouré de simples guillemets ('') 
+	et une chaine de doubles guillemets ("").
+
+	La taille (ou longueur) d'une chaine 
+	est le nombre de caractères qu'elle contient. 
+	Remarquez qu'une chaine peut être vide, mais pas un caractère !
+	Ne confondez pas la chaine vide ("", de taille nulle) 
+	avec le caractère blanc (' ') qui contient l'espace séparant 
+	2 mots d'un texte et que vous obtenez en enfonçant 
+	la touche d'espacement au bas du clavier.
+
+	La chaine (string en anglais) 
+	est un type à part entière dans la plupart des langages informatiques, 
+	bien que certains langages utilisent d'autres artifices 
+	pour simuler les chaines 
+	(par exemple le C où la chaine s'apparente plus 
+	à un tableau de caractères). 
+	Au début de l'histoire de l'informatique, 
+	les chaines étaient limitées à 255 caractères ;
+	actuellement, la majorité des langages admettent des chaines 
+	de longueur 65535 ou plus 
+	(soit suffisament pour contenir tout un chapitre de ce syllabus). 
+	La plupart des langages orienté objet offrent une classe 
+	dédiée à la représentation et la manipulation des chaines de caractères.
+
+	La manipulation de chaines peut s'avérer être 
+	une source de complications pour le programmeur, 
+	en particulier pour le développeur de sites internet 
+	en raison des problèmes de compatibilité des différents systèmes informatiques, 
+	des différentes normes de représentations 
+	et des différents alphabets utilisés à travers le monde. 
+	Dans tout ce qui suit, 
+	nous simplifierons sensiblement cette problématique 
+	(même au niveau du français) 
+	en ne considérant pas les problèmes liés aux différentes 
+	accentuations des lettres (accents, trémas, cédilles\dots). 
+
+\section{Manipuler les caractères}
+% ================================
+
+	Introduisons quelques fonctions (ou primitives) 
+	agissant sur les caractères. 
+	Leur écriture s'apparente à celle de modules 
+	que vous pourrez utiliser tels quels dans les exercices. 
+	Nous ne détaillons pas leur code ici, 
+	car il fait intervenir des aspects techniques 
+	extérieurs au cadre du cours de logique 
+	(codage des caractères, code ASCII, normes ISO\dots)
+
+	\begin{center}
+		\pseudocode{estLettre(car: caractère) \Gives~booléen}
+	\end{center}
+
+	Cette fonction indique si un caractère est une lettre. 
+	Par exemple elle retourne vrai pour 'a', 'e', 'G', 'K', 
+	mais faux pour '4', '\$', '@'\dots %$
+	Si on veut savoir si une lettre est une minuscule ou majuscule, 
+	on utilisera les fonctions analogues
+
+	\begin{center}
+		\pseudocode{estMinuscule(car: caractère) \Gives~booléen}
+	\end{center}
+	
+	et
+
+	\begin{center}
+		\pseudocode{estMajuscule(car: caractère) \Gives~booléen}
+	\end{center}
+
+	Il va de soit que si car n'est pas une lettre, 
+	ces deux fonctions retournent faux.
+
+	\begin{center}
+		\pseudocode{estChiffre(car: caractère) \Gives~booléen}
+	\end{center}
+
+	Cette fonction permet de savoir si un caractère est un chiffre. 
+	Elle retourne vrai uniquement pour les dix caractères 
+	'0', '1', '2', '3', '4', '5', '6', '7', '8' et '9' 
+	et faux dans tous les autres cas.
+
+	On peut aussi convertir une majuscule en minuscule, grâce à la fonction :
+
+	\begin{center}
+		\pseudocode{majuscule(car: caractère) \Gives~caractère}
+	\end{center}
+
+	Par exemple, si car vaut 'h', 
+	cette fonction retourne 'H'. 
+	L'opération inverse se fait avec :
+
+	\begin{center}
+		\pseudocode{minuscule(car: caractère) \Gives~caractère}
+	\end{center}
+
+	Il peut aussi être pratique de connaître 
+	la position d'une lettre dans l'alphabet. 
+	Ceci se fera à l'aide de la fonction :
+
+	\begin{center}
+		\pseudocode{numLettre(car: caractère) \Gives~entier}
+	\end{center}
+
+	qui retourne toujours un entier entre 1 et 26. 
+	Par exemple \pseudocode{numLettre('E')} donnera 5, 
+	ainsi que \pseudocode{numLettre('e')}, 
+	cette fonction traite donc de la même manière 
+	les majuscules et les minuscules. 
+	En vertu de ce qui a été écrit plus haut, 
+	numLettre retournera aussi 5 pour les caractères 'é', 'è', 'ê', 'ë'\dots). 
+	N.B. :  attention, il est interdit d'utiliser cette fonction 
+	si le caractère n'est pas une lettre !
+
+	Il peut être utile d'avoir un outil qui fait l'opération inverse, 
+	à savoir associer la lettre de l'alphabet correspondant à une position donnée. 
+	Pour cela, nous aurons : 
+
+	\begin{center}
+		\pseudocode{lettreMaj(n: entier) \Gives~caractère}
+	\end{center}
+	
+	et
+
+	\begin{center}
+		\pseudocode{lettreMin(n: entier) \Gives~caractère}
+	\end{center}
+
+	qui retournent respectivement 
+	la forme majuscule ou minuscule de la n-ème lettre de l'alphabet 
+	(où n sera obligatoirement compris entre 1 et 26). 
+	Par exemple, \pseudocode{lettreMaj(13)} retourne 'M' 
+	tandis que \pseudocode{lettreMin(26)} retourne 'z'.
+
+\section{Convertir en chaine}
+% ===========================
+
+	Un caractère peut être vu comme une chaine de taille 1, 
+	mais techniquement, 
+	il est important de faire la distinction entre ces deux types. 
+	Si on veut transformer un caractère en chaine, 
+	on utilisera la fonction :
+
+	\begin{center}
+		\pseudocode{chaine(car: caractère) \Gives~chaine}
+	\end{center}
+
+	Par exemple, si car vaut 'a', cette fonction retournera "a". 
+	Il est cependant admissible d'utiliser le simple signe d'affectation 
+	qui réalise la conversion de façon automatique :
+
+	\begin{center}
+		\pseudocode{varChaine \Gets~varCaractère}
+	\end{center}
+
+	De façon similaire, 
+	on pourra transformer une variable numérique en chaine avec :
+
+	\begin{center}
+		\pseudocode{chaine(n : entier) \Gives~chaine}
+	\end{center}
+
+	ou
+
+	\begin{center}
+		\pseudocode{chaine(x : réel) \Gives~chaine}
+	\end{center}
+
+	Ainsi, \pseudocode{chaine(23)} donnera "23" 
+	et \pseudocode{chaine (3,14)} donnera "3,14". 
+	Notez qu'on utilise le même nom de fonction dans ces derniers cas 
+	(concept de « surcharge » qui sera développé 
+	dans le chapitre orienté objet du cours \og Algorithmique II \fg). 
+	La différence entre ces différentes fonctions 
+	se fait par le type de la variable en entrée.
+
+	On peut aussi transformer une chaine 
+	contenant des caractères numériques 
+	en nombre par la fonction inverse :
+
+	\begin{center}
+		\pseudocode{nombre(ch : chaine) \Gives~réel}
+	\end{center}
+
+	Ainsi, 
+	\pseudocode{nombre("3,14")} retournera 3,14. 
+	Notez que si n est un entier, 
+	l'instruction \pseudocode{n \Gets~nombre("3,14")} affectera n à 3, 
+	conformément à la remarque du paragraphe \vref{affinterne}. 
+	On supposera encore que si la chaine ch ne représente pas 
+	un nombre de façon correcte, la fonction retournera 0.
+
+\section{Manipuler les chaines}
+% =============================
+
+	Venons-en maintenant aux différentes fonctions 
+	qui permettent de manipuler les chaines ; 
+	ces fonctions ont des formes équivalentes 
+	dans la plupart des langages de programmation. 
+	Nous adapterons pour le pseudo-code 
+	les fonctions les plus courantes et les plus utiles.
+	
+	\subsection{Longueur d'une chaine}
+	%---------------------------------
+
+		La longueur d'une chaine (ou encore sa taille) 
+		est le nombre de caractères qu'elle contient. 
+		Nous pourrons l'évaluer avec la fonction
+
+		\begin{center}
+			\pseudocode{longueur(ch : chaine) \Gives~entier}
+		\end{center}
+	
+		Par exemple : \pseudocode{longueur("algorithmique")} retourne 13 
+		et \pseudocode{longueur("")} retourne 0.
+
+	\subsection{Accès aux différents caractères d'une chaine}
+	%--------------------------------------------------------
+
+		La fonction
+
+		\begin{center}
+			\pseudocode{car(ch: chaine, n: entier) \Gives~caractère}
+		\end{center}
+
+		permet de connaître le n-ème caractère contenu dans une chaine. 
+		Pour une utilisation correcte de cette fonction, 
+		il faut que la valeur de n soit au moins égale à 1 
+		et qu'elle ne dépasse pas la longueur de la chaine. 
+		Par exemple \pseudocode{car("Spirou", 4)} retourne 'r', 
+		mais \pseudocode{car("Spirou", 8)} générera un message d'erreur.
+
+	\subsection{Extraction de sous-chaine}
+	%-------------------------------------
+
+		Cette fonction importante 
+		permet d'extraire une portion 
+		d'une certaine longueur d'une chaine donnée, 
+		et ceci à partir d'une position donnée. 
+		L'en-tête de cette fonction 
+		(qui reçoit donc 3 paramètres entrants) est la suivante :
+
+		\begin{center}
+			\pseudocode{sousChaine(ch: chaine, pos: entier, long: entier) \Gives~chaine}
+		\end{center}
+
+		Il faudra aussi être très vigilant 
+		pour une utilisation correcte: 
+		\pseudocode{pos} doit être compris entre 1 et la taille de la chaine, 
+		et la valeur de \pseudocode{long} doit être telle 
+		qu'on ne déborde pas de la chaine ! 
+
+		Par exemple, \pseudocode{sousChaine("algorithmique", 5, 3)} 
+		donne "rit".
+
+		Cette fonction est très utile pour sélectionner 
+		des portions d'une chaine 
+		contenant des informations codées sous un certain format. 
+		Prenons par exemple une date stockée dans une chaine de format 
+		"JJ/MM/AAAA" (de longueur 10). 
+		Pour extraire le jour de cette date, 
+		on écrira \pseudocode{sousChaine(ch, 1, 2)} ; 
+		le mois s'obtiendra avec \pseudocode{sousChaine(ch, 4, 2)} 
+		et l'année avec \pseudocode{sousChaine(ch, 7, 4)}. 
+		Attention, les 3 résultats obtenus sont des chaines de chiffres 
+		et non des nombres !
+
+	\subsection{Recherche de sous-chaine}
+	%------------------------------------
+	
+		Cette fonction permet de savoir 
+		si une sous-chaine donnée (ou un caractère) 
+		est présent dans une chaine donnée. 
+		Elle permet d'éviter d'écrire 
+		le code correspondant à une recherche : 
+
+		\begin{center}
+			\pseudocode{estDansChaine(ch: chaine, sous-chaine: chaine [ou caractère]) \Gives~entier}			
+		\end{center}
+
+		La valeur de l'entier renvoyé est la position 
+		où commence la sous-chaine recherchée. 
+		Par exemple, 
+		\pseudocode{estDansChaine("algorithmique", "mi")} retournera 9. 
+		Si la sous-chaine ne s'y trouve pas, 
+		la fonction retourne 0. 
+		On peut admettre ici d'écrire un caractère à la place de la sous-chaine. 
+		Par exemple, 
+		\pseudocode{estDansChaine("algorithmique", 'm')} 
+		retournera également 9. 
+		
+		\subsection{Concaténation de chaines}
+		%------------------------------------
+
+			Il est fréquent de devoir rassembler plusieurs chaines 
+			pour former une seule chaine plus grande, 
+			il s'agit de l'opération de concaténation. 
+			La syntaxe est la suivante :
+	
+			\begin{center}
+				\pseudocode{concat(ch1, ch2, \dots, chN: chaine) \Gives~chaine}
+			\end{center}
+			
+			On remarquera ici le cas exceptionnel 
+			d'une fonction admettant un nombre indéfini de paramètres. 
+			Par exemple, \pseudocode{concat("al", "go", "rithmique")}
+			donnera "algorithmique". 
+			On admettra aussi comme notation alternative 
+			l'utilisation du signe « + » 
+			qui est ici sans équivoque 
+			entre des variables non numériques :
+
+			\begin{center}
+				\pseudocode{ch \Gets~ch1 + ch2 + \dots + chN}
+			\end{center}
+
+\section{Exercices}
+%==================
+
+\begin{Exercice}{Calcul de fraction}
+	Écrire un algorithme 
+	qui reçoit une fraction sous forme de chaine, 
+	et retourne la valeur numérique de celle-ci. 
+	Par exemple, si la fraction donnée est "5/8", 
+	l'algorithme renverra 0,625. 
+	On peut considérer que la fraction donnée est correcte, 
+	elle est composée de 2 entiers séparés 
+	par le caractère de division '/'.
+\end{Exercice}
+
+\begin{Exercice}{Conversion de nom}
+	Écrire un algorithme 
+	qui reçoit le nom complet d'une personne 
+	dans une chaine sous la forme "nom, prénom" 
+	et la renvoie au format "prénom nom" 
+	(sans virgule séparatrice). 
+	Exemple : "De Groote, Jan" deviendra "Jan De Groote".	
+\end{Exercice}
+
+\begin{Exercice}{Gauche et droite}
+	Écrire un module \pseudocode{gauche} 
+	et un \pseudocode{droite}
+	qui retourne la chaine formée respectivement 
+	des n premiers et des n derniers caractères d'une chaine donnée.	
+\end{Exercice}
+
+\begin{Exercice}{Grammaire}
+	Écrire un algorithme 
+	qui met un mot en « ou » au pluriel. 
+	Pour rappel, 
+	un mot en « ou » prend un « s » à l'exception des 7 mots 
+	bijou, caillou, chou, genou, hibou, joujou et pou qui prennent 
+	un « x » au pluriel. 
+	Exemple : un clou, des clous, un hibou, des hiboux. 
+	Si le mot soumis à l'algorithme n'est pas un mot en « ou », 
+	un message adéquat sera affiché.
+\end{Exercice}
+
+\begin{Exercice}{Le code correct}
+	Le code IBAN de votre compte en banque 
+	est composé de 16 caractères alphanumériques 
+	(2 lettres suivies de 14 chiffres). 
+	Pour la lisibilité, 
+	on l'écrit souvent en 4 paquets de 4 caractères 
+	séparés par des blancs, par ex. : "BE89 6352 4390 0285" 
+	(soit une chaine de 19 caractères au total). 
+	On peut vérifier si un compte est valide par la manipulation suivante :
+	le reste de la division par 97 du nombre formé 
+	par les 10 chiffres entre le 5ème et 14ème caractères du code 
+	doit donner le nombre formé par les 2 derniers chiffres. 
+	On peut directement que pour l'exemple donné, 
+	896352439002 MOD 97 est bien égal à 85.
+
+	Écrire l'algorithme qui reçoit un code IBAN sous la forme 
+	d'une chaine de 19 caractères
+	et retourne un booléen indiquant si ce code est correct.
+\end{Exercice}
+
+\begin{Exercice}{Email valide}
+	Écrire un algorithme 
+	qui vérifie si une chaine représentant une adresse email 
+	est valide. 
+	Pour simplifier, 
+	nous dirons qu'une adresse email valide 
+	est une chaine de la forme \verb|ch1@ch2.ch3|, 
+	où les sous-chaines ch1 et ch2 ne peuvent contenir 
+	que des caractères alpha-numériques, 
+	et ch3 ne contient que 2 ou 3 lettres. 
+	(Dans la réalité, c'est un peu plus complexe, 
+	ch1 pouvant contenir d'autres caractères 
+	tels que points, tirets, tirets bas (underscore)\dots).
+\end{Exercice}
+
+\begin{Exercice}{Les palindromes}
+	Cet exercice a déjà été réalisé pour des entiers, 
+	en voici 2 versions « chaine » ! 
+	\begin{enumerate}[label=\alph*)]
+	\item 
+		Écrire un algorithme qui vérifie 
+		si un mot donné sous forme de chaine 
+		constitue un palindrome 
+		(comme par exemple "kayak", "radar" ou "saippuakivikauppias" 
+		(marchand de savon en finnois)
+	\item
+		Écrire un algorithme qui vérifie 
+		si une phrase donnée sous forme de chaine constitue un palindrome 
+		(comme par exemple "Esope reste ici et se repose" 
+		ou "Tu l'as trop écrasé, César, ce Port-Salut !"). 
+		Dans cette seconde version, 
+		on fait abstraction des majuscules/minuscules 
+		et on néglige les espaces et tout signe de ponctuation.
+	\end{enumerate}
+\end{Exercice}
+
+\begin{Exercice}{Remplacement de sous-chaines}
+	Écrire un algorithme 
+	qui remplace dans une chaine donnée 
+	toutes les sous-chaines ch1 par la sous-chaine ch2. 
+	Attention, 
+	cet exercice est plus coriace qu'il n'y parait à première vue\dots 
+	Assurez-vous que votre code n'engendre pas de boucle infinie. 
+\end{Exercice}
+
+\begin{Exercice}{Conversion nombres binaires et décimaux}
+	Réécrire les exercices de conversion de nombres binaires et décimaux
+	du chapitre sur les boucles 
+	en considérant que les nombres entrés et affichés sont des chaines. 
+	D'après-vous, 
+	en quoi cette transformation 
+	est-elle une amélioration de la version purement numérique ?
+\end{Exercice}
+
+\begin{Exercice}{Normaliser une chaine}
+	Écrire un module qui recoit une chaine et retourne une autre chaine,
+	version normalisée de la première.
+	Par normalisée, on entend~:~enlever tout ce qui n'est pas une lettre 
+	et tout mettre en majuscule.
+	\\Exemple~:~"Le <COBOL>, c'est la santé~!" devient "LECOBOLCESTLASANTE".
+\end{Exercice}
+
+\begin{Exercice}{Le chiffre de César}
+	\label{ex:cesar}
+	Depuis l'antiquité, les hommes politiques, les militaires, 
+	les hommes d'affaires cherchent à garder secret les messages
+	importants qu'ils doivent envoyer.
+	L'empereur César utilisait une technique (on dit un \emph{chiffrement})
+	qui porte à présent son nom~:
+	remplacer chaque lettre du message par la lettre qui se situe 
+	$k$ position plus loin dans l'alphabet (cycliquement).
+	
+	Exemple~:~si $k$ vaut $2$, 
+	alors le texte clair "CESAR" devient "EGUCT" lorsqu'il est chiffré 
+	et le texte "ZUT" devient "BWV".
+	
+	Bien sûr, il faut que l'expéditeur du message et le récepteur
+	se soient mis d'accord sur la valeur de $k$.
+	
+	On vous demande d'écrire un module qui reçoit une chaine ne contenant
+	que des lettres majuscules ainsi que la valeur de $k$ et qui retourne
+	la version chiffrée du message.
+
+	On vous demande également d'écrire le module de déchiffrement.
+	Ce module reçoit un message chiffré et la valeur de $k$ qui a été
+	utilisée pour le chiffrer et retourne le message en clair.
+	Attention~! Ce second module est \textbf{très simple}.
+
+	%\begin{Solution}
+		%\cadre{
+		%\begin{Pseudocode}
+			%\LComment{Chiffrer un message en utilisant le chiffre de César}
+			%\Module{chiffrerCésar}{msgClair\In : chaine, déplacement\In : entier}{chaine}
+				%\Decl msgChiffré : chaine
+				%\Decl carClair, carChiffré : caractères
+				%\Decl i : entier
+				%\Empty
+				%\Let msgChiffré \Gets ""
+				%\For{i \K{de} 1 \K{à} long(msgClair)}
+					%\Let carClair \Gets car(msgClair, i)
+					%\Let carChiffré \Gets avancer(carClair, déplacement)
+					%\Let msgChiffré \Gets concat( msgChiffré, chaine(carChiffré) )
+				%\EndFor
+				%\Return msgChiffré
+			%\EndModule
+
+			%\Empty
+			%\LComment{Calcule la lettre qui est "delta" position plus loin dans l'alphabet (circulairement)}
+			%\Module{avancer}{lettre\In : caractère, delta\In : entier}{caractère}
+				%\Return lettre( (numLettre(lettre) + delta - 1) MOD 26 + 1 ) 
+			%\EndModule
+
+			%\Empty
+			%\LComment{Déchiffrer un message chiffré avec le chiffre de César}
+			%\Module{déchiffrerCésar}{msgClair\In : chaine, déplacement\In : entier}{chaine}
+				%\Return chiffrerCésar(msgClair, 26 - déplacement)
+			%\EndModule
+		%\end{Pseudocode}
+		%}
+	%\end{Solution}
+	
+\end{Exercice}
