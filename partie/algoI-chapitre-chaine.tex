@@ -13,7 +13,7 @@
 \section{Introduction}
 % ====================
 
-	Nous avons définis au chapitre 2 deux types de variables 
+	Nous avons défini au chapitre 2 deux types de variables 
 	qui permettent de stocker du texte : 
 	le caractère 
 	(pour les différentes lettres et symboles 
@@ -23,8 +23,8 @@
 	comme par exemple "Nous voici déjà arrivés au chapitre 7 !".
 
 	Observez la petite nuance d'écriture :
-	un caractère sera entouré de simples guillemets ('') 
-	et une chaine de doubles guillemets ("").
+	un caractère sera entouré de simples guillemets (' ') 
+	et une chaine de doubles guillemets (" ").
 
 	La taille (ou longueur) d'une chaine 
 	est le nombre de caractères qu'elle contient. 
@@ -78,7 +78,8 @@
 
 	Cette fonction indique si un caractère est une lettre. 
 	Par exemple elle retourne vrai pour 'a', 'e', 'G', 'K', 
-	mais faux pour '4', '\$', '@'\dots %$
+	mais faux pour '4', '\$', '@'\dots %$ 
+		
 	Si on veut savoir si une lettre est une minuscule ou majuscule, 
 	on utilisera les fonctions analogues
 
@@ -92,7 +93,7 @@
 		\pseudocode{estMajuscule(car: caractère) \Gives~booléen}
 	\end{center}
 
-	Il va de soit que si car n'est pas une lettre, 
+	Il va de soi que si \textit{car} n'est pas une lettre, 
 	ces deux fonctions retournent faux.
 
 	\begin{center}
@@ -110,7 +111,7 @@
 		\pseudocode{majuscule(car: caractère) \Gives~caractère}
 	\end{center}
 
-	Par exemple, si car vaut 'h', 
+	Par exemple, si \textit{car} vaut 'h', 
 	cette fonction retourne 'H'. 
 	L'opération inverse se fait avec :
 
@@ -118,7 +119,7 @@
 		\pseudocode{minuscule(car: caractère) \Gives~caractère}
 	\end{center}
 
-	Il peut aussi être pratique de connaître 
+	Il peut aussi être pratique de connaitre 
 	la position d'une lettre dans l'alphabet. 
 	Ceci se fera à l'aide de la fonction :
 
@@ -152,7 +153,7 @@
 
 	qui retournent respectivement 
 	la forme majuscule ou minuscule de la n-ème lettre de l'alphabet 
-	(où n sera obligatoirement compris entre 1 et 26). 
+	(où \textit{n} sera obligatoirement compris entre 1 et 26). 
 	Par exemple, \pseudocode{lettreMaj(13)} retourne 'M' 
 	tandis que \pseudocode{lettreMin(26)} retourne 'z'.
 
@@ -169,7 +170,7 @@
 		\pseudocode{chaine(car: caractère) \Gives~chaine}
 	\end{center}
 
-	Par exemple, si car vaut 'a', cette fonction retournera "a". 
+	Par exemple, si \textit{car} vaut 'a', cette fonction retournera "a". 
 	Il est cependant admissible d'utiliser le simple signe d'affectation 
 	qui réalise la conversion de façon automatique :
 
@@ -208,10 +209,10 @@
 
 	Ainsi, 
 	\pseudocode{nombre("3,14")} retournera 3,14. 
-	Notez que si n est un entier, 
-	l'instruction \pseudocode{n \Gets~nombre("3,14")} affectera n à 3, 
+	Notez que si \textit{n} est un entier, 
+	l'instruction \pseudocode{n \Gets~nombre("3,14")} affectera \textit{n} à 3, 
 	conformément à la remarque du paragraphe \vref{affinterne}. 
-	On supposera encore que si la chaine ch ne représente pas 
+	On supposera encore que si la chaine \textit{ch} ne représente pas 
 	un nombre de façon correcte, la fonction retournera 0.
 
 \section{Manipuler les chaines}
@@ -247,9 +248,9 @@
 			\pseudocode{car(ch: chaine, n: entier) \Gives~caractère}
 		\end{center}
 
-		permet de connaître le n-ème caractère contenu dans une chaine. 
+		permet de connaitre le n-ème caractère contenu dans une chaine. 
 		Pour une utilisation correcte de cette fonction, 
-		il faut que la valeur de n soit au moins égale à 1 
+		il faut que la valeur de \textit{n} soit au moins égale à 1 
 		et qu'elle ne dépasse pas la longueur de la chaine. 
 		Par exemple \pseudocode{car("Spirou", 4)} retourne 'r', 
 		mais \pseudocode{car("Spirou", 8)} générera un message d'erreur.
@@ -280,7 +281,7 @@
 		Cette fonction est très utile pour sélectionner 
 		des portions d'une chaine 
 		contenant des informations codées sous un certain format. 
-		Prenons par exemple une date stockée dans une chaine de format 
+		Prenons par exemple une date stockée dans une chaine \textit{ch} de format 
 		"JJ/MM/AAAA" (de longueur 10). 
 		Pour extraire le jour de cette date, 
 		on écrira \pseudocode{sousChaine(ch, 1, 2)} ; 
@@ -392,7 +393,7 @@
 	le reste de la division par 97 du nombre formé 
 	par les 10 chiffres entre le 5ème et 14ème caractères du code 
 	doit donner le nombre formé par les 2 derniers chiffres. 
-	On peut directement que pour l'exemple donné, 
+	On peut voir directement que, pour l'exemple donné, 
 	896352439002 MOD 97 est bien égal à 85.
 
 	Écrire l'algorithme qui reçoit un code IBAN sous la forme 
@@ -441,7 +442,7 @@
 	qui remplace dans une chaine donnée 
 	toutes les sous-chaines ch1 par la sous-chaine ch2. 
 	Attention, 
-	cet exercice est plus coriace qu'il n'y parait à première vue\dots 
+	cet exercice est plus coriace qu'il n'y parait à première vue\dots~
 	Assurez-vous que votre code n'engendre pas de boucle infinie. 
 \end{Exercice}
 
@@ -455,7 +456,7 @@
 \end{Exercice}
 
 \begin{Exercice}{Normaliser une chaine}
-	Écrire un module qui recoit une chaine et retourne une autre chaine,
+	Écrire un module qui reçoit une chaine et retourne une autre chaine,
 	version normalisée de la première.
 	Par normalisée, on entend~:~enlever tout ce qui n'est pas une lettre 
 	et tout mettre en majuscule.
