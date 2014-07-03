@@ -58,16 +58,6 @@
 % -------------------------------------------------------------
 \newcommand\textsubscript[1]{\ensuremath{{}_{\mathrm{#1}}}}
 
-% Hyperliens et URL
-% http://www.ctan.org/pkg/hyperref
-% -------------------------------------------------------------
-\usepackage{hyperref}
-\hypersetup{
-  colorlinks = true,  % Colours links instead of ugly boxes
-  urlcolor   = blue,  % Colour for external hyperlinks
-  linkcolor  = black  % Colour of internal links
-}
-
 % Permet d'avoir les numéros de (sub)sections dans la marge
 % Tiré de "Latex Howtos" de Sébastien Combéfis
 % -------------------------------------------------------------
@@ -127,6 +117,15 @@
 	\renewcommand{\headrulewidth}{0pt} % pas de ligne en entête
 }
 
+% Hyperliens et URL
+% http://www.ctan.org/pkg/hyperref
+% -------------------------------------------------------------
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks = true,  % Colours links instead of ugly boxes
+  urlcolor   = blue,  % Colour for external hyperlinks
+  linkcolor  = black  % Colour of internal links
+}
 
 % ===================================================
 %   Commandes et environnements
