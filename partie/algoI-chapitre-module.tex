@@ -388,7 +388,13 @@
 	\item
 		\pseudocode{var1, \dots, varN}
 		sont les paramètres du module 
-		(aussi appelés \textbf{arguments}) ; 
+		(aussi appelés \textbf{arguments}%
+		\footnote{%
+			Dans certains contextes, en anglais, 
+			on distingue arguments et paramètres. 
+			La différence est subtile 
+			et vous y reviendrez sans doute plus tard.
+		}) ; 
 		ce sont, le plus souvent, des paramètres d’entrée, 
 		les paramètres de sortie étant plus rares 
 		dans ce type de module~;
@@ -701,61 +707,69 @@
 \section{Blocs}
 % =============
 	
+	Certains langages -- comme Conol -- ont une notion de \emph{bloc}.
 	Un bloc est l’écriture d’une portion de module à l’extérieur de celui-ci. 
 	C’est un simple \textit{déplacement} de lignes de code 
-	vers un autre endroit du texte de l’algorithme. 
-	La raison de découper un module en blocs peut être 
-	le souci de clarifier un algorithme en le découpant en étapes
-    bien distinctes, ou tout simplement un manque de place. 
-    Les variables d’un bloc ne sont donc pas des variables locales 
-    du bloc dans lequel elles apparaissent, 
-    mais bien des variables locales du module auquel appartient ce bloc. 
-    L’appel de l’exécution des instructions se trouvant
-	dans un bloc est similaire à celui d’un module avec paramètres, 
-	on écrit simplement le nom du bloc comme s’il s’agissait d’une
-	instruction.
+	vers un autre endroit du texte de l’algorithme pour découper
+	et clarifier un programme trop long,
+	utilisé dans des langages om la notion de module est rudimentaire. 
+	Nous n'utiliserons pas cette notion dans ce cours.
+	 
+	%Un bloc est l’écriture d’une portion de module à l’extérieur de celui-ci. 
+	%C’est un simple \textit{déplacement} de lignes de code 
+	%vers un autre endroit du texte de l’algorithme. 
+	%La raison de découper un module en blocs peut être 
+	%le souci de clarifier un algorithme en le découpant en étapes
+    %bien distinctes, ou tout simplement un manque de place. 
+    %Les variables d’un bloc ne sont donc pas des variables locales 
+    %du bloc dans lequel elles apparaissent, 
+    %mais bien des variables locales du module auquel appartient ce bloc. 
+    %L’appel de l’exécution des instructions se trouvant
+	%dans un bloc est similaire à celui d’un module avec paramètres, 
+	%on écrit simplement le nom du bloc comme s’il s’agissait d’une
+	%instruction.
 
-	Pour exemple, le module \pseudocode{additionnerFractions} 
-	(première version dans le chapitre sur les algorithmes séquentiels) 
-	pourrait se découper ainsi~:
+	%Pour exemple, le module \pseudocode{additionnerFractions} 
+	%(première version dans le chapitre sur les algorithmes séquentiels) 
+	%pourrait se découper ainsi~:
 
-	\begin{Pseudocode}
-	\LComment Lit les contenus de 2 fractions et affiche leur somme
-		\Module{additionnerFractions}{}{}
-			\Stmt déclaration
-			\Stmt lectureDonnées
-			\Stmt calculs
-			\Stmt écritureRésultat
-		\EndModule
-	\end{Pseudocode}
+	%\begin{Pseudocode}
+	%\LComment Lit les contenus de 2 fractions et affiche leur somme
+		%\Module{additionnerFractions}{}{}
+			%\Stmt déclaration
+			%\Stmt lectureDonnées
+			%\Stmt calculs
+			%\Stmt écritureRésultat
+		%\EndModule
+	%\end{Pseudocode}
 
-	\begin{Pseudocode}
-	\Block{déclaration}
-		\Decl num1, den1, num2, den2, numRes, denRes~:~entiers
-	\EndBlock
-	\end{Pseudocode}
+	%\begin{Pseudocode}
+	%\Block{déclaration}
+		%\Decl num1, den1, num2, den2, numRes, denRes~:~entiers
+	%\EndBlock
+	%\end{Pseudocode}
 
-	\begin{Pseudocode}
-	\Block{lectureDonnées}
-		\Read num1, den1, num2, den2
-	\EndBlock
-	\end{Pseudocode}
+	%\begin{Pseudocode}
+	%\Block{lectureDonnées}
+		%\Read num1, den1, num2, den2
+	%\EndBlock
+	%\end{Pseudocode}
 
-	\begin{Pseudocode}
-	\Block{calculs}
-		\Let numRes \Gets num1 * den2 + num2 * den1
-		\Let denRes \Gets den1 * den2
-	\EndBlock
-	\end{Pseudocode}
+	%\begin{Pseudocode}
+	%\Block{calculs}
+		%\Let numRes \Gets num1 * den2 + num2 * den1
+		%\Let denRes \Gets den1 * den2
+	%\EndBlock
+	%\end{Pseudocode}
 
-	\begin{Pseudocode}
-	\Block{écritureRésultat}
-		\Write numRes, "/", denRes \RComment la fraction n’est pas simplifiée
-	\EndBlock
-	\end{Pseudocode}
+	%\begin{Pseudocode}
+	%\Block{écritureRésultat}
+		%\Write numRes, "/", denRes \RComment la fraction n’est pas simplifiée
+	%\EndBlock
+	%\end{Pseudocode}
 
-	Le bloc contenant la déclaration des variables
-	est aussi appelé \textbf{dictionnaire des variables} du module.
+	%Le bloc contenant la déclaration des variables
+	%est aussi appelé \textbf{dictionnaire des variables} du module.
 
 \section{Qu’est-ce qu’un algorithme de qualité~?}
 % ===============================================
@@ -873,7 +887,6 @@
 		on identifiera les portions de code où le programme s’attarde 
 		le plus et on cherchera à les optimiser.
 	
-\clearpage
 \section{Exercices}
 % =================
 
