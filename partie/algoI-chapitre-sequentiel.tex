@@ -535,54 +535,54 @@
 			d’utiliser l’évaluation court-circuitée apparaitra dans plusieurs
 			exemples tout au long du cours.
 	
-		\subsection{Manipuler les chaines}
+		%\subsection{Manipuler les chaines}
 		
-			Pour les chaines, nous allons introduire quelques notations\footnote{
-			Le lecteur averti reconnaitra la notation modulaire}
-			qui vont nous permettre de les manipuler plus facilement.
+			%Pour les chaines, nous allons introduire quelques notations\footnote{
+			%Le lecteur averti reconnaitra la notation modulaire}
+			%qui vont nous permettre de les manipuler plus facilement.
 		
-			\begin{liste}
-			\item 
-				\pseudocode{long(maChaine)}
-				donne la taille (le nombre de caractères) de la chaine 
-				\pseudocode{maChaine}.
-			\item 
-				\pseudocode{car(maChaine,pos)}
-				donne le caractère en position \pseudocode{pos} 
-				(à partir de 1) dans la chaine \pseudocode{maChaine}.
-			\item{}
-				\pseudocode{souschaine(maChaine,pos,long)}
-				donne la sous-chaine de \pseudocode{maChaine}
-				commençant en position \pseudocode{pos}
-				et de longueur \pseudocode{long}.
-				Exemple: 
-				\pseudocode{souschaine("Bonjour",2,3)} donne \pseudocode{"onj"}.
-			\item 
-				\pseudocode{concat(maChaine1,\dots,maChaineN)}
-				concatène les chaines \pseudocode{maChaine1} 
-				à \pseudocode{maChaineN}.
-				\\
-				Exemple:
-				\pseudocode{concat("Bon","j", "our")} donne \pseudocode{"Bonjour"}.
-			\end{liste}
+			%\begin{liste}
+			%\item 
+				%\pseudocode{long(maChaine)}
+				%donne la taille (le nombre de caractères) de la chaine 
+				%\pseudocode{maChaine}.
+			%\item 
+				%\pseudocode{car(maChaine,pos)}
+				%donne le caractère en position \pseudocode{pos} 
+				%(à partir de 1) dans la chaine \pseudocode{maChaine}.
+			%\item{}
+				%\pseudocode{souschaine(maChaine,pos,long)}
+				%donne la sous-chaine de \pseudocode{maChaine}
+				%commençant en position \pseudocode{pos}
+				%et de longueur \pseudocode{long}.
+				%Exemple: 
+				%\pseudocode{souschaine("Bonjour",2,3)} donne \pseudocode{"onj"}.
+			%\item 
+				%\pseudocode{concat(maChaine1,\dots,maChaineN)}
+				%concatène les chaines \pseudocode{maChaine1} 
+				%à \pseudocode{maChaineN}.
+				%\\
+				%Exemple:
+				%\pseudocode{concat("Bon","j", "our")} donne \pseudocode{"Bonjour"}.
+			%\end{liste}
 			
 
-		\subsection{Manipuler les caractères}
+		%\subsection{Manipuler les caractères}
 
-			Introduisons également quelques notations pour les caractères.
+			%Introduisons également quelques notations pour les caractères.
 
-			\begin{liste}
-			\item \pseudocode{chaine(car)} transforme le caractère \pseudocode{car} en une chaine de taille 1.
-			\item \pseudocode{estLettre(car)} est vrai si le caractère \pseudocode{car} est une lettre
-				(idem pour \pseudocode{estChiffre}, 
-				\pseudocode{estMajuscule}, 
-				\pseudocode{estMinuscule}).
-			\item \pseudocode{majuscule(car)} donne la majuscule de la lettre \pseudocode{car}
-				(idem pour \pseudocode{minuscule}).
-			\item \pseudocode{numLettre(car)} donne la position de \pseudocode{car} dans l’alphabet (ex~:~\pseudocode{numLettre(’E’)} donne 5, 
-			idem pour \pseudocode{numLettre(’e’)}).
-			\item \pseudocode{lettre(num)} l’inverse de la précédente (ex~:~\pseudocode{lettre(4)} donne le caractère ’D’).
-			\end{liste}
+			%\begin{liste}
+			%\item \pseudocode{chaine(car)} transforme le caractère \pseudocode{car} en une chaine de taille 1.
+			%\item \pseudocode{estLettre(car)} est vrai si le caractère \pseudocode{car} est une lettre
+				%(idem pour \pseudocode{estChiffre}, 
+				%\pseudocode{estMajuscule}, 
+				%\pseudocode{estMinuscule}).
+			%\item \pseudocode{majuscule(car)} donne la majuscule de la lettre \pseudocode{car}
+				%(idem pour \pseudocode{minuscule}).
+			%\item \pseudocode{numLettre(car)} donne la position de \pseudocode{car} dans l’alphabet (ex~:~\pseudocode{numLettre(’E’)} donne 5, 
+			%idem pour \pseudocode{numLettre(’e’)}).
+			%\item \pseudocode{lettre(num)} l’inverse de la précédente (ex~:~\pseudocode{lettre(4)} donne le caractère ’D’).
+			%\end{liste}
 
 			 
 	\section{L’affectation d’une valeur à une variable}
