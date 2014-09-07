@@ -429,112 +429,7 @@
 			fonctions mathématiques sous leur forme la plus courante dans la
 			plupart des langages de programmation (exemples~:
 			$sin(x)$, $tan(x)$, $log(x)$, $exp(x)$\dots)
-			
-		
-		\subsection{Opérateurs de comparaison}
-	
-			Ces opérateurs agissent généralement sur des variables numériques ou des
-			chaines et donnent un résultat booléen.
-	
-			\begin{center}
-			\begin{tabular}{m{2cm}|m{11cm}}
-			\raggedleft  \pseudocode{=} & égal\\
-			\raggedleft  \pseudocode{{\textless}{\textgreater}}
-				ou \pseudocode{${\neq}$} &  différent de\\
-			\raggedleft  \pseudocode{\textless} & (strictement) plus petit que\\
-			\raggedleft  \pseudocode{\textgreater} & (strictement) plus grand que\\
-			\raggedleft  \pseudocode{${\leq}$} & plus petit ou égal\\
-			\raggedleft  \pseudocode{${\geq}$} & plus grand ou égal\\
-			\end{tabular}
-			\end{center}
-	
-			Pour les chaines, 
-			c’est l’ordre alphabétique qui détermine le résultat 
-			(par exemple
-			\pseudocode{"milou" < "tintin"} est \textbf{vrai} 
-			de même que
-			\pseudocode{"assembleur" ${\leq}$ "java"})
-	
-		\subsection{Opérateurs logiques}
-	
-			Ils agissent sur des expressions booléennes (variables ou expressions à
-			valeurs booléennes) pour donner un résultat du même type.
-	
-			\begin{center}
-			\begin{tabular}{m{1cm}|m{12cm}}
-			\raggedleft \pseudocode{NON} & négation\\
-			\raggedleft \pseudocode{ET} & conjonction logique\\
-			\raggedleft \pseudocode{OU} & disjonction logique\\
-			\end{tabular}
-			\end{center}
-	
-			Pour rappel, \pseudocode{cond1 ET cond2} n’est vrai que lorsque
-			les deux conditions sont vraies. \pseudocode{cond1 OU cond2} est
-			toujours vrai, sauf quand les deux conditions sont fausses.
-	
-			Veillez à mettre des parenthèses dans le cas de combinaisons de ET et de
-			OU~: \pseudocode{(cond1 ET cond2) OU cond3} étant différent de
-			\pseudocode{cond1 ET (cond2 OU cond3).} En cas
-			d’oubli de parenthèses, il faudra se rappeler que
-			\pseudocode{ET} est prioritaire sur le \pseudocode{OU}.
-			
-			Pour rappel aussi, pour un booléen \pseudocode{ok}~: 
-			\pseudocode{ok = faux} est équivalent à \pseudocode{NON ok},
-			\pseudocode{ok = vrai} est équivalent à \pseudocode{ok} et 
-			\pseudocode{NON NON ok} est équivalent à \pseudocode{ok}.
-			Dans les trois cas, nous préconiserons la seconde écriture.
-	
-		\subsection{Évaluation complète et court-circuitée}
-	
-			On définit deux modes d’évaluation des opérateurs \pseudocode{ET}
-			et \pseudocode{OU}~:
-	
-			\begin{description}
-			\item[l’évaluation \textit{complète}]
-				pour connaitre la valeur de
-				\pseudocode{cond1 ET cond2} (respectivement
-				\pseudocode{cond1 OU cond2}), les deux conditions sont chacune
-				évaluées, après quoi on évalue la valeur de vérité de l’ensemble de
-				l’expression.
-			\item[l’évaluation \textit{court-circuitée}]
-				dans un premier temps, seule la
-				première condition est testée. Dans le cas du \pseudocode{ET},
-				si \pseudocode{cond1} s’avère faux, il est inutile d’évaluer
-				\pseudocode{cond2} puisque le résultat sera faux de toute façon
-				; l’évaluation de \pseudocode{cond2} et de l’ensemble de la
-				conjonction ne se fera que si \pseudocode{cond1} est vrai. De
-				même, dans le cas du \pseudocode{OU}, si
-				\pseudocode{cond1} s’avère vrai, il est inutile d’évaluer
-				\pseudocode{cond2} puisque le résultat sera vrai de toute façon
-				; l’évaluation de \pseudocode{cond2} et de l’ensemble de la
-				disjonction ne se fera que si \pseudocode{cond1} est faux.
-			\end{description}
-	
-			Dans le cadre de ce cours, nous opterons pour la deuxième 
-			interprétation.
-			Montrons son avantage sur un exemple.
-			Considérons	l’expression 
-			\pseudocode{n }\pseudocode{${\neq}$}\pseudocode{ 0
-			ET m/n {\textgreater} 10}. Si on teste sa valeur de vérité avec une
-			valeur de \pseudocode{n} non nulle, la première condition est
-			vraie et le résultat de la conjonction dépendra de la valeur de la
-			deuxième condition. Supposons à présent que \pseudocode{n} soit
-			nul. L’évaluation court-circuitée donne le résultat \textbf{faux}
-			immédiatement après test de la première condition sans évaluer la
-			seconde, tandis que l’évaluation complète entrainerait un arrêt de
-			l’algorithme pour cause de division par 0~!
-	
-			Notez que l’évaluation court-circuitée a pour conséquence la
-			non-commutativité du \pseudocode{ET} et du
-			\pseudocode{OU~}: \pseudocode{cond1 ET cond2} n’est donc
-			pas équivalent à \pseudocode{cond2 ET cond1}, puisque l’ordre
-			des évaluations des deux conditions entre en jeu.~Nous conseillons
-			cependant de limiter les cas d’utilisation de l’évaluation
-			court-circuitée et d’opter pour des expressions dont
-			l’évaluation serait similaire dans les deux cas. La justification
-			d’utiliser l’évaluation court-circuitée apparaitra dans plusieurs
-			exemples tout au long du cours.
-	
+				
 		%\subsection{Manipuler les chaines}
 		
 			%Pour les chaines, nous allons introduire quelques notations\footnote{
@@ -1055,6 +950,7 @@
 				\end{Pseudocode}
 
 % -----------------------
+\clearpage
 	\section{Exercices}
 % -----------------------
 
