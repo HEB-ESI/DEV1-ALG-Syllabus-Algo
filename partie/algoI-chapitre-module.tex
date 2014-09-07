@@ -125,7 +125,7 @@
 
 	\begin{Pseudocode}
 	\Module{max2}{a\In, b\In~:~réels, max\Out~: réel}{}
-		\RComment Affiche deux nombres et sort le maximum des deux.
+		\RComment Reçoit 2 valeurs et sort la plus grande.
 		\If{a > b}
 			\Let max \Gets a
 		\Else
@@ -210,11 +210,11 @@
 	Cette instruction est reconnue comme telle 
 	car elle ne s’apparente pas aux autres types d’instruction 
 	vus précédemment 
-	(primitives \pseudocode{\K{lire}}, \pseudocode{\K{afficher}}
-	affectation (\pseudocode{\Gets}, 
+	(primitives \pseudocode{\K{lire}}, \pseudocode{\K{afficher}},
+	\pseudocode{\Gets}, 
 	structures de contrôle
 	\pseudocode{\K{si}}, \pseudocode{\K{selon que}},
-	\pseudocode{\K{tant que}}, \pseudocode{\K{pour}}, etc.) 
+	\pseudocode{\K{tant que}}, \pseudocode{\K{pour}}\dots).
 	Lorsque l’ordinateur rencontre cette instruction, 
 	il va rechercher si un module portant ce nom existe. 
 	Une fois ce module trouvé, les paramètres \textit{ad hoc} 
@@ -329,13 +329,13 @@
 	\Module{lirePositif}{a\Out~: réel}{}
 		\Read a
 		\If{a < 0}
-			\Error Le nombre n’est pas positif !
+			\Error Le nombre n’est pas positif ! \RComment{Arrêt du programme.}
 		\EndIf
 	\EndModule
 	\end{Pseudocode}
 
 	\begin{Pseudocode}
-	\LComment Affiche deux nombres et sort le maximum des deux.
+	\LComment Reçoit deux nombres et sort le maximum des deux.
 	\Module{max2}{a\In, b\In~: réels, max\Out~:~réel}{}
 		\If{a > b}
 			\Let max \Gets a
@@ -450,7 +450,7 @@
 	\end{Pseudocode}
 
 	\begin{Pseudocode}
-	\LComment Affiche deux nombres et retourne le maximum des deux.
+	\LComment Reçoit deux nombres et retourne le maximum des deux.
 	\Module{max2}{a\In, b\In~:~réels}{réel}
 		\Decl max~: réel
 		\If{a > b}
