@@ -238,7 +238,7 @@
 
 		\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.7\textwidth]{image/boucle-choixtype}
+		\includegraphics[width=0.8\textwidth]{image/boucle-choixtype}
 		\caption{Quel type de boucle choisir~?}
 		\label{fig:boucle-choix}
 		\end{figure}
@@ -1004,7 +1004,7 @@
 		\begin{tabular}{|*{3}{>{\centering\arraybackslash}m{4cm}|}}
 			\hline
 			\textbf{Corpulence} & \textbf{IMC homme} & \textbf{IMC femme} 
-			\\\hline
+			\\\hline\hline
 			maigre & strictement moins de 20 & strictement moins de 19
 			\\\hline
 			normal & entre 20 et 25 inclus & entre 19 et 24 inclus
@@ -1024,30 +1024,30 @@
 	données.
 \end{Exercice}
 
-\begin{Exercice}{Cotes}
-	Écrire un algorithme qui permet d’introduire,
-	pour chaque étudiant d’un groupe de logique, les trois cotes
-	d’interrogations (sur 20) qu’il a passées durant l’année, cotes données
-	dans l’ordre chronologique ainsi que la cote d’examen
-	(sur 100). La valeur –1 est introduite en cas d’absence justifiée à une
-	interrogation. Pour une absence non justifiée, la cote de
-	l’interrogation est de 0. En ce qui concerne l’examen,
-	toute absence (justifiée ou non) est introduite comme un «~-1~» et
-	implique un «~0~» comme cote finale.
+%\begin{Exercice}{Cotes}
+	%Écrire un algorithme qui permet d’introduire,
+	%pour chaque étudiant d’un groupe d'algorithmique, les trois cotes
+	%d’interrogations (sur 20) qu’il a passées durant l’année, cotes données
+	%dans l’ordre chronologique ainsi que la cote d’examen
+	%(sur 100). La valeur –1 est introduite en cas d’absence justifiée à une
+	%interrogation. Pour une absence non justifiée, la cote de
+	%l’interrogation est de 0. En ce qui concerne l’examen,
+	%toute absence (justifiée ou non) est introduite comme un «~-1~» et
+	%implique un «~0~» comme cote finale.
 	
-	Pour rappel, l’examen est coté sur 100 et la cote finale se calcule
-	comme suit~:~on additionne les points des trois interrogations passées
-	(y compris les zéros des absences non justifiées) à la cote de
-	l’examen. Dans le cas d’absences justifiées (1, 2 ou 3), la cote
-	d’examen est ramenée respectivement sur 120, 140 ou 160 et additionnée
-	aux interrogations passées. Dans tous les cas, le total sur 160 est
-	divisé par 8 pour obtenir la cote finale sur 20.
+	%Pour rappel, l’examen est coté sur 100 et la cote finale se calcule
+	%comme suit~:~on additionne les points des trois interrogations passées
+	%(y compris les zéros des absences non justifiées) à la cote de
+	%l’examen. Dans le cas d’absences justifiées (1, 2 ou 3), la cote
+	%d’examen est ramenée respectivement sur 120, 140 ou 160 et additionnée
+	%aux interrogations passées. Dans tous les cas, le total sur 160 est
+	%divisé par 8 pour obtenir la cote finale sur 20.
 	
-	L’algorithme demande après chaque étudiant
-	s’il reste encore des notes à encoder et affiche à la
-	fin le nombre de cotes, la meilleure cote et le pourcentage de cotes
-	supérieures à 12.
-\end{Exercice}
+	%L’algorithme demande après chaque étudiant
+	%s’il reste encore des notes à encoder et affiche à la
+	%fin le nombre de cotes, la meilleure cote et le pourcentage de cotes
+	%supérieures à 12.
+%\end{Exercice}
 
 
 
