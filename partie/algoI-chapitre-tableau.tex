@@ -570,10 +570,32 @@
 			\LComment arrêt prématuré à l'indice i.
 		\EndIf
 	\end{Pseudocode}
+
+	Il faut être attentif à \textbf{ne pas inverser}
+	les deux parties du test.
+	Il faut absolument vérifier que l'indice est bon avant
+	de tester la valeur à cet indice.
 	
 	On pourrait inverser les deux branches du \K{si-sinon} en inversant le test
 	mais attention à ne pas tester tab[i] car $i$ n'est peut-être pas valide.
 
+	Dans certains cas, le \K{si-sinon} peut se simplifier
+	en un simple \K{return} d'une condition.
+	
+	\textbf{Exemple} : Recherche d'un zéro dans un tableau.
+
+	\begin{Pseudocode}
+		\LComment{Indique si un zéro est présent dans le tableau}
+		\Module{contientZéro}{tab: \K{tableau} [1 à n] d'entiers}{booléen}
+		\Decl i~: entier
+		\Let i \Gets 1
+		\While{i $\le$ n ET tab[i] $\neq$ 0}
+			\Let i \Gets i + 1
+		\EndWhile
+		\Return {i $\leq$ n} \RComment{Si le test est vrai c'est qu'on a trouvé un 0}
+		\EndModule
+	\end{Pseudocode}
+	
 \subsubsection*{[B] Avec variable booléenne}
 
 	\begin{Pseudocode}
