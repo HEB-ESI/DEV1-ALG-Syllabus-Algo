@@ -275,62 +275,43 @@
 	algorithmique où on a plus de liberté dans le choix des bornes.
 
 % ==============================================
-\section{Tableau statique vs tableau dynamique}
+\section{Taille logique et physique}
 % ==============================================
 
-	Les tableaux étudiés jusqu'ici sont dit \textbf{statiques}.
-	Un tableau est dit \textbf{statique} si sa taille 
-	est connue lors de l’écriture du programme
-
-	Un tableau est dit \textbf{dynamique}
-	si sa taille n’est connue qu’à l’exécution du programme (elle est
-	calculée, donnée par l’utilisateur, lue dans un fichier de
-	configuration, fournie par une autre partie du programme, \dots)
-
-	\textbf{Exemples}
-
-	\begin{liste}
-	\item
-		Reprenons l’exemple ci-dessus. 
-		S’il y a toujours exactement 10 produits, 
-		alors on peut utiliser un tableau statique. 
-	\item
-		Dans la pratique, il est probable que ce nombre puisse évoluer 
-		au cours de l’histoire de l’entreprise.
-		On peut au moins demander au gérant le nombre d'articles dans son stock.
-		On utilisera alors un tableau dynamique.
-	\item 
-		Si on désire stocker le chiffre d’affaire d’une entreprise 
-		pour une année donnée, mois par mois, un tableau de
-		taille 12 est suffisant (tableau statique)
+	Parfois, on connait la taille d'un tableau lorsqu'on
+	écrit l'algorithme 
+	(par exemple s'il s'agit de retenir les ventes
+	pour les douze mois de l'année)
+	mais ce n'est pas toujours le cas
+	(par exemple, connait-on le nombre de produits vendus 
+	par le magasin ?).
 	
-	\end{liste}
-	
-	\textbf{Concrètement, comment choisir?}
-	Le choix dépend du langage.
+	Certains langages de programmation possèdent des tableaux
+	\textbf{dynamique} dont la taille peut être déterminée
+	à l'exécution du programme.
+	C'est notamment le cas du langage Java.
 
-	Certains langages (c’est le cas de Cobol) ne permettent 
-	que des tableaux statiques. Dans ce cas, il faudra souvent
-	imposer une \textbf{taille maximale} au tableau. 
-	Il sera également nécessaire d’utiliser une variable 
-	pour retenir la taille utile (ou logique) du tableau, 
-	à savoir la partie du tableau réellement utilisée.
-	Bien sûr cette solution entraine souvent une perte de place mémoire due
-	à une réservation inutilement grande (ou, pire, une saturation du
-	tableau qui n’aura pas été prévu assez grand).
-	
-	D'autres, comme Java, n'ont que des tableaux dynamiques. La taille ne doit 
-	pas forcément être connue à la compilation, mais doit être connue à
-	l'exécution. Vous verrez les détails dans votre cours de Java.
+	Les tableaux que nous présentons ici
+	sont appelés tableaux \textbf{statiques}.
+	La taille doit être indiquée à l'écriture du programme.
+	Si cette taille n'est pas connue,
+	une possibilité est d'attribuer au tableau
+	une taille maximale (sa taille \textbf{physique})
+	et de retenir dans une variable le nombre réel de cases utilisées
+	(sa taille \textbf{logique}).
 
-	\textbf{Exemple statique}
+	\textbf{Exemple}
 
 	Reprenons encore l’exemple de la vente de produits. 
 	Si on ne dispose pas de tableau dynamique, on peut réserver
 	un tableau de taille 1000 par exemple (si on est sûr qu’on ne vendra
-	pas plus de 1000 produits différents) et ajouter une variable entière
-	(\pseudocode{nbProduits}) pour retenir 
-	le nombre exact de produits différents actuellement en vente.
+	pas plus de 1000 produits différents ;
+	ce sera sa taille physique) 
+	et ajouter une variable entière
+	(\pseudocode{nbProduits}) 
+	pour retenir le nombre exact de produits différents 
+	actuellement en vente
+	(ce sera sa taille logique).
 	
 	\begin{Pseudocode}
 	\LComment Calcule et affiche la quantité vendue de x produits.
@@ -366,57 +347,150 @@
 		\Empty
 	\EndModule
 	\end{Pseudocode}
-
-	\textbf{Exemple dynamique}
 	
-	Pour déclarer un tableau dynamique, on sépare la déclaration du tableau
-	(où la taille n’est pas donnée) de sa création effective~(où on donne
-	la taille)
+%% ==============================================
+%\section{Tableau statique vs tableau dynamique}
+%% ==============================================
 
-	\begin{Pseudocode}
-	\Decl nomTableau~: \K{tableau} de TypeElément
-	\LComment Le code peut déterminer ici les bornes
-	\Let nomTableau \Gets \K{nouveau} \K{tableau} [ borneMin à borneMax ] de TypeElément
-	\end{Pseudocode}
+	%Les tableaux étudiés jusqu'ici sont dit \textbf{statiques}.
+	%Un tableau est dit \textbf{statique} si sa taille 
+	%est connue lors de l’écriture du programme
 
-	où \pseudocode{borneMin} et \pseudocode{borneMax} sont des
-	expressions entières quelconques.
+	%Un tableau est dit \textbf{dynamique}
+	%si sa taille n’est connue qu’à l’exécution du programme (elle est
+	%calculée, donnée par l’utilisateur, lue dans un fichier de
+	%configuration, fournie par une autre partie du programme, \dots)
+
+	%\textbf{Exemples}
+
+	%\begin{liste}
+	%\item
+		%Reprenons l’exemple ci-dessus. 
+		%S’il y a toujours exactement 10 produits, 
+		%alors on peut utiliser un tableau statique. 
+	%\item
+		%Dans la pratique, il est probable que ce nombre puisse évoluer 
+		%au cours de l’histoire de l’entreprise.
+		%On peut au moins demander au gérant le nombre d'articles dans son stock.
+		%On utilisera alors un tableau dynamique.
+	%\item 
+		%Si on désire stocker le chiffre d’affaire d’une entreprise 
+		%pour une année donnée, mois par mois, un tableau de
+		%taille 12 est suffisant (tableau statique)
 	
-	\begin{Pseudocode}
-	\LComment Calcule et affiche la quantité vendue de x produits.
-	\Module{statistiquesVentesAvecTableau}{}{}
-		\Empty
-		\Decl cpt~: \K{tableau} d’entiers
-		\Decl i, numéroProduit, quantité~: entiers
-		\Decl nbArticles~: entier
-		\Read nbArticles
-		\Let cpt \Gets \K{nouveau} \K{tableau} [1 à nbArticles] d'entiers
-		\Empty
-		\For{i \K{de} 1 \K{à} nbArticles}
-			\Let cpt[i] \Gets 0
-		\EndFor
-		\Empty
-		\Write "Introduisez le numéro du produit~:"
-		\Read numéroProduit
-		\Empty
-		\While{numéroProduit > 0 ET numéroProduit <= nbArticles}
-		\Empty
-			\Write "Introduisez la quantité vendue~:"
-			\Read quantité
-			\Empty
-			\Let cpt[numéroProduit] \Gets cpt[numéroProduit] + quantité
-			\Empty
-			\Write "Introduisez le numéro du produit~:"
-			\Read numéroProduit
-			\Empty
-		\EndWhile
-		\Empty
-		\For{i \K{de} 1 \K{à} nbArticles}
-			\Write "quantité vendue de produit ", i, ": ", cpt[i]
-		\EndFor
-		\Empty
-	\EndModule
-	\end{Pseudocode}
+	%\end{liste}
+	
+	%\textbf{Concrètement, comment choisir?}
+	%Le choix dépend du langage.
+
+	%Certains langages (c’est le cas de Cobol) ne permettent 
+	%que des tableaux statiques. Dans ce cas, il faudra souvent
+	%imposer une \textbf{taille maximale} au tableau. 
+	%Il sera également nécessaire d’utiliser une variable 
+	%pour retenir la taille utile (ou logique) du tableau, 
+	%à savoir la partie du tableau réellement utilisée.
+	%Bien sûr cette solution entraine souvent une perte de place mémoire due
+	%à une réservation inutilement grande (ou, pire, une saturation du
+	%tableau qui n’aura pas été prévu assez grand).
+	
+	%D'autres, comme Java, n'ont que des tableaux dynamiques. La taille ne doit 
+	%pas forcément être connue à la compilation, mais doit être connue à
+	%l'exécution. Vous verrez les détails dans votre cours de Java.
+
+	%\textbf{Exemple statique}
+
+	%Reprenons encore l’exemple de la vente de produits. 
+	%Si on ne dispose pas de tableau dynamique, on peut réserver
+	%un tableau de taille 1000 par exemple (si on est sûr qu’on ne vendra
+	%pas plus de 1000 produits différents) et ajouter une variable entière
+	%(\pseudocode{nbProduits}) pour retenir 
+	%le nombre exact de produits différents actuellement en vente.
+	
+	%\begin{Pseudocode}
+	%\LComment Calcule et affiche la quantité vendue de x produits.
+	%\Module{statistiquesVentes}{}{}
+		%\Empty
+		%\Decl cpt~: \K{tableau} [1 à 1000] d’entiers
+		%\Decl i, numéroProduit, quantité~: entiers
+		%\Decl nbArticles~: entier
+		%\Read nbArticles
+		%\Empty
+		%\For{i \K{de} 1 \K{à} nbArticles}
+			%\Let cpt[i] \Gets 0
+		%\EndFor
+		%\Empty
+		%\Write "Introduisez le numéro du produit~:"
+		%\Read numéroProduit
+		%\Empty
+		%\While{numéroProduit > 0 ET numéroProduit <= nbArticles}
+		%\Empty
+			%\Write "Introduisez la quantité vendue~:"
+			%\Read quantité
+			%\Empty
+			%\Let cpt[numéroProduit] \Gets cpt[numéroProduit] + quantité
+			%\Empty
+			%\Write "Introduisez le numéro du produit~:"
+			%\Read numéroProduit
+			%\Empty
+		%\EndWhile
+		%\Empty
+		%\For{i \K{de} 1 \K{à} nbArticles}
+			%\Write "quantité vendue de produit ", i, ": ", cpt[i]
+		%\EndFor
+		%\Empty
+	%\EndModule
+	%\end{Pseudocode}
+
+	%\textbf{Exemple dynamique}
+	
+	%Pour déclarer un tableau dynamique, on sépare la déclaration du tableau
+	%(où la taille n’est pas donnée) de sa création effective~(où on donne
+	%la taille)
+
+	%\begin{Pseudocode}
+	%\Decl nomTableau~: \K{tableau} de TypeElément
+	%\LComment Le code peut déterminer ici les bornes
+	%\Let nomTableau \Gets \K{nouveau} \K{tableau} [ borneMin à borneMax ] de TypeElément
+	%\end{Pseudocode}
+
+	%où \pseudocode{borneMin} et \pseudocode{borneMax} sont des
+	%expressions entières quelconques.
+	
+	%\begin{Pseudocode}
+	%\LComment Calcule et affiche la quantité vendue de x produits.
+	%\Module{statistiquesVentesAvecTableau}{}{}
+		%\Empty
+		%\Decl cpt~: \K{tableau} d’entiers
+		%\Decl i, numéroProduit, quantité~: entiers
+		%\Decl nbArticles~: entier
+		%\Read nbArticles
+		%\Let cpt \Gets \K{nouveau} \K{tableau} [1 à nbArticles] d'entiers
+		%\Empty
+		%\For{i \K{de} 1 \K{à} nbArticles}
+			%\Let cpt[i] \Gets 0
+		%\EndFor
+		%\Empty
+		%\Write "Introduisez le numéro du produit~:"
+		%\Read numéroProduit
+		%\Empty
+		%\While{numéroProduit > 0 ET numéroProduit <= nbArticles}
+		%\Empty
+			%\Write "Introduisez la quantité vendue~:"
+			%\Read quantité
+			%\Empty
+			%\Let cpt[numéroProduit] \Gets cpt[numéroProduit] + quantité
+			%\Empty
+			%\Write "Introduisez le numéro du produit~:"
+			%\Read numéroProduit
+			%\Empty
+		%\EndWhile
+		%\Empty
+		%\For{i \K{de} 1 \K{à} nbArticles}
+			%\Write "quantité vendue de produit ", i, ": ", cpt[i]
+		%\EndFor
+		%\Empty
+	%\EndModule
+	%\end{Pseudocode}
 
 % ==============================
 \section{Tableau et paramètres}
