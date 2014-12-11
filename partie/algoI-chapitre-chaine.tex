@@ -381,25 +381,25 @@
 	un message adéquat sera affiché.
 \end{Exercice}
 
-\begin{Exercice}{Le code correct}
-	Le code IBAN de votre compte en banque 
-	est composé de 16 caractères alphanumériques 
-	(2 lettres suivies de 14 chiffres). 
-	Pour la lisibilité, 
-	on l'écrit souvent en 4 paquets de 4 caractères 
-	séparés par des blancs, par ex. : "BE89 6352 4390 0285" 
-	(soit une chaine de 19 caractères au total). 
-	On peut vérifier si un compte est valide par la manipulation suivante :
-	le reste de la division par 97 du nombre formé 
-	par les 10 chiffres entre le 5ème et 14ème caractères du code 
-	doit donner le nombre formé par les 2 derniers chiffres. 
-	On peut voir directement que, pour l'exemple donné, 
-	896352439002 MOD 97 est bien égal à 85.
+%\begin{Exercice}{Le code correct}
+	%Le code IBAN de votre compte en banque 
+	%est composé de 16 caractères alphanumériques 
+	%(2 lettres suivies de 14 chiffres). 
+	%Pour la lisibilité, 
+	%on l'écrit souvent en 4 paquets de 4 caractères 
+	%séparés par des blancs, par ex. : "BE89 6352 4390 0285" 
+	%(soit une chaine de 19 caractères au total). 
+	%On peut vérifier si un compte est valide par la manipulation suivante :
+	%le reste de la division par 97 du nombre formé 
+	%par les 10 chiffres entre le 5ème et 14ème caractères du code 
+	%doit donner le nombre formé par les 2 derniers chiffres. 
+	%On peut voir directement que, pour l'exemple donné, 
+	%896352439002 MOD 97 est bien égal à 85.
 
-	Écrire l'algorithme qui reçoit un code IBAN sous la forme 
-	d'une chaine de 19 caractères
-	et retourne un booléen indiquant si ce code est correct.
-\end{Exercice}
+	%Écrire l'algorithme qui reçoit un code IBAN sous la forme 
+	%d'une chaine de 19 caractères
+	%et retourne un booléen indiquant si ce code est correct.
+%\end{Exercice}
 
 \begin{Exercice}{Email valide}
 	Écrire un algorithme 
