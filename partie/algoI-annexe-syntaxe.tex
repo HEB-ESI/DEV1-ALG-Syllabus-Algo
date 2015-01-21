@@ -1,0 +1,557 @@
+\chapter{Le LDA}
+
+Dans cette annexe nous définissons le LDA
+(\emph{le Langage de Description d'Algorithmes})
+que nous allons utiliser. 
+Nous ne nous attarderons pas sur les concepts
+ni sur certaines bonne pratiques;
+tout cela est vu dans les chapitres associés.
+
+Nous utilisons un pseudo-code pour nous libérer 
+des contraintes des langages de programmation.
+\begin{itemize}
+\item
+	Un programme est une suite de lignes
+	ne permettant pas d'utiliser pleinement les
+	deux dimensions de la page 
+	(pensons à la mise en page des formules).
+\item
+	Certaines constructions et règles
+	n'existent que pour simplifier le travail du compilateur
+	et/ou accélérer le code.
+	C'est le cas, par exemple, de la syntaxe du \emph{switch}
+	ou encore des opérateurs de comparaisons qui sont uniquement
+	binaires.
+\end{itemize}
+
+Dans vos réflexions, brouillons, premiers jets,
+nous vous encourageons à utiliser des notations
+qui vous sont propres et qui vous permettent
+de poser votre réflexion sur un papier
+et d'avancer vers une solution.
+
+La version finale, toutefois, 
+doit être lue par d'autres personnes.
+Il est \textbf{essentiel} qu'il n'y ait aucune ambiguïté
+sur le sens de votre écrit.
+C'est pourquoi, nous devons définir une notation
+à la fois souple et précise.
+
+Cette notation doit aussi être adaptée à des étudiants de première année.
+Ce qui nous amène à ne pas introduire des nuances qui leur échappent encore
+et, parfois, à imposer des contraintes qui seront relachées plus tard
+mais qui permettent de cadrer l'apprentissage d'un débutant.
+
+\textbf{Remarque} : Ce guide n'est pas universel.
+En dehors de l'école, d'autres notations sont utilisées,
+parfois proches, parfois plus lointaines.
+Votre professeur pourra également introduire quelques notations
+qui ne sont pas reprises ici. 
+Lorsque vous changerez de professeur,
+soyez conscient que ces ajouts ne seront peut-être plus valables.
+
+L'important est que le groupe qui doit communiquer
+au moyen d'algorithmes se soit préalablement mis d'accord 
+sur des notations.
+
+\begin{Note}
+	Cette version ne concerne que les notions vues en DEV$_1$.
+\end{Note}
+
+\pagebreak
+
+\section{Les variables}
+%-----------------------------------
+
+	\begin{Pseudocode}
+		\Decl var1, \dots : Type 
+	\end{Pseudocode}
+	
+	Uniquement en début de module.
+	Où \pseudocode{Type} est à choisir parmi :
+	\pseudocode{entier}, \pseudocode{réel},
+	\pseudocode{booléen}, \pseudocode{chaine},
+	\pseudocode{structure} et \pseudocode{tableau}.
+	
+	\begin{Note}
+	Plus de type \emph{caractère}.
+	Ca complique les choses sans rien apporter de fondamental
+	et c'est très peu utilisé. À laisser pour les langages.
+	Exit aussi les \emph{énumérations}
+	pour les mêmes raisons.
+	\end{Note}
+
+	\begin{Note}
+	Alternative 1 : Fusionner \pseudocode{entier} et \pseudocode{réel}
+	en un seul type (\pseudocode{nombre}).
+	L'avantage est que ça simplifie encore ;
+	l'inconvénient est qu'il y a une perte d'expressivité pour le lecteur.
+	Savoir qu'une variable ne va contenir que des valeurs entières
+	aide à mieux comprendre son rôle et le reste de l'algorithme. 
+	\end{Note}
+
+	\begin{Note}
+	Alternative 2 : Utiliser les notations mathématiques universelles
+	pour les types numériques : $\mathbb{N}$, $\mathbb{Z}$,
+	$\mathbb{R}$, $\mathbb{N}_0$\dots\
+	C'est concis et précis et ça permet de spécifier facilement qu'un
+	paramètre doit être positif par exemple.
+	L'inconvénient est que certains étudiants ne sont pas familiers 
+	de ces notations.
+	\end{Note}
+
+
+\section{Les constantes}
+%-----------------------------------
+
+	\begin{Pseudocode}
+		\Decl \K{Constante} nom = valeur	
+	\end{Pseudocode}
+	
+	En début de module ou en dehors des modules si la constante
+	est partagée par plusieurs modules.
+
+\section{Les expressions numériques}
+%-----------------------------------
+
+	Comme le nom d'une variable est généralement composé de plusiers lettres,
+	nous écrirons explicitement la multiplication (via un $*$)
+	afin d'éviter toute ambiguïté.
+
+	Introduisons :
+
+	\begin{itemize}
+	\item
+		\pseudocode{DIV} et \pseudocode{MOD} pour les entiers uniquement. 
+	\item 
+		\pseudocode{hasard(n)} pour obtenir un nombre aléatoire entre 1 et n.
+	\end{itemize}
+
+	Pour écrire les expressions,
+	nous admettons toute notation mathématique
+	puisqu'elle est concise et précise.
+	L'écriture pourra être en deux dimensions.
+	
+	Exemples : 
+	\begin{equation*}
+		\mathrm{delta} \Gets \mathrm{b}^{2} - 4 * \mathrm{a} * \mathrm{c}
+		,\qquad
+		\mathrm{racine} \Gets \frac{-\mathrm{b} + \sqrt{\mathrm{delta}}}{2*\mathrm{a}}
+	\end{equation*}
+	
+	Ainsi, on pourra écrire :
+
+	%
+	\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+	\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+	\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+	%
+	
+	\begin{itemize}
+	\item 
+		$\mathrm{sin}(x)$, $\mathrm{cos}(x)$ et toutes les fonctions trigonométriques.
+	\item
+		$\abs{x}$ et $x!$ pour la valeur absolue et la factorielle. 
+	\item
+		$\floor{x}$ et $\ceil{x}$ pour la valeur plancher et la valeur plafond. 
+	\end{itemize}
+	
+	Bien sûr, ces notations ne seront pas admises
+	en début d'année si le but de l'exercice
+	est précisément de déterminer l'algorithme qui se cache derrière.
+	
+	\begin{Note}
+	Il est trop tôt en première pour leur permettre
+	d'utiliser les opérateurs de somme et de produit
+	(comme $\sum_{i=0}^{n}i$)
+	mais on pourra les y encourager par la suite.
+	\end{Note}
+	
+	Il est possible d'assigner une valeur entière à une variable réelle
+	et vice-versa. Un réel est \emph{arrondi} avant d'être placé
+	dans une variable entière.
+
+\section{Les expressions booléennes}
+%-----------------------------------
+
+	Les valeurs possibles sont \pseudocode{vrai} et \pseudocode{faux}.
+	
+	Les comparaisons ($<$, $\leq$, $>$ et $\geq$) peuvent être utilisés
+	pour les types numériques uniquement.
+	Pour augmenter leur expressivité, on considére qu'ils
+	existent aussi en version \emph{n-aire} comme en Math.
+	On peut donc écrire : \pseudocode{1 $\leq$ nb $\leq$ 100}.
+	
+	L'(in)égalité ($=$ et $\neq$) peut être testée pour tous les types.
+	
+	Les opérateurs booléens s'écrivent 
+	\pseudocode{NON}, \pseudocode{OU} et \pseudocode{ET}.
+	Les deux derniers sont \emph{court-circuités}.
+
+\section{Les expressions avec des chaines}
+%-----------------------------------------
+
+	D'abord les fondamentaux qu'on ne pourraient écrire avec ce qu'on a.
+	
+	\begin{Note}
+		On peut considérer que le 1\ier{} caractère est en position 1 ou 0,
+		à décider (cf. partie tableau)
+	\end{Note} 
+
+	\begin{Pseudocode}
+		\Stmt taille(ch : chaine) \Gives~entier			\RComment{donne la taille de la chaine.}
+		\Stmt sousChaine(ch: chaine, pos: entier, long: entier) \Gives~chaine \RComment{extrait une sous-chaine}
+		\Stmt ch[i]											\RComment raccourci pour sousChaine(ch,i,1)
+		\Stmt concat(ch1, ch2, \dots, chN: chaine) \Gives~chaine 	\RComment{concatène des chaines}
+		\Let  ch1 + ch2 + \dots + chN						\RComment{idem}
+	\end{Pseudocode}
+	
+	Les modules qui suivent sont donnés par facilité
+	mais pourraient être écrits.
+
+	\begin{Pseudocode}
+		\LComment{Est-ce ?}
+		\Stmt estLettre(ch: chaine) \Gives~booléen		\RComment ne contient que des lettres ?
+		\Stmt estChiffre(ch: chaine) \Gives~booléen		\RComment ne contient que des chiffres ?
+		\Stmt estMajuscule(ch: chaine) \Gives~booléen	\RComment ne contient que des majuscules ?
+		\Stmt estMinuscule(ch: chaine) \Gives~booléen	\RComment ne contient que des minuscules ? 
+		\Empty
+		\LComment{Conversions}
+		\Stmt majuscule(ch: chaine) \Gives~chaine		\RComment minuscules vers majuscules sans toucher au reste.
+		\Stmt minuscule(ch: chaine) \Gives~chaine		\RComment majuscules vers minuscules sans toucher au reste.
+		\Stmt numLettre(lettre: chaine) \Gives~entier	\RComment la position de la lettre dans l'alphabet.
+		\Stmt lettreMaj(pos: entier) \Gives~chaine		\RComment la majuscule de position donnée dans l'alphabet.
+		\Stmt lettreMin(pos: entier) \Gives~chaine		\RComment la minuscule de position donnée dans l'alphabet.
+		\Stmt chaine(n : entier) \Gives~chaine			\RComment convertit un entier en une chaine.
+		\Stmt chaine(x : réel) \Gives~chaine			\RComment convertit un réel en une chaine.
+		\Stmt nombre(nb : chaine) \Gives~réel			\RComment convertit une chaine en un nombre.
+		\Empty
+		\LComment{Manipulations}
+		\Stmt estDansChaine(ch: chaine, sous-chaine: chaine) \Gives~entier 
+		\Stmt 											\RComment{dit où commence une sous-chaine dans une chaine donnée (-1 si pas trouvé)}
+		\Empty
+		\LComment Dans ce ce qui précède :
+		\LComment - \textbf{lettre} : doit être unne chaine de taille 1 contenant une lettre. erreur sinon.
+		\LComment - \textbf{pos} : erreur si pas entre 1 et 26.
+		\LComment - \textbf{nb} : erreur si la chaine ne contient pas un nombre et rien que ça.
+	\end{Pseudocode}
+
+\section{Les instructions de base}
+%---------------------------------
+
+	\begin{Pseudocode}
+	\Let var \Gets expression
+	\Read var1, var2\dots
+	\Write expression1, expression2\dots
+	\Error "raison" \Comment Provoque l'arrrêt de l'algorithme.
+	\end{Pseudocode}
+
+	\begin{Note}
+	Il y a quelques années, à la demande des professeurs de BD,
+	le "écrire" est devenu "afficher" pour éviter des confusions
+	dans l'esprit des étudiants avec les opérations sur les fichiers. 
+	Dans le même sens, il me semble que le "lire" devrait
+	devenir un "demander". 
+	La modification dans le syllabus ne demanderait que quelques
+	minutes mais dans nos têtes ça prendrait plus de temps.
+	Est-ce que ça en vaut la peine ?
+	\end{Note}
+
+\section{Les instructions de choix}
+%---------------------------------
+
+	\begin{Note}
+	Chaque année, il y a une discussion à propos du "selon-que"
+	avec conditons : est-ce que les conditions sont mutuellement
+	exclusives ou pas ?
+	D'un point de vue formel, 
+	ce serait mieux mais il faut bien constater que, en pratique,
+	ça complique pas mal les conditions dans certains cas.
+	De plus, ça demande un gros effort d'adaptation pour
+	la plupart des langages.
+	Je propose de l'écrire comme des sinon-si pour éviter
+	toute ambiguïté.
+	\end{Note}
+
+	\begin{minipage}[t]{4.5cm}
+	\begin{Pseudocode}
+	\If{condition}
+		\Stmt Instructions
+	\EndIf
+	\Empty
+	\Empty
+	\Empty
+	\Empty
+	\Empty
+	\Empty
+	\end{Pseudocode}
+	\end{minipage}
+	\ 
+	\begin{minipage}[t]{4.5cm}
+	\begin{Pseudocode}
+	\If{condition}
+		\Stmt Instructions
+	\Else
+		\Stmt Instructions
+	\EndIf
+	\Empty
+	\Empty
+	\Empty
+	\Empty
+	\end{Pseudocode}
+	\end{minipage}
+	\ 
+	\begin{minipage}[t]{4.5cm}
+	\begin{Pseudocode}
+	\If{condition}
+		\Stmt Instructions
+	\ElsIf{condition}
+		\Stmt Instructions
+	\ElsIf{condition}
+		\Stmt \dots
+	\Else
+		\Stmt Instructions
+	\EndIf
+	\end{Pseudocode}
+	\end{minipage}
+	
+	\begin{Pseudocode}
+		\Switch{expression \K{vaut}}
+			\Case{liste${}_1$ de valeurs séparées par des virgules }
+				\Stmt Instructions
+			\Case{liste${}_2$ de valeurs séparées par des virgules }
+				\Stmt Instructions
+			\Empty \dots
+			\Case{liste${}_k$ de valeurs séparées par des virgules }
+				\Stmt Instructions
+			\Case{\K{autres }}
+				\Stmt Instructions
+		\EndSwitch
+	\end{Pseudocode}
+	
+	où l'expression peut être de type \pseudocode{entier} ou \pseudocode{chaine}
+	(pas de \pseudocode{réel}) et les valeurs sont des constantes.
+
+\section{Les instructions de répétition}
+%---------------------------------
+
+	\begin{minipage}[t]{4cm}	
+	\begin{Pseudocode}
+		\While{condition}
+			\Stmt Instructions
+		\EndWhile
+	\end{Pseudocode}
+	\end{minipage}
+	\
+	\begin{minipage}[t]{4cm}	
+	\begin{Pseudocode}
+		\Repeat
+			\Stmt Instructions
+		\Until{condition}
+	\end{Pseudocode}
+	\end{minipage}
+	\
+	\begin{minipage}[t]{6.5cm}	
+	\begin{Pseudocode}
+		\For{indice \K{de} début \K{à} fin [\K{par} pas]}
+			\Stmt Instructions
+		\EndFor
+	\end{Pseudocode}
+	\end{minipage}
+	
+	\begin{Note}
+	Transformer le "répéter...jusqu'à ce que" en "répéter...tant que" ?
+	En Java, le "do-while" me gène car je crois systématiquement
+	qu'un "while" commence quand je vois la fin du "do-while".
+	Y-aurait'il le même problème ici ?
+	\end{Note}
+	
+	La boucle \pseudocode{pour} ne peut être utilisée que pour des entiers.
+
+	Il n'est \textbf{pas nécessaire} de déclarer l'indice.
+	Il ne peut être utilisé en dehors de la boucle et ne peut pas
+	être modifié à l'intérieur de la boucle.
+	De même, le \pseudocode{début}, la \pseudocode{fin} et le \pseudocode{pas} 
+	ne peuvent pas être modifiés dans la boucle.
+
+\section{Les modules}
+%---------------------------------
+
+	\begin{minipage}[t]{5.5cm}	 
+	\begin{Pseudocode}
+	\Module{nom}{paramètres}{}
+		\Stmt Instructions
+	\EndModule
+	\Empty
+	\end{Pseudocode}
+	\end{minipage}
+	\ 
+	\begin{minipage}[t]{8cm}	 
+	\begin{Pseudocode}
+	\Module{nom}{paramètres}{Type}
+		\Stmt Instructions
+		\Return expression
+	\EndModule
+	\end{Pseudocode}
+	\end{minipage}
+
+	\begin{Note}
+	Je propose ici une définition purement sémantique
+	du passage de paramètre, indépendament de toute considération
+	technique d'implémentation dans les langages.
+	\end{Note}
+
+	Pour les paramètres, on utilise des flèches pour indiquer l'\textbf{utilisation} du paramètre.
+	Il s'agit d'une information sémantique qui n'a aucun lien avec le fonctionnement dans les langages
+		
+	\begin{itemize}
+	\item \In{}
+		pour une donnée pure (paramètre en entrée).
+		Le paramètre doit avoir une valeur au début du module
+		car cette valeur va être utilisée.
+		À l'appel, on peut donner une expression.
+		Par facilité,
+		on admet que le paramètre soit modifié dans le module
+		mais sans incidence sur ce qui est donné à l'appel.
+	\item \Out{}
+		pour une résultat pur (paramètre en sortie).
+		Le paramètre donné à l'appel doit être une variable.
+		Cette variable ne doit pas avoir une valeur au début
+		mais le module va lui assigner une valeur.
+	\item \InOut{}
+		pour une combinaison des deux (paramètre en entrée/sortie).
+		Le paramètre donné à l'appel doit être une variable initialisée.
+		Sa valeur sera utilisée par la module et pourra être modifiée.
+	\end{itemize}
+
+	On peut omettre les flèches si tous les paramètres sont en entrée.
+	
+\section{Les structures}
+%---------------------------------
+
+	La structure doit être définie une fois pour toute, 
+	\emph{quelque part}.
+	
+	\begin{Pseudocode}
+	\Struct{NomDeLaStructure}
+		\Decl nomChamp1 : type1
+		\Decl nomChamp2 : type2
+		\Decl \dots
+		\Decl nomChampN : typeN
+	\EndStruct
+	\end{Pseudocode}
+
+	Quelques manipulations.
+	
+	\begin{Pseudocode}
+	\Decl var : NomDeLaStructure
+	\Let var \Gets \{champ1, champ2\dots\} \RComment Assigner tous les champs
+	\Let var1 \Gets var2 \RComment Tous les champs de var2 sont assignés à var1
+	\Read var \RComment Lit tous les champs de var
+	\Write var \RComment Affiche tous les champs de var 
+	\Stmt var1 = var2 \RComment {Teste l'égalité de tous les champs}
+	\end{Pseudocode}
+
+	On écrit \pseudocode{var.nomChamp} pour accéder à un champ.
+	Ce champ est manipulé comme on le ferait 
+	de n'importe quelle variable.
+	On peut donc, l'utiliser, l'assigner, le lire, l'afficher,
+	le passer en paramètre\dots
+	
+	Pour les structures en paramètre,
+	attention à l'utilisation des flèches.
+	On met une flèche en sortie pour indiquer que des champs vont être modifiés. 
+
+	On suppose les modules suivants :
+	
+	\begin{Pseudocode}
+		\ModuleSign{date}{}{Date}	  \RComment{Donne la date du jour}
+		\ModuleSign{moment}{}{Moment}  \RComment{Donne le moment actuel}
+	\end{Pseudocode}
+		
+\pagebreak
+\section{Les tableaux}
+%---------------------------------
+
+	\begin{Pseudocode}
+	\Decl nomTableau~: \K{tableau} [borneMin à borneMax] de TypeElément
+	\end{Pseudocode}
+
+	où \pseudocode{borneMin} et \pseudocode{borneMax}
+	doivent être connus au moment où la déclaration sera effective.
+	C'est une expression pouvant faire intervenir des
+	constantes et des paramètres de la méthode.
+	Les éléments n'ont pas de valeur initiale.
+
+	Quelques manipulations.
+
+	\begin{Pseudocode}
+	\Let tab1 \Gets tab2 \RComment{les éléments de tab1 sont copiés dans tab2 (de même taille).}
+	\Read tab \RComment lit tous les élements du tableau
+	\Write tab \RComment affiche tous les éléments du tableau
+	\Stmt tab1 = tab2 \RComment {les 2 tableaux ont la même taille et des éléments identiques}
+	\end{Pseudocode}
+
+	On écrit \pseudocode{tab[indice]} 
+	pour accéder à un élément du tableau.
+	Cet élément est manipulé comme on le ferait 
+	de n'importe quelle variable.
+	On peut donc, l'utiliser, l'assigner, le lire, l'afficher,
+	le passer en paramètre\dots
+
+	\begin{Note}
+		Certains voudraient que les tableaux commencent à 0
+		pour faciliter la traduction
+		vers les langages courants comme Java et C.	
+		Ce serait bien qu'ils puissent faire les deux.
+		On pourrait envisager de commencer à 0
+		pour les exercices qui vont être traduits en Java.
+		
+		Il faudra peut-être écrire 
+		\pseudocode{\K{tableau} [0 à N-1] de \dots}
+		pour que \pseudocode{N} reste l'équivalent du 
+		\pseudocode{tab.length}.
+	\end{Note}
+		 
+	\subsection{Tableaux et paramètres}
+
+	Quelques utilisations licites.
+	
+	\begin{Pseudocode}
+		\ModuleSign{brol}{ tab\In: \K{tableau} [1 à N] d'entiers}{}
+		\ModuleSign{brol}{}{\K{tableau} [1 à 10] d'entiers}
+		\ModuleSign{brol}{ N\In: entier}{\K{tableau} [1 à N] d'entiers}
+		\ModuleSign{brol}{ tab\In: \K{tableau} [1 à N] d'entiers}{\K{tableau} [1 à N] d'entiers}
+	\end{Pseudocode}
+	
+	Attention à l'utilisation des flèches. 
+	Il faut se rappeler la sémantique.
+	\begin{itemize}
+	\item \In{} 
+		indique que les cases seront lues mais pas modifiées.
+	\item \Out{}
+		indique que les cases n'ont pas à être initialisées.
+		Certaines seront modifiées.
+	\item \InOut{}
+		indique que les cases seront lues et/ou modifiées.
+	\end{itemize}
+	Dans les 3 cas, un tableau doit être fourni à l'appel.
+
+\section{La généricité}
+%---------------------------------
+	
+	Parfois, un algorithme peut être valide
+	quel que soit le type des données 
+	(le \pseudocode{swap} en est un exemple évident).
+	Dans ces cas, on peut écrire \pseudocode{T} en lieu et place du type.
+	
+	Exemple :
+	
+	\begin{Pseudocode}
+	\Module{fill}{ tab\In : \K{tableau} [1 à N] de T, val\In : T }{}
+		\For{i \K{de} 1 \K{à} N}
+			\Let tab[i] \Gets val
+		\EndFor
+	\EndModule
+	\end{Pseudocode}
+	
