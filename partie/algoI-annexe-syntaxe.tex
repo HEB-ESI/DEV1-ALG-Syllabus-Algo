@@ -4,7 +4,7 @@ Dans cette annexe nous définissons le LDA
 (\emph{le Langage de Description d'Algorithmes})
 que nous allons utiliser. 
 Nous ne nous attarderons pas sur les concepts
-ni sur certaines bonne pratiques;
+ni sur certaines bonnes pratiques;
 tout cela est vu dans les chapitres associés.
 
 Nous utilisons un pseudo-code pour nous libérer 
@@ -32,14 +32,14 @@ et d'avancer vers une solution.
 
 La version finale, toutefois, 
 doit être lue par d'autres personnes.
-Il est \textbf{essentiel} qu'il n'y ait aucune ambiguïté
+Il est \textbf{essentiel} qu'il n'y ait aucune ambigüité
 sur le sens de votre écrit.
 C'est pourquoi, nous devons définir une notation
 à la fois souple et précise.
 
 Cette notation doit aussi être adaptée à des étudiants de première année.
 Ce qui nous amène à ne pas introduire des nuances qui leur échappent encore
-et, parfois, à imposer des contraintes qui seront relachées plus tard
+et, parfois, à imposer des contraintes qui seront relâchées plus tard
 mais qui permettent de cadrer l'apprentissage d'un débutant.
 
 \textbf{Remarque} : Ce guide n'est pas universel.
@@ -114,9 +114,9 @@ sur des notations.
 \section{Les expressions numériques}
 %-----------------------------------
 
-	Comme le nom d'une variable est généralement composé de plusiers lettres,
+	Comme le nom d'une variable est généralement composé de plusieurs lettres,
 	nous écrirons explicitement la multiplication (via un $*$)
-	afin d'éviter toute ambiguïté.
+	afin d'éviter toute ambigüité.
 
 	Introduisons :
 
@@ -176,9 +176,9 @@ sur des notations.
 
 	Les valeurs possibles sont \pseudocode{vrai} et \pseudocode{faux}.
 	
-	Les comparaisons ($<$, $\leq$, $>$ et $\geq$) peuvent être utilisés
+	Les comparaisons ($<$, $\leq$, $>$ et $\geq$) peuvent être utilisées
 	pour les types numériques uniquement.
-	Pour augmenter leur expressivité, on considére qu'ils
+	Pour augmenter leur expressivité, on considère qu'ils
 	existent aussi en version \emph{n-aire} comme en Math.
 	On peut donc écrire : \pseudocode{1 $\leq$ nb $\leq$ 100}.
 	
@@ -231,7 +231,7 @@ sur des notations.
 		\Stmt 											\RComment{dit où commence une sous-chaine dans une chaine donnée (-1 si pas trouvé)}
 		\Empty
 		\LComment Dans ce ce qui précède :
-		\LComment - \textbf{lettre} : doit être unne chaine de taille 1 contenant une lettre. erreur sinon.
+		\LComment - \textbf{lettre} : doit être une chaine de taille 1 contenant une lettre. erreur sinon.
 		\LComment - \textbf{pos} : erreur si pas entre 1 et 26.
 		\LComment - \textbf{nb} : erreur si la chaine ne contient pas un nombre et rien que ça.
 	\end{Pseudocode}
@@ -243,7 +243,7 @@ sur des notations.
 	\Let var \Gets expression
 	\Read var1, var2\dots
 	\Write expression1, expression2\dots
-	\Error "raison" \Comment Provoque l'arrrêt de l'algorithme.
+	\Error "raison" \Comment Provoque l'arrêt de l'algorithme.
 	\end{Pseudocode}
 
 	\begin{Note}
@@ -270,7 +270,7 @@ sur des notations.
 	De plus, ça demande un gros effort d'adaptation pour
 	la plupart des langages.
 	Je propose de l'écrire comme des sinon-si pour éviter
-	toute ambiguïté.
+	toute ambigüité.
 	\end{Note}
 
 	\begin{minipage}[t]{4.5cm}
@@ -363,7 +363,7 @@ sur des notations.
 	Transformer le "répéter...jusqu'à ce que" en "répéter...tant que" ?
 	En Java, le "do-while" me gène car je crois systématiquement
 	qu'un "while" commence quand je vois la fin du "do-while".
-	Y-aurait'il le même problème ici ?
+	Y-aurait-il le même problème ici ?
 	\end{Note}
 	
 	La boucle \pseudocode{pour} ne peut être utilisée que pour des entiers.
@@ -397,7 +397,7 @@ sur des notations.
 
 	\begin{Note}
 	Je propose ici une définition purement sémantique
-	du passage de paramètre, indépendament de toute considération
+	du passage de paramètre, indépendamment de toute considération
 	technique d'implémentation dans les langages.
 	\end{Note}
 
@@ -414,14 +414,14 @@ sur des notations.
 		on admet que le paramètre soit modifié dans le module
 		mais sans incidence sur ce qui est donné à l'appel.
 	\item \Out{}
-		pour une résultat pur (paramètre en sortie).
+		pour un résultat pur (paramètre en sortie).
 		Le paramètre donné à l'appel doit être une variable.
 		Cette variable ne doit pas avoir une valeur au début
 		mais le module va lui assigner une valeur.
 	\item \InOut{}
 		pour une combinaison des deux (paramètre en entrée/sortie).
 		Le paramètre donné à l'appel doit être une variable initialisée.
-		Sa valeur sera utilisée par la module et pourra être modifiée.
+		Sa valeur sera utilisée par le module et pourra être modifiée.
 	\end{itemize}
 
 	On peut omettre les flèches si tous les paramètres sont en entrée.
