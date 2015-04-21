@@ -1,0 +1,68 @@
+\begin{Fiche}{Un calcul complexe}
+\label{fiche:calcul-complexe}
+
+\Section{Le problème}
+	Calculer la vitesse (en km/h) d'un véhicule dont on donne
+	la durée du parcours (en secondes) 
+	et la distance parcourue (en mètres).
+
+\Section{Spécification}
+
+	\paragraph{Données}
+	\begin{itemize}
+	\item la distance parcourue par le véhicule (en m);
+	\item la durée du parcours (en s).
+	\end{itemize}
+	Toutes les données sont des réels
+
+	\paragraph{Résultat.}
+	Un réel représentant la vitesse du véhicule (en km/h).
+
+	\bigskip
+	\begin{center}	
+	\flowalgodd{distanceM (réel)}{duréeS (réel)}{vitesseKMH}{réel}
+	\end{center}
+
+\Section{Exemples}
+
+	\begin{itemize}
+	\item \lda{vitesseKMH(100,10)} donne $36$
+	\item \lda{vitesseKMH(10000,3600)} donne $10$
+	\end{itemize}
+
+\Section{Analyse de la solution}
+
+	La vitesse est liée à la distance et à la durée par la formule :
+	\begin{equation}
+		\textrm{vitesse} = \frac{\textrm{distance}}{\textrm{durée}}
+	\end{equation}
+
+	pour autant que les unités soient cohérentes.
+	Ainsi pour obtenir une vitesse en km/h, 
+	il faut convertir la distance en kilomètres 
+	et la durée en heures.
+		
+\Section{Solution}
+
+	\begin{LDA}
+%	\LComment Calcule la vitesse d'un véhicule en connaissant la distance et la durée
+%	\LComment Données : la distance parcourue en m et le temps écoulé en secondes
+%	\LComment Résultat : la vitesse du véhicule en km/h
+	\Algo{vitesseKMH}{\Par{distanceM, duréeS}{réel}}{réel}
+		\Decl{distanceKM, duréeH}{réel}
+		\Let distanceKM \Gets $\frac{\textrm{distanceM}}{1000}$
+		\Let duréeH \Gets $\frac{\textrm{duréeS}}{3600}$
+		\Return $\frac{\textrm{distanceKM}}{\textrm{duréeH}}$
+	\EndAlgo
+	\end{LDA}
+
+\Section{Quand l'utiliser ?}
+
+	Ce type de solution peut être utilisé à chaque fois
+	que la réponse s'obtient par un calcul complexe sur les données
+	qu'il est bon de décomposer pour aider à sa lecture.
+	Si le calcul est plutôt simple, 
+	on peut le garder en une seule assignation
+	(cf. fiche \vref{fiche:calcul-simple}).
+	
+\end{Fiche}

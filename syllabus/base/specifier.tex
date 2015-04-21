@@ -1,0 +1,414 @@
+%==============================
+\chapter{Spécifier le problème}
+%==============================
+
+	\marginicon{objectif}
+	Comme nous l'avons dit, 
+	un problème ne sera véritablement bien spécifié 
+	que s’il s’inscrit dans le schéma suivant~:
+		
+	\medskip
+	\begin{center}
+	\begin{Ovalbox}
+		{\textbf{étant donné} [les données] 
+		\textbf{on demande} [résultat]}
+	\end{Ovalbox}
+	\end{center}
+	\medskip
+	
+	La première étape dans la résolution d’un problème est de
+	préciser ce problème à partir de l'énoncé,
+	c-à-d de déterminer et préciser les données et le résultat.
+	Il ne s’agit pas d’un travail facile 
+	et c'est celui par lequel nous allons commencer.
+
+	%----------------------------------------------
+	\section{Déterminer les données et le résultat}
+	%----------------------------------------------
+	
+		La toute première étape est de parvenir à extraire
+		d'un énoncé de problème, quelles sont les données
+		et quel est le résultat attendu%
+		\footnote{%
+			Plaçons-nous pour le moment dans le cadre
+			de problèmes où il y a exactement un résultat.%
+		}.
+	
+		\begin{Emphase}
+			\paragraph{Exemple.}
+			Soit l'énoncé suivant :
+			\og
+				Calculer la surface d'un rectangle 
+				à partir de sa longueur et sa largeur
+			\fg.
+			
+			Quelles sont les données ? Il y en a deux :	
+			\begin{itemize}
+				\item la longueur du rectangle ;
+				\item sa largeur.
+			\end{itemize}
+		
+			Quel est le résultat attendu ? la surface du rectangle.
+		\end{Emphase}
+		
+	%----------------------------------------------
+	\section{Les noms}\index{noms}
+	%----------------------------------------------
+	
+		Pour identifier clairement chaque \textbf{donnée}
+		et pouvoir y faire référence dans le futur algorithme
+		nous devons lui attribuer un \textbf{nom}%		
+		\footnote{%
+				Dans ce cours, on va choisir des noms en Français,
+				mais vous pouvez très bien choisir
+				des noms Anglais si vous vous sentez
+				suffisamment à l'aise avec cette langue.
+		}.
+		Il est important de bien choisir les noms. 
+		Le but est de trouver un nom qui soit suffisamment court,
+		tout en restant explicite et ne prêtant pas à confusion.
+		
+\clearpage
+	
+		\begin{Emphase}
+			\paragraph{Exemple.}	
+			Quel nom choisir pour la longueur d'un rectangle ?
+	
+			On peut envisager les noms suivants :
+			\begin{itemize}
+			\item
+				\lda{longueur} est probablement le plus approprié.
+			\item
+				\lda{longueurRectangle} peut se justifier
+				pour éviter toute ambigüité avec une autre longueur.
+			\item
+				\lda{long} peut être admis
+				si le contexte permet de comprendre immédiatement
+				l’abréviation.
+			\item
+				\lda{l} et \lda{lg} sont à proscrire car pas assez explicites.
+			\item
+				\lda{laLongueurDuRectangle} est inutilement long. 
+			\item
+				\lda{bidule} ou \lda{temp} ne sont pas de bons choix
+				car ils n'ont aucun lien avec la donnée.
+			\end{itemize}
+		\end{Emphase}
+		
+		Nous allons également donner un \textbf{nom à l'algorithme}
+		de résolution du problème.
+		Cela permettra d'y faire référence dans les explications
+		mais également de l'utiliser dans d'autres algorithmes.
+		Généralement, un nom d'algorithme est :
+		\begin{itemize}
+		\item soit un verbe indiquant ce que fait l'algorithme ;
+		\item soit un nom indiquant le résultat fourni.	
+		\end{itemize}
+	
+		\begin{Emphase}
+			\paragraph{Exemple.}	
+			Quel nom choisir pour l'algorithme 
+			qui calcule la surface d'un rectangle ?
+	
+			On peut envisager 
+			le verbe \lda{calculerSurfaceRectangle}
+			ou le nom \lda{surfaceRectangle} (notre préféré).
+			On pourrait aussi simplifier en \lda{surface}
+			s'il est évident qu'on traite des rectangles.
+		\end{Emphase}
+		
+		Notons que les langages de programmation 
+		imposent certaines limitations 
+		(parfois différentes d’un langage à l’autre)
+		ce qui peut nécessiter une modification du nom 
+		lors de la traduction de l'algorithme en un programme.
+	
+	%----------------------------------------------
+	\section{Les types}\index{types}
+	%----------------------------------------------
+		
+		Nous allons également attribuer un \textbf{type} à chaque donnée
+		ainsi qu'au résultat.
+		Le \textbf{type} décrit la nature de son contenu,
+		quelles valeurs elle peut prendre.
+		
+		Dans un premier temps, les seuls \textbf{types} autorisés 
+		sont les suivants~:
+		
+		\begin{center}
+		\begin{tabular}[t]{p{1.1cm}|p{12cm}}
+			\raggedleft \lda{entier} & pour les nombres entiers\\
+			\raggedleft \lda{réel} & pour les nombres réels\\
+	%				\raggedleft \lda{caractère} & pour les différentes lettres et caractères 
+	%						(par exemple ceux qui apparaissent sur un clavier~: 
+	%						\lda{‘a’}, \lda{‘1’}, \lda{‘\#’}, etc.)
+	%						\\
+			\raggedleft \lda{chaine} & pour les chaines de caractères,
+					les textes.
+					(par exemple~: 
+					\lda{"Bonjour"}, \lda{"Bonjour le monde !"}, 
+					\lda{"a"}, \lda{""}\dots)
+					\\
+			\raggedleft \lda{booléen} & quand la valeur 
+					ne peut être que \lda{vrai} ou \lda{faux}\\
+		\end{tabular}
+		\end{center}
+	
+		\begin{Emphase}
+			\paragraph{Exemples.}	
+			\begin{itemize}
+			\item Pour la longueur, la largeur et la surface d'un rectangle, on prendra un réel.
+			\item Pour le nom d'une personne, on choisira la chaine.
+			\item Pour l'âge d'une personne, un entier est indiqué.
+			\item Pour décrire si un étudiant est doubleur ou pas, un booléen est adapté.
+			\item Pour représenter un mois, on préférera souvent un entier
+				donnant le numéro du mois (par ex: 3 pour le mois de mars)
+				plutôt qu'une chaine (par ex: "mars")
+				car les manipulations, les calculs seront plus simples.
+			\end{itemize}
+		\end{Emphase}
+	
+		\subsection{Il n'y a pas d'unité}
+		%-----------------------------------------
+	
+			Un type numérique indique que les valeurs possibles seront
+			des nombres. Il n'y a là aucune notion d'unité.
+			Ainsi, la longueur d'un rectangle, un réel, 
+			peut valoir $2.5$ mais certainement pas $2.5 cm$.
+			Si cette unité a de l'importance,
+			il faut la spécifier dans le nom de la donnée ou en commentaire.
+			
+			\begin{Emphase}
+				\paragraph{Exemple.}
+				Faut-il préciser les unités 
+				pour les dimensions d'un rectangle ?
+				
+				Si la longueur d'un rectangle vaut $6$, 
+				on ne peut pas dire s'il s'agit de centimètres, 
+				de mètres ou encore de kilomètres.
+				Pour notre problème de calcul de la surface,
+				ce n'est pas important ;
+				la surface n'aura pas d'unité non plus.
+				
+				Si, par contre, 
+				il est important de préciser que la longueur
+				est donnée en centimètres,
+				on pourrait l'expliciter en la nommant
+				\lda{longueurCM}.	
+			\end{Emphase}
+	
+		\subsection{Préciser les valeurs possibles}
+		%-----------------------------------------
+		
+			Le type choisi n'est pas toujours assez précis.
+			Souvent, la donnée ne pourra prendre que certaines valeurs.
+			
+			\begin{Emphase}
+				\paragraph{Exemples.}	
+				\begin{itemize} 
+				\item Un âge est un entier qui ne peut pas être négatif.
+				\item Un mois est un entier compris entre 1 et 12.
+				\end{itemize}
+			\end{Emphase}
+			
+			Ces précisions pourront être données en commentaire
+			pour aider à mieux comprendre le problème et sa solution.
+	
+		\subsection{Le type des données complexes}
+		%-----------------------------------------
+		
+			Parfois, aucun des types disponibles ne permet de représenter 
+			la donnée.
+			Il faut alors la décomposer.
+			
+			\begin{Emphase}
+				\paragraph{Exemple.}	
+				Quel type choisir 
+				pour la date de naissance d'une personne ?
+				
+				On pourrait la représenter dans une chaine 
+				(par ex: "17/3/1985")
+				mais cela rendrait difficile le traitement, les calculs
+				(par exemple, déterminer le numéro du mois).
+				Le mieux est sans doute de la décomposer en trois parties : 
+				le jour, le mois et l'année, tous des entiers.
+			\end{Emphase}
+			
+			Plus loin dans le cours,
+			nous verrons qu'il est possible de définir de nouveaux
+			types de données grâce aux \emph{structures}%
+			\footnote{
+				L'orienté objet que vous verrez en Java
+				le permet également et même mieux.%
+			}. 
+			On pourra alors définir et utiliser un type \lda{Date}
+			et il ne sera plus nécessaire de décomposer une date en trois
+			morceaux.
+	
+		\subsection{Exercice}
+		%----------------------------------------------
+		
+			Quel(s) type(s) de données utiliseriez-vous pour représenter 
+			\begin{itemize}
+				\item le prix d’un produit en grande surface~?
+				\item la taille de l'écran de votre ordinateur~?
+				\item votre nom~?
+				\item votre adresse~?
+				\item le pourcentage de remise proposé pour un produit~?
+				\item une date du calendrier~?
+				\item un moment dans la journée~?
+			\end{itemize}
+			
+	%----------------------------------------------
+	\section{Résumé graphique}
+	%----------------------------------------------
+	
+		Toutes les informations déjà collectées sur le problème
+		peuvent être représentés graphiquement.
+	
+		\begin{Emphase}
+			\paragraph{Exemple.}
+			Pour le problème, de la surface du rectangle, 
+			on fera le schéma suivant :
+			
+			\center\flowalgodd{longueur (réel)}{largeur (réel)}{surfaceRectangle}{réel}	
+		\end{Emphase}
+		
+	%----------------------------------------------
+	\section{Exemples numériques}
+	%----------------------------------------------
+	
+		Une dernière étape pour vérifier que le problème
+		est bien compris est de donner quelques exemples numériques.
+		On peut les spécifier en français, 
+		via un graphique ou via une notation compacte
+		que nous allons présenter.
+	
+		\begin{Emphase}
+			\paragraph{Exemples.}
+			Voici différentes façons de présenter des exemples numériques
+			pour le problème de calcul de la surface d'un rectangle :
+			\begin{itemize}
+			\item En français : 
+				si la longueur du rectangle vaut 3 et sa largeur vaut 2, 
+				alors sa surface vaut 6.			
+			\item Via un schéma :	
+				\begin{center}
+					\flowalgodd{longueur (3)}{largeur (2)}{surfaceRectangle}{6}
+				\end{center}
+			\item En notation compacte :
+				\lda{surfaceRectangle(3,2)} donne $6$.
+			\end{itemize}
+		\end{Emphase}
+	
+	%----------------------------------------------
+	\section{Exercices}
+	%----------------------------------------------
+	
+		Pour les exercices suivants, 
+		nous vous demandons d’imiter la démarche décrite dans ce chapitre, 
+		à savoir :
+		\begin{itemize}
+			\item Déterminer quelles sont les données ;
+				leur donner un nom et un type.
+			\item Déterminer quel est le type du résultat.
+			\item Déterminer un nom pertinent pour l'algorithme.
+			\item Fournir un résumé graphique.
+			\item Donner des exemples.
+		\end{itemize}
+	
+		\begin{Exercice}{Somme de 2 nombres}
+			Calculer la somme de deux nombres donnés.
+		\end{Exercice}
+	
+		\begin{Exercice}{Moyenne de 2 nombres}
+			Calculer la moyenne de deux nombres donnés.
+		\end{Exercice}
+		
+		\begin{Exercice}{Surface d’un triangle}
+			Calculer la surface d’un triangle connaissant sa base et sa hauteur.
+		\end{Exercice}
+	
+		\begin{Exercice}{Périmètre d’un cercle}
+			Calculer le périmètre d’un cercle dont on donne le rayon. 
+		\end{Exercice}
+	
+		\begin{Exercice}{Surface d’un cercle}
+			Calculer la surface d’un cercle dont on donne le rayon. 
+		\end{Exercice}
+	
+		\begin{Exercice}{TVA}
+			Si on donne un prix hors TVA, il faut lui ajouter 21\% 
+			pour obtenir le prix TTC. Écrire un algorithme qui permet 
+			de passer du prix HTVA au prix TTC.
+		\end{Exercice}
+	
+		\begin{Exercice}{Les intérêts}
+			Calculer les intérêts reçus après 1 an pour un montant placé en 
+			banque à du 2\% d’intérêt.
+		\end{Exercice}
+	
+		\begin{Exercice}{Placement}
+			Étant donné le montant d’un capital placé (en \texteuro) 
+			et le taux d’intérêt annuel (en \%), 
+			calculer la nouvelle valeur de ce capital après un an.
+		\end{Exercice}
+	
+		\begin{Exercice}{Prix TTC}
+			Étant donné le prix unitaire d’un produit
+			(hors TVA), le taux de TVA (en \%) et la quantité de produit vendue à
+			un client, calculer le prix total à payer par ce client.
+		\end{Exercice}
+	
+		\begin{Exercice}{Durée de trajet}
+			Étant donné la vitesse moyenne en \textbf{m/s}
+			d’un véhicule et la distance parcourue en \textbf{km} par ce véhicule,
+			calculer la durée en secondes du trajet de ce véhicule.
+		\end{Exercice}
+	
+		\begin{Exercice}{Cote moyenne}
+			Étant donné les résultats (cote entière sur
+			20) de trois examens passés par un étudiant (exprimés par six nombres,
+			à savoir, la cote et la pondération de chaque examen), calculer 
+			la moyenne globale exprimée en pourcentage.
+		\end{Exercice}
+	
+		\begin{Exercice}{Somme des chiffres}
+			Calculer la somme des chiffres
+			d’un nombre entier de 3 chiffres.
+		\end{Exercice}
+	
+		\begin{Exercice}{Conversion HMS en secondes}
+			Étant donné un moment dans la journée donné
+			par trois nombres, à savoir, heure, minute et seconde, calculer le
+			nombre de secondes écoulées depuis minuit.
+		\end{Exercice}
+	
+		\begin{Exercice}{Conversion secondes en heures}
+			Étant donné un temps écoulé depuis minuit.
+			Si on devait exprimer ce temps sous la forme
+			habituelle (heure, minute et seconde),
+			que vaudrait la partie "heure".
+	
+			Ex~:~10000 secondes donnera 2 heures.
+		\end{Exercice}
+	
+		\begin{Exercice}{Conversion secondes en minutes}
+			Étant donné un temps écoulé depuis minuit.
+			Si on devait exprimer ce temps sous la forme
+			habituelle (heure, minute et seconde),
+			que vaudrait la partie "minute".
+	
+			Ex~:~10000 secondes donnera 46 minutes.
+		\end{Exercice}
+	
+		\begin{Exercice}{Conversion secondes en secondes}
+			Étant donné un temps écoulé depuis minuit.
+			Si on devait exprimer ce temps sous la forme
+			habituelle (heure, minute et seconde),
+			que vaudrait la partie "seconde".
+	
+			Ex~:~10000 secondes donnera 40 secondes.
+		\end{Exercice}	
+		
+	

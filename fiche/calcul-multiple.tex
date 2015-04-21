@@ -1,0 +1,60 @@
+\begin{Fiche}{Un nombre (im)pair}
+\label{fiche:calcul-multiple}
+
+\Section{Le problème}
+	Un nombre reçu en paramètre est-il un multiple d'un autre~?
+
+\todo {modifier la suite qui est un copier-coller de pair}
+\Section{Analyse}
+
+	Un nombre est pair si il est multiple de 2. 
+	C'est-à-dire si 	le reste de sa division par 2 vaut 0.
+	\begin{LDA}
+		\Stmt estPair est vrai si nombre MOD 2 = 0
+	\end{LDA}
+
+	\paragraph{Données}
+	\begin{itemize}
+	\item le nombre dont on veut savoir si il est pair.
+	\end{itemize}
+	Un entier.
+
+	\paragraph{Résultat.}
+	Un booléen à \textit{vrai} si le \textit{nombre} est pair et \textit{faux} sinon.
+
+	\bigskip
+	\begin{center}	
+	\SchemaModulei{nombre}{isPair}{booléen}
+	\end{center}
+
+\Section{Exemples}
+
+	\begin{itemize}
+	\item \lda{isPair(2016)} donne $vrai$
+	\item \lda{isPair(2015)} donne $faux$
+	\end{itemize}
+	
+\Section{Solution}
+
+	\begin{LDA}
+	\LComment Retourne vrai si le nombre reçu en paramètre est pair et faux sinon.
+	\LComment Données : le nombre dont on veut savoir si il est pair
+	\LComment Résultat : vrai si le nombre est pair et faux sinon.
+	\Module{isPair}{\Par{nombre}{entier}}{booléen}
+		\Return nombre MOD 2 = 0
+	\EndModule
+	\end{LDA}
+
+\Section{Quand l'utiliser ?}
+
+	\todo{todo}
+	
+\Section{Fiches liées}
+	
+	\begin{itemize}
+	\item
+		La fiche \vref{fiche:calcul-pair} présente
+		une solution plus générale.
+	\end{itemize}
+	
+\end{Fiche}

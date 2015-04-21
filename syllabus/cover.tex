@@ -1,0 +1,39 @@
+% =========================================================
+% 1ère page du syllabus
+% Utilise des constantes définies dans le fichier de config
+% =========================================================
+
+\thispagestyle{empty}
+
+%----------------------------------
+% haut : logo + infos écoles
+%----------------------------------
+\includegraphics[scale=0.2]{image/esi-logo}
+\quad
+\begin{minipage}[t]{7cm}
+	\vspace{-7\baselineskip}
+	\sffamily\large
+	\textbf{\ecole\\\entite\\\etude}
+	\bigskip\\
+	\entiteadresse\\\entitetel{} – \entitemail
+\end{minipage}
+
+%----------------------------------
+% centre : ue, cours, année
+%----------------------------------
+\vfill
+\begin{center}
+	\sffamily
+	\LARGE\ue\\
+	\Huge\cours
+	\bigskip\\
+	\Large\annee
+\end{center}
+\vfill
+
+%----------------------------------
+% bas : profs
+%----------------------------------
+\begin{center}
+	\Large\auteur
+\end{center}

@@ -1,0 +1,195 @@
+\chapter{Le LDA}
+
+	Dans cette annexe nous définissons le LDA
+	(\emph{le Langage de Description d'Algorithmes})
+	que nous allons utiliser. 
+	Nous ne nous attarderons pas sur les concepts
+	ni sur certaines bonnes pratiques;
+	tout cela est vu dans les chapitres associés.
+	
+	Nous utilisons un pseudo-code pour nous libérer 
+	des contraintes des langages de programmation.
+	\begin{itemize}
+	\item
+		Un programme est une suite de lignes
+		ne permettant pas d'utiliser pleinement les
+		deux dimensions de la page 
+		(pensons à la mise en page des formules).
+	\item
+		Certaines constructions et règles
+		n'existent que pour simplifier le travail du compilateur
+		et/ou accélérer le code.
+		C'est le cas, par exemple, de la syntaxe du \emph{switch}.
+	\end{itemize}
+	
+	Dans vos réflexions, brouillons, premiers jets,
+	nous vous encourageons à utiliser des notations
+	qui vous sont propres et qui vous permettent
+	de poser votre réflexion sur un papier
+	et d'avancer vers une solution.
+	
+	La version finale, toutefois, 
+	doit être lue par d'autres personnes.
+	Il est \textbf{essentiel} qu'il n'y ait aucune ambigüité
+	sur le sens de votre écrit.
+	C'est pourquoi, nous devons définir une notation
+	à la fois souple et précise.
+	
+	Cette notation doit aussi être adaptée à des étudiants de première année.
+	Ce qui nous amène à ne pas introduire des nuances qui leur échappent encore
+	et, parfois, à imposer des contraintes qui seront relâchées plus tard
+	mais qui permettent de cadrer l'apprentissage d'un débutant.
+	
+	\textbf{Remarque} : Ce guide n'est pas universel.
+	En dehors de l'école, d'autres notations sont utilisées,
+	parfois proches, parfois plus lointaines.
+	Votre professeur pourra également introduire quelques notations
+	qui ne sont pas reprises ici 
+	ou relâcher quelques contraintes définies ici. 
+	Lorsque vous changerez de professeur,
+	soyez conscient que ces ajouts ne seront peut-être plus valables.
+	
+	L'important est que le groupe qui doit communiquer
+	au moyen d'algorithmes se soit préalablement mis d'accord 
+	sur des notations.
+
+\subsection*{Un algorithme}
+%---------------------------------
+
+	\begin{minipage}{6cm}
+		\begin{LDA}
+			\Algo{nom}{paramètres}{Type}
+				\Stmt Instructions
+				\Return expression
+			\EndAlgo
+		\end{LDA}
+	\end{minipage}
+	\qquad
+	\begin{minipage}{6cm}
+		\begin{LDA}
+			\Algo{nom}{paramètres}{}
+				\Stmt Instructions
+			\EndAlgo
+		\end{LDA}
+	\end{minipage}
+
+	On permet l'utilisation du raccourci \lda{\K{algo}}.
+	
+\subsection*{Types, variables et constantes}
+%-----------------------------------
+
+	Les types permis sont :
+	\lda{entier}, \lda{réel},
+	\lda{booléen} et \lda{chaine}.
+
+	\begin{LDA}
+		\Const{nom}{valeur}
+		\Decl{var1, \dots}{Type} 
+	\end{LDA}
+
+\subsection*{Les instructions de base}
+%---------------------------------
+
+	\begin{LDA}
+		\Let var \Gets expression
+		\Read var1, var2\dots
+		\Write expression1, expression2\dots
+		\Error "raison" \Comment Provoque l'arrêt de l'algorithme.
+	\end{LDA}
+	
+\subsection*{Les instructions de choix}
+%---------------------------------
+
+	\begin{minipage}[t]{4.5cm}
+	\begin{LDA}
+	\If{condition}
+		\Stmt Instructions
+	\EndIf
+	\Empty
+	\Empty
+	\Empty
+	\Empty
+	\Empty
+	\Empty
+	\end{LDA}
+	\end{minipage}
+	\ 
+	\begin{minipage}[t]{4.5cm}
+	\begin{LDA}
+	\If{condition}
+		\Stmt Instructions
+	\Else
+		\Stmt Instructions
+	\EndIf
+	\Empty
+	\Empty
+	\Empty
+	\Empty
+	\end{LDA}
+	\end{minipage}
+	\ 
+	\begin{minipage}[t]{4.5cm}
+	\begin{LDA}
+	\If{condition}
+		\Stmt Instructions
+	\ElsIf{condition}
+		\Stmt Instructions
+	\ElsIf{condition}
+		\Stmt \dots
+	\Else
+		\Stmt Instructions
+	\EndIf
+	\end{LDA}
+	\end{minipage}
+	
+	\begin{LDA}
+		\Switch{expression \K{vaut}}
+			\Case{liste${}_1$ de valeurs séparées par des virgules }
+				\Stmt Instructions
+			\Case{liste${}_2$ de valeurs séparées par des virgules }
+				\Stmt Instructions
+			\Empty \dots
+			\Case{liste${}_k$ de valeurs séparées par des virgules }
+				\Stmt Instructions
+			\Case{\K{autres }}
+				\Stmt Instructions
+		\EndSwitch
+	\end{LDA}
+	
+	où l'expression peut être de type \lda{entier} ou \lda{chaine}
+	(pas de \lda{réel}) et les valeurs sont des constantes.
+
+\subsection*{Les instructions de répétition}
+%---------------------------------
+
+	\begin{minipage}[t]{4cm}	
+	\begin{LDA}
+		\While{condition}
+			\Stmt Instructions
+		\EndWhile
+	\end{LDA}
+	\end{minipage}
+	\
+	\begin{minipage}[t]{6.5cm}	
+	\begin{LDA}
+		\For{indice \K{de} début \K{à} fin [\K{par} pas]}
+			\Stmt Instructions
+		\EndFor
+	\end{LDA}
+	\end{minipage}
+	\
+	\begin{minipage}[t]{4cm}	
+	\begin{LDA}
+		\Repeat
+			\Stmt Instructions
+		\EndRepeat{condition}
+	\end{LDA}
+	\end{minipage}
+		
+	La boucle \lda{pour} ne peut être utilisée que pour des entiers.
+
+	Il n'est \textbf{pas nécessaire} de déclarer l'indice.
+	Il ne peut être utilisé en dehors de la boucle et ne peut pas
+	être modifié à l'intérieur de la boucle.
+	De même, le \lda{début}, la \lda{fin} et le \lda{pas} 
+	ne peuvent pas être modifiés dans la boucle.

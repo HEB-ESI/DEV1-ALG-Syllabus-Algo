@@ -1,0 +1,668 @@
+% ============================
+\chapter{Un travail répétitif}
+\label{chap:bcl}
+% ============================
+
+	\marginicon{objectif}
+	Les ordinateurs révèlent tout leur potentiel dans leur capacité à
+	répéter inlassablement les mêmes tâches.
+	Vous avez pu appréhender les boucles lors de votre initiation
+	sur le site \url{code.org}.
+	Nous voyons ici comment incorporer des boucles dans nos codes 
+	et comment les utiliser à bon escient.
+
+	\marginicon{attention}
+	Attention~! 
+	D’expérience, nous savons que ce chapitre est difficile à appréhender. 
+	Beaucoup d’entre vous perdent pied ici. 
+	Accrochez-vous et faites bien tous les exercices proposés~!
+
+% =======================================
+\section{La notion de travail répétitif}
+% =======================================
+
+	Si on veut faire effectuer un travail répétitif, 
+	il faut indiquer deux choses~:
+	\begin{itemize}
+	\item le travail à répéter ;
+	\item une indication qui permet de savoir quand s'arrêter.
+	\end{itemize}
+
+	Examinons quelques exemples pour fixer notre propos.
+
+	\paragraph{Exemple 1.} 
+	Pour traiter des dossiers, 
+	on dira quelque chose comme 
+	«~tant qu’il reste un dossier à traiter, le traiter~» 
+	ou encore 
+	«~traiter un dossier puis passer au suivant jusqu’à ce qu’il n’en reste plus à traiter~».
+	\begin{itemize}
+	\item La tâche à répéter est : «~traiter un dossier~».
+	\item On indique qu’on doit continuer s’il reste encore un dossier à traiter.
+	\end{itemize}
+
+	\paragraph{Exemple 2.}
+	Pour calculer la cote finale de tous les étudiants,
+	on aura quelque chose du genre 
+	«~Pour tout étudiant, calculer sa cote~».
+	\begin{itemize}
+	\item 
+		La tâche à répéter est : «~calculer la cote d’un étudiant~».
+	\item 
+		On indique qu’on doit le faire pour tous les étudiants.
+		On doit donc commencer par le premier, passer à chaque fois au suivant
+		et s’arrêter quand on a fini le dernier.
+	\end{itemize}
+
+	\paragraph{Exemple 3.}
+	Pour afficher tous les nombres de 1 à 100, on aura
+	«~Pour tous les nombres de 1 à 100, afficher ce nombre~».
+	\begin{itemize}
+	\item
+		La tâche à répéter est : «~afficher un nombre~».
+	\item 
+		On indique qu’on doit le faire pour tous les nombres de 1 à 100. 
+		On doit donc commencer avec 1, 
+		passer à chaque fois au nombre suivant 
+		et s’arrêter après avoir affiché le nombre 100.
+	\end{itemize}
+		
+% ===================================================
+\section{Une même instruction, des effets différents}
+% ===================================================
+
+	Comprenez bien que c’est toujours la même tâche qui est exécutée 
+	mais pas avec le même effet à chaque fois. 
+	Ainsi, on traite un dossier mais à chaque fois un différent ; 
+	on affiche un nombre mais à chaque fois un différent. 
+	
+	Par exemple, la tâche à répéter pour afficher des nombres
+	ne peut pas être
+	\lda{\K{Afficher} 1} ni \lda{\K{Afficher} 2} ni\dots{}
+	Par contre, on pourra utiliser l'instruction
+	\lda{\K{Afficher} nb} si on s'arrange pour que la variable
+	\lda{nb} s'adapte à chaque passage dans la boucle.
+
+	\subsection{Exemple - Afficher les nombres de 1 à 5}
+	%===================================================
+	
+		Sans boucle, on pourrait écrire :
+		
+		\begin{LDA}
+		\Write{1}
+		\Write{2}
+		\Write{3}
+		\Write{4}
+		\Write{5}
+		\end{LDA}
+		
+		Ces cinq instructions sont proches mais pas tout-à-fait identiques. 
+		En l'état, on ne peut pas encore en faire une boucle%
+		\footnote{%
+			Vous vous dites peut-être que ce code est simple ;
+			inutile d'en faire une boucle.
+			Ce n'est qu'un exemple.
+			Que feriez-vous s'il faillait afficher les nombres
+			de 1 à 1000 ?
+		} ;
+		il va falloir ruser.
+		On peut obtenir le même résultat avec l'algorithme suivant :
+
+		\begin{LDA}
+		\Let nb \Gets 1
+		\Write{nb}
+		\Let nb \Gets nb + 1
+		\Write{nb}
+		\Let nb \Gets nb + 1
+		\Write{nb}
+		\Let nb \Gets nb + 1
+		\Write{nb}
+		\Let nb \Gets nb + 1
+		\Write{nb}
+		\Let nb \Gets nb + 1
+		\end{LDA}
+
+		Il est plus compliqué,
+		mais cette fois les lignes 2 et 3 se répètent exactement.
+		D'ailleurs, la dernière ligne ne sert à rien d'autre qu'à
+		obtenir exactement cinq copies.
+		Le travail à répéter est donc :
+
+		\begin{LDA}
+		\Write{nb}
+		\Let nb \Gets nb + 1
+		\end{LDA}
+
+		Il existe plusieurs structures répétitives
+		qui vont se distinguer par la façon dont on va
+		contrôler le nombre de répétitions.
+		Voyons-les une à une.
+
+%========================
+\section{«~tant que~»}\index{tant que}
+%========================
+	
+	Le «~tant que~» est une structure qui demande à
+	l’exécutant de répéter une tâche (une ou plusieurs
+	instructions) tant qu’une condition donnée est vraie.
+
+	\begin{LDA}
+	\While{condition}
+		\Stmt séquence d’instructions à exécuter
+	\EndWhile
+	\end{LDA}
+
+	Comme pour la structure \lda{si}, 
+	la \lda{condition} est une expression à valeur booléenne. 
+	Dans ce type de structure, 
+	il faut qu’il y ait dans la séquence d’instructions comprise entre
+	\lda{tant que} et \lda{fin tant que} au moins une
+	instruction qui modifie une des composantes de la condition de telle
+	manière qu’elle puisse devenir \textbf{fausse} à un moment donné. Dans
+	le cas contraire, la condition reste indéfiniment vraie et la boucle va
+	tourner sans fin, c’est ce qu’on appelle une \textbf{boucle infinie}. 
+	L'ordinogramme ci-dessous décrit  le déroulement de cette structure. 
+	On remarquera que si la condition est fausse dès le début, 
+	la tâche n’est jamais exécutée.
+
+	\begin{center}
+	\includegraphics[width=0.4\textwidth]{image/boucle-tq}
+	\label{fig:boucle-tq}
+	\end{center}
+
+	\subsection{Exemple - Afficher les nombres de 1 à 5}
+	%===================================================
+
+		Reprenons notre exemple d'affichage des nombres de 1 à 5.
+		Pour rappel, la tâche à répéter est :
+
+		\begin{LDA}
+		\Write{nb}
+		\Let nb \Gets nb + 1
+		\end{LDA}
+		
+		La condition va se baser sur la valeur de \lda{nb}.
+		On continue tant que le nombre n'a pas dépassé 5.
+		Ce qui donne (en n'oubliant pas l'initialisation de \lda{nb}) :
+
+		\begin{LDA}
+		\Let nb \Gets 1
+		\While{nb $\le$ 5}
+			\Write{nb}
+			\Let nb \Gets nb + 1
+		\EndWhile
+		\end{LDA}
+
+	\subsection{Exemple - Généralisation à n nombres}
+	%===================================================
+
+		On peut généraliser l'exemple précédent
+		en affichant tous les nombres de 1 à n où n est une donnée
+		de l'algorithme.
+		
+		\begin{LDA}
+		\Algo{compteur}{\Par{n}{entier}}{}
+			\Decl{nb}{entier}
+			\Let nb \Gets 1
+			\While{nb $\le$ n}
+				\Write{nb}
+				\Let nb \Gets nb + 1
+			\EndWhile
+		\EndAlgo
+		\end{LDA}
+
+	\subsection{Exercices}
+	% =====================================
+
+		\begin{Exercice}{Compréhension d’algorithmes}
+			Quels sont les affichages réalisés lors de l’exécution
+			des algorithmes suivants~?
+			
+			\begin{LDA}
+			\Algo{boucle1}{}{}
+				\Decl{x}{entier}
+				\Let x \Gets 0
+				\While{x < 12}
+					\Let x \Gets x + 2	
+				\EndWhile
+				\Write x
+			\EndAlgo
+			\end{LDA}
+		
+			\begin{LDA}
+			\Algo{boucle2}{}{}
+				\Decl{ok}{booléen}
+				\Decl x : entier
+				\Let ok \Gets vrai
+				\Let x \Gets 5
+				\While{ok}
+					\Let x \Gets x + 7	
+					\Let ok \Gets x MOD 11 $\neq$ 0	
+				\EndWhile
+				\Write x
+			\EndAlgo
+			\end{LDA}
+		
+			\begin{LDA}
+			\Algo{boucle3}{}{}
+				\Decl{ok}{booléen}
+				\Decl cpt, x : entiers
+				\Let x \Gets 10
+				\Let cpt \Gets 0
+				\Let ok \Gets vrai
+				\While{ok ET cpt < 3}
+					\If{x MOD 2 = 0}
+						\Let x \Gets x + 1
+						\Let ok \Gets x < 20
+					\Else
+						\Let x \Gets x + 3
+						\Let cpt \Gets cpt + 1
+					\EndIf
+				\EndWhile
+				\Write x
+			\EndAlgo
+			\end{LDA}
+
+		\end{Exercice}
+
+		\begin{Exercice}{Afficher les n premiers}
+			En utilisant un \lda{\algorithmicwhile},
+			écrire un algorithme qui reçoit un entier $n$ positif et affiche
+			\begin{enumerate}[label=\alph*)]
+			\item les nombres de 1 à $n$ ;
+			\item les nombres de 1 à $n$ en ordre décroissant ;
+			\item les nombres impairs de 1 à $n$ ;
+			\item les $n$ premiers nombres impairs
+			(attention, c'est un peu plus difficile).
+			\end{enumerate}
+		\end{Exercice}
+
+		\begin{Exercice}{Somme de chiffres}
+			\marginicon{java}
+			Écrire un algorithme qui calcule la somme des chiffres qui forment un
+			nombre naturel $n$. Attention, on donne au départ \textbf{le} nombre et
+			pas ses chiffres. Exemple~: 133045 doit donner comme résultat 16,
+			car 1 + 3 + 3 + 0 + 4 + 5 = 16.
+		\end{Exercice}
+
+%====================
+\section{«~pour~»}\index{pour}
+%====================
+
+		Ici, on va plutôt indiquer 
+		\textbf{combien de fois} la tâche doit être répétée. 
+		Cela se fait au travers d’une
+		\textbf{variable de contrôle} dont la valeur va évoluer à partir
+		d’une valeur de départ jusqu’à une valeur finale.
+		
+		\begin{LDA}
+		\For{variable}{début}{fin}{pas}
+			\Stmt séquence d’instructions à exécuter
+		\EndFor
+		\end{LDA}
+
+		Dans ce type de structure, 
+		\lda{début}, \lda{fin} et \lda{pas}
+		peuvent être des constantes, 
+		des variables ou des expressions entières. 
+		Le \lda{pas} est facultatif, et généralement omis 
+		(dans ce cas, sa valeur par défaut est 1). 
+		Ce pas est parfois négatif, dans le cas d’un compte à rebours, 
+		par exemple \lda{pour n de 10 à 1 par -1}.
+
+		Quand le \lda{pas} est positif, la boucle s’arrête
+		lorsque la variable dépasse la valeur de \lda{fin}. 
+		Par contre, avec un \lda{pas} négatif, 
+		la boucle s’arrête lorsque la variable prend une valeur 
+		plus petite que la valeur de \lda{fin}
+		(cf. le test dans l’organigramme ci-dessous).
+
+		\begin{center}
+			\includegraphics[width=0.33\textwidth]{image/boucle-pour}
+			\label{fig:boucle-pour}
+		\end{center}
+
+		\marginicon{attention}
+		Veiller à la cohérence de l’écriture de cette structure. On considérera
+		qu’au cas (à éviter) où \lda{début} est strictement supérieur à
+		\lda{fin} et le \lda{pas} est positif, la séquence d’instructions
+		n’est jamais exécutée (mais ce n’est pas le cas dans tous les langages
+		de programmation~!). Idem si \lda{début} est strictement inférieur à
+		\lda{fin} mais avec un \lda{pas} négatif.
+
+		\textbf{Exemples~}:
+
+		\begin{LDA}
+		\Stmt \K{pour} i \K{de} 2 \K{à} 0 \K{faire} \RComment La boucle n’est pas exécutée.
+		\Stmt \K{pour} i \K{de} 1 \K{à} 10 \K{par} -1 \K{faire} \RComment La boucle n’est pas exécutée.
+		\Stmt \K{pour} i \K{de} 1 \K{à} 1 \K{par} 5 \K{faire} \RComment La boucle est exécutée 1 fois.
+		\end{LDA}
+		
+		\marginicon{attention}
+		Veiller aussi à ne pas modifier dans la séquence d’instructions une des
+		variables de contrôle \lda{début}, \lda{fin} ou \lda{pas}~! Il
+		est aussi fortement déconseillé de modifier «~manuellement~» la
+		\lda{variable} de contrôle au sein de la boucle
+		\lda{pour}. Il ne faut pas l’initialiser en début de boucle,
+		et ne pas s’occuper de sa modification, l’instruction 
+		\lda{i \Gets i + pas} 
+		étant automatique et implicite à chaque étape de la boucle. 
+		
+		La variable de contrôle ne servant que pour la boucle
+		et étant forcement entière,
+		on va considérer qu'il n'est pas nécessaire de la déclarer
+		et qu'elle n'est pas utilisable en dehors de la boucle%
+		\footnote{%
+			De nombreux langages ne le permettent d'ailleurs pas
+			ou ont un comportement indéterminé si on le fait.%
+		}.
+
+	\subsection{Exemples -- Afficher des nombres}
+	%===================================================
+
+		Restons avec notre exemple d'affichage des nombres de 1 à 5.
+		
+		\begin{LDA}
+		\Algo{compterJusque5}{}{}
+			\For{nb}{1}{5}{} \RComment par défaut le pas est de 1
+				\Write nb 
+			\EndFor
+		\EndAlgo
+		\end{LDA}
+
+		Si on veut généraliser à n nombres, on a :
+		
+		\begin{LDA}
+		\Algo{compterJusqueN}{\Par{n}{entier}}{}
+			\For{nb}{1}{n}{}
+				\Write nb 
+			\EndFor
+		\EndAlgo
+		\end{LDA}
+
+		Et si on veut afficher un compte à rebours :
+		
+		\begin{LDA}
+		\Algo{compterJusqueNDécroissant}{\Par{n}{entier}}{}
+			\For{nb}{n}{1}{-1}{}
+				\Write nb 
+			\EndFor
+			\Write "Partez !"
+		\EndAlgo
+		\end{LDA}
+
+	\subsection{Exemple -- Afficher uniquement les nombres pairs}
+	%===========================================================
+
+		Cela se complique un peu. 
+		Cette fois-ci on affiche uniquement 
+		les nombres \textbf{pairs} jusqu’à la limite $n$.
+		
+		\paragraph{Exemple.}
+		Les nombres pairs de $1$ à $10$ sont~: $2$, $4$, $6$, $8$, $10$.
+		
+		Notez que $n$ peut être impair. 
+		Si $n$ vaut $11$, l’affichage est le même que pour $10$.
+
+		On peut utiliser un \og{}pour\fg{}.
+		De 1 à $n$, il y a exactement «~$n$ DIV $2$~» nombres à afficher. 
+		La difficulté vient du lien à faire entre la variable de
+		contrôle et le nombre à afficher.
+
+		\paragraph{Solution 1.}
+		On garde le lien entre la variable de contrôle 
+		et le nombre à afficher. 
+		Dans ce cas, on commence à $2$ et le pas doit être de $2$.
+
+		\begin{LDA}
+		\Algo{afficherPair}{\Par{n}{entier}}{} 
+			\For{nb}{2}{n}{2} 
+				\Write nb 
+			\EndFor
+		\EndAlgo
+		\end{LDA}
+
+		\paragraph{Solution 2.}
+		La variable de contrôle compte simplement le nombre d’itérations.
+		Il faut alors calculer le nombre à afficher en fonction de la variable
+		de contrôle (ici le double de celle-ci convient)
+
+		\begin{LDA}
+		\Algo{afficherPair}{\Par{n}{entier}}{} 
+			\For{i}{1}{n DIV 2}{} 
+				\Write 2 * i 
+			\EndFor
+		\EndAlgo
+		\end{LDA}
+
+		Par une vieille habitude des programmeurs%
+		\footnote{%
+			Née avec le langage FORTRAN 
+			où la variable $i$ était par défaut une variable entière.
+		},
+		une variable de contrôle qui se contente de compter les passages dans
+		la boucle est souvent nommée $i$. 
+		On l’appelle aussi «~itérateur~».
+
+	\subsection{Exemple -- Afficher les premiers nombres pairs}
+	%============================================================
+	
+		Voici un problème proche du précédent~:
+		on affiche cette fois les $n$ premiers nombres pairs.
+		
+		\textbf{Exemple}~:~les $10$ premiers nombres pairs sont~:~$2$, $4$, $6$, $8$, 
+		$10$, $12$, $14$, $16$, $18$, $20$.
+		
+		Il est plus simple de partir de la solution 2 de l’exemple précédent
+		en changeant simplement la valeur finale de la boucle.
+
+		\begin{LDA}
+		\Algo{afficherPair}{\Par{n}{entier}}{} 
+			\For{i}{1}{n}{} 
+				\Write 2 * i 
+			\EndFor
+		\EndAlgo
+		\end{LDA}
+
+	\subsection{Exercices}
+	% =====================================
+
+		\begin{Exercice}{Compréhension d’algorithmes}
+			Quels sont les affichages réalisés lors de l’exécution
+			des algorithmes suivants~?
+			
+			\begin{LDA}
+			\Algo{boucle5}{}{}
+				\Decl{x}{entier}
+				\Decl{ok}{booléen}
+				\Let x \Gets 3
+				\Let ok \Gets vrai
+				\For{i}{1}{5}{}
+					\Let x \Gets x + i
+					\Let ok \Gets ok ET (x MOD 2 = 0)
+				\EndFor
+				\If{ok}
+					\Write x
+				\Else
+					\Write 2 * x
+				\EndIf
+			\EndAlgo
+			\end{LDA}
+		
+			\begin{LDA}
+			\Algo{boucle6}{}{}
+				\Decl{i, fin}{entiers}
+				\For{i}{1}{3}{}
+					\Let fin \Gets 6 * i - 11
+					\For{j}{1}{fin}{3}
+						\Write 10 * i + j
+					\EndFor
+				\EndFor
+			\EndAlgo
+			\end{LDA}
+
+		\end{Exercice}
+
+		\begin{Exercice}{Afficher les n premiers}
+			En utilisant un \lda{\algorithmicfor},
+			écrire un algorithme qui reçoit un entier $n$ positif et affiche
+			\begin{enumerate}[label=\alph*)]
+			\item les nombres de 1 à $n$ ;
+			\item les nombres de 1 à $n$ en ordre décroissant ;
+			\item les $n$ premiers carrés parfaits (1, 4, 9\dots) ;
+			\item les nombres impairs de 1 à $n$ ;
+			\item les $n$ premiers nombres impairs.
+			\end{enumerate}
+		\end{Exercice}
+
+%===================================
+\section{«~faire~–~tant que~»}
+%===================================
+
+	Cette structure est très proche du «faire~-~tant que~» 
+	à ceci près que le test est fait à la fin et pas au début. 
+	La tâche est donc toujours exécutée au moins une fois.
+
+	\begin{LDA}
+	\Repeat
+		\Stmt séquence d’instructions à exécuter
+	\EndRepeat{condition}
+	\end{LDA}
+
+	Comme avec le tant-que, 
+	il faut que la séquence d’instructions comprise entre
+	\lda{\K{faire}} et \lda{\K{tant que}} 
+	contienne au moins une instruction qui modifie la condition de
+	telle manière qu’elle puisse devenir \textbf{vraie} à un moment donné
+	pour arrêter l’itération. 
+	Le schéma ci-dessous décrit le déroulement de cette boucle. 
+
+	\begin{center}
+	\includegraphics[width=0.35\textwidth]{image/boucle-faire}
+	\label{fig:boucle-faire}
+	\end{center}
+
+	%\subsection{Exercices}
+	%=====================
+	
+		\begin{Exercice}{Compréhension d’algorithmes}
+			Quels sont les affichages réalisés lors de l’exécution
+			des algorithmes suivants~?
+
+			\begin{LDA}
+				\Algo{boucle4}{}{}
+					\Decl{pair, grand}{booléens}
+					\Decl{p, x}{entiers}
+					\Let x \Gets 1
+					\Let p \Gets 1
+					\Repeat
+						\Let p \Gets 2 * p
+						\Let x \Gets x + p
+						\Let pair \Gets x MOD 2 = 0
+						\Let grand \Gets x > 15
+					\EndRepeat{NON pair ET NON grand}
+					\Write x
+				\EndAlgo
+			\end{LDA}			
+		
+		\end{Exercice}
+
+%======================================
+\section{Quel type de boucle choisir~?}
+%======================================
+
+	En pratique, il est possible d’utiliser systématiquement la boucle 
+	\lda{tant que} qui peut s’adapter à toutes les situations. 
+	Cependant, il est plus clair d’utiliser la boucle \lda{pour} 
+	dans les cas où le nombre d’itérations est fixé et connu à l’avance 
+	(par là, on veut dire que le nombre d’itérations est déterminé au moment 
+	où on arrive à la boucle). 
+	La boucle \lda{faire} convient quant à elle
+	dans les cas où le contenu de la boucle doit être parcouru au moins une
+	fois, alors que dans \lda{tant que}, 
+	le nombre de parcours peut être nul si la condition initiale est fausse. 
+	La schéma ci-dessous propose un récapitulatif.
+
+	\begin{center}
+		\includegraphics[width=0.66\textwidth]{image/boucle-choixtype}
+		\label{fig:boucle-choix}
+	\end{center}
+
+% ================================
+\section{Exercices récapitulatifs}
+% ================================
+
+	\begin{Exercice}{Factorielle}
+		Écrire un algorithme qui retourne la factorielle de $n$ (entier positif ou
+		nul). Rappel~: la factorielle de $n$, notée $n$!, est le produit des $n$
+		premiers entiers strictement positifs. 
+		
+		Par convention, 0! = 1.
+	\end{Exercice}
+	
+	\begin{Exercice}{Produit de 2 nombres}
+		Écrire un algorithme qui retourne le produit de deux entiers quelconques
+		sans utiliser l’opérateur de multiplication, mais en minimisant le
+		nombre d’opérations.
+	\end{Exercice}
+	
+	\begin{Exercice}{Nombre premier}
+		Écrire un algorithme qui vérifie si un entier positif est un
+		\textbf{nombre premier}. 
+		
+		Rappel~:~un nombre est premier s’il n’est divisible que par 1 et par
+		lui-même. Le premier nombre premier est 2.
+	\end{Exercice}
+	
+	\begin{Exercice}{Nombres premiers}
+		Écrire un algorithme qui affiche les nombres premiers inférieurs ou
+		égaux à un entier positif donné. Le module de cet algorithme fera appel
+		de manière répétée mais économique à celui de l’exercice précédent.
+	\end{Exercice}
+	
+	\begin{Exercice}{Nombre parfait}
+		Écrire un algorithme qui vérifie si un entier positif est un
+		\textbf{nombre parfait}, c’est-à-dire un nombre égal à la somme de ses
+		diviseurs (sauf lui-même). 
+		
+		Par exemple, 6 est parfait car 6 = 1 + 2 + 3. 
+		De même, 28 est parfait car 28 = 1 + 2 + 4 + 7 + 14.
+	\end{Exercice}
+	
+	\begin{Exercice}{Décomposition en facteurs premiers}
+		Écrire un algorithme qui affiche la décomposition 
+		d’un entier en facteurs premiers. 
+		Par exemple, $1001880$ donnerait comme décomposition
+		$2^3 * 3^2 * 5 * 11^2 * 23$.
+	\end{Exercice}
+
+	\begin{Exercice}{Nombre miroir}
+		Le miroir d'un nombre est le nombre obtenu
+		en lisant les chiffres de droite à gauche.
+		Ainsi le nombre miroir de $4209$ est $9024$.
+		Écrire un algorithme qui calcule le miroir
+		d'un nombre entier positif donné.
+	\end{Exercice}
+	
+	\begin{Exercice}{Palindrome}
+		Écrire un algorithme qui vérifie si un entier donné 
+		forme un palindrome ou non. 
+		Un nombre palindrome est un nombre qui lu dans un sens 
+		(de gauche à droite) est identique au nombre lu dans l’autre sens 
+		(de droite à gauche). 
+		Par exemple, $1047401$ est un nombre palindrome.
+	\end{Exercice}
+	
+	\begin{Exercice}{Jeu de la fourchette}
+		\marginicon{java}
+		Écrire un algorithme qui simule le jeu de la
+		fourchette. Ce jeu consiste à essayer de découvrir un nombre quelconque
+		compris entre 1 et 100 inclus, tiré au sort par l’ordinateur (la primitive
+		\lda{hasard(n~:~entier)} retourne un entier entre 1 et $n$). 
+		L’utilisateur a droit à huit essais
+		maximum. À chaque essai, l’algorithme devra afficher un message
+		indicatif «~nombre donné trop petit~» ou «~nombre donné trop grand~».
+		En conclusion, soit «~bravo, vous avez trouvé en [nombre] essai(s)~» soit
+		«~désolé, le nombre était [valeur]~».
+	\end{Exercice}
+	

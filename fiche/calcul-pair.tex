@@ -1,0 +1,103 @@
+\begin{Fiche}{Un nombre (im)pair}
+\label{fiche:calcul-pair}
+
+\Section{Le problème}
+	Un nombre reçu en paramètre est-il pair~?
+
+\Section{Analyse}
+
+	Un nombre est pair si il est multiple de 2. 
+	C'est-à-dire si le reste de sa division par 2 vaut 0.
+	\begin{LDA}
+		\Stmt estPair est vrai si nombre MOD 2 = 0
+	\end{LDA}
+
+	\paragraph{Données}
+	\begin{itemize}
+	\item le nombre entier dont on veut savoir si il est pair.
+	\end{itemize}
+
+	\paragraph{Résultat.}
+	Un booléen à \textit{vrai} si le \textit{nombre} est pair et \textit{faux} sinon.
+
+	\bigskip
+	\begin{center}	
+	\SchemaModulei{nombre (entier)}{isPair}{booléen}
+	\end{center}
+
+\Section{Exemples}
+
+	\begin{itemize}
+	\item \lda{isPair(2016)} donne $vrai$
+	\item \lda{isPair(2015)} donne $faux$
+	\end{itemize}
+	
+\Section{Solution}
+
+	\begin{LDA}
+%	\LComment Retourne vrai si le nombre reçu en paramètre est pair et faux sinon.
+%	\LComment Données : le nombre dont on veut savoir si il est pair
+%	\LComment Résultat : vrai si le nombre est pair et faux sinon.
+	\Algo{isPair}{\Par{nombre}{entier}}{booléen}
+		\Return nombre MOD 2 = 0
+	\EndAlgo
+	\end{LDA}
+
+\Section{Alternatives}
+
+	\begin{minipage}{7.5cm}
+		\begin{LDA}
+		\Algo{isPair}{\Par{nombre}{entier}}{booléen}
+			\If{nombre MOD 2 = 0}
+				\Return vrai
+			\Else
+				\Return faux
+			\EndIf
+		\EndAlgo
+		\end{LDA}
+	\end{minipage}
+	\quad
+	\begin{minipage}{6cm}
+		Certains étudiants se sentent plus à l'aise avec
+		la solution ci-contre en début d'année.			
+		C'est probablement parce qu'elle colle plus à la façon de l'exprimer
+		en français.
+		On les encourage toutefois à rapidement 
+		passer à la version plus compacte
+		et, une fois habitué, plus lisible.
+	\end{minipage}
+
+	\hfil\rule{0.5\textwidth}{.4pt}\hfil
+
+	\begin{minipage}{7.5cm}
+		\begin{LDA}
+		\Algo{isPair}{\Par{nombre}{entier}}{booléen}
+			\If{nombre MOD 2 = 0}
+				\Return vrai
+			\EndIf
+			\Return faux
+		\EndAlgo
+		\end{LDA}
+	\end{minipage}
+	\quad
+	\begin{minipage}{6cm}
+		On rencontre également ce genre de solution
+		qui, pour certains, 
+		parait mieux que la précédente 
+		parce qu'elle ne contient pas de "sinon"
+		et est donc plus courte.
+		Il n'en n'est rien.
+		Rappelons que la longueur de l'algorithme
+		n'est pas, en soi, un critère de qualité. 
+	\end{minipage}
+	
+\Section{Quand l'utiliser ?}
+
+	À chaque fois qu'un résultat booléen dépend d'un calcul simple.
+	Si le calcul est plus compliqué, on peut le décomposer comme
+	indiqué dans la fiche \vref{fiche:calcul-complexe}.
+	
+	On peut également s'inspirer de cette solution
+	quand il faut donner sa valeur à une variable booléenne.
+		
+\end{Fiche}
