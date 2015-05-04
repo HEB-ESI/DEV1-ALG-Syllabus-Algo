@@ -346,12 +346,19 @@
 				\flowalgodd{nombre1 (réel)}{nombre2 (réel)}{somme}{réel}
 			\end{center}			 
 			Et voici quelques exemples numériques :
-			\begin{itemize}
-			\item \lda{somme(3, 2)} donne $5$.
-			\item \lda{somme(-3, 2)} donne $-1$.
-			\item \lda{somme(3, 2.5)} donne $5.5$.
-			\item \lda{somme(-2.5, 2.5)} donne $0$.
-			\end{itemize}
+			
+			\begin{minipage}{6cm}
+				\begin{itemize}
+				\item \lda{somme(3, 2)} donne $5$.
+				\item \lda{somme(-3, 2)} donne $-1$.
+				\end{itemize}
+			\end{minipage}
+			\begin{minipage}{6cm}
+				\begin{itemize}
+				\item \lda{somme(3, 2.5)} donne $5.5$.
+				\item \lda{somme(-2.5, 2.5)} donne $0$.
+				\end{itemize}
+			\end{minipage}
 			
 		\end{Exercice}
 	
@@ -398,6 +405,14 @@
 			Étant donné la vitesse moyenne en \textbf{m/s}
 			d’un véhicule et la distance parcourue en \textbf{km} par ce véhicule,
 			calculer la durée en secondes du trajet de ce véhicule.
+		\end{Exercice}
+	
+		\begin{Exercice}{Allure et vitesse}
+			L'allure d'un coureur est le temps qu'il met pour parcourir 1 km
+			(par exemple, $4'37''$).
+			On voudrait calculer sa vitesse (en km/h) à partir de son allure.
+			Par exemple, la vitesse d'un coureur ayant une allure de
+			$4'37''$ est de $14$ km/h. 
 		\end{Exercice}
 	
 		\begin{Exercice}{Cote moyenne}
