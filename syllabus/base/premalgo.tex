@@ -562,9 +562,9 @@
 			assigner des valeurs booléennes 
 			en fonction de comparaisons ;
 		\item
-			utiliser la division entière et le reste ;
+			manipuler les opérateurs logiques ;
 		\item
-			manipuler les opérateurs logiques.
+			utiliser la division entière et le reste.
 		\end{itemize}
 		
 		Examinons ces situations une à une
@@ -583,9 +583,9 @@
 			Ce qui l'est peut-être moins c'est que $1<3$ est aussi
 			un calcul dont le résultat est un \emph{booléen},
 			vrai en l’occurrence. 
-			Ce résultat peut être assigné à une variable booléenne.
-			
-			\subsubsection{Exemples}
+			Ce résultat peut être assigné à une variable booléenne.			
+
+			\paragraph{Exemples}
 			Voici quelques assignations correctes 
 			(les variables à gauche du \Gets sont des variables booléennes) :
 			\begin{itemize}
@@ -593,20 +593,7 @@
 				\item \lda{adulte \Gets âge$\ge$21 \RComment adulte est vrai si l'âge est 21 ou plus}
 				\item \lda{réussi \Gets cote$\ge$10 \RComment réussi est mis à vrai si la cote est supérieure ou égale à 10}
 			\end{itemize}
-	
-			\begin{Exercice}{Simplifier des expressions booléennes}
-				Voici quelques assignations correctes du point de vue de la
-				syntaxe mais contenant des lourdeurs d’écriture.
-				Trouvez des expressions plus simples
-				qui auront un effet équivalent.
-				\begin{itemize}
-					\item \lda{ok \Gets adulte = vrai}
-					\item \lda{ok \Gets adulte = faux}
-					\item \lda{ok \Gets etudiant = vrai ET jeune = faux}
-					\item \lda{ok \Gets NON (adulte = vrai) ET NON (adulte = faux)}
-				\end{itemize}		
-			\end{Exercice}
-			
+		
 			\begin{Exercice}{Écrire des expressions booléennes}
 				Pour chacune des phrases suivantes,
 				écrivez l'assignation qui lui correspond.
@@ -622,6 +609,122 @@
 				\item 
 					Un étudiant a une \emph{grande distinction} si sa cote est
 					de 18/20 ou plus.
+				\end{itemize}
+			\end{Exercice}
+
+		%------------------------------------------------------------------------
+		\subsection{Les opérations logiques}
+		%------------------------------------------------------------------------
+		\index{opérateurs logiques}\index{NON}\index{ET}\index{OU}
+	
+			Les opérateurs logiques agissent sur des expressions booléennes 
+			(variables ou expressions à valeurs booléennes) 
+			pour donner un résultat du même type.
+	
+			\begin{center}
+			\begin{tabular}{m{1cm}|m{3cm}|m{8cm}}
+			\raggedleft \lda{NON} & négation & vrai devient faux et inversement\\
+			\raggedleft \lda{ET} & conjonction logique & vrai si les 2 conditions sont vraies\\
+			\raggedleft \lda{OU} & disjonction logique & vrai si au moins une des 2 conditions est vraie\\
+			\end{tabular}
+			\end{center}
+			
+			Ce qu'on peut résumer par les tableaux suivants :
+			
+			\begin{center}
+			\begin{tabular}{|cccc|}
+				\hline
+				a & b & a ET b & a OU b \\
+				\hline
+				vrai & vrai & vrai & vrai \\\hline
+				vrai & faux & faux & vrai \\\hline
+				faux & vrai & faux & vrai \\\hline
+				faux & faux & faux & faux \\\hline				
+			\end{tabular}
+			\qquad
+			\begin{tabular}{|cc|}
+				\hline
+				a & NON a \\
+				\hline
+				vrai & faux \\\hline
+				faux & vrai \\\hline
+			\end{tabular}
+			\end{center}
+			
+\clearpage
+			On peut les utiliser 
+			pour donner une valeur à une variable booléenne.
+			Par exemple :
+			
+			\begin{small}
+			\begin{multicols}{2}
+				\begin{itemize}
+					\item \lda{tarifPlein \Gets 18$\le$âge ET âge$<$60}
+					\item \lda{distinction \Gets 16$\le$cote ET cote<18}
+					\item \lda{nbA3chiffres \Gets 100$\le$nb ET nb$\le$999}
+					\item \lda{tarifRéduit \Gets NON tarifPlein}
+					\item \lda{tarifRéduit \Gets NON (18$\le$âge ET âge$<$60)}
+					\item \lda{tarifRéduit \Gets âge$<$18 OU 60$\le$âge}
+				\end{itemize}
+			\end{multicols}
+			\end{small}
+	
+			Écrire des calculs utilisant ces opérateurs n'est pas facile
+			car le français nous induit souvent en erreur
+			en nous poussant à utiliser un ET pour un OU et inversement
+			ou bien à utiliser des raccourcis d'écriture ambigus%
+			\footnote{%
+				Vous noterez que le nombre de "et" et de "ou"
+				dans cette phrase ne facilite pas sa compréhension ;)%
+			}.
+	
+			\paragraph{Loi de De Morgan.}
+			Lorsqu'on a une expression complexe faisant intervenir
+			des négations, on peut utiliser la \emph{Loi de De Morgan}
+			pour la simplifier.
+			Cette loi stipule que :
+			\[
+				\mathrm{NON}\ (a\ \mathrm{ET}\ b) \Leftrightarrow \mathrm{NON}\ a\ \mathrm{OU}\ \mathrm{NON}\ b
+			\]
+			\[
+				\mathrm{NON}\ (a\ \mathrm{OU}\ b) \Leftrightarrow \mathrm{NON}\ a\ \mathrm{ET}\ \mathrm{NON}\ b
+			\]
+			
+			Par exemple : \lda{tarifRéduit \Gets NON (18$\le$âge ET âge$<$60)}
+			\\peut s'écrire aussi : \lda{tarifRéduit \Gets (NON 18$\le$âge) OU (NON âge$<$60)}
+			\\ce qui se simplifie en : \lda{tarifRéduit \Gets âge$<$18 OU 60$\le$âge}
+
+			\paragraph{Priorités et parenthèses.}
+			Lorsqu'on écrit une expression mélant les opérateurs logiques,
+			on considère que NON est prioritaire sur ET qui l'est sur OU.
+			
+			Ainsi l'expression : \lda{NON a OU b ET c}
+			doit se comprendre : \lda{(NON a) OU (b ET c)}.
+			Vous pouvez toujours ajouter des parenthèses inutiles
+			pour vous assurer d'être bien compris.
+			 
+			\begin{Exercice}{Simplifier des expressions booléennes}
+				Voici quelques assignations correctes du point de vue de la
+				syntaxe mais contenant des lourdeurs d’écriture.
+				Trouvez des expressions plus simples
+				qui auront un effet équivalent.
+				\begin{itemize}
+					\item \lda{ok \Gets adulte = vrai}
+					\item \lda{ok \Gets adulte = faux}
+					\item \lda{ok \Gets etudiant = vrai ET jeune = faux}
+					\item \lda{ok \Gets NON (adulte = vrai) ET NON (adulte = faux)}
+					\item \lda{nbA3chiffres \Gets NON (nb$<$100 OU nb$\ge$1000)}
+				\end{itemize}		
+			\end{Exercice}
+		
+			\begin{Exercice}{Expressions logiques}
+				Pour chacune des phrases suivantes,
+				écrivez l'assignation qui lui correspond.
+				\begin{itemize}
+				\item J’irai au cinéma si le film me plait et que j’ai 20\texteuro{} en poche.
+				\item Je n’irai pas au cinéma si je n’ai pas 20\texteuro{} en poche.
+				\item Je brosserai le premier cours de la journée s’il commence à 8h et aussi si je n’ai pas dormi mes 8h.
+				\item Pour réussir GEN1, il faut au moins 10 dans chacune des AA qui le composent (math, anglais, compta).	
 				\end{itemize}
 			\end{Exercice}
 			
@@ -640,7 +743,12 @@
 			indique combien de fois on peut \emph{mettre} b dans a.
 			
 			\textbf{Exemples} :
-			7 DIV 2 vaut 3, 8 DIV 2 vaut 4, 6 DIV 6 vaut 1 et 6 DIV 7 vaut 0.
+			\begin{multicols}{4}
+				7 DIV 2 vaut 3\\
+				8 DIV 2 vaut 4\\
+				6 DIV 6 vaut 1\\
+				6 DIV 7 vaut 0
+			\end{multicols}
 			
 			\marginicon{definition}
 			Le \textbf{reste} de la division entière de a par b
@@ -657,7 +765,12 @@
 			C'est le reste de la division de 14 par 3.
 			
 			\textbf{Exemples} :
-			7 MOD 2 vaut 1, 8 MOD 2 vaut 0, 6 MOD 6 vaut 0 et 6 MOD 7 vaut 6.
+			\begin{multicols}{4}
+				7 MOD 2 vaut 1\\
+				8 MOD 2 vaut 0\\
+				6 MOD 6 vaut 0\\
+				6 MOD 7 vaut 6
+			\end{multicols}
 		
 			Pour indiquer le lien entre la division et le reste,
 			on écrira : $9/2 = 4\ \textrm{reste}\ 1$.
@@ -666,19 +779,14 @@
 				Voici quelques petits calculs.
 				On vous demande de remplir les trous.
 				
-				\begin{minipage}{6cm}
+				\begin{multicols}{2}
 					\begin{itemize}
 					\item $11/3 = \_\_\ \textrm{reste}\ \_\_$
 					\item $3/11 = \_\_\ \textrm{reste}\ \_\_$
-					\end{itemize}
-				\end{minipage}
-				\quad
-				\begin{minipage}{6cm}
-					\begin{itemize}
 					\item $11/\_\_ = 2\ \textrm{reste}\ 3$
 					\item $\_\_/3 = 3\ \textrm{reste}\ 2$
 					\end{itemize}
-				\end{minipage}
+				\end{multicols}
 			\end{Exercice}
 			
 			\medskip
@@ -736,62 +844,6 @@
 				
 				\textbf{Exemple} : 65536 DIV 100 MOD 10 = 3.
 				
-		%------------------------------------------------------------------------
-		\subsection{Les opérations logiques}
-		%------------------------------------------------------------------------
-		\index{opérateurs logiques}\index{NON}\index{ET}\index{OU}
-	
-			Les opérateurs logiques agissent sur des expressions booléennes 
-			(variables ou expressions à valeurs booléennes) 
-			pour donner un résultat du même type.
-	
-			\begin{center}
-			\begin{tabular}{m{1cm}|m{3cm}|m{8cm}}
-			\raggedleft \lda{NON} & négation & vrai devient faux et inversement\\
-			\raggedleft \lda{ET} & conjonction logique & vrai si les 2 conditions sont vraies\\
-			\raggedleft \lda{OU} & disjonction logique & vrai si au moins une des 2 conditions est vraie\\
-			\end{tabular}
-			\end{center}
-			
-			On peut les utiliser 
-			pour donner une valeur à une variable booléenne.
-			Par exemple :
-			
-			\begin{minipage}{7cm}
-				\begin{itemize}
-					\item \lda{tarifPlein \Gets 18$\le$âge ET âge$<$60}
-					\item \lda{distinction \Gets 16$\le$cote ET cote<18}
-					\item \lda{nbA3chiffres \Gets 100$\le$nb ET nb$\le$999}
-				\end{itemize}
-			\end{minipage}
-			%\quad
-			\begin{minipage}{7cm}
-				\begin{itemize}
-					\item \lda{tarifRéduit \Gets NON tarifPlein}
-					\item \lda{tarifRéduit \Gets NON (18$\le$âge ET âge$<$60)}
-					\item \lda{tarifRéduit \Gets âge$<$18 OU 60$\le$âge}
-				\end{itemize}
-			\end{minipage}
-	
-			Écrire des calculs utilisant ces opérateurs n'est pas facile
-			car le français nous induit souvent en erreur
-			en nous poussant à utiliser un ET pour un OU et inversement
-			ou bien à utiliser des raccourcis d'écriture ambigus%
-			\footnote{%
-				Vous noterez que le nombre de "et" et de "ou"
-				dans cette phrase ne facilite pas sa compréhension ;)%
-			}.
-	
-			\begin{Exercice}{Expressions logiques}
-				Pour chacune des phrases suivantes,
-				écrivez l'assignation qui lui correspond.
-				\begin{itemize}
-				\item J’irai au cinéma si le film me plait et que j’ai 20\texteuro{} en poche.
-				\item Je n’irai pas au cinéma si je n’ai pas 20\texteuro{} en poche.
-				\item Je brosserai le premier cours de la journée s’il commence à 8h et aussi si je n’ai pas dormi mes 8h.
-				\item Pour réussir GEN1, il faut au moins 10 dans chacune des AA qui le composent (math, anglais, compta).	
-				\end{itemize}
-			\end{Exercice}
 	
 		%---------------------
 		\subsection{Exercices}
@@ -807,6 +859,9 @@
 				d'écrire la spécification et de donner des exemples.
 			\item
 				De rédiger une solution.
+			\item
+				De tracer votre solution sur des exemples numériques
+				pour le vérifier.
 			\end{enumerate}
 		
 			\begin{Exercice}{Nombre multiple de 5}
