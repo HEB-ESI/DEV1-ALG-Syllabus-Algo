@@ -26,6 +26,7 @@
 
 \usepackage{environ} % Merci à astalavista pour ce truc :)
 \NewEnviron{LDA}{%
+	\begin{flushleft}
 	\fcolorbox{gray}{gray!10}{%
 		\begin{minipage}{0.97\linewidth}
 			\begin{pseudo}
@@ -33,6 +34,7 @@
 			\end{pseudo}
 		\end{minipage}
 	}
+	\end{flushleft}
 }
 \newcommand{\lda}{\textsf}
 
@@ -117,12 +119,12 @@
 % \Write val
 % \Error motif
 %-----------------------------------------------
-%\newcommand{\Open}{\LState\textbf{ouvrir}\ }
-%\newcommand{\Close}{\LState\textbf{fermer}\ }
+\newcommand{\Open}{\LState\textbf{ouvrir}\ }
+\newcommand{\Close}{\LState\textbf{fermer}\ }
 \newcommand{\Read}{\LState\textbf{demander}\ }
-%\newcommand{\Readf}{\LState\textbf{lire}\ }
+\newcommand{\Readf}{\LState\textbf{lire}\ }
 \newcommand{\Write}{\LState\textbf{afficher}\ }
-%\newcommand{\Writef}{\LState\textbf{écrire}\ }
+\newcommand{\Writef}{\LState\textbf{écrire}\ }
 \newcommand{\Error}{\LState\textbf{erreur}\ }
 
 %-----------------------------------------------
