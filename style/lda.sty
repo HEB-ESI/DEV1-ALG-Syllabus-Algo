@@ -13,25 +13,17 @@
 % \lda{...}
 % ==============================================================
 
-\newenvironment{pseudo}{%
-	\begin{minipage}{0.95\linewidth}
-	\begin{sffamily}
-	\begin{algorithmic}[0]
-	\small
-}{%
-	\end{algorithmic}
-	\end{sffamily}
-	\end{minipage}
-}
-
 \usepackage{environ} % Merci à astalavista pour ce truc :)
 \NewEnviron{LDA}{%
 	\begin{flushleft}
 	\fcolorbox{gray}{gray!10}{%
 		\begin{minipage}{0.97\linewidth}
-			\begin{pseudo}
+		\begin{sffamily}
+		\begin{algorithmic}[1]
+		\small
 				\BODY
-			\end{pseudo}
+		\end{algorithmic}
+		\end{sffamily}
 		\end{minipage}
 	}
 	\end{flushleft}
