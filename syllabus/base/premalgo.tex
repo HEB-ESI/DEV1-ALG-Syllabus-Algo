@@ -98,6 +98,19 @@
 		
 			\begin{Exercice}{Somme de 2 nombres}
 				Calculer la somme de deux nombres donnés.
+				\paragraph{Solution.}
+				Rappelons ce que nous avons obtenus 
+				lors de la phase d'analyse du problème.
+				\begin{center}
+					\flowalgodd{nombre1 (réel)}{nombre2 (réel)}{somme}{réel}
+				\end{center}
+				Sommer deux nombres est un problème trivial.
+				L'algorithme s'écrit simplement :			
+				\begin{LDA}
+					\Algo{somme}{\Par{nombre1, nombre2}{réel}}{réel}
+						\Return nombre1 + nombre2
+					\EndAlgo
+				\end{LDA}
 			\end{Exercice}
 		
 			\begin{Exercice}{Moyenne de 2 nombres}
