@@ -1270,33 +1270,21 @@
 			prix rond en euros.
 		\end{Emphase}
 		
-		\subsection{Exercices}
-		%----------------------------------
-		
-			Pour les exercices qui suivent,
-			on vous donne des algorithmes
-			que vous devez tester en les \emph{exécutant} 
+		\begin{Exercice}{Calcul de vitesse}
+			Testez cet algorithme en l'\emph{exécutant} 
 			sur des valeurs concrètes.
-	
-			\begin{Exercice}{Calcul de vitesse}
-				Calculer la vitesse (en km/h) d'un véhicule dont on donne
-				la durée du parcours (en secondes) 
-				et la distance parcourue (en mètres).
-				
-				\begin{LDA}
-				\Algo{vitesseKMH}{\Par{distanceM, duréeS}{réel}}{réel}
-					\Decl{distanceKM, duréeH}{réel}
-					\Let distanceKM \Gets 1000 * distanceM
-					\Let duréeH \Gets 3600 * duréeS
-					\Return $\frac{\textrm{distanceKM}}{\textrm{duréeH}}$
-				\EndAlgo
-				\end{LDA}
-			\end{Exercice}
-			
-			\begin{TODO}
-				En ajouter quelques uns.
-			\end{TODO}
-	
+			\begin{LDA}
+			\LComment{Calculer la vitesse (en km/h) d'un véhicule dont on donne}
+			\LComment{la durée du parcours (en secondes) et la distance parcourue (en mètres).}
+			\Algo{vitesseKMH}{\Par{distanceM, duréeS}{réel}}{réel}
+				\Decl{distanceKM, duréeH}{réel}
+				\Let distanceKM \Gets 1000 * distanceM
+				\Let duréeH \Gets 3600 * duréeS
+				\Return $\frac{\textrm{distanceKM}}{\textrm{duréeH}}$
+			\EndAlgo
+			\end{LDA}
+		\end{Exercice}
+		
 	%=====================================
 	\section{Interagir avec l'utilisateur}
 	%=====================================
