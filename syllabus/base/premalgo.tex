@@ -166,7 +166,6 @@
 		Pour que cela reste lisible,
 		il serait bon de pouvoir \emph{décomposer}
 		le calcul en étapes.
-		
 		Pour ce faire, nous devons introduire deux nouvelles notions :
 		les \emph{variables locales} et \emph{l'assignation}.
 		
@@ -178,22 +177,32 @@
 			Une \textbf{variable locale} (ou simplement variable)
 			est une zone mémoire à laquelle on a donné un nom
 			et qui contiendra des valeurs d'un type donné.
-			Le contenu de la variable \emph{peut} changer
-			pendant le déroulement de l'algorithme.
-			Cette variable n'est connue et utilisable qu'au sein
-			de l'algorithme où elle est déclarée%
+			Elles vont servir à retenir des étapes intermédiaires
+			de calculs.
+			\begin{itemize}
+			\item
+				On parle de \textbf{variable}
+				car son contenu \emph{peut} changer
+				pendant le déroulement de l'algorithme.
+			\item
+				On l'appelle \textbf{locale}
+				car elle n'est connue et utilisable qu'au sein
+				de l'algorithme où elle est déclarée%
+				\footnote{%
+					Certains langages proposent également des variables
+					\emph{globales} qui sont connues dans tout un programme.
+					Nous ne les utiliserons pas dans ce cours ;
+					voilà pourquoi on se contentera de dire "variable".%
+				}.
+			\end{itemize}		
+			Pour être utilisable, 
+			une variable doit être \emph{déclarée}%
 			\footnote{%
-				Certains langages proposent également des variables
-				\emph{globales} qui sont connues dans tout un programme.
-				Nous ne les utiliserons pas dans ce cours ;
-				voilà pourquoi on se contentera de dire "variable".%
-			}.
-			
-			Les variables vont servir à retenir des étapes intermédiaires
-			de calculs. 
-			Pour être utilisables, elles doivent être \emph{déclarées}
-			au début de l'algorithme. 
-	
+				Certains langages permettent 
+				d'utiliser des variables sans les déclarer.
+				Ce ne sera pas le cas de Java.
+			}
+			au début de l'algorithme. 	
 			La déclaration\index{déclaration} d’une variable 
 			est l’instruction qui définit son nom et son type. 
 			On pourrait écrire~:
@@ -236,7 +245,7 @@
 			est un calcul, une combinaison de variables et
 			d’opérateurs. Une expression a une valeur.
 					
-			\subsubsection{Exemples d'assignations correctes}
+			\paragraph{Exemples d'assignations correctes.}
 			%------------------------------------------------
 				
 				\begin{LDA}
@@ -249,9 +258,8 @@
 				%\Let uneChaine \Gets concat(maChaine, "jour")
 				\end{LDA}
 				
-			\subsubsection{Exemples d'assignations incorrectes}
-			%--------------------------------------------------
-				
+			\paragraph{Exemples d'assignations incorrectes}
+			%--------------------------------------------------				
 				\begin{LDA}
 				\Let somme + 1 \Gets 3
 				\RComment somme + 1 n’est pas une variable
@@ -259,13 +267,13 @@
 				\RComment 3n n’est ni un nom de variable correct ni une expression correcte
 				\end{LDA}
 				
-			\subsubsection{Remarques}
+			\paragraph{Remarques}
 			%------------------------
 			
 				\begin{itemize}
 				\item 
 					\textbf{Une assignation n'est pas une égalité, une définition}.
-					Ainsi, l'assignation \lda{cpt \Gets cpt + 1}
+					\\Ainsi, l'assignation \lda{cpt \Gets cpt + 1}
 					ne veut pas dire que $\textrm{cpt} = \textrm{cpt} + 1$,
 					ce qui est mathématiquement faux 
 					mais que la \emph{nouvelle} valeur de \lda{cpt}
@@ -286,7 +294,7 @@
 					booléenne.
 				\end{itemize}
 				
-			\subsubsection{Exemples}
+			\paragraph{Exemples.}
 			%-----------------------
 			
 				Voici des extraits d'algorithmes.
