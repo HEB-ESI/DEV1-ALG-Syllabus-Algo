@@ -455,6 +455,64 @@
 				Étant donné la vitesse moyenne en \textbf{m/s}
 				d’un véhicule et la distance parcourue en \textbf{km} par ce véhicule,
 				calculer la durée en secondes du trajet de ce véhicule.
+				
+				\paragraph{Solution.}
+				L'analyse du problème aboutit à :
+				\begin{center}
+					\flowalgodd{vitesseMS (réel)}{distanceKM (réel)}{duréeTrajet}{réel}
+				\end{center}
+				La formule qui lie les trois éléments est :
+				\[
+					\mathrm{vitesse} = \frac{\mathrm{distance}}{\mathrm{temps}}
+					\qquad \mathrm{\ qu'on\ peut\ aussi\ exprimer}\qquad
+					\mathrm{temps} = \frac{\mathrm{distance}}{\mathrm{vitesse}}					
+				\]
+				pour autant que les unités soient compatibles.
+				Dans notre cas, il faut d'abord convertir
+				la distance en mètres, selon la formule :
+				\[
+					\mathrm{vitesseM} = 1000 * \mathrm{vitesseKM}					
+				\]
+				Quelques exemple numériques :
+				\begin{itemize}
+				\item \lda{duréeeTrajet(1, 1) donne $1000$}
+				\item \lda{duréeeTrajet(0.5, 0.2) donne $400$}
+				\end{itemize}
+				L'algorithme s'écrit :
+				\begin{LDAnum}
+					\Algo{duréeTrajet}{\Par{vitesseMS, distanceKM}{réel}}{réel}
+						\Decl{distanceM}{réel}
+						\Let distanceM \Gets 1000 * distanceKM
+						\Return distanceM / vitesseMS
+					\EndAlgo
+				\end{LDAnum}
+				
+				Vérifions l'algorithme pour \lda{duréeeTrajet(1, 1)}
+				\begin{center}
+				\begin{tabular}{*{5}{>{\centering\arraybackslash}m{20mm}}}
+					instruction & vitesseMS & distanceKM & distanceM & résultat\\\hline			
+				\end{tabular}
+				\begin{tabular}{|*{5}{>{\centering\arraybackslash}m{20mm}}|}
+					1 & 1 & 1 & {} & {}\\\hline
+					2 & 1 & 1 & ? & {}\\\hline
+					3 & 1 & 1 & 1000 & {}\\\hline
+					4 & 1 & 1 & 1000 & 1000\\\hline
+				\end{tabular}
+				\end{center}
+
+				et pour \lda{duréeeTrajet(0.5, 0.2)}
+				\begin{center}
+				\begin{tabular}{*{5}{>{\centering\arraybackslash}m{20mm}}}
+					instruction & vitesseMS & distanceKM & distanceM & résultat\\\hline			
+				\end{tabular}
+				\begin{tabular}{|*{5}{>{\centering\arraybackslash}m{20mm}}|}
+					1 & 0.5 & 0.2 & {} & {}\\\hline
+					2 & 0.5 & 0.2 & ? & {}\\\hline
+					3 & 0.5 & 0.2 & 200 & {}\\\hline
+					4 & 0.5 & 0.2 & 200 & 400\\\hline
+				\end{tabular}
+				\end{center}
+								
 			\end{Exercice}
 
 			\begin{Exercice}{Allure et vitesse}
