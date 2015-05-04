@@ -989,8 +989,7 @@
 			Comparer la lisibilité de deux algorithmes
 			n'est pas une tâche évidente car c'est une notion subjective.
 			Il faut se demander quelle version va être le plus facilement
-			comprise par la majorité des lecteurs.
-			
+			comprise par la majorité des lecteurs.		
 			La section \vref{lisibilite}
 			explique ce qui peut être fait pour rendre ses algorithmes
 			plus lisibles.
@@ -1048,7 +1047,15 @@
 			Le point le plus important est bien sûr d'écrire
 			un algorithme correct mais ne vous arrêtez pas là !
 			Demandez-vous s'il n'est pas possible de le re-travailler
-			pour améliorer sa lisibilité.
+			pour améliorer sa lisibilité%
+			\footnote{%
+				On appelle \emph{refactorisation}
+				l'opération qui consiste à modifier
+				un algorithme ou un code
+				sans changer ce qu'il fait
+				dans le but,
+				notamment, de le rendre plus lisible.
+			}.
 		
 	%======================
 	\section{Améliorer la lisibilité d'un algorithme}\label{lisibilite}\index{lisibilite}
@@ -1191,8 +1198,7 @@
 			\end{LDA}
 	
 			Il est inutile de spécifier leur type, celui-ci
-			étant défini implicitement par la valeur de la constante.
-	
+			étant défini implicitement par la valeur de la constante.	
 			L'utilisation de constantes dans vos algorithmes présente
 			les avantages suivants :
 			\begin{itemize}
@@ -1391,8 +1397,7 @@
 				\Read{longueur, largeur}
 				\Write{surfaceRectangle(longueur, largeur)}
 			\end{LDA}
-	
-	
+		
 		%-----------------------------------------
 		\subsection{Algorithme sans paramètre}
 		%-----------------------------------------
@@ -1412,4 +1417,16 @@
 				\EndAlgo
 			\end{LDA}
 		
-			Cet algorithme n'a ni paramètres ni de valeur de retour.
+			Cet algorithme n'a ni paramètre ni valeur de retour.
+
+		%-----------------------------------------
+		\subsection{Préférer les paramètres}
+		%-----------------------------------------
+			
+			Un algorithme avec paramètres 
+			est toujours plus intéressant
+			qu'un algorithme qui demande les données
+			et affiche les résultats
+			car il peut être utilisé (appelé) dans un autre algorithme
+			pour résoudre une partie du problème.
+			
