@@ -27,20 +27,23 @@
 			Rappelons l'énoncé et l'analyse qui en a été faite.
 			
 			\begin{Emphase}
-				\paragraph{Exemple.}
+				\paragraph{Problème.}
 				Calculer la surface d'un rectangle 
 				à partir de sa longueur et sa largeur.
 			
-				\textbf{Rappel}. Après analyse, 
-				nous sommes arrivés à la spécification suivante :
+				\paragraph{Analyse.} 
+				Nous sommes arrivés à la spécification suivante :
 				\begin{center}
 				\flowalgodd{longueur (réel)}{largeur (réel)}{surfaceRectangle}{réel}
-				\end{center}	
-				et nous pouvons donner quelques exemples numériques :
-				\begin{itemize}
-				\item \lda{surfaceRectangle(3,2)} donne $6$ ;
-				\item \lda{surfaceRectangle(3.5,1)} donne $3.5$.		
-				\end{itemize}
+				\end{center}
+				
+				\textbf{Exemples.} 
+				\begin{multicols}{2}
+					\begin{itemize}
+					\item \lda{surfaceRectangle(3,2)} donne $6$ ;
+					\item \lda{surfaceRectangle(3.5,1)} donne $3.5$.		
+					\end{itemize}
+				\end{multicols}
 			\end{Emphase}
 			
 			\paragraph{Comment résoudre ce problème ?} 
@@ -75,7 +78,7 @@
 			permet de délimiter l'algorithme.
 			La première ligne est appelée 
 			\textbf{l'entête}\index{entête} de l'algorithme.
-			On y retrouve 
+			On y retrouve :
 			\begin{itemize}
 				\item 
 					le nom de l'algorithme,
@@ -122,11 +125,11 @@
 			\item
 				vérifier qu'il fonctionne également
 				dans certains cas particuliers
-				car déterminer ces cas est difficile quand on débute ;
+				auxquels il est difficile de penser quand on débute ;
 			\item
 				donner son avis sur la qualité de votre solution
 				c-à-d essentiellement sur sa lisibilité.
-				Nous y revi
+				Nous y reviendrons.
 			\end{itemize}
 		
 			Vous éprouvez souvent des difficultés à tester un algorithme
@@ -425,7 +428,8 @@
 				\hline
 			\end{tabular}
 			\end{minipage}
-	
+
+			\bigskip
 			\begin{minipage}{4cm}
 			\begin{LDA}[1]
 				\Decl{a, b, c}{entiers}
@@ -450,8 +454,11 @@
 			
 			\lda{c} ne peut pas être calculé car b n’a pas été initialisé;
 			quant à \lda{d}, il n’est même pas déclaré~!
-	
-\clearpage
+
+		%----------------------------------------------
+		\subsection{Exercices de traçage}
+		%-----------------------------------------
+
 			\begin{Exercice}{Tracer des bouts de code}
 				Suivez l'évolution des variables pour les bouts
 				d'algorithmes donnés.
@@ -483,7 +490,8 @@
 					\hline
 					\end{tabular}
 				\end{minipage}
-
+				
+				\bigskip
 				\begin{minipage}{4cm}
 				\begin{LDA}[1]
 					\Decl{a, b, c}{entiers}
@@ -508,14 +516,54 @@
 					6 & {} & {} & {} \\
 					\hline
 					\end{tabular}
-				\end{minipage}
-	
+				\end{minipage}	
 			\end{Exercice}
-	
-		%----------------------------------------------
-		\subsection{Exercices}
-		%-----------------------------------------
 		
+			\begin{Exercice}{Calcul de vitesse}
+				Soit le problème suivant :
+				\og
+					Calculer la vitesse (en km/h) d'un véhicule 
+					dont on donne la durée du parcours (en secondes) 
+					et la distance parcourue (en mètres).
+				\fg.
+				
+				Voici une solution : 
+				\begin{LDA}[1]
+				\Algo{vitesseKMH}{\Par{distanceM, duréeS}{réel}}{réel}
+					\Decl{distanceKM, duréeH}{réel}
+					\Let distanceKM \Gets 1000 * distanceM
+					\Let duréeH \Gets 3600 * duréeS
+					\Return $\frac{\textrm{distanceKM}}{\textrm{duréeH}}$
+				\EndAlgo
+				\end{LDA}
+
+				L'algorithme, s'il est correct, devrait donner
+				une vitesse de 1 km/h pour une distance de 1000 mètres
+				et une durée de 3600 secondes.
+				Testez cet algorithme avec cet exemple.
+
+				\begin{center}
+				\begin{tabular}{|>{\centering\arraybackslash}m{1cm}|*{5}{>{\centering\arraybackslash}m{2cm}}|}
+					\hline
+						\verb_#_  &  &  & & &  \\			
+					\hline
+						1 & & & & & \\
+						2 & & & & & \\
+						3 & & & & & \\
+						4 & & & & & \\
+						5 & & & & & \\
+					\hline
+				\end{tabular}
+				\end{center}
+				
+				Si vous trouvez qu'il n'est pas correct,
+				voyez ce qu'il faudrait changer pour le corriger.
+			\end{Exercice}
+		
+		%---------------------------------------------
+		\subsection{Exercices complets}
+		%---------------------------------------------
+					
 			Savoir, face à un cas concret, s'il est préférable 
 			de décomposer le calcul ou pas, n'est pas toujours évident.	
 			La section \vref{lisibilite}
@@ -527,39 +575,12 @@
 			Ils ont déjà été analysés dans un précédent chapitre.
 			On vous demande à présent d'en rédiger une solution
 			et de la tracer pour vérifier que le résultat est correct.
-	
 			Vous pouvez vous baser sur la fiche \vref{fiche:calcul-complexe}
 			qui présente un exemple complet.
 
-			\begin{Exercice}{Calcul de vitesse}
-				Testez cet algorithme en l'\emph{exécutant} 
-				sur des valeurs concrètes.
-				\begin{LDA}[1]
-				\LComment{Calculer la vitesse (en km/h) d'un véhicule dont on donne}
-				\LComment{la durée du parcours (en secondes) et la distance parcourue (en mètres).}
-				\Algo{vitesseKMH}{\Par{distanceM, duréeS}{réel}}{réel}
-					\Decl{distanceKM, duréeH}{réel}
-					\Let distanceKM \Gets 1000 * distanceM
-					\Let duréeH \Gets 3600 * duréeS
-					\Return $\frac{\textrm{distanceKM}}{\textrm{duréeH}}$
-				\EndAlgo
-				\end{LDA}
-				\begin{center}
-				\begin{tabular}{|>{\centering\arraybackslash}m{1cm}|*{5}{>{\centering\arraybackslash}m{2cm}}|}
-					\hline
-						\verb_#_  &  &  & & &  \\			
-					\hline
-						3 & & & & & \\
-						4 & & & & & \\
-						5 & & & & & \\
-						6 & & & & & \\
-						7 & & & & & \\
-					\hline
-				\end{tabular}
-				\end{center}
-			\end{Exercice}
 				
 			\begin{Exercice}{Durée de trajet}
+				\label{algo:durée}
 				Étant donné la vitesse moyenne en \textbf{m/s}
 				d’un véhicule et la distance parcourue en \textbf{km} par ce véhicule,
 				calculer la durée en secondes du trajet de ce véhicule.
@@ -680,13 +701,14 @@
 			vrai en l’occurrence. 
 			Ce résultat peut être assigné à une variable booléenne.			
 
-			\paragraph{Exemples}
+			\paragraph{Exemples.}
 			Voici quelques assignations correctes 
 			(les variables à gauche du \Gets sont des variables booléennes) :
 			\begin{itemize}
 				\item \lda{positif \Gets nb>0 \RComment positif est mis à vrai si le nb est positif} 
 				\item \lda{adulte \Gets âge$\ge$21 \RComment adulte est vrai si l'âge est 21 ou plus}
 				\item \lda{réussi \Gets cote$\ge$10 \RComment réussi est mis à vrai si la cote est supérieure ou égale à 10}
+				\item \lda{parfait \Gets nbFautes=0 \RComment c'est parfait si le nombre de fautes est 0}
 			\end{itemize}
 		
 			\begin{Exercice}{Écrire des expressions booléennes}
@@ -771,7 +793,9 @@
 			\footnote{%
 				Vous noterez que le nombre de "et" et de "ou"
 				dans cette phrase ne facilite pas sa compréhension ;)%
-			}.
+			}. 
+			\\Par exemple, ne pas écrire : 
+			\lda{tarifRéduit \Gets âge$<$18 OU $\ge$60}
 	
 			\paragraph{Loi de De Morgan.}
 			Lorsqu'on a une expression complexe faisant intervenir
@@ -795,7 +819,7 @@
 			
 			Ainsi l'expression : \lda{NON a OU b ET c}
 			doit se comprendre : \lda{(NON a) OU (b ET c)}.
-			Vous pouvez toujours ajouter des parenthèses inutiles
+			Vous pouvez toujours ajouter des parenthèses non nécessaires
 			pour vous assurer d'être bien compris.
 			 
 			\begin{Exercice}{Simplifier des expressions booléennes}
@@ -982,15 +1006,52 @@
 			\item
 				De rédiger une solution.
 			\item
-				De tracer votre solution sur des exemples numériques
-				pour le vérifier.
+				De vérifier votre solution sur les exemples choisis.
 			\end{enumerate}
 		
 			\begin{Exercice}{Nombre multiple de 5}
-				Calculer si un nombre donné est un multiple de 5.
+				Calculer si un nombre entier positif donné est un multiple de 5.
+				\paragraph{Solution.}
+				Dans ce problème,
+				il y a une donnée, le nombre à tester.
+				La réponse est un booléen
+				qui est à vrai si le nombre donné est un multiple de 5.
+				\begin{center}
+				\flowalgod{nombre (entier)}{multiple5}{booléen}
+				\end{center}
+				\textbf{Exemples.}
+				\begin{multicols}{4}
+					\begin{itemize}
+					\item \lda{multiple5(4)} donne faux
+					\item \lda{multiple5(15)} donne vrai
+					\item \lda{multiple5(0)} donne vrai
+					\item \lda{multiple5(-10)} donne vrai
+					\end{itemize}
+				\end{multicols}
+				La technique pour vérifier si un nombre est
+				un multiple de 5 est de vérifier que le reste
+				de la division par 5 donne 0.
+				Ce qui donne :
+				\begin{LDA}[1]
+					\Algo{multiple5}{\Par{nombre}{entier}}{booléen}
+						\Return nombre MOD 5 = 0
+					\EndAlgo
+				\end{LDA}
+				Vérifions sur nos exemples :
+				\begin{center}
+				\begin{tabular}{|c|c|c|c|c|}
+				\hline
+				test \no & nombre & réponse correcte & valeur retournée & Correct ? \\\hline
+				\hline 
+				1 & 4   & faux & faux & $\checkmark$ \\\hline
+				2 & 15  & vrai & vrai & $\checkmark$ \\\hline
+				3 & 0   & vrai & vrai & $\checkmark$ \\\hline
+				4 & -10 & vrai & vrai & $\checkmark$ \\\hline
+				\end{tabular}
+				\end{center}
 			\end{Exercice}
 		
-			\begin{Exercice}{Nombre se terminant par un 0}
+			\begin{Exercice}{Nombre entier positif se terminant par un 0}
 				Calculer si un nombre donné se termine par un 0.
 			\end{Exercice}
 	
@@ -1064,8 +1125,8 @@
 		\subsection{L'efficacité}\index{efficacité}
 		%------------------------------------------
 			
-			Désigne le fait que l'algorithme (le programme)
-			résout%
+			L'\textbf{efficacité}
+			désigne le fait que l'algorithme (le programme) résout%
 			\footnote{%
 				À ne pas confondre avec \emph{l'efficience}
 				qui indique qu'il est économe en ressources.
@@ -1077,7 +1138,8 @@
 		\subsection{La lisibilité}\index{lisibilité}
 		%-------------------------------------------
 		
-			Indique si une personne qui lit l'algorithme
+			La \textbf{lisibilité}
+			indique si une personne qui lit l'algorithme
 			(ou le programme)
 			peut facilement percevoir comment il fonctionne.
 			C'est crucial car un algorithme (un programme) 
@@ -1120,7 +1182,8 @@
 		\subsection{La rapidité}\index{rapidité}
 	    %---------------------------------------
 	    
-			Indique si l'algorithme (le programme)
+			La \textbf{rapidité}
+			indique si l'algorithme (le programme)
 			permet d'arriver plus ou moins vite au résultat.
 			
 			C'est un critère qui est souvent sur-évalué, 
@@ -1230,7 +1293,7 @@
 			des constantes. 
 			Deux concepts que nous allons développer maintenant.
 		\end{itemize}
-			
+					
 		%------------------------------------------------
 		\subsection{Les commentaires}\index{commentaires}
 		%------------------------------------------------
@@ -1296,6 +1359,21 @@
 				commentaire à l'intérieur de l'algorithme
 				devienne superflu.
 			\end{quote}
+
+			\paragraph{Exemple.}
+			Voici comment on pourrait commenter un de nos algorithmes.
+			\begin{LDA}
+				\LComment{Calcule la surface d'un rectangle dont on donne la largeur et la longueur.}
+				\LComment{On considère que les données ne sont pas négatives.}
+				\Algo{surfaceRectangle}{\Par{longueur, largeur}{réel}}{réel}
+					\Return longueur * largeur
+				\EndAlgo
+			\end{LDA}
+			
+			\begin{Exercice}{Commenter la durée du trajet}
+				Commentez l'algorithme qui calcule la durée d'un trajet
+				(exercice \vref{algo:durée}).
+			\end{Exercice}
 			
 		%--------------------------------------------
 		\subsection{Constantes}\index{constantes}
@@ -1333,7 +1411,12 @@
 				(modification légale du seuil de réussite par exemple).
 			\end{itemize}
 			
-		
+			\begin{Exercice}{Utiliser une constante}
+				Trouvez un algorithme que vous avez écrit
+				où l'utilisation de constante
+				pourrait améliorer la lisibilité de votre solution.
+			\end{Exercice}
+			
 	%=====================================
 	\section{Interagir avec l'utilisateur}
 	%=====================================
@@ -1346,7 +1429,17 @@
 		Et que faire du résultat ?
 		
 		Tout d'abord, un algorithme peut utiliser 
-		(on dit \textbf{appeler}\index{appel}) un autre algorithme.
+		(on dit \textbf{appeler}\index{appel}) un autre algorithme%
+		\footnote{%
+			Cet autre algorithme doit exister \emph{quelque part} :
+			sur la même page, une autre page, un autre document,
+			peu importe.
+			Quand on codera cet algorithme,
+			les contraintes seront plus fortes
+			car il faudra que l'ordinateur
+			trouve cet autre bout de code
+			pour pouvoir l'exécuter.
+		}.
 		Pour ce faire, il doit spécifier les valeurs des paramètres ;
 		il peut alors utiliser le résultat.
 		L'appel s'écrit ainsi :
@@ -1391,7 +1484,7 @@
 			via une application graphique,
 			sur un cadran de calculatrice ou de montre,
 			sur une feuille de papier imprimée,
-			via un hologramme\dots)
+			via un synthétiseur vocal\dots)
 			ne nous intéresse pas ici%
 			\footnote{%
 				Ce sera bien sûr une question importante
@@ -1425,7 +1518,8 @@
 			via un champ de saisie ou une liste déroulante 
 			dans une application graphique,
 			via une interface tactile,
-			via des boutons physiques\dots)
+			via des boutons physiques,
+			via la reconnaissance vocale\dots)
 			ne nous intéresse pas ici.
 	
 			On peut combiner les demandes et écrire :
@@ -1439,7 +1533,7 @@
 		\subsection{Algorithme sans paramètre}
 		%-----------------------------------------
 			
-			La paramètres d'un algorithme sont destinés
+			Les paramètres d'un algorithme sont destinés
 			aux autres algorithmes qui vont l'utiliser.
 			Ils ne sont pas présents lorsque les données
 			sont précisées par l'utilisateur.
@@ -1454,7 +1548,8 @@
 				\EndAlgo
 			\end{LDA}
 		
-			Cet algorithme n'a ni paramètre ni valeur de retour.
+			Cet algorithme n'a ni paramètre ni valeur de retour
+			mais il fait appel (utilise) un autre algorithme.
 
 		%-----------------------------------------
 		\subsection{Préférer les paramètres}
@@ -1463,7 +1558,7 @@
 			Un algorithme avec paramètres 
 			est toujours plus intéressant
 			qu'un algorithme qui demande les données
-			et affiche les résultats
+			et affiche le résultat
 			car il peut être utilisé (appelé) dans un autre algorithme
 			pour résoudre une partie du problème.
 			
