@@ -334,6 +334,7 @@
 %==================================
 	
 	Une valeur de retour est toujours possible,
+	mais jamais obligatoire,
 	quels que soient les sortes des paramètres.
 	Ainsi, on peut imaginer un algorithme
 	qui possède un paramètre en sortie \textbf{et}
@@ -345,6 +346,59 @@
 	il ne peut pas apparaître dans une expression
 	ou être assigné à une variable.
 
+%===================
+\section{Résumons}
+%===================
+
+	Reprenons tout ce qu'on vient de voir
+	avec un exemple d'algorithme qui possède tous les types de paramètres.
+
+	\begin{LDA}
+		\Algo{test}{}{}
+			\Write f(pE1, pE2, pE3)
+		\EndAlgo
+		\Empty
+		\Algo{f}{\Par{pF1\In}{entier}, \Par{pF2\Out}{entier}, \Par{pF3\In\Out}{entier}}{entier}
+			\Let{\color{gray} pF1 \Gets pE1} 
+			\Let{\color{gray} pF3 \Gets pE3} 
+			\Empty
+			\LComment Le code proprement dit de l'algorithme
+			\Empty
+			\Let{\color{gray} pE2 \Gets pF2} 
+			\Let{\color{gray} pE3 \Gets pF3} 
+			\Return réponse
+		\EndAlgo
+	\end{LDA}
+
+	Pour mieux se comprendre,
+	il est utile d'introduire un peu de vocabulaire.
+	Les paramètres déclarés dans l'entête d'un algorithme
+	sont appelés \textbf{paramètres formels}.
+	Les paramètres donnés à l'appel de l'algorihtme
+	sont appelés \textbf{paramètres effectifs}. 
+	
+	Les instructions en gris dans l'exemple ne sont pas écrites
+	mais c'est comme si elles étaient présentes
+	pour initialiser les paramètres formels \In{} et \InOut{}
+	en début d'algorithme
+	et pour donner des valeurs 
+	aux paramètres effectifs \Out{} et \InOut{}
+	en fin d'algorithme.
+	
+	On comprend pourquoi \lda{pE1} peut être une expression quelconque
+	mais que \lda{pE2} et \lda{pE3} doivent être des variables,
+	puisqu'elle vont recevoir une valeur.
+	
+	À la fin de l'algorithme, 
+	c'est comme si la valeur retournée \emph{remplaçait} l'appel.
+	Dans notre exemple, c'est donc cette valeur retournée
+	qui sera affichée.
+
+	\begin{TODO}
+		Si quelqu'un se sent de faire un schéma 
+		plus parlant que ce bla-bla\dots
+	\end{TODO}
+	
 %===================
 \section{Exercices}
 %===================
@@ -363,9 +417,7 @@
 			\Stmt addition(x, y, y)
 			\Write y
 		\EndAlgo
-		\end{LDA}
-	
-		\begin{LDA}
+		\Empty
 		\Algo{addition}{a\In, b\In, c\Out~:~entiers}{}
 			\Decl{somme}{entier}
 			\Let somme \Gets a + b
@@ -396,9 +448,7 @@
 			\Stmt calcul(b, c, a)
 			\Write a, b, c
 		\EndAlgo
-		\end{LDA}
-	
-		\begin{LDA}
+		\Empty
 		\Algo{calcul}{a\In, b\In, c\Out~:~entiers}{}
 			\Let a \Gets 2 * a
 			\Let b \Gets 3 * b
@@ -416,17 +466,13 @@
 			\Stmt calcul2(a, b, c)
 			\Write a, b, c
 		\EndAlgo
-		\end{LDA}
-	
-		\begin{LDA}
+		\Empty
 		\Algo{calcul2}{a\In, b\In, c\Out~:~entiers}{}
 			\Let a \Gets f(a)
 			\Let c \Gets 3 * b
 			\Let c \Gets a + c
 		\EndAlgo
-		\end{LDA}
-	
-		\begin{LDA}
+		\Empty
 		\Algo{f}{a\In~:~entier}{entier}
 			\Decl{b}{entier}
 			\Let b \Gets 2 * a + 1
