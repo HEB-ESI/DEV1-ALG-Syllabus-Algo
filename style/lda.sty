@@ -14,12 +14,12 @@
 % ==============================================================
 
 \usepackage{environ} % Merci à astalavista pour ce truc :)
-\NewEnviron{LDA}{%
+\NewEnviron{LDA}[1][0]{%
 	\begin{flushleft}
 	\fcolorbox{gray}{gray!10}{%
 		\begin{minipage}{0.97\linewidth}
 		\begin{sffamily}
-		\begin{algorithmic}[0]
+		\begin{algorithmic}[#1]
 		\small
 				\BODY
 		\end{algorithmic}
@@ -44,6 +44,9 @@
 }
 \newcommand{\lda}{\textsf}
 
+
+% Pour colorer les numéros de lignes dans les algos
+\algrenewcommand{\alglinenumber}[1]{\color{gray}\footnotesize#1:\ \ }
 
 % ==============================================================================
 % Le code suivant permet d'avoir des lignes verticales pour délimiter les blocs. 
