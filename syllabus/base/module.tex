@@ -1,6 +1,9 @@
+%===========================================
 \chapter{Décomposer le problème}
 \index{décomposer le code}
+%===========================================
 
+%===================
 \section{Motivation}
 %===================
 
@@ -40,6 +43,7 @@
 	que vous pourrez moins percevoir en début d'apprentissage,
 	citons la possibilité de répartir le travail dans une équipe.
 	
+%===================
 \section{Exemple}
 %===================
 
@@ -184,9 +188,11 @@
 	Il s'agit d'une situation fréquente mais pas obligatoire
 	que nous pouvons généraliser.
 	En pratique, on peut rencontrer trois sortes de paramètres.
-	
-	\begin{enumerate}
-	\item
+
+	%==================================
+	\subsection{Le paramètre en entrée}
+	%==================================
+
 		Le paramètre en \textbf{entrée}
 		est ce que nous connaissons déjà.
 		Il correspond à une donnée de l'algorithme.
@@ -198,7 +204,34 @@
 		Lors de l'appel, on fournit la \textbf{valeur}
 		ou, plus généralement une expression
 		dont la valeur sera donnée au paramète.
-	\item
+
+		\textbf{Illustration.} 
+		Voici un cas général de paramètre en entrée.
+		
+		\begin{minipage}{4cm}
+			\begin{LDA}
+				\LComment {Code appelant}
+				\Stmt algo(expr)
+				\Empty
+			\end{LDA}
+		\end{minipage}
+		\quad
+		\begin{minipage}{8cm}
+			\begin{LDA}
+				\LComment {Code appelé}
+				\Entete{monAlgo}{\Par{par\In}{entier}}{}
+				\Stmt \dots
+			\end{LDA}
+		\end{minipage}
+		
+		C'est comme si l'algorithme \lda{monAlgo}
+		commençait pas l'affectation
+		\lda{par \Gets expr}.
+		
+	%==================================
+	\subsection{Le paramètre en sortie}
+	%==================================
+
 		Le paramètre en \textbf{sortie}
 		correspond à un résultat de l'algorithme.
 		Avec la notation que nous utilisons,
@@ -215,26 +248,24 @@
 		Lors de l'appel, on fournit une \textbf{variable}
 		qui recevra la valeur finale du paramètre.
 		
-		\begin{Emphase}
-			\paragraph{Exemple.}
-			On peut envisager un algorithme
-			qui reçoit une durée exprimée en seconde
-			et fournisse trois paramètres en sortie
-			correspondant à cette même durée exprimée en heures, minutes et secondes.
-			En voici le schéma et la solution :
-			\begin{center}
-			\flowalgorrr{totalSec (entier)}{versHMS}{H (entier)}{M (entier)}{S (entier)}
-			\end{center}
-				
-			\begin{LDA}
-				\Algo{versHMS}{\Par{totalSec\In}{entier}, \Par{H\Out}{entier}, 
-							   \Par{M\Out}{entier}, \Par{S\Out}{entier}}{}
-					\Let H \Gets totalSec DIV (60*60)
-					\Let M \Gets totalSec MOD (60*60) DIV 60				
-					\Let S \Gets totalSec MOD 60
-				\EndAlgo
-			\end{LDA}
-		\end{Emphase}
+		\paragraph{Exemple.}
+		On peut envisager un algorithme
+		qui reçoit une durée exprimée en seconde
+		et fournisse trois paramètres en sortie
+		correspondant à cette même durée exprimée en heures, minutes et secondes.
+		En voici le schéma et la solution :
+		\begin{center}
+		\flowalgorrr{totalSec (entier)}{versHMS}{H (entier)}{M (entier)}{S (entier)}
+		\end{center}
+			
+		\begin{LDA}
+			\Algo{versHMS}{\Par{totalSec\In}{entier}, \Par{H\Out}{entier}, 
+						   \Par{M\Out}{entier}, \Par{S\Out}{entier}}{}
+				\Let H \Gets totalSec DIV (60*60)
+				\Let M \Gets totalSec MOD (60*60) DIV 60				
+				\Let S \Gets totalSec MOD 60
+			\EndAlgo
+		\end{LDA}
 		
 		Il n'y a donc pas de \lda{\algorithmicreturn}
 		puisque les résultats sont en paramètres de sortie et pas comme
@@ -245,7 +276,15 @@
 			\Stmt versHMS(65536, heure, minute, seconde)
 		\end{LDA}
 
-	\item
+		C'est comme si,
+		à la fin de l'algorithme \lda{versHMS},
+		on avait les assignations suivantes :
+		\\\lda{heure \Gets H}, \lda{minute \Gets M} et \lda{seconde \Gets S}.
+				
+	%==================================
+	\subsection{Le paramètre en entrée-sortie}
+	%==================================
+
 		Le paramètre en \textbf{entrée-sortie}
 		correspond à une situation mixte.
 		Il est à la fois une donnée et un résultat de l'algorithme.
@@ -256,23 +295,27 @@
 		Sa valeur est donnée au paramètre au début de l'algorithme.
 		À la fin de l'algorithme, la variable reçoit la valeur du paramètre.
 		
-		\begin{Emphase}
-			\paragraph{Exemple.}
-			On a déjà vu un algorithme qui retourne la valeur absolue d'un nombre.
-			On pourrait imaginer une variante qui \textbf{modifie}
-			le nombre reçu.
-			En voici le schéma :
+		\paragraph{Exemple.}
+		On a déjà vu un algorithme qui retourne la valeur absolue d'un nombre.
+		On pourrait imaginer une variante qui \textbf{modifie}
+		le nombre reçu.
+		En voici le schéma et la solution :
+
+		\begin{minipage}{6cm}		
 			\begin{center}
 			\flowalgov{nb (réel)}{valAboslue}
 			\end{center}
-			et a solution
-		
+		\end{minipage}
+		\quad
+		\begin{minipage}{6cm}		
 			\begin{LDA}
 				\Algo{valAbsolue}{\Par{nb\In\Out}{réel}}{}
-					\Let nb \Gets nb+1
+					\If{nb<0}
+						\Let nb \Gets -nb
+					\EndIf
 				\EndAlgo
 			\end{LDA}
-		\end{Emphase}
+		\end{minipage}
 		
 		Un appel possible pourrait être :
 
@@ -280,9 +323,15 @@
 			\Stmt valAbsolue(température)
 		\end{LDA}
 	
+		C'est comme si, dans \lda{valAbsolue},
+		on avait une première ligne pour donner sa valeur au paramètre
+		(\lda{nb \Gets température})
+		et une dernière ligne pour effectuer l'assignation opposée
+		(\lda{nb \Gets température}).
 		
-			
-	\end{enumerate}
+%==================================
+\section{La valeur de retour}
+%==================================
 	
 	Une valeur de retour est toujours possible,
 	quels que soient les sortes des paramètres.
@@ -300,12 +349,9 @@
 \section{Exercices}
 %===================
 
-	\subsection{Comprendre}
-	%----------------------
-	
-	\begin{Exercice}{Exécuter des algorithmes}
+	\begin{Exercice}{Tracer des algorithmes}
 		Indiquer quels nombres sont successivement affichés 
-		lors de l’exécution des modules ex1, ex2, ex3 et ex4.
+		lors de l’exécution des algorithmes ex1, ex2, ex3 et ex4.
 	
 		\begin{LDA}
 		\Algo{ex1}{}{}
@@ -317,9 +363,9 @@
 			\Stmt addition(x, y, y)
 			\Write y
 		\EndAlgo
+		\end{LDA}
 	
-		\Empty
-	
+		\begin{LDA}
 		\Algo{addition}{a\In, b\In, c\Out~:~entiers}{}
 			\Decl{somme}{entier}
 			\Let somme \Gets a + b
@@ -350,7 +396,9 @@
 			\Stmt calcul(b, c, a)
 			\Write a, b, c
 		\EndAlgo
-		\Empty
+		\end{LDA}
+	
+		\begin{LDA}
 		\Algo{calcul}{a\In, b\In, c\Out~:~entiers}{}
 			\Let a \Gets 2 * a
 			\Let b \Gets 3 * b
@@ -368,27 +416,30 @@
 			\Stmt calcul2(a, b, c)
 			\Write a, b, c
 		\EndAlgo
-		\Empty
+		\end{LDA}
+	
+		\begin{LDA}
 		\Algo{calcul2}{a\In, b\In, c\Out~:~entiers}{}
 			\Let a \Gets f(a)
 			\Let c \Gets 3 * b
 			\Let c \Gets a + c
 		\EndAlgo
-		\Empty
+		\end{LDA}
+	
+		\begin{LDA}
 		\Algo{f}{a\In~:~entier}{entier}
 			\Decl{b}{entier}
 			\Let b \Gets 2 * a + 1
 			\Return b
 		\EndAlgo
-		\end{LDA}
-	
+		\end{LDA}	
 	\end{Exercice}
 	
 	\begin{Exercice}{Appels de module}
 		Parmi les instructions suivantes (où les variables
 		\lda{a}, \lda{b} et \lda{c}
-		sont des entiers), lesquelles font correctement appel au module
-		d’en-tête suivant~?
+		sont des entiers), lesquelles font correctement appel 
+		à l'algorithme d’en-tête suivant~?
 	
 		\begin{LDA}
 			\Entete{PGCD}{a\In,b\In~:~entiers}{entier}
@@ -407,27 +458,9 @@
 		\Stmt [10] PGCD(a, b) \Gets c
 		\end{LDA}
 	\end{Exercice}
-
-	\subsection{Appliquer}
-	%----------------------
-
-	Pour les exercices suivants :
-	\begin{itemize}
-	\item
-		décomposez le problème en sous-problèmes ;
-	\item
-		faites un schéma pour expliquer cette décomposition ;
-	\item
-		écrivez les algorithmes.
-	\end{itemize}
 	
 	\begin{Exercice}{Maximum de 4 nombres}
 		Écrivez un algorithme qui calcule le maximum de 4 nombres.
-	\end{Exercice}
-
-	\begin{Exercice}{Conversion en heures-minutes-secondes}
-		Écrivez complètement l'algorithme \lda{versHMS}
-		présenté lors de la description des paramètres en sortie.
 	\end{Exercice}
 
 	\begin{Exercice}{Écart entre 2 durées}
@@ -438,12 +471,6 @@
 		seconde(s) sachant que la deuxième durée donnée 
 		est plus petite que la première.
 	\end{Exercice}
-
-	\begin{Exercice}{Valeur absolue}
-		Écrivez l'algorithme \lda{valAbsolue}
-		qui \textbf{transforme} le nombre reçu
-		en lui enlevant son éventuel signe négatif.
-	\end{Exercice}
 	
 	\begin{Exercice}{Validité d'une date}
 		Vous avez déjà écrit un algorithme
@@ -453,3 +480,12 @@
 		pour accroitre sa lisibilité
 		et créer des modules utiles et réutilisables.
 	\end{Exercice}
+
+	\begin{Exercice}{Réussir GEN1}
+		Reprenons l'exercice \vref{algo:réussirGEN1}.
+		Cette fois-ci on ne veut rien afficher
+		mais fournir deux résultats :
+		un booléen indiquant si l'étudiant a réussi ou pas
+		et un entier indiquant sa cote (qui n'a de sens que s'il a réussi). 
+	\end{Exercice}
+	
