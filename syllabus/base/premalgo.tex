@@ -157,6 +157,18 @@
 				\end{center}				
 			\end{Emphase}
 			
+			\bigskip
+			\marginicon{attention}
+			\textbf{Attention} : 
+			Dans tous les exercices qui suivront,
+			chaque fois qu'on vous demandera d'écrire un algorithme,
+			on attendra de vous : de spécifier le problème,
+			de fournir des exemples, d'écrire l'algorithme
+			et de le vérifier sur vos exemples.
+			Ce n'est que si tous ces éléments sont présents
+			que votre solution pourra être considérée comme complète.
+
+\clearpage
 		%-------------------------------------------
 		\subsection{Exercices}\label{prem-ex-simple}
 		%-------------------------------------------
@@ -164,11 +176,10 @@
 			Les exercices suivants ont déjà été analysés 
 			dans un précédent chapitre
 			et des exemples numériques ont été choisis.
-			On vous demande cette fois-ci d'écrire une solution
-			et de vérifier qu'elle fournit bien la bonne
-			réponse pour les exemples choisis.
+			Il ne vous reste plus qu'à écrire l'algorithme
+			et à le vérifier pour les exemples choisis.
 
-			Vus pouvez vous baser sur la fiche \vref{fiche:calcul-simple} 
+			Vous pouvez vous baser sur la fiche \vref{fiche:calcul-simple} 
 			qui résume la résolution 
 			du calcul de la surface d'un rectangle,
 			depuis l'analyse de l'énoncé jusqu'à l'algorithme
@@ -455,10 +466,6 @@
 			\lda{c} ne peut pas être calculé car b n’a pas été initialisé;
 			quant à \lda{d}, il n’est même pas déclaré~!
 
-		%----------------------------------------------
-		\subsection{Exercices de traçage}
-		%-----------------------------------------
-
 			\begin{Exercice}{Tracer des bouts de code}
 				Suivez l'évolution des variables pour les bouts
 				d'algorithmes donnés.
@@ -561,7 +568,7 @@
 			\end{Exercice}
 		
 		%---------------------------------------------
-		\subsection{Exercices complets}
+		\subsection{Exercices de décomposition}
 		%---------------------------------------------
 					
 			Savoir, face à un cas concret, s'il est préférable 
@@ -861,13 +868,20 @@
 			Dit autrement, \lda{a DIV b}
 			indique combien de fois on peut \emph{mettre} b dans a.
 			
-			\textbf{Exemples} :
-			\begin{multicols}{4}
-				7 DIV 2 vaut 3\\
-				8 DIV 2 vaut 4\\
-				6 DIV 6 vaut 1\\
-				6 DIV 7 vaut 0
+			\begin{minipage}{2cm}
+			\textbf{Exemples} :	
+			\\
+			\end{minipage}
+			\begin{minipage}{9cm}
+			\begin{multicols}{2}
+			\begin{itemize}
+				\item 7 DIV 2 vaut 3
+				\item 8 DIV 2 vaut 4
+				\item 6 DIV 6 vaut 1
+				\item 6 DIV 7 vaut 0
+			\end{itemize}
 			\end{multicols}
+			\end{minipage}
 			
 			\marginicon{definition}
 			Le \textbf{reste} de la division entière de a par b
@@ -883,13 +897,20 @@
 			mais il restera 2 étudiants ne pouvant former un groupe complet.
 			C'est le reste de la division de 14 par 3.
 			
-			\textbf{Exemples} :
-			\begin{multicols}{4}
-				7 MOD 2 vaut 1\\
-				8 MOD 2 vaut 0\\
-				6 MOD 6 vaut 0\\
-				6 MOD 7 vaut 6
+			\begin{minipage}{2cm}
+			\textbf{Exemples} :	
+			\\
+			\end{minipage}
+			\begin{minipage}{9cm}
+			\begin{multicols}{2}
+			\begin{itemize}
+				\item 7 MOD 2 vaut 1
+				\item 8 MOD 2 vaut 0
+				\item 6 MOD 6 vaut 0
+				\item 6 MOD 7 vaut 6
+			\end{itemize}
 			\end{multicols}
+			\end{minipage}
 		
 			Pour indiquer le lien entre la division et le reste,
 			on écrira : $9/2 = 4\ \textrm{reste}\ 1$.
@@ -916,7 +937,7 @@
 				
 				\begin{LDA}
 				\Algo{versPrixRond}{\Par{prixCentimes}{entier}}{entier}
-					\Return 100-(prixCentimes MOD 100)
+					\Return 100 - (prixCentimes MOD 100)
 				\EndAlgo
 				\end{LDA}
 				
@@ -949,11 +970,11 @@
 				Qu'est-ce qu'un nombre pair ? Un nombre qui est multiple de 2.
 				C'est-à-dire dont le reste de la division par 2 est nul.
 				
-				\begin{equation}
+				\[
 				\textrm{nb pair} 
 					\quad\equiv\quad \textrm{nb divisible par 2} 
 					\quad\equiv\quad \textrm{nb MOD 2 = 0} 
-				\end{equation}
+				\]
 				
 				On peut donc écrire : \lda{pair \Gets nb MOD 2 = 0}.
 	
@@ -992,22 +1013,17 @@
 				\textbf{Exemple} : 65536 DIV 100 MOD 10 = 3.
 									
 		%---------------------
-		\subsection{Exercices}
+		\subsection{Exercices sur les difficultés de calcul}
 		%---------------------
 		\label{prem-ex-cplx}
 		
 			Les exercices qui suivent n'ont pas tous étés déjà analysés
-			et ils demandent des calculs plus complexes.
-			On vous demande :
-			\begin{enumerate}
-			\item
-				Si ça n'a pas encore été fait,
-				d'écrire la spécification et de donner des exemples.
-			\item
-				De rédiger une solution.
-			\item
-				De vérifier votre solution sur les exemples choisis.
-			\end{enumerate}
+			et ils demandent des calculs faisant intervenir
+			des divisions entières, des restes et/ou des expressions booléennes.
+			Comme d'habitude, écrivez la spécification
+			si ça n'a pas encore été fait,
+			donnez des exemples, rédigez un algorithme
+			et vérifiez-le.
 		
 			\begin{Exercice}{Nombre multiple de 5}
 				Calculer si un nombre entier positif donné est un multiple de 5.
@@ -1050,7 +1066,8 @@
 				\end{tabular}
 				\end{center}
 			\end{Exercice}
-		
+
+\clearpage	
 			\begin{Exercice}{Nombre entier positif se terminant par un 0}
 				Calculer si un nombre donné se termine par un 0.
 			\end{Exercice}
@@ -1350,6 +1367,7 @@
 			\Empty \RComment c1 est le nouveau capital, c0 est l’ancien capital, t est le taux
 			\end{LDA}
 			
+			\bigskip
 			Pour résumer :
 			\begin{quote}
 				\bfseries

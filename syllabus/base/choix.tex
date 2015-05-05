@@ -1,78 +1,80 @@
-\chapter{Une question de choix}
-
-Vous avez déjà eu l'occasion d'aborder les alternatives
-lors de votre initiation aux algorithmes sur le site
-\url{code.org}.
-Par exemple, vous avez indiqué au zombie quelque chose comme :
-\og{}S'il existe un chemin à gauche alors tourner à gauche\fg{}.
-
-Les \textbf{alternatives}\index{alternatives} 
-permettent de n'exécuter des instructions
-que si une certaine \emph{condition} est vérifiée.
-Avec le zombie, vous testiez son environnement ;
-dans nos algorithmes, vous allez tester les données.
-
-Les algorithmes vus jusqu'à présent ne proposent
-qu'un seul \og{}chemin\fg{}, une seule \og{}histoire\fg{}.
-À chaque exécution de l'algorithme,
-les mêmes instructions s'exécutent dans le même ordres.
-Les alternatives permettent de créer des histoires différentes,
-d'adapter les instructions aux valeurs concrètes des données.
-Procédons par étapes.
-
-\section{Le si}
 %===========================================
-	\index{si}
+\chapter{Une question de choix}
+%===========================================
+
+	Vous avez déjà eu l'occasion d'aborder les alternatives
+	lors de votre initiation aux algorithmes sur le site
+	\url{code.org}.
+	Par exemple, vous avez indiqué au zombie quelque chose comme :
+	\og{}S'il existe un chemin à gauche alors tourner à gauche\fg{}.
 	
-	Parfois, il existe des situations où
-	des instructions ne doivent pas toujours
-	être exécutées
+	Les \textbf{alternatives}\index{alternatives} 
+	permettent de n'exécuter des instructions
+	que si une certaine \emph{condition} est vérifiée.
+	Avec le zombie, vous testiez son environnement ;
+	dans nos algorithmes, vous allez tester les données.
+	
+	Les algorithmes vus jusqu'à présent ne proposent
+	qu'un seul \og{}chemin\fg{}, une seule \og{}histoire\fg{}.
+	À chaque exécution de l'algorithme,
+	les mêmes instructions s'exécutent dans le même ordres.
+	Les alternatives permettent de créer des histoires différentes,
+	d'adapter les instructions aux valeurs concrètes des données.
+	Procédons par étapes.
+
+%===========================================
+\section{Le si}
+\index{si}
+%===========================================
+		
+	Il existe des situations où
+	des instructions ne doivent pas toujours être exécutées
 	et un test va nous permettre de le savoir.
 	
-	\begin{Emphase}
-		\paragraph{Exemple.}
-		Supposons que la variable \lda{nb}
-		contienne un nombre positif ou négatif,
-		on ne sait pas.
-		Et supposons qu'on veuille le rendre positif.
-		On peut tester son signe.
-		S'il est négatif on peut l'inverser.
-		Par contre, s'il est positif,
-		il n'y a rien à faire.
-		Voici comment on peut l'écrire,
-		graphiquement%
-		\footnote{%
-			Ce graphique, appelé 
-			\emph{organigramme} ou encore \emph{ordinogramme}
-			permet de représenter un algorithme
-			de façon plus visuelle.
-			cf. \url{http://fr.wikipedia.org/wiki/Organigramme_de_programmation}.
-		} et en LDA :
-		
-		\qquad
-		\begin{minipage}{6cm}
-			\begin{tikzpicture}[node distance = 1.5cm, auto]
-				\sffamily				
-				\node[draw, diamond] (Test) {nb<0 ?};
-				\node[draw, below of=Test] (Instr) {nb \Gets -nb};
-				\node[right of=Instr] (Empty) {};		          
-				\node[draw, circle, below of=Instr] (End) {};		          
-				\draw[->] (Test) -- (Instr) node[near start] {Oui};
-				\draw[->] (Instr) -- (End);
-				\draw[->] (Test) to[out=0,in=0] node[near start] {Non}  (End);
- 			\end{tikzpicture}	
-		\end{minipage}
-		\quad
-		\begin{minipage}{6cm}
-			\begin{LDA}
-				\If{nb<0}
-					\Let nb \Gets -nb
-				\EndIf
-			\end{LDA}
-		\end{minipage}
-	\end{Emphase}
+	\paragraph{Exemple.}
+	Supposons que la variable \lda{nb}
+	contienne un nombre positif ou négatif,
+	on ne sait pas.
+	Et supposons qu'on veuille le rendre positif.
+	On peut tester son signe.
+	S'il est négatif on peut l'inverser.
+	Par contre, s'il est positif,
+	il n'y a rien à faire.
+	Voici comment on peut l'écrire,
+	graphiquement%
+	\footnote{%
+		Ce graphique, appelé 
+		\emph{organigramme} ou encore \emph{ordinogramme}
+		permet de représenter un algorithme
+		de façon plus visuelle.
+		cf. \url{http://fr.wikipedia.org/wiki/Organigramme_de_programmation}.
+	} et en LDA :
+	
+	\qquad
+	\begin{minipage}{6cm}
+		\begin{tikzpicture}[node distance = 1.5cm, auto]
+			\sffamily				
+			\node[draw, diamond] (Test) {nb<0 ?};
+			\node[draw, below of=Test] (Instr) {nb \Gets -nb};
+			\node[right of=Instr] (Empty) {};		          
+			\node[draw, circle, below of=Instr] (End) {};		          
+			\draw[->] (Test) -- (Instr) node[near start] {Oui};
+			\draw[->] (Instr) -- (End);
+			\draw[->] (Test) to[out=0,in=0] node[near start] {Non}  (End);
+		\end{tikzpicture}	
+	\end{minipage}
+	\quad
+	\begin{minipage}{6cm}
+		\begin{LDA}
+			\If{nb<0}
+				\Let nb \Gets -nb
+			\EndIf
+		\end{LDA}
+	\end{minipage}
 
-\clearpage
+	La condition peut-être n'importe quelle expression (calcul)
+	dont le résultat est un booléen (vrai ou faux).
+
 	\marginicon{attention}
 	Attention !
 	Vous faites parfois la confusion.
@@ -81,98 +83,205 @@ Procédons par étapes.
 	La condition n'est testée que lorsqu'on arrive à cet endroit
 	de l'algorithme.
 
-\section{Le si-sinon}
-%===============================
-	\index{si-sinon}
+	\begin{Exercice}{Compréhension}
+		Tracez cet algorithme et donnez la valeur de retour.
+		\begin{LDA}
+		\Algo{exerciceA}{a, b~: entier}{entier}
+			\Decl{c}{entier}
+			\Let c \Gets 2 * a
+			\If{c > b}
+				\Let c \Gets c - b
+			\EndIf
+			\Return c
+		\EndAlgo
+		\end{LDA}		
+		\begin{multicols}{2}
+		\begin{itemize}
+		\item \lda{exerciceA(2, 5)} = \_\_\_
+		\item \lda{exerciceA(4, 1)} = \_\_\_
+		\end{itemize}
+		\end{multicols}	
+	\end{Exercice}
 
+	\begin{Exercice}{Simplification d’algorithmes}
+		Voici quelques extraits d’algorithmes corrects 
+		du point de vue de la syntaxe 
+		mais contenant des lourdeurs d’écriture.
+		Simplifiez-les.
+		
+		\begin{LDA}
+		\If{ok = vrai}
+			\Write nombre
+		\EndIf
+		\end{LDA}
+	
+		\begin{LDA}
+		\If{ok = faux}
+			\Write nombre
+		\EndIf
+		\end{LDA}
+	\end{Exercice}
+		
+%===============================
+\section{Le si-sinon}
+\index{si-sinon}
+%===============================
+	
 	Pour illustrer cette instruction,
 	nous allons nous pencher sur un grand classique,
 	la recherche de maximum.
 	
-	\begin{Emphase}
-		\paragraph{Exemple.}
-		Supposons qu'on veuille déterminer
-		le maximum de deux nombres,
-		c'est-à-dire la plus grande des deux valeurs.
-		Dans la solution, il y a deux chemins possibles.
-		Le maximum devra pendre la valeur du premier nombre
-		ou du second selon que le premier est plus grand 
-		que le second ou pas.
-		
-		\qquad
-		\begin{minipage}{6cm}
-			\begin{tikzpicture}[node distance = 1.5cm, auto]
-				\sffamily				
-				\node[draw, diamond] (Test) {nb1>nb2 ?};
-				\node[below of=Test] (Empty) {};
-				\node[draw,left  of=Empty] (If) {max \Gets nb1};		          
-				\node[draw,right  of=Empty] (Else) {max \Gets nb2};		          
-				\node[draw, circle, below of=Empty] (End) {};
-				\draw[->] (Test) -| (If) node[left, midway] {Oui};
-				\draw[->] (If) |- (End);
-				\draw[->] (Test) -| (Else) node[right, midway] {Non};
-				\draw[->] (Else) |- (End);
- 			\end{tikzpicture}	
-		\end{minipage}
-		\quad
-		\begin{minipage}{6cm}
-			\begin{LDA}
-				\If{nb1<nb2}
-					\Let max \Gets nb1
-				\Else
-					\Let max \Gets nb2
-				\EndIf
-			\end{LDA}
-		\end{minipage}
-	\end{Emphase}
+	\paragraph{Exemple.}
+	Supposons qu'on veuille déterminer
+	le maximum de deux nombres,
+	c'est-à-dire la plus grande des deux valeurs.
+	Dans la solution, il y a deux chemins possibles.
+	Le maximum devra pendre la valeur du premier nombre
+	ou du second selon que le premier est plus grand 
+	que le second ou pas.
 	
-	\subsection{Exercices avec si-sinon}
-	%-----------------------------------
+	\qquad
+	\begin{minipage}{6cm}
+		\begin{tikzpicture}[node distance = 1.5cm, auto]
+			\sffamily				
+			\node[draw, diamond] (Test) {nb1>nb2 ?};
+			\node[below of=Test] (Empty) {};
+			\node[draw,left  of=Empty] (If) {max \Gets nb1};		          
+			\node[draw,right  of=Empty] (Else) {max \Gets nb2};		          
+			\node[draw, circle, below of=Empty] (End) {};
+			\draw[->] (Test) -| (If) node[left, midway] {Oui};
+			\draw[->] (If) |- (End);
+			\draw[->] (Test) -| (Else) node[right, midway] {Non};
+			\draw[->] (Else) |- (End);
+		\end{tikzpicture}	
+	\end{minipage}
+	\quad
+	\begin{minipage}{6cm}
+		\begin{LDA}
+			\If{nb1<nb2}
+				\Let max \Gets nb1
+			\Else
+				\Let max \Gets nb2
+			\EndIf
+		\end{LDA}
+	\end{minipage}
+
+	\begin{Exercice}{Compréhension}
+		Tracez ces algorithmes et donnez la valeur de retour.
 	
-		Pour chacun des exercices suivants,
-		on vous demande
-		\begin{enumerate}
-		\item
-			d'écrire une spécification ;
-		\item
-			de donner des exemples numériques ;
-		\item
-			d'écrire une solution ;
-		\item
-			de vérifier votre solution pour les exemples choisis.
-		\end{enumerate}
+		\begin{LDA}
+		\Algo{exerciceB}{b, a : entier}{entier}
+			\Decl{c}{entier}
+			\If{a > b}
+				\Let c \Gets a DIV b
+			\Else
+				\Let c \Gets b MOD a	
+			\EndIf
+			\Return c
+		\EndAlgo
+		\end{LDA}
+	
+		\begin{multicols}{2}
+		\begin{itemize}
+		\item \lda{exerciceB(2, 3)} = \_\_\_
+		\item \lda{exerciceB(4, 1)} = \_\_\_
+		\end{itemize}
+		\end{multicols}
+	
+		\begin{LDA}
+		\Algo{exerciceC}{x1, x2~: entier}{entier}
+			\Decl{ok}{booléen}
+			\Let ok \Gets x1 > x2
+			\If{ok}
+				\Let ok \Gets ok ET x1 = 4
+			\Else
+				\Let ok \Gets ok OU x2 = 3
+			\EndIf
+			\If{ok}
+				\Let x1 \Gets x1 * 1000
+			\EndIf
+			\Return x1 + x2
+		\EndAlgo
+		\end{LDA}
 		
-		\begin{Exercice}{Maximum de 2 nombres}
-			\marginicon{java}
-			Écrire un algorithme qui, étant donné deux nombres quelconques,
-			recherche et retourne le plus grand des deux. Attention~! On ne veut
-			pas savoir si c’est le premier ou le deuxième qui est
-			le plus grand mais bien quelle est cette plus grande valeur. Le
-			problème est donc bien défini même si les deux nombres sont
-			identiques.
-		\end{Exercice}
+		\medskip
+		\begin{multicols}{2}
+		\begin{itemize}
+		\item \lda{exerciceC(2, 3)} = \_\_\_
+		\item \lda{exerciceC(4, 1)} = \_\_\_	
+		\end{itemize}
+		\end{multicols}	
 		
-		\begin{Exercice}{Calcul de salaire}
-			Dans une entreprise, 
-			une retenue spéciale de 15\% est pratiquée 
-			sur la partie du salaire mensuel qui dépasse 1200~\texteuro. 
-			Écrire un algorithme qui calcule le salaire net à partir du salaire brut. 
-			En quoi l’utilisation de constantes convient-elle pour améliorer cet algorithme~?
-		\end{Exercice}
+	\end{Exercice}	
+	
+	\begin{Exercice}{Simplification d’algorithmes}
+		Voici quelques extraits d’algorithmes corrects du point de vue de la
+		syntaxe mais contenant des lignes inutiles ou des lourdeurs d’écriture.
+		Remplacer chacune de ces portions d’algorithme par un minimum
+		d’instructions qui auront un effet équivalent.
+	
+		\begin{LDA}
+		\If{condition}
+			\Let ok \Gets vrai
+		\Else
+			\Let ok \Gets faux
+		\EndIf
+		\end{LDA}
+	
+		\begin{LDA}
+		\If{a $>$ b}
+			\Let ok \Gets faux
+		\Else
+			\If{a $\leq$ b}
+				\Let ok \Gets vrai
+			\EndIf
+		\EndIf
+		\end{LDA}
+	\end{Exercice}
 
-		\begin{Exercice}{Fonction}
-			Écrire un algorithme qui, étant donné un nombre $x$ quelconque,
-			retourne le résultat de la fonction
-			$f(x)=
-				\left\{
-				\begin{array}{rl}
-					x/2 & si \ x \ est\ pair\\
-					3x+1 & si \ x \ est \ impair
-				\end{array}
-				\right.$
-		\end{Exercice}
+	\begin{Exercice}{Maximum de 2 nombres}
+		\marginicon{java}
+		Écrire un algorithme qui, étant donné deux nombres quelconques,
+		recherche et retourne le plus grand des deux. Attention~! On ne veut
+		pas savoir si c’est le premier ou le deuxième qui est
+		le plus grand mais bien quelle est cette plus grande valeur. Le
+		problème est donc bien défini même si les deux nombres sont
+		identiques.
+		
+		\textbf{Solution.}
+		Une solution complète est disponible dans la fiche \vref{fiche:max2nb}.
+	\end{Exercice}
+	
+	\begin{Exercice}{Calcul de salaire}
+		Dans une entreprise, 
+		une retenue spéciale de 15\% est pratiquée 
+		sur la partie du salaire mensuel qui dépasse 1200~\texteuro. 
+		Écrire un algorithme qui calcule le salaire net à partir du salaire brut. 
+		En quoi l’utilisation de constantes convient-elle pour améliorer cet algorithme~?
+	\end{Exercice}
 
+	\begin{Exercice}{Fonction de Syracuse}
+		Écrire un algorithme qui, étant donné un entier $n$ quelconque,
+		retourne le résultat de la fonction
+		$f(n)=
+			\left\{
+			\begin{array}{rl}
+				n/2 & si \ n \ est\ pair\\
+				3n+1 & si \ n \ est \ impair
+			\end{array}
+			\right.$
+	\end{Exercice}
 
+	\begin{Exercice}{Tarif réduit ou pas}
+		Dans une salle de cinéma,
+		le tarif plein pour une place est de 8\texteuro{}.
+		Les personnes ayant droit au tarif réduit payent 7\texteuro{}.
+		Écrivez un algorithme qui reçoit un booléen
+		indiquant si la personne peut bénéficier du tarif réduit
+		et qui retourne le prix à payer.
+	\end{Exercice}
+
+%============================
 \section{Le si-sinon-si}
 \index{si-sinon-si}
 %============================
@@ -192,7 +301,7 @@ Procédons par étapes.
 		\begin{minipage}{9cm}
 			\begin{tikzpicture}[auto]
 				\sffamily				
-				\node[draw, diamond] (Test) {};
+				\node[draw, diamond] (Test) {\ \ };
 				\node[draw,below=1cm of Test] (nul) {signe \Gets "nul"};
 				\node[draw,left=0.5cm  of nul] (pos) {signe \Gets "positif"};		          
 				\node[draw,right=0.5cm  of nul] (neg) {signe \Gets "négatif"};		          
@@ -233,7 +342,6 @@ Procédons par étapes.
 		On pourrait écrire la même chose 
 		avec des \lda{\K{si-sinon}} imbriqués
 		mais le \lda{\K{si-sinon-si}} est plus lisible.
-		\\
 		\begin{LDA}
 			\If{nb>0}
 				\Let signe \Gets "positif"
@@ -245,13 +353,15 @@ Procédons par étapes.
 				\EndIf
 			\EndIf
 		\end{LDA}
+		\medskip
 	\item
 		Lorsqu'une condition est testée,
 		on sait que toutes celles au-dessus
 		se sont avérées fausses.
 		Cela permet parfois de simplifier la condition.
 	\end{itemize}
-	
+
+\clearpage
 	\begin{Emphase}
 		\paragraph{Exemple.}
 		Supposons que le prix unitaire d'un produit (\lda{prixUnitaire})
@@ -260,80 +370,55 @@ Procédons par étapes.
 		De 10 à 99 unités, on le paie 8\texteuro{} l'unité.
 		À partir de 100 unités, on paie 6\texteuro{} l'unité.
 		
-		La solution peut s'écrire :\\
-		%\begin{minipage}{7cm}
-			%\begin{tikzpicture}[auto]
-				%\sffamily				
-				%\node[draw, diamond] (Test) {};
-				%\node[draw,below=1cm of Test] (nul) {prixU \Gets 8};
-				%\node[draw,left=0.5cm  of nul] (pos) {prixU \Gets 10};		          
-				%\node[draw,right=0.5cm  of nul] (neg) {prixU \Gets 6};		          
-				%\node[draw, circle, below=1cm of nul] (End) {};
-				%\draw[->] (Test) -| (pos) node[left, near end] {qté<10};
-				%\draw[->] (Test) -- (nul) node[midway] {10$\le$qté<100};
-				%\draw[->] (Test) -| (neg) node[right, near end] {100$\le$qté};
-				%\draw[->] (pos) |- (End);
-				%\draw[->] (nul) -- (End);
-				%\draw[->] (neg) |- (End);
- 			%\end{tikzpicture}	
-		%\end{minipage}
-		%\quad
-		%\begin{minipage}{6cm}
-			\begin{LDA}
-				\If{quantité<10}
-					\Let prixUnitaire \Gets 10
-				\ElsIf{quantité<100} \Comment{On sait que ce n'est pas <10; inutile de le tester}
-					\Let prixUnitaire \Gets 8
-				\Else
-					\Let prixUnitaire \Gets 6
-				\EndIf
-			\end{LDA}
-		%\end{minipage}
+		\begin{LDA}
+			\If{quantité<10}
+				\Let prixUnitaire \Gets 10
+			\ElsIf{quantité<100} \Comment{On sait que ce n'est pas <10; inutile de le tester}
+				\Let prixUnitaire \Gets 8
+			\Else
+				\Let prixUnitaire \Gets 6
+			\EndIf
+		\end{LDA}
 		
 	\end{Emphase}
-	
-	\subsection{Exercices avec si-sinon-si}
-	%--------------------------------------
-	
-		Pour chacun des exercices suivants,
-		on vous demande
-		\begin{enumerate}
-		\item
-			d'écrire une spécification ;
-		\item
-			de donner des exemples numériques ;
-		\item
-			d'écrire une solution.
-		\end{enumerate}
-		
-		\begin{Exercice}{Maximum de 3 nombres}
-			\marginicon{java}
-			Écrire un algorithme qui, étant donnés trois nombres quelconques,
-			recherche et retourne le plus grand des trois.
-		\end{Exercice}
-		
-		\begin{Exercice}{Le signe}
-			\marginicon{java}
-			Écrire un algorithme qui affiche un message indiquant
-			si un entier est strictement négatif, nul ou strictement
-			positif.
-		\end{Exercice}
-
-		\begin{Exercice}{Grade}
-			Écrire un algorithme qui retourne le grade d'un étudiant 
-			suivant la moyenne qu'il a obtenue.
 			
-			Un étudiant ayant obtenu 
-			\begin{itemize}
-				\item moins de 50\% n'a pas réussi~;
-				\item de 50\% inclus à 60\% exclu a réussi~;
-				\item de 60\% inclus à 70\% exclu a une satisfaction~;
-				\item de 70\% inclus à 80\% exclu a une distinction~;
-				\item de 80\% inclus à 90\% exclu a une grande distinction~;
-				\item de 90\% inclus à 100\% inclus a la plus grande distinction.
-			\end{itemize}
-		\end{Exercice}
+	\begin{Exercice}{Maximum de 3 nombres}
+		\marginicon{java}
+		Écrire un algorithme qui, étant donnés trois nombres quelconques,
+		recherche et retourne le plus grand des trois.
+	\end{Exercice}
 	
+	\begin{Exercice}{Le signe}
+		\marginicon{java}
+		Écrire un algorithme qui \textbf{affiche} un message indiquant
+		si un entier est strictement négatif, nul ou strictement
+		positif.
+	\end{Exercice}
+
+	\begin{Exercice}{Le type de triangle}
+		Écrire un algorithme qui indique si un triangle
+		dont on donne les longueurs de ces 3 cotés est :
+		équilatéral (tous égaux), isocèle (2 égaux)
+		ou quelconque.
+	\end{Exercice}
+
+	\begin{Exercice}{Grade}
+		Écrire un algorithme qui retourne le grade d'un étudiant 
+		suivant la moyenne qu'il a obtenue.
+		
+		Un étudiant ayant obtenu 
+		\begin{itemize}
+			\item moins de 50\% n'a pas réussi~;
+			\item de 50\% inclus à 60\% exclu a réussi~;
+			\item de 60\% inclus à 70\% exclu a une satisfaction~;
+			\item de 70\% inclus à 80\% exclu a une distinction~;
+			\item de 80\% inclus à 90\% exclu a une grande distinction~;
+			\item de 90\% inclus à 100\% inclus a la plus grande distinction.
+		\end{itemize}
+	\end{Exercice}
+
+\clearpage
+%=====================
 \section{Le selon-que}
 \index{selon-que}
 %=====================
@@ -416,189 +501,76 @@ Procédons par étapes.
 		\EndSwitch
 	\end{LDA}
 	
-	\subsection{Exercices avec selon-que}
-	%-----------------------------------
+	\begin{Exercice}{Numéro du jour}
+		Écrire un algorithme qui retourne le numéro de jour de la semaine
+		reçu en paramètre (1 pour "lundi", 2 pour "mardi"\dots).
+	\end{Exercice}
 	
-		Pour chacun des exercices suivants,
-		on vous demande
-		\begin{enumerate}
-		\item
-			d'écrire une spécification ;
-		\item
-			de donner des exemples numériques ;
-		\item
-			d'écrire une solution.
-		\end{enumerate}
+	\begin{Exercice}{Nombre de jours dans un mois}
+		Écrire un algorithme qui retourne le nombre de jours dans un mois. 
+		Le mois est lu sous forme d’un entier (1 pour janvier\dots).
+		On considère dans cet exercice que le mois de février
+		comprend toujours 28 jours.
+	\end{Exercice}
 		
-		\begin{Exercice}{Numéro du jour}
-			Écrire un algorithme qui retourne le numéro de jour de la semaine
-			reçu en paramètre (1 pour "lundi", 2 pour "mardi"\dots).
-		\end{Exercice}
-		
-		\begin{Exercice}{Nombre de jours dans un mois}
-			Écrire un algorithme qui retourne le nombre de jours dans un mois. 
-			Le mois est lu sous forme d’un entier (1 pour janvier\dots).
-			On considère dans cet exercice que le mois de février
-			comprend toujours 28 jours.
-		\end{Exercice}
-		
-\section{Exercices}
-%==================
+\section{Exercices de synthèse}
+%==============================
 
-	\subsection{Exercices de compréhension}
-	%---------------------------------------
-	
-	\begin{Exercice}{Compréhension}
+	Dans les exercices qui suivent,
+	à vous de déterminer si une instruction de choix est nécessaire
+	et laquelle est la plus adaptée.
 
-		Pour ces exercices, nous vous demandons de comprendre des algorithmes
-		donnés. Plus précisément, quelle est la valeur de retour à l'appel~?
-	
-	\begin{LDA}
-	\Algo{exerciceA}{a, b~: entier}{entier}
-		\If{a > b}
-			\Let a \Gets a + 2 * b
-		\EndIf
-		\Return a
-	\EndAlgo
-	\end{LDA}
-	
-	\begin{itemize}
-	\item \lda{exerciceA(2, 3)},
-	\item \lda{exerciceA(4, 1)}.
-	\end{itemize}
-	
-	\begin{LDA}
-	\Algo{exerciceB}{b, a : entier}{entier}
-		\Decl c~: entier
-		\If{a > b}
-			\Let c \Gets a DIV b
-		\Else
-			\Let c \Gets b MOD a	
-		\EndIf
-		\Return c
-	\EndAlgo
-	\end{LDA}
+	\begin{Exercice}{Réussir DEV1}
+		Pour réussir l'UE (unité d'enseignement) GEN1,
+		il faut que la cote attribuée à cette UE 
+		soit supérieure ou égale à 50\%.
+		Cette cote tient compte de votre examen intégré
+		et de vos interrogations.
+		Écrire un algorithme 
+		qui reçoit la cote finale (sur 100)
+		d'un étudiant pour l'UE DEV1
+		et qui indique si l'étudiant à réussi cette UE.
+	\end{Exercice}		
 
-	\begin{itemize}
-	\item \lda{exerciceB(2, 3)},
-	\item \lda{exerciceB(4, 1)}.
-	\end{itemize}
+	\begin{Exercice}{Réussir GEN1}
+		Pour réussir l'unité d'enseignement GEN1,
+		il faut que la cote attribuée à chaque AA (activité d'apprentissage)
+		soit supérieure ou égale à 50\%.
+		Écrire un algorithme qui reçoit les 3 cotes (sur 20) d'AA d'un étudiant
+		pour l'UE GEN1 et qui \textbf{affiche} un message
+		indiquant si l'étudiant a réussi ou pas.
+		S'il a réussi, l'algorithme affiche également sa moyenne
+		(cherchez quelle est la pondération entre ces AA).
+	\end{Exercice}		
 	
-	\begin{LDA}
-	\Algo{exerciceC}{x1, x2~: entier}{entier}
-		\Decl ok : booléen
-		\Let ok \Gets x1 > x2
-		\If{ok}
-			\Let ok \Gets ok ET x1 = 4
-		\Else
-			\Let ok \Gets ok OU x2 = 3
-		\EndIf
-		\If{ok}
-			\Let x1 \Gets x1 * 1000
-		\EndIf
-		\Return x1 + x2
-	\EndAlgo
-	\end{LDA}
-	
-	\begin{itemize}
-	\item \lda{exerciceC(2, 3)},
-	\item \lda{exerciceC(4, 1)}.	
-	\end{itemize}
-	
+	\begin{Exercice}{La fourchette}
+		Écrire un algorithme qui, étant donné trois nombres, 
+		retourne vrai si le premier des trois 
+		appartient à l’intervalle donné par le plus petit et le plus grand 
+		des deux autres (bornes exclues) et faux sinon. 
+		Qu’est-ce qui change si on inclut les bornes~?
 	\end{Exercice}
 
-	\begin{Exercice}{Simplification d’algorithmes}
-	Voici quelques extraits d’algorithmes corrects du point de vue de la
-	syntaxe mais contenant des lignes inutiles ou des lourdeurs d’écriture.
-	Remplacer chacune de ces portions d’algorithme par un minimum
-	d’instructions qui auront un effet équivalent.
-
-	\begin{LDA}
-	\If{ok = vrai}
-		\Write nombre
-	\EndIf
-	\end{LDA}
-
-	\begin{LDA}
-	\If{ok = faux}
-		\Write nombre
-	\EndIf
-	\end{LDA}
-
-	\begin{LDA}
-	\If{condition}
-		\Let ok \Gets vrai
-	\Else
-		\Let ok \Gets faux
-	\EndIf
-	\end{LDA}
-
-	\begin{LDA}
-	\If{a $>$ b}
-		\Let ok \Gets faux
-	\Else
-		\If{a $\leq$ b}
-			\Let ok \Gets vrai
-		\EndIf
-	\EndIf
-	\end{LDA}
+	\begin{Exercice}{Nombre de jours dans un mois}
+		Écrire un algorithme qui donne le nombre de jours dans un mois.
+		Il reçoit en paramètre le numéro du mois (1 pour janvier\dots)
+		ainsi que l'année.
+		Pour le mois de février, 
+		il faudra répondre 28 ou 29 selon que l'année fournie
+		est bissextile ou pas.
 	\end{Exercice}
 
-
-	\subsection{Exercices mélangés}
-	%-----------------------------------
+	\begin{Exercice}{Valider une date}
+		Écrire un algorithme qui valide 
+		une date donnée par trois entiers~:~ l’année, le mois et le jour.
+	\end{Exercice}
 	
-		Pour chacun des exercices suivants,
-		on vous demande
-		\begin{enumerate}
-		\item
-			d'écrire une spécification ;
-		\item
-			de donner des exemples numériques ;
-		\item
-			d'écrire une solution.
-		\end{enumerate}
-
-		\begin{Exercice}{Réussi~?}
-			Écrire un algorithme qui retourne vrai si un étudiant à réussi (plus de 50\%) 
-			et faux sinon.
-		\end{Exercice}		
-		
-		\begin{Exercice}{La fourchette}
-			Écrire un algorithme qui, étant donné trois nombres, 
-			retourne vrai si le premier des trois 
-			appartient à l’intervalle donné par le plus petit et le plus grand 
-			des deux autres (bornes exclues) et faux sinon. 
-			Qu’est-ce qui change si on inclut les bornes~?
-		\end{Exercice}
+	\begin{Exercice}{Le stationnement alternatif}
+		Dans une rue où se pratique le stationnement alternatif, 
+		du 1 au 15 du mois, on se gare du côté des maisons ayant un numéro impair, 
+		et le reste du mois, on se gare de l’autre côté. 
+		Écrire un algorithme qui, sur base de la date du jour et du numéro de maison
+		devant laquelle vous vous êtes arrêté, 
+		retourne vrai si vous êtes bien stationné et faux sinon.
+	\end{Exercice}
 	
-		\begin{Exercice}{Année bissextile}
-			\marginicon{java}
-			Écrire un algorithme qui vérifie si une année est bissextile. 
-			Pour rappel, les années bissextiles sont les années multiples de 4. 
-			Font exception, les multiples de 100 
-			(sauf les multiples de 400 qui sont bien bissextiles). 
-			Ainsi $2012$ et $2400$ sont bissextile mais pas $2010$ ni $2100$.
-		\end{Exercice}
-		
-		\begin{Exercice}{Nombre de jours dans un mois}
-			Écrire un algorithme qui donne le nombre de jours dans un mois. 
-			Le mois est lu sous forme d’un entier (1 pour janvier\dots).
-			On considère dans cet exercice que le mois de février
-			comprend toujours 28 jours si l'année n'est pas bissextile et 29 sinon.
-		\end{Exercice}
-
-		\begin{Exercice}{Valider une date}
-			Écrire un algorithme qui valide une date donnée par trois entiers~:~
-			l’année, le mois et le jour.
-		\end{Exercice}
-		
-		\begin{Exercice}{Le stationnement alternatif}
-			Dans une rue où se pratique le stationnement alternatif, 
-			du 1 au 15 du mois, on se gare du côté des maisons ayant un numéro impair, 
-			et le reste du mois, on se gare de l’autre côté. 
-			Écrire un algorithme qui, sur base de la date du jour et du numéro de maison
-			devant laquelle vous vous êtes arrêté, 
-			retourne vrai si vous êtes bien stationné et faux sinon.
-		\end{Exercice}
-		
