@@ -4,9 +4,8 @@
 
 \usepackage{algpseudocode}		% Perme d'écrire des algorithmes
 
-
 % ==============================================================
-% \begin{LDA}
+% \begin{LDA}		// \begin{LDA}[1] pour des n° de lignes
 %      ...
 % \end{LDA}
 %
@@ -20,20 +19,6 @@
 		\begin{minipage}{0.97\linewidth}
 		\begin{sffamily}
 		\begin{algorithmic}[#1]
-		\small
-				\BODY
-		\end{algorithmic}
-		\end{sffamily}
-		\end{minipage}
-	}
-	\end{flushleft}
-}
-\NewEnviron{LDAnum}{%
-	\begin{flushleft}
-	\fcolorbox{gray}{gray!10}{%
-		\begin{minipage}{0.97\linewidth}
-		\begin{sffamily}
-		\begin{algorithmic}[1]
 		\small
 				\BODY
 		\end{algorithmic}

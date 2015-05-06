@@ -78,9 +78,9 @@
 	
 	Par exemple, la tâche à répéter pour afficher des nombres
 	ne peut pas être
-	\lda{\K{Afficher} 1} ni \lda{\K{Afficher} 2} ni\dots{}
+	\lda{\K{afficher} 1} ni \lda{\K{afficher} 2} ni\dots{}
 	Par contre, on pourra utiliser l'instruction
-	\lda{\K{Afficher} nb} si on s'arrange pour que la variable
+	\lda{\K{afficher} nb} si on s'arrange pour que la variable
 	\lda{nb} s'adapte à chaque passage dans la boucle.
 
 	\subsection{Exemple - Afficher les nombres de 1 à 5}
@@ -323,7 +323,7 @@
 		\end{center}
 
 		\marginicon{attention}
-		Veiller à la cohérence de l’écriture de cette structure. On considérera
+		Il faut veiller à la cohérence de l’écriture de cette structure. On considérera
 		qu’au cas (à éviter) où \lda{début} est strictement supérieur à
 		\lda{fin} et le \lda{pas} est positif, la séquence d’instructions
 		n’est jamais exécutée (mais ce n’est pas le cas dans tous les langages
@@ -339,7 +339,7 @@
 		\end{LDA}
 		
 		\marginicon{attention}
-		Veiller aussi à ne pas modifier dans la séquence d’instructions une des
+		Il faut aussi veiller à ne pas modifier dans la séquence d’instructions une des
 		variables de contrôle \lda{début}, \lda{fin} ou \lda{pas}~! Il
 		est aussi fortement déconseillé de modifier «~manuellement~» la
 		\lda{variable} de contrôle au sein de la boucle
@@ -398,18 +398,17 @@
 		Cette fois-ci on affiche uniquement 
 		les nombres \textbf{pairs} jusqu’à la limite $n$.
 		
-		\paragraph{Exemple.}
+		\textbf{Exemple :}
 		Les nombres pairs de $1$ à $10$ sont~: $2$, $4$, $6$, $8$, $10$.
 		
 		Notez que $n$ peut être impair. 
 		Si $n$ vaut $11$, l’affichage est le même que pour $10$.
-
 		On peut utiliser un \og{}pour\fg{}.
 		De 1 à $n$, il y a exactement «~$n$ DIV $2$~» nombres à afficher. 
 		La difficulté vient du lien à faire entre la variable de
 		contrôle et le nombre à afficher.
 
-		\paragraph{Solution 1.}
+		\textbf{Solution 1.}
 		On garde le lien entre la variable de contrôle 
 		et le nombre à afficher. 
 		Dans ce cas, on commence à $2$ et le pas doit être de $2$.
@@ -422,7 +421,7 @@
 		\EndAlgo
 		\end{LDA}
 
-		\paragraph{Solution 2.}
+		\textbf{Solution 2.}
 		La variable de contrôle compte simplement le nombre d’itérations.
 		Il faut alors calculer le nombre à afficher en fonction de la variable
 		de contrôle (ici le double de celle-ci convient)
@@ -491,7 +490,7 @@
 		
 			\begin{LDA}
 			\Algo{boucle6}{}{}
-				\Decl{i, fin}{entiers}
+				\Decl{fin}{entiers}
 				\For{i}{1}{3}{}
 					\Let fin \Gets 6 * i - 11
 					\For{j}{1}{fin}{3}
