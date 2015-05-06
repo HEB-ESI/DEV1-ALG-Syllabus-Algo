@@ -266,7 +266,56 @@
 		Plus loin, nous verrons une notation alternative
 		qui permet de choisir un autre numéro de début pour le tableau
 		ce qui sera plus naturel pour certains problèmes.
+
+	% ==============================
+	\section{Tableau et paramètres}
+	% ==============================
 	
+		Un tableau peut être passé en paramètre à un module 
+		mais qu’en est-il de sa taille ? 
+		Il serait utile de pouvoir appeler le même module avec des
+		tableaux de tailles différentes. 
+		Pour permettre cela, la taille du tableau reçu en paramètre 
+		est déclarée avec une variable 
+		(qui peut être considéré comme un paramètre entrant).
+	
+		\textbf{Exemple~:}
+		
+		\begin{LDA}
+			\Algo{brol}{\Par{tab}{\Array{n}{entiers}}}{}
+				\Write "J’ai reçu un tableau de ", n, " éléments".
+			\EndAlgo
+		\end{LDA}
+	
+		Ce $n$ va prendre la taille précise du tableau
+		utilisé à chaque appel et peut être utilisé
+		dans le corps du module. 	
+		Notons qu’on admet également qu’un module retourne un tableau. 
+		
+		\begin{LDA}
+		\LComment Crée un tableau d'entiers de taille 10, l'initialise à 0 et le retourne.
+		\Algo{créerTableau}{}{\Array{n}{entiers}}
+			\Decl{tab}{\Array{n}{entiers}}
+			\For{i}{0}{9}{}
+				\Let tab[i] \Gets 0
+			\EndFor
+			\Return tab
+		\EndAlgo
+		\Empty
+		\Algo{principalAppelTableau}{}{}
+			\Decl{entiers}{\Array{n}{entiers}}
+			\Let entiers \Gets créerTableau()
+			\For{i}{0}{9}{}
+				\Write entiers[i]
+			\EndFor
+		\EndAlgo
+		\end{LDA}
+		
+		Par contre, on ne peut pas lire ou afficher un tableau 
+		en une seule instruction; 
+		il faut des instructions de lecture 
+		ou d'affichage individuelles pour chacun de ses éléments.
+			
 	% ==============================================
 	\section{Parcours d'un tableau à une dimension} 
 	\label{Les parcours de tableaux}
