@@ -1,25 +1,23 @@
+%================================
 \begin{Fiche}{Un calcul complexe}
+%================================
 \label{fiche:calcul-complexe}
 
-\Section{Le problème}
 	Calculer la vitesse (en km/h) d'un véhicule dont on donne
 	la durée du parcours (en secondes) 
 	et la distance parcourue (en mètres).
 
 \Section{Spécification}
+	
+	\textbf{Données} (toutes réelles et non négatives) :
+		\begin{itemize}
+		\item la distance parcourue par le véhicule (en m) ;
+		\item la durée du parcours (en s).
+		\end{itemize}
+		
+	\textbf{Résultat} : la vitesse du véhicule (en km/h).
 
-	\paragraph{Données}
-	\begin{itemize}
-	\item la distance parcourue par le véhicule (en m);
-	\item la durée du parcours (en s).
-	\end{itemize}
-	Toutes les données sont des réels
-
-	\paragraph{Résultat.}
-	Un réel représentant la vitesse du véhicule (en km/h).
-
-	\bigskip
-	\begin{center}	
+	\begin{center}
 	\flowalgodd{distanceM (réel)}{duréeS (réel)}{vitesseKMH}{réel}
 	\end{center}
 
@@ -30,31 +28,39 @@
 	\item \lda{vitesseKMH(10000,3600)} donne $10$
 	\end{itemize}
 
-\Section{Analyse de la solution}
+\Section{Solution}
 
 	La vitesse est liée à la distance et à la durée par la formule :
-	\begin{equation}
+	\[
 		\textrm{vitesse} = \frac{\textrm{distance}}{\textrm{durée}}
-	\end{equation}
+	\]
 
 	pour autant que les unités soient cohérentes.
 	Ainsi pour obtenir une vitesse en km/h, 
 	il faut convertir la distance en kilomètres 
 	et la durée en heures.
+	Ce qui donne :
 		
-\Section{Solution}
-
 	\begin{LDA}
-%	\LComment Calcule la vitesse d'un véhicule en connaissant la distance et la durée
-%	\LComment Données : la distance parcourue en m et le temps écoulé en secondes
-%	\LComment Résultat : la vitesse du véhicule en km/h
-	\Algo{vitesseKMH}{\Par{distanceM, duréeS}{réel}}{réel}
-		\Decl{distanceKM, duréeH}{réel}
-		\Let distanceKM \Gets $\frac{\textrm{distanceM}}{1000}$
-		\Let duréeH \Gets $\frac{\textrm{duréeS}}{3600}$
-		\Return $\frac{\textrm{distanceKM}}{\textrm{duréeH}}$
-	\EndAlgo
+		\Algo{vitesseKMH}{\Par{distanceM, duréeS}{réel}}{réel}
+			\Decl{distanceKM, duréeH}{réel}
+			\Let distanceKM \Gets $\frac{\textrm{distanceM}}{1000}$
+			\Let duréeH \Gets $\frac{\textrm{duréeS}}{3600}$
+			\Return $\frac{\textrm{distanceKM}}{\textrm{duréeH}}$
+		\EndAlgo
 	\end{LDA}
+
+\Section{Vérification}
+
+	\begin{center}
+		\begin{tabular}{|c|cccc|c|}
+		\hline
+		test \no & longueur & largeur & réponse attendue & réponse fournie & {} \\\hline
+		\hline 
+		1 & 100   & 10   & 36 & 36 & {\color{ForestGreen}$\checkmark$} \\\hline
+		2 & 10000 & 3600 & 10 & 10 & {\color{ForestGreen}$\checkmark$} \\\hline
+		\end{tabular}
+	\end{center}								
 
 \Section{Quand l'utiliser ?}
 

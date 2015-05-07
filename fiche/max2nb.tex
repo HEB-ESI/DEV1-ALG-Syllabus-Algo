@@ -1,7 +1,8 @@
+%======================================
 \begin{Fiche}{Maximum de deux nombres}
+%======================================
 \label{fiche:max2nb}
 
-\Section{Le problème}
 	Quel est le maximum de deux nombres ?
 
 \Section{Analyse}
@@ -10,25 +11,26 @@
 	Attention ! On ne veut pas savoir \emph{lequel}
 	est le plus grand mais juste la valeur.
 	Il n'y a donc pas d'ambiguïté si les deux nombres sont égaux.
-	
-	\paragraph{Données}
-	\begin{itemize}
-	\item deux nombres réels
-	\end{itemize}
 
-	\paragraph{Résultat.}
-	Un réel contenant la plus grande des deux valeurs données.
+	\textbf{Données} : deux nombres réels.
+		
+	\textbf{Résultat} : un réel contenant la plus grande des deux valeurs données.
+
 	\begin{center}	
-	\flowalgodd{nb1 (réel)}{nb2 (réel)}{max2}{réel}
+		\flowalgodd{nb1 (réel)}{nb2 (réel)}{max2}{réel}
 	\end{center}
 
 \Section{Exemples}
 
-	\begin{itemize}
-	\item \lda{max2(-3, 4)} donne $4$
-	\item \lda{max2(7, 4)} donne $7$
-	\item \lda{max2(4, 4)} donne $4$
-	\end{itemize}
+	\vspace*{-3mm}
+	\begin{multicols}{3}
+		\begin{itemize}
+		\item \lda{max2(-3, 4)} donne $4$
+		\item \lda{max2(7, 4)} donne $7$
+		\item \lda{max2(4, 4)} donne $4$
+		\end{itemize}
+	\end{multicols}
+	\vspace*{-6mm}
 	
 \Section{Solution}
 
@@ -46,7 +48,7 @@
 
 \Section{Alternatives}
 
-	\begin{minipage}{7.5cm}
+	\begin{minipage}{7.0cm}
 		\begin{LDA}
 		\Algo{max2}{\Par{nb1}{réel}, \Par{nb2}{réel}}{réel}
 			\If{nb1 > nb2}
@@ -58,7 +60,7 @@
 		\end{LDA}
 	\end{minipage}
 	\quad
-	\begin{minipage}{6cm}
+	\begin{minipage}{6.5cm}
 		En algorithmique, comme ailleurs, il existe des modes.
 		Certaines personnes insistent pour qu'il n'y ait qu'un seul
 		retour en fin d'algorithme ; 
@@ -71,7 +73,7 @@
 
 	\hfil\rule{0.5\textwidth}{.4pt}\hfil
 
-	\begin{minipage}{7.5cm}
+	\begin{minipage}{7.0cm}
 		\begin{LDA}
 		\Algo{max2}{\Par{nb1}{réel}, \Par{nb2}{réel}}{réel}
 			\Decl{max}{réel}
@@ -84,7 +86,7 @@
 		\end{LDA}
 	\end{minipage}
 	\quad
-	\begin{minipage}{6cm}
+	\begin{minipage}{6.5cm}
 		Certains écrivent parfois une solution de ce genre
 		mais ne la défendent pas avec les bons arguments.
 		Le fait de ne pas avoir de "sinon" n'est absolument pas pertinent.
