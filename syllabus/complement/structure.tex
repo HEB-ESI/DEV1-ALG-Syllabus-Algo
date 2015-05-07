@@ -1,0 +1,335 @@
+% ==================================
+\chapter{Les variables structurées}
+% ==================================
+
+	% ==========================
+	\section{Le type structuré}
+	\index{structure}
+	% ==========================
+	
+		Comme un tableau,
+		une structure permet de stocker plusieurs valeurs.
+		Mais, à l'inverse des tableaux,
+		chaque valeur peut être de type différent
+		et est désignée par un nom et pas par un numéro.
+		
+		Cela permet de créer un nouveau type
+		permettant de représenter des données
+		qui ne peuvent s'inscrire 
+		dans les types simples déjà vus.
+		Par exemple :
+		\begin{itemize}
+		\item
+			Une \textbf{date} est composée de trois éléments (le jour, le mois,
+			l’année). Le mois peut s'exprimer par un entier (15/10/2014) 
+			ou par une chaine (15~octobre~2014).
+		\item
+			Un \textbf{moment} de la journée est un triple d’entiers 
+			(heures, minutes, secondes).
+		\item
+			La localisation d’un \textbf{point} dans un plan 
+			nécessite la connaissance de deux coordonnées cartésiennes 
+			(l’abscisse \textit{x} et l’ordonnée \textit{y}) 
+			ou polaires 
+			(le rayon \textit{r} et l’angle \textit{$\theta$}).
+		\item
+			Une \textbf{adresse} est composée de plusieurs données~:~
+			un nom de rue, 
+			un numéro de maison, 
+			parfois un numéro de boite postale, 
+			un code postal, 
+			le nom de la localité, 
+			un nom ou code de pays pour une adresse à l’étranger\dots
+		\end{itemize}
+	
+		Pour stocker et manipuler de tels ensembles de données, 
+		nous utiliserons des \textbf{types structurés} 
+		ou \textbf{structures}. 
+		Une \textbf{structure} est donc un ensemble fini d’éléments 
+		pouvant être de types distincts. 
+		Chaque élément de cet ensemble, 
+		appelé \textbf{champ} de la structure, possède un nom unique.
+		
+		Notez qu’un champ d’une structure peut lui-même être une structure. 
+		Par exemple, une \textbf{carte d’identité} inclut 
+		parmi ses informations une \textbf{date} de naissance, 
+		l’\textbf{adresse} de son propriétaire 
+		(cachée dans la puce électronique~!)\dots
+	
+	% ===================================
+	\section{Définition d’une structure}
+	% ===================================
+	
+		\marginicon{definition}
+		La définition d’un type structuré adoptera le modèle suivant~:
+	
+		\begin{LDA}
+		\Struct{NomDeLaStructure}
+			\Decl{nomChamp1}{type1}
+			\Decl{nomChamp2}{type2}
+			\Stmt \dots
+			\Decl{nomChampN}{typeN}
+		\EndStruct
+		\end{LDA}
+	
+		\lda{nomChamp1}, \dots, \lda{nomChampN} 
+		sont les noms des différents champs de la structure, 
+		et \lda{type1}, \dots, \lda{typeN} 
+		les types de ces champs. 
+		Tous les types peuvent être envisagés :
+		les types «~simples~» (entier, réel, booléen, chaine),
+		les tableaux et même d’autres types structurés 
+		dont la structure aura été préalablement définie.
+	
+		Pour exemple, nous définissons ci-dessous trois
+		types structurés que nous utiliserons souvent par la suite~:
+	
+		\begin{minipage}{4.5cm}
+		\begin{LDA}
+		\Struct{Date}
+			\Decl{jour}{entier}
+			\Decl{mois}{entier}
+			\Decl{année}{entier}
+		\EndStruct
+		\end{LDA}
+		\end{minipage}
+	\ 
+		\begin{minipage}{4.5cm}
+		\begin{LDA}
+		\Struct{Moment}
+			\Decl{heure}{entier}
+			\Decl{minute}{entier}
+			\Decl{seconde}{entier}
+		\EndStruct
+		\end{LDA}
+		\end{minipage}
+	\ 
+		\begin{minipage}{4.5cm}
+		\begin{LDA}
+		\Struct{Point}
+			\Decl{x}{réel}
+			\Decl{y}{réel}
+		\EndStruct{}
+		\Empty
+		\end{LDA}
+		\end{minipage}
+	
+	% =====================================================
+	\section{Déclaration d’une variable de type structuré}
+	% =====================================================
+	
+		Une fois un type structuré défini, 
+		la déclaration de variables de ce type 
+		est identique à celle des variables simples. 
+		Par exemple~:
+	
+		\begin{LDA}
+		\Decl{anniversaire, jourJ}{Date}
+		\Decl{départ, arrivée, unMoment}{Moment}
+		\Decl{a, b, centreGravité}{Point}
+		\end{LDA}
+	
+	% ====================================================
+	\section{Utilisation des variables de type structuré}
+	% ====================================================
+	
+		En général, 
+		pour manipuler une variable structurée ou en modifier le contenu, 
+		il faut agir au niveau de ses champs en utilisant 
+		les opérations permises selon leur type. 
+		Pour accéder à l’un des champs d’une variable structurée, 
+		il faut mentionner le nom de ce champ 
+		ainsi que celui de la variable dont il fait partie.
+		Nous utiliserons la notation «~pointée~»~:
+	
+		\begin{LDA}
+		\Stmt nomVariable.nomChamp
+		\end{LDA}
+	
+		Exemple d’instructions utilisant les variables
+		déclarées au paragraphe précédent~:
+	
+		\begin{LDA}
+		\Let anniversaire.jour \Gets 15
+		\Let anniversaire.mois \Gets 10
+		\Let anniversaire.année \Gets 2014
+		\Let arrivée.heure \Gets départ.heure + 2
+		\Let centreGravité.x \Gets (a.x + b.x) / 2
+		\end{LDA}
+	
+		On peut cependant, dans certains cas, 
+		utiliser une variable structurée de manière globale 
+		(c’est-à-dire d’une façon qui agit simultanément sur chacun de ses champs). 
+		Le cas le plus courant est l’affectation interne 
+		entre deux variables structurées de même type, 
+		par exemple~:
+	
+		\begin{LDA}
+		\Let arrivée \Gets départ
+		\end{LDA}
+	
+		qui résume les trois instructions suivantes~:
+	
+		\begin{LDA}
+		\Let arrivée.heure \Gets départ.heure
+		\Let arrivée.minute \Gets départ.minute
+		\Let arrivée.seconde \Gets départ.seconde
+		\end{LDA}
+	
+		Une variable structurée peut aussi 
+		être le paramètre ou la valeur de retour d’un algorihtme. 
+		Par exemple, l’entête d’un algorihtme 
+		renvoyant le nombre de secondes 
+		écoulées entre une heure de départ et d’arrivée serait~:
+	
+		\begin{LDA}
+		\Entete{nbSecondesEcoulées}{\Par{départ\In, arrivée\In}{Moment}}{entier}
+		\end{LDA}
+	
+		On pourra aussi lire ou afficher une variable structurée%
+		\footnote{%
+			Bien que, dans certains langages, 
+			ces opérations devront être décomposées en une lecture ou
+			écriture de chaque champ de la structure.
+		}.
+	
+		\begin{LDA}
+		\Read unMoment
+		\Write unMoment
+		\end{LDA}
+	
+		Par contre, il n’est pas autorisé d’utiliser
+		les opérateurs de comparaison ({\textless}, {\textgreater}) 
+		pour comparer des variables structurées (même de même type), 
+		car une relation d’ordre n’accompagne pas toujours les structures utilisées. 
+		En effet, s’il est naturel de vouloir comparer des dates ou des moments,
+		comment définir une relation d’ordre avec les points du plan ou avec
+		des cartes d’identités~?
+	
+		Si le besoin de comparer des variables structurées se fait sentir, 
+		il faudra dans ce cas écrire 
+		des modules de comparaison adaptés aux structures utilisées.
+	
+		Par facilité d’écriture, 
+		on peut assigner tous les champs en une fois via des «~\{\}~». 
+		Exemple~:
+	
+		\begin{LDA}
+		\Let anniversaire \Gets \{1, 9, 1989\}
+		\end{LDA}
+	
+	% =============================
+	\section{Exemple d’algorithme}
+	% =============================
+	
+		Le module ci-dessous reçoit en paramètre deux dates ; 
+		la valeur renvoyée est 
+		–1 si la première date est antérieure à la deuxième, 
+		0 si les deux dates sont identiques 
+		ou 1 si la première date est postérieure à la deuxième.
+	
+		\begin{LDA}
+		\LComment Reçoit 2 dates en paramètres et retourne une valeur
+		\LComment négative si la première date est antérieure à la deuxième
+		\LComment nulle si les deux	dates sont identiques
+		\LComment positive si la première date est postérieure à la deuxième.
+		\Algo{comparerDates}{date1\In, date2\In : Date}{entier}
+			\If{date1.année $\neq$ date2.année}
+				\Return date1.année - date2.année
+			\ElsIf{date1.mois $\neq$ date2.mois}
+				\Return date1.mois - date2.mois 
+			\Else
+				\Return date1.jour - date2.jour
+			\EndIf
+		\EndAlgo
+		\end{LDA}
+	
+	% =====================================
+	\section{Exercices sur les structures}
+	% =====================================
+	
+		\begin{Exercice}{Conversion moment-secondes}
+			Écrire un module qui reçoit en paramètre un
+			moment d’une journée et qui retourne le nombre de secondes écoulées
+			depuis minuit jusqu’à ce moment.
+		\end{Exercice}
+		
+		\begin{Exercice}{Conversion secondes-moment}
+			Écrire un module qui reçoit en paramètre un
+			nombre de secondes écoulées dans une journée à partir de minuit et qui
+			retourne le moment correspondant de la journée.
+		\end{Exercice}
+		
+		\begin{Exercice}{Temps écoulé entre 2 moments}
+			Écrire un module qui reçoit en paramètres deux
+			moments d’une journée et qui retourne le nombre de secondes séparant
+			ces deux moments.
+		\end{Exercice}
+		
+		\begin{Exercice}{Milieu de 2 points}
+			Écrire un module recevant les coordonnées de
+			deux points distincts du plan et qui retourne les coordonnées du point
+			situé au milieu des deux.
+		\end{Exercice}
+		
+		\begin{Exercice}{Distance entre 2 points}
+			Écrire un module recevant les coordonnées de
+			deux points distincts du plan et qui retourne
+			la distance entre ces deux points.
+		\end{Exercice}
+		
+		\begin{Exercice}{Un cercle}
+			Définir un type \textbf{Cercle} pouvant décrire de façon
+			commode un cercle quelconque dans un espace à deux dimensions. 	
+			Écrire ensuite
+			
+			\begin{enumerate}[label=\alph*)]
+			\item {
+				un module calculant la surface du cercle reçu en paramètre ;}
+			\item {
+				un module recevant 2 points en paramètre et retournant le cercle dont le
+				diamètre est le segment reliant ces 2 points ;}
+			\item {
+				un module qui détermine si un point donné est dans un cercle ;}
+			\item {
+				un module qui indique si 2 cercles ont une intersection.
+			}
+			\end{enumerate}
+		\end{Exercice}
+		
+		
+		\begin{Exercice}{Un rectangle}
+			\marginicon{java}
+			Définir un type \textbf{Rectangle} pouvant décrire de façon
+			commode un rectangle dans un espace à deux dimensions et dont les côtés
+			sont parallèles aux axes des coordonnées. 	
+			Écrire ensuite
+		
+			\begin{enumerate}[label=\alph*)]
+			\item {
+				un module calculant le périmètre d’un rectangle reçu en paramètre ;}
+			\item {
+				un module calculant la surface d’un rectangle reçu en paramètre ;}
+			\item {
+				un module recevant en paramètre un rectangle R et les coordonnées
+				d’un point P, et renvoyant 
+				\textbf{vrai} si et seulement si le point P est à
+				l’intérieur du rectangle R ;}
+			\item {
+				un module recevant en paramètre un rectangle R et les coordonnées
+				d’un point P, et renvoyant 
+				\textbf{vrai} si et seulement si le point P est sur le bord du
+				rectangle R ;}
+			\item {
+				un module recevant en paramètre deux rectangles et renvoyant la valeur
+				booléenne \textbf{vrai} si et seulement si ces deux rectangles ont une
+				intersection.}
+			\end{enumerate}
+		\end{Exercice}
+		
+		\begin{Exercice}{Validation de date}
+			Écrire un algorithme qui valide une date reçue en paramètre 
+			sous forme d’une structure.
+		\end{Exercice}
+
+	
