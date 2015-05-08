@@ -327,31 +327,15 @@
 		Il est important de maitriser ce parcours.
 		Examinons les situations courantes 
 		et voyons quelles solutions conviennent.
-		
-		Soit le tableau \lda{tab} déclaré ainsi
-		
-		\begin{LDA}
-			\Decl{tab}{\Array{n}{entiers}} \RComment où un autre type
-		\end{LDA}
-		
-		Envisageons d'abord le parcours complet
-		et voyons ensuite les parcours avec arrêt prématuré.
-	
+				
 		\subsection{Parcours complet}
 		
 			Pour parcourir complètement un tableau, 
 			on peut utiliser la boucle \K{pour}.
-			Dans l'algorithme suivant,
-			on affiche tous les élements du tableau 
-			mais on pourrait faire autre chose avec ces éléments :
+			La fiche \vref{fiche:tab-parcours-complet}
+			décrit comment afficher tous les élements d'un tableau.
+			On pourrait faire autre chose avec ces éléments :
 			les sommer, les comparer\dots
-
-			\begin{LDA}
-				\LComment{Parcours complet d'un tableau via une boucle pour}
-				\For{i}{0}{n-1}{}
-					\Write tab[i]
-				\EndFor
-			\end{LDA}
 		
 		\subsection{Parcours avec sortie prématurée}
 		
@@ -364,97 +348,14 @@
 			\item on cherche la présence d'un élément et on vient de le trouver ;
 			\item on vérifie qu'il n'y a pas de $0$ et on vient d'en trouver un.
 			\end{itemize}
-			
-			La première étape est de transformer le \K{pour} en \K{tant que}
-			ce qui donne l'algorithme 
-			
-			\begin{LDA}
-				\LComment{Parcours complet d'un tableau via une boucle tant-que}
-				\Decl{i}{entier}
-				\Let i \Gets 0
-				\While{i < n}
-					\Write tab[i]
-					\Let i \Gets i + 1
-				\EndWhile
-			\end{LDA}
-			
-			On peut à présent introduire le test d'arrêt.
-			Une contrainte est qu'on voudra, à la fin de la boucle, 
-			savoir si oui ou non on s'est arrêté prématurément et, 
-			si c'est le cas, à quel indice.
-			
-			Il existe essentiellement deux solutions, avec ou sans variable booléenne.
-			En général, la solution [A] sera plus claire si le test est court.
-		
-			\subsubsection*{[A] Sans variable booléenne}
-			
-				\begin{LDA}
-					\LComment{Parcours partiel d'un tableau sans variable booléenne}
-					\Decl{i}{entier}
-					\Let i \Gets 0
-					\While{i < n ET \textit{test sur tab[i] dit que on continue}}
-						\Let i \Gets i + 1
-					\EndWhile
-					\If{i = n}
-						\LComment on est arrivé au bout
-					\Else
-						\LComment arrêt prématuré à l'indice i.
-					\EndIf
-				\end{LDA}
-			
-				Il faut être attentif à \textbf{ne pas inverser}
-				les deux parties du test.
-				Il faut absolument vérifier que l'indice est bon avant
-				de tester la valeur à cet indice.
-				
-				On pourrait inverser les deux branches 
-				du \K{si-sinon} en inversant le test
-				mais attention à ne pas tester tab[i] 
-				car $i$ n'est peut-être pas valide.
-			
-				Dans certains cas, le \K{si-sinon} peut se simplifier
-				en un simple \K{return} d'une condition.
-				
-				\textbf{Exemple} : Recherche d'un zéro dans un tableau.
-			
-				\begin{LDA}
-					\LComment{Indique si un zéro est présent dans le tableau}
-					\Algo{contientZéro}{\Par{tab}{\Array{n}{entiers}}}{booléen}
-					\Decl{i}{entier}
-					\Let i \Gets 0
-					\While{i < n ET tab[i] $\neq$ 0}
-						\Let i \Gets i + 1
-					\EndWhile
-					\Return {i < n} \RComment{Si le test est vrai c'est qu'on a trouvé un 0}
-					\EndAlgo
-				\end{LDA}
-				
-			\subsubsection*{[B] Avec variable booléenne}
-			
-				\begin{LDA}
-					\LComment{Parcours partiel d'un tableau avec variable booléenne}
-					\Decl{i}{entier}
-					\Decl{trouvé}{booléen}
-					\Let i \Gets 0
-					\Let trouvé \Gets faux
-					\While{i < n ET NON trouvé}
-						\If{\textit{test sur tab[i] dit que on a trouvé}}
-							\Let trouvé \Gets vrai
-						\Else
-							\Let i \Gets i + 1
-						\EndIf
-					\EndWhile
-					\LComment tester le booléen pour savoir si arrêt prématuré.
-				\end{LDA}
-				
-				Attention à bien choisir un nom de booléen 
-				adapté au problème
-				et à l'initialiser à la bonne valeur. 
-				Par exemple, si la variable s'appelle \og{}continue\fg{}
-				\begin{itemize}
-				\item initialiser la variable à vrai ;
-				\item le test de la boucle est \og\lda{\dots ET continue}\fg{} ;
-				\item mettre la variable à faux pour sortir de la boucle.
-				\end{itemize}
-		
-	
+
+			Pour résoudre ce problème,
+			on peut partir du parcours complet et :
+			\begin{itemize}
+			\item
+				Transformer le \K{pour} en \K{tant que}.
+			\item
+				Introduire un test d'arrêt.
+			\end{itemize}
+			La fiche \vref{fiche:tab-parcours-partiel}
+			détaille un parcours partiel.

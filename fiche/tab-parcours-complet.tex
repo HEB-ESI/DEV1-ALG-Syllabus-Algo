@@ -1,0 +1,35 @@
+%================================
+\begin{Fiche}{Parcours complet d'un tableau}
+%================================
+\label{fiche:tab-parcours-complet}
+
+	Afficher tous les éléments d'un tableau d'entiers.
+
+\Section{Spécification}
+	
+	\textbf{Données} : le tableau à afficher
+		
+	\textbf{Résultat} : aucun. Se contente d'afficher les éléments.
+
+\Section{Solution}
+
+	Psuiqu'on parcourt tout le tableau,
+	on peut utiliser une boucle \emph{pour}.
+	
+	\begin{LDA}
+		\Algo{afficherTab}{\Par{tab}{\Array{n}{entiers}}}{}
+			\For{i}{0}{n-1}{}
+				\Write tab[i]
+			\EndFor
+		\EndAlgo
+	\end{LDA}
+
+\Section{Quand l'utiliser ?}
+
+	Ce type de solution peut être utilisé à chaque fois
+	qu'on doit examiner \textbf{tous} les éléments d'un tableau,
+	quel que soit le traitement qu'on en fait :
+	les afficher, les sommer, les comparer\dots
+	
+	
+\end{Fiche}

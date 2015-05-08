@@ -1,0 +1,122 @@
+%================================
+\begin{Fiche}{Parcours partiel d'un tableau}
+%================================
+\label{fiche:tab-parcours-partiel}
+
+	Recherche d'un zéro dans un tableau.
+
+\Section{Spécification}
+	
+	\textbf{Données} : le tableau à tester
+		
+	\textbf{Résultat} : 
+		un booléen à vrai si il existe une valeur nulle dans le tableau.
+	
+	\begin{center}	
+		\flowalgod{tab (tableau d'entiers)}{contientZéro}{booléen}
+	\end{center}
+
+\Section{Solution}
+
+	Contrairement au parcours complet 
+	(cf. fiche \vref{fiche:tab-parcours-complet})
+	on va utiliser un \emph{tant que}
+	car on peut s'arrêter dès qu'on trouve ce qu'on cherche.
+	
+	Il existe essentiellement deux solutions, avec ou sans variable booléenne.
+	En général, la solution [A] sera plus claire si le test est court.
+
+	\subsubsection*{[A] Sans variable booléenne}
+	
+		\begin{LDA}
+			\Algo{tousPositifs}{\Par{tab}{\Array{n}{entiers}}}{booléen}
+				\Decl{i}{entier}
+				\Let i \Gets 0
+				\While{i < n ET tab[i] $\neq$ 0}
+					\Let i \Gets i + 1
+				\EndWhile
+				\Return i < n \RComment Si i<n -> arrêt prématuré -> on a trouvé un 0.
+			\EndAlgo
+		\end{LDA}
+	
+		Il faut être attentif à \textbf{ne pas inverser}
+		les deux parties du test.
+		Il faut absolument vérifier que l'indice est bon avant
+		de tester la valeur à cet indice.
+		
+	\subsubsection*{[B] Avec variable booléenne}
+
+		\begin{LDA}
+			\Algo{tousPositifs}{\Par{tab}{\Array{n}{entiers}}}{booléen}
+				\Decl{i}{entier}
+				\Decl{zéroPrésent}{booléen}
+				\Let zéroPrésent \Gets faux
+				\Let i \Gets 0
+				\While{i < n ET NON zéroPrésent}
+					\Let zéroPrésent \Gets tab[i] = 0
+					\Let i \Gets i + 1
+				\EndWhile
+				\Return zéroPrésent
+			\EndAlgo
+		\end{LDA}
+
+		Au sortir de la boucle,
+		l'indice \lda{i} ne désigne pas l'élément
+		qui nous à permis d'arrêter mais le suivant.
+		Si nécessaire, on peut remplacer l'intérieur de la boucle par :
+
+		\begin{LDA}
+			\If{tab[i] = 0}
+				\Let zéroPrésent \Gets true
+			\Else
+				\Let i \Gets i + 1
+			\EndIf
+		\end{LDA}
+		
+		Dans notre exemple, 
+		on cherche un élément particulier (un 0).
+		Dans le cas où on vérifie si tous les élements possèdent 
+		une certaine propriéte (être positifs par exemple),
+		on veillera à adapter le nom du booléen et son utilisation
+		(par exemple un booléen appelé \lda{tousPositifs},
+		initialisé à vrai avec un \lda{\dots ET tousPositifs}
+		dans le test.
+
+\Section{Alternatives}
+
+	\begin{minipage}{9.0cm}
+		\begin{LDA}
+			\Algo{tousPositifs}{\Par{tab}{\Array{n}{entiers}}}{booléen}
+				\For{i}{0}{n-1}{}
+					\If{tab[i] = 0}
+						\Return false
+					\EndIf
+				\EndFor
+				\Return true
+			\EndAlgo
+		\end{LDA}
+	\end{minipage}
+	\quad
+	\begin{minipage}{4.5cm}
+		On rencontre parfois ce genre de solutions.
+		Elle est plus simple à écrire car on ne doit
+		pas gérer manuellement l'indice
+		mais le lecteur doit attendre de lire
+		le code de la boucle pour comprendre
+		que le parcours ne sera pas toujous complet.
+	\end{minipage}
+
+					
+\Section{Quand l'utiliser ?}
+
+	Ce type de solution peut être utilisé à chaque fois
+	qu'on parcourt un tableau mais qu'un arrêt avant la fin est possible.
+
+	\begin{itemize}
+	\item Est-ce que tous les éléments sont positifs ?
+	\item Est-ce que les élément sont triés ?
+	\item Est-ce qu'un élément précis est présent ?
+	\item \dots
+	\end{itemize}
+	
+\end{Fiche}
