@@ -8,14 +8,15 @@
 	répéter inlassablement les mêmes tâches.
 	Vous avez pu appréhender les boucles lors de votre initiation
 	sur le site \url{code.org}.
-	Nous voyons ici comment incorporer des boucles dans nos codes 
-	et comment les utiliser à bon escient.
+	Voyons comment utiliser à bon escient des boucles dans nos codes.
 
 	\marginicon{attention}
 	Attention~! 
 	D’expérience, nous savons que ce chapitre est difficile à appréhender. 
 	Beaucoup d’entre vous perdent pied ici. 
-	Accrochez-vous et faites bien tous les exercices proposés~!
+	Accrochez-vous, faites bien tous les exercices proposés,
+	montrez vos solutions à votre professeur
+	et demandez de l'aide dès que vous vous sentez perdu~!
 
 % =======================================
 \section{La notion de travail répétitif}
@@ -83,10 +84,19 @@
 	\lda{\K{afficher} nb} si on s'arrange pour que la variable
 	\lda{nb} s'adapte à chaque passage dans la boucle.
 
+	\begin{quote}
+		\bfseries
+		De façon générale,
+		obtenir un travail répétitif,
+		il faut trouver une formulation de la tâche
+		qui va produire un effet différent à chaque fois.
+	\end{quote}
+	
 	\subsection{Exemple - Afficher les nombres de 1 à 5}
 	%===================================================
 	
-		Sans boucle, on pourrait écrire :
+		Si on veut un algorithme qui affiche les nombres de 1 à 5
+		sans utiliser de boucle, on pourrait écrire :
 		
 		\begin{LDA}
 		\Write{1}
@@ -108,7 +118,7 @@
 		il va falloir ruser.
 		On peut obtenir le même résultat avec l'algorithme suivant :
 
-		\begin{LDA}
+		\begin{LDA}[1]
 		\Let nb \Gets 1
 		\Write{nb}
 		\Let nb \Gets nb + 1
@@ -125,7 +135,7 @@
 		Il est plus compliqué,
 		mais cette fois les lignes 2 et 3 se répètent exactement.
 		D'ailleurs, la dernière ligne ne sert à rien d'autre qu'à
-		obtenir exactement cinq copies.
+		obtenir cinq copies identiques.
 		Le travail à répéter est donc :
 
 		\begin{LDA}
@@ -133,10 +143,17 @@
 		\Let nb \Gets nb + 1
 		\end{LDA}
 
+		Cette tâche doit être effectuée cinq fois dans notre exemple.
 		Il existe plusieurs structures répétitives
 		qui vont se distinguer par la façon dont on va
 		contrôler le nombre de répétitions.
-		Voyons-les une à une.
+		Voyons-les une à une%
+		\footnote{%
+			Nous ne verrons pas de structure de type
+			\lda{répéter 5 fois\dots}
+			Elle est simple à comprendre
+			mais pas souvent adaptée au problème à résoudre.
+		}.
 
 %========================
 \section{«~tant que~»}\index{tant que}
@@ -186,13 +203,16 @@
 		Ce qui donne (en n'oubliant pas l'initialisation de \lda{nb}) :
 
 		\begin{LDA}
-		\Let nb \Gets 1
-		\While{nb $\le$ 5}
-			\Write{nb}
-			\Let nb \Gets nb + 1
-		\EndWhile
+			\Algo{compteur5}{}{}
+				\Let nb \Gets 1
+				\While{nb $\le$ 5}
+					\Write{nb}
+					\Let nb \Gets nb + 1
+				\EndWhile
+			\EndAlgo
 		\end{LDA}
 
+\clearpage
 	\subsection{Exemple - Généralisation à n nombres}
 	%===================================================
 
@@ -218,73 +238,82 @@
 			Quels sont les affichages réalisés lors de l’exécution
 			des algorithmes suivants~?
 			
-			\begin{LDA}
-			\Algo{boucle1}{}{}
-				\Decl{x}{entier}
-				\Let x \Gets 0
-				\While{x < 12}
-					\Let x \Gets x + 2	
-				\EndWhile
-				\Write x
-			\EndAlgo
-			\end{LDA}
-		
-			\begin{LDA}
-			\Algo{boucle2}{}{}
-				\Decl{ok}{booléen}
-				\Decl x : entier
-				\Let ok \Gets vrai
-				\Let x \Gets 5
-				\While{ok}
-					\Let x \Gets x + 7	
-					\Let ok \Gets x MOD 11 $\neq$ 0	
-				\EndWhile
-				\Write x
-			\EndAlgo
-			\end{LDA}
-		
-			\begin{LDA}
-			\Algo{boucle3}{}{}
-				\Decl{ok}{booléen}
-				\Decl cpt, x : entiers
-				\Let x \Gets 10
-				\Let cpt \Gets 0
-				\Let ok \Gets vrai
-				\While{ok ET cpt < 3}
-					\If{x MOD 2 = 0}
-						\Let x \Gets x + 1
-						\Let ok \Gets x < 20
-					\Else
-						\Let x \Gets x + 3
-						\Let cpt \Gets cpt + 1
-					\EndIf
-				\EndWhile
-				\Write x
-			\EndAlgo
-			\end{LDA}
-
+			\begin{minipage}[t]{40mm}
+				\begin{LDA}
+				\Algo{boucle1}{}{}
+					\Decl{x}{entier}
+					\Let x \Gets 0
+					\While{x < 12}
+						\Let x \Gets x + 2	
+					\EndWhile
+					\Write x
+				\EndAlgo
+				\end{LDA}
+			\end{minipage}
+			\ 
+			\begin{minipage}[t]{45mm}
+				\begin{LDA}
+				\Algo{boucle2}{}{}
+					\Decl{ok}{booléen}
+					\Decl x : entier
+					\Let ok \Gets vrai
+					\Let x \Gets 5
+					\While{ok}
+						\Let x \Gets x + 7	
+						\Let ok \Gets x MOD 11 $\neq$ 0	
+					\EndWhile
+					\Write x
+				\EndAlgo
+				\end{LDA}
+			\end{minipage}
+			\ 
+			\begin{minipage}[t]{50mm}
+				\begin{LDA}
+				\Algo{boucle3}{}{}
+					\Decl{ok}{booléen}
+					\Decl cpt, x : entiers
+					\Let x \Gets 10
+					\Let cpt \Gets 0
+					\Let ok \Gets vrai
+					\While{ok ET cpt < 3}
+						\If{x MOD 2 = 0}
+							\Let x \Gets x + 1
+							\Let ok \Gets x < 20
+						\Else
+							\Let x \Gets x + 3
+							\Let cpt \Gets cpt + 1
+						\EndIf
+					\EndWhile
+					\Write x
+				\EndAlgo
+				\end{LDA}
+			\end{minipage}
 		\end{Exercice}
 
-		\begin{Exercice}{Afficher les n premiers}
+		\begin{Exercice}{Afficher des nombres}
 			En utilisant un \lda{\algorithmicwhile},
 			écrire un algorithme qui reçoit un entier $n$ positif et affiche
 			\begin{enumerate}[label=\alph*)]
 			\item les nombres de 1 à $n$ ;
 			\item les nombres de 1 à $n$ en ordre décroissant ;
 			\item les nombres impairs de 1 à $n$ ;
-			\item les $n$ premiers nombres impairs
-			(attention, c'est un peu plus difficile).
+			\item les nombres de -n à n ;
+			\item les multiples de 5 de 1 à n ;
+			\item les multiples de n de 1 à 100.
+%			\item les $n$ premiers nombres impairs
+%			(attention, c'est un peu plus difficile).
 			\end{enumerate}
 		\end{Exercice}
 
-		\begin{Exercice}{Somme de chiffres}
-			\marginicon{java}
-			Écrire un algorithme qui calcule la somme des chiffres qui forment un
-			nombre naturel $n$. Attention, on donne au départ \textbf{le} nombre et
-			pas ses chiffres. Exemple~: 133045 doit donner comme résultat 16,
-			car 1 + 3 + 3 + 0 + 4 + 5 = 16.
-		\end{Exercice}
+		%\begin{Exercice}{Somme de chiffres}
+			%\marginicon{java}
+			%Écrire un algorithme qui calcule la somme des chiffres qui forment un
+			%nombre naturel $n$. Attention, on donne au départ \textbf{le} nombre et
+			%pas ses chiffres. Exemple~: 133045 doit donner comme résultat 16,
+			%car 1 + 3 + 3 + 0 + 4 + 5 = 16.
+		%\end{Exercice}
 
+\clearpage
 %====================
 \section{«~pour~»}\index{pour}
 %====================
@@ -301,6 +330,13 @@
 		\EndFor
 		\end{LDA}
 
+		\begin{wrapfigure}{r}{8cm}
+		%\vskip-4mm
+		\includegraphics[width=0.5\textwidth]{image/boucle-pour}
+				\label{fig:boucle-pour}
+		\vskip-10mm
+		\end{wrapfigure}
+
 		Dans ce type de structure, 
 		\lda{début}, \lda{fin} et \lda{pas}
 		peuvent être des constantes, 
@@ -315,14 +351,8 @@
 		Par contre, avec un \lda{pas} négatif, 
 		la boucle s’arrête lorsque la variable prend une valeur 
 		plus petite que la valeur de \lda{fin}
-		(cf. le test dans l’organigramme ci-dessous).
+		(cf. le test dans l’organigramme ci-contre).
 
-		\begin{center}
-			\includegraphics[width=0.33\textwidth]{image/boucle-pour}
-			\label{fig:boucle-pour}
-		\end{center}
-
-		\marginicon{attention}
 		Il faut veiller à la cohérence de l’écriture de cette structure. On considérera
 		qu’au cas (à éviter) où \lda{début} est strictement supérieur à
 		\lda{fin} et le \lda{pas} est positif, la séquence d’instructions
@@ -383,7 +413,7 @@
 		Et si on veut afficher un compte à rebours :
 		
 		\begin{LDA}
-		\Algo{compterJusqueNDécroissant}{\Par{n}{entier}}{}
+		\Algo{compterÀReboursDécroissant}{\Par{n}{entier}}{}
 			\For{nb}{n}{1}{-1}{}
 				\Write nb 
 			\EndFor
