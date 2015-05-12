@@ -434,14 +434,15 @@
 		Notez que $n$ peut être impair. 
 		Si $n$ vaut $11$, l’affichage est le même que pour $10$.
 		On peut utiliser un \og{}pour\fg{}.
-		De 1 à $n$, il y a exactement «~$n$ DIV $2$~» nombres à afficher. 
-		La difficulté vient du lien à faire entre la variable de
-		contrôle et le nombre à afficher.
+%		De 1 à $n$, il y a exactement «~$n$ DIV $2$~» nombres à afficher. 
+%		La difficulté vient du lien à faire entre la variable de
+%		contrôle et le nombre à afficher.
 
-		\textbf{Solution 1.}
-		On garde le lien entre la variable de contrôle 
-		et le nombre à afficher. 
-		Dans ce cas, on commence à $2$ et le pas doit être de $2$.
+		\textbf{Solution.}
+		Une solution possible est :
+%		On garde le lien entre la variable de contrôle 
+%		et le nombre à afficher. 
+%		Dans ce cas, on commence à $2$ et le pas doit être de $2$.
 
 		\begin{LDA}
 		\Algo{afficherPair}{\Par{n}{entier}}{} 
@@ -451,47 +452,50 @@
 		\EndAlgo
 		\end{LDA}
 
-		\textbf{Solution 2.}
-		La variable de contrôle compte simplement le nombre d’itérations.
-		Il faut alors calculer le nombre à afficher en fonction de la variable
-		de contrôle (ici le double de celle-ci convient)
+		La section sur les suites proposera d'autres solutions
+		pour ce problème.
+		
+		%\textbf{Solution 2.}
+		%La variable de contrôle compte simplement le nombre d’itérations.
+		%Il faut alors calculer le nombre à afficher en fonction de la variable
+		%de contrôle (ici le double de celle-ci convient)
 
-		\begin{LDA}
-		\Algo{afficherPair}{\Par{n}{entier}}{} 
-			\For{i}{1}{n DIV 2}{} 
-				\Write 2 * i 
-			\EndFor
-		\EndAlgo
-		\end{LDA}
+		%\begin{LDA}
+		%\Algo{afficherPair}{\Par{n}{entier}}{} 
+			%\For{i}{1}{n DIV 2}{} 
+				%\Write 2 * i 
+			%\EndFor
+		%\EndAlgo
+		%\end{LDA}
 
-		Par une vieille habitude des programmeurs%
-		\footnote{%
-			Née avec le langage FORTRAN 
-			où la variable $i$ était par défaut une variable entière.
-		},
-		une variable de contrôle qui se contente de compter les passages dans
-		la boucle est souvent nommée $i$. 
-		On l’appelle aussi «~itérateur~».
+		%Par une vieille habitude des programmeurs%
+		%\footnote{%
+			%Née avec le langage FORTRAN 
+			%où la variable $i$ était par défaut une variable entière.
+		%},
+		%une variable de contrôle qui se contente de compter les passages dans
+		%la boucle est souvent nommée $i$. 
+		%On l’appelle aussi «~itérateur~».
 
-	\subsection{Exemple -- Afficher les premiers nombres pairs}
-	%============================================================
+	%\subsection{Exemple -- Afficher les premiers nombres pairs}
+	%%============================================================
 	
-		Voici un problème proche du précédent~:
-		on affiche cette fois les $n$ premiers nombres pairs.
+		%Voici un problème proche du précédent~:
+		%on affiche cette fois les $n$ premiers nombres pairs.
 		
-		\textbf{Exemple}~:~les $10$ premiers nombres pairs sont~:~$2$, $4$, $6$, $8$, 
-		$10$, $12$, $14$, $16$, $18$, $20$.
+		%\textbf{Exemple}~:~les $10$ premiers nombres pairs sont~:~$2$, $4$, $6$, $8$, 
+		%$10$, $12$, $14$, $16$, $18$, $20$.
 		
-		Il est plus simple de partir de la solution 2 de l’exemple précédent
-		en changeant simplement la valeur finale de la boucle.
+		%Il est plus simple de partir de la solution 2 de l’exemple précédent
+		%en changeant simplement la valeur finale de la boucle.
 
-		\begin{LDA}
-		\Algo{afficherPair}{\Par{n}{entier}}{} 
-			\For{i}{1}{n}{} 
-				\Write 2 * i 
-			\EndFor
-		\EndAlgo
-		\end{LDA}
+		%\begin{LDA}
+		%\Algo{afficherPair}{\Par{n}{entier}}{} 
+			%\For{i}{1}{n}{} 
+				%\Write 2 * i 
+			%\EndFor
+		%\EndAlgo
+		%\end{LDA}
 
 	\subsection{Exercices}
 	% =====================================
