@@ -789,6 +789,149 @@
 \section{Acquisition de données multiples}
 % ================================
 
+	On vient de voir une série de problème
+	où l'algorithme doit afficher plusieurs valeurs.
+	Il existe aussi des problèmes
+	où l'algorithme doit demander une série de valeurs
+	à l'utilisateur pour pouvoir les traiter.
+	Par exemple, les sommer, en faire la moyenne,
+	calculer la plus grande\dots
+	
+	Dans ce genre de problème,
+	on va devoir stocker chaque valeur donnée par l'utilisateur 
+	dans une seule et même variable et la traiter avant de passer
+	à la suivante.
+	Prenons un exemple concret pour mieux comprendre.
+	
+	\subsection{Exemple -- Somme de nombres}
+
+		On veut pouvoir calculer (et retourner)
+		la somme d’une série de nombres donnés par l’utilisateur. 
+		Il faut d’abord se demander 
+		comment l’utilisateur va pouvoir indiquer
+		combien de nombres il faut additionner ou quand est-ce que le dernier
+		nombre à additionner a été entré. Voyons quelques possibilités.
+
+		\medskip
+		\textbf{Variante 1}~: 
+		
+		L’utilisateur indique le nombre de termes au départ.
+		Ce problème est proche de ce qui a déjà été fait.
+		
+		\begin{Pseudocode}
+		\LComment Lit des valeurs entières et retourne la somme des valeurs lues.
+		\Module{sommeNombres}{}{entier} \RComment Variante 1
+			\Decl nbValeurs : entier \RComment nb de valeurs à additionner
+			\Decl valeur : entier \RComment un des termes de l’addition
+			\Decl somme : entier \RComment la somme
+			\Decl i : entier \RComment itérateur
+			\Let somme \Gets 0 \RComment la somme se construit petit à petit. 0 au départ
+			\Read nbValeurs
+			\For{i \K{de} 1 \K{à} nbValeurs} 
+				\Read valeur
+				\Let somme \Gets somme + valeur 
+			\EndFor
+			\Return somme
+		\EndModule
+		\end{Pseudocode}
+
+		\medskip
+		\textbf{Variante 2}~: 
+		
+		Après chaque nombre, 
+		on demande à l’utilisateur s’il y a encore un nombre à additionner.
+
+		Ici, il faut chercher une solution différente
+		car on ne connait pas au départ le nombre de valeurs à additionner et
+		donc le nombre d’exécution de la boucle. On va devoir passer à un
+		«~tant que~» ou un «faire - jusqu’à ce que». On peut
+		envisager de demander en fin de boucle s’il reste
+		encore un nombre à additionner. Ce qui donne~:
+
+		\begin{Pseudocode}
+		\LComment Lit des valeurs entières et retourne la somme des valeurs lues.
+		\Module{sommeNombres}{}{entier} \RComment Variante 2a
+			\Decl encore : booléen \RComment est-ce qu’il reste encore une valeur à additionner~?
+			\Decl valeur : entier \RComment un des termes de l’addition
+			\Decl somme : entier \RComment la somme
+			\Let somme \Gets 0
+			\Repeat 
+				\Read valeur
+				\Let somme \Gets somme + valeur 
+				\Read encore
+			\Until{NON encore}
+			\Return somme
+		\EndModule
+		\end{Pseudocode}
+		
+		Avec cette solution, on additionne au moins une valeur. 
+		Si on veut pouvoir tenir compte du
+		cas très particulier où l’utilisateur ne veut
+		additionner aucune valeur, il faut utiliser un «~tant que~» et donc
+		poser la question avant d’entrer dans la boucle.
+
+		\begin{Pseudocode}
+		\LComment Lit des valeurs entières et retourne la somme des valeurs lues.
+		\Module{sommeNombres}{}{entier} \RComment Variante 2b
+			\Decl encore : booléen \RComment est-ce qu’il reste encore une valeur à additionner~?
+			\Decl valeur : entier \RComment un des termes de l’addition
+			\Decl somme : entier \RComment la somme
+			\Let somme \Gets 0
+			\Read encore
+			\While{encore} 
+				\Read valeur
+				\Let somme \Gets somme + valeur 
+				\Read encore
+			\EndWhile
+			\Return somme
+		\EndModule
+		\end{Pseudocode}
+
+		\medskip
+		\textbf{Variante 3}~:
+		
+		L’utilisateur entre une valeur spéciale pour indiquer la fin. 
+		On parle de valeur \textbf{sentinelle}. 
+		Ceci n’est possible que si cette valeur \textbf{sentinelle} ne peut pas être
+		un terme valide de l’addition. Par exemple, si on veut
+		additionner des nombres positifs uniquement, la valeur -1 peut servir
+		de valeur sentinelle. Mais sans limite sur les nombres à additionner
+		(positifs, négatifs ou nuls) il n’est pas possible de
+		choisir une sentinelle.
+
+		Ici, on se base sur la valeur entrée pour décider si on continue ou pas. 
+		Il faut donc \textbf{toujours} effectuer un test
+		après une lecture de valeur. C’est pour cela
+		qu’il faut effectuer une lecture avant et une autre à
+		la fin de la boucle.
+
+		\begin{Pseudocode}
+		\LComment Lit des valeurs entières et retourne la somme des valeurs lues.
+		\Module{sommeNombres}{}{entier} \RComment Variante 3
+			\Decl valeur : entier \RComment un des termes de l’addition
+			\Decl somme : entier \RComment la somme
+			\Let somme \Gets 0
+			\Read valeur
+			\While{valeur ${\geq}$ 0} 
+				\Let somme \Gets somme + valeur 
+				\Read valeur \RComment remarquer l’endroit où on lit une valeur.
+			\EndWhile
+			\Return somme
+		\EndModule
+		\end{Pseudocode}
+
+		\marginicon{reflexion}
+		\textbf{Réflexions}~: 
+		\begin{liste}
+		\item
+			Quelle valeur sentinelle prendrait-on 
+			pour additionner une série de cotes d’interrogations~? 
+			Une série de températures~?
+		\item
+			Dans les solutions 2 et 3 on lit une variable booléenne. 
+			Comment un programmeur pourrait-il réaliser 
+			cette instruction de façon pratique~?		
+		\end{liste}
 % ================================
 \section{Exercices récapitulatifs}
 % ================================
