@@ -318,74 +318,74 @@
 \section{«~pour~»}\index{pour}
 %====================
 
-		Ici, on va plutôt indiquer 
-		\textbf{combien de fois} la tâche doit être répétée. 
-		Cela se fait au travers d’une
-		\textbf{variable de contrôle} dont la valeur va évoluer à partir
-		d’une valeur de départ jusqu’à une valeur finale.
-		
-		\begin{LDA}
-		\For{variable}{début}{fin}{pas}
-			\Stmt séquence d’instructions à exécuter
-		\EndFor
-		\end{LDA}
+	Ici, on va plutôt indiquer 
+	\textbf{combien de fois} la tâche doit être répétée. 
+	Cela se fait au travers d’une
+	\textbf{variable de contrôle} dont la valeur va évoluer à partir
+	d’une valeur de départ jusqu’à une valeur finale.
+	
+	\begin{LDA}
+	\For{variable}{début}{fin}{pas}
+		\Stmt séquence d’instructions à exécuter
+	\EndFor
+	\end{LDA}
 
-		\begin{wrapfigure}{r}{8cm}
-		%\vskip-4mm
-		\includegraphics[width=0.5\textwidth]{image/boucle-pour}
-				\label{fig:boucle-pour}
-		\vskip-10mm
-		\end{wrapfigure}
+	\begin{wrapfigure}{r}{8cm}
+	%\vskip-4mm
+	\includegraphics[width=0.5\textwidth]{image/boucle-pour}
+			\label{fig:boucle-pour}
+	\vskip-10mm
+	\end{wrapfigure}
 
-		Dans ce type de structure, 
-		\lda{début}, \lda{fin} et \lda{pas}
-		peuvent être des constantes, 
-		des variables ou des expressions entières. 
-		Le \lda{pas} est facultatif, et généralement omis 
-		(dans ce cas, sa valeur par défaut est 1). 
-		Ce pas est parfois négatif, dans le cas d’un compte à rebours, 
-		par exemple \lda{pour n de 10 à 1 par -1}.
+	Dans ce type de structure, 
+	\lda{début}, \lda{fin} et \lda{pas}
+	peuvent être des constantes, 
+	des variables ou des expressions entières. 
+	Le \lda{pas} est facultatif, et généralement omis 
+	(dans ce cas, sa valeur par défaut est 1). 
+	Ce pas est parfois négatif, dans le cas d’un compte à rebours, 
+	par exemple \lda{pour n de 10 à 1 par -1}.
 
-		Quand le \lda{pas} est positif, la boucle s’arrête
-		lorsque la variable dépasse la valeur de \lda{fin}. 
-		Par contre, avec un \lda{pas} négatif, 
-		la boucle s’arrête lorsque la variable prend une valeur 
-		plus petite que la valeur de \lda{fin}
-		(cf. le test dans l’organigramme ci-contre).
+	Quand le \lda{pas} est positif, la boucle s’arrête
+	lorsque la variable dépasse la valeur de \lda{fin}. 
+	Par contre, avec un \lda{pas} négatif, 
+	la boucle s’arrête lorsque la variable prend une valeur 
+	plus petite que la valeur de \lda{fin}
+	(cf. le test dans l’organigramme ci-contre).
 
-		Il faut veiller à la cohérence de l’écriture de cette structure. On considérera
-		qu’au cas (à éviter) où \lda{début} est strictement supérieur à
-		\lda{fin} et le \lda{pas} est positif, la séquence d’instructions
-		n’est jamais exécutée (mais ce n’est pas le cas dans tous les langages
-		de programmation~!). Idem si \lda{début} est strictement inférieur à
-		\lda{fin} mais avec un \lda{pas} négatif.
+	Il faut veiller à la cohérence de l’écriture de cette structure. On considérera
+	qu’au cas (à éviter) où \lda{début} est strictement supérieur à
+	\lda{fin} et le \lda{pas} est positif, la séquence d’instructions
+	n’est jamais exécutée (mais ce n’est pas le cas dans tous les langages
+	de programmation~!). Idem si \lda{début} est strictement inférieur à
+	\lda{fin} mais avec un \lda{pas} négatif.
 
-		\textbf{Exemples~}:
+	\textbf{Exemples~}:
 
-		\begin{LDA}
-		\Stmt \K{pour} i \K{de} 2 \K{à} 0 \K{faire} \RComment La boucle n’est pas exécutée.
-		\Stmt \K{pour} i \K{de} 1 \K{à} 10 \K{par} -1 \K{faire} \RComment La boucle n’est pas exécutée.
-		\Stmt \K{pour} i \K{de} 1 \K{à} 1 \K{par} 5 \K{faire} \RComment La boucle est exécutée 1 fois.
-		\end{LDA}
-		
-		\marginicon{attention}
-		Il faut aussi veiller à ne pas modifier dans la séquence d’instructions une des
-		variables de contrôle \lda{début}, \lda{fin} ou \lda{pas}~! Il
-		est aussi fortement déconseillé de modifier «~manuellement~» la
-		\lda{variable} de contrôle au sein de la boucle
-		\lda{pour}. Il ne faut pas l’initialiser en début de boucle,
-		et ne pas s’occuper de sa modification, l’instruction 
-		\lda{i \Gets i + pas} 
-		étant automatique et implicite à chaque étape de la boucle. 
-		
-		La variable de contrôle ne servant que pour la boucle
-		et étant forcement entière,
-		on va considérer qu'il n'est pas nécessaire de la déclarer
-		et qu'elle n'est pas utilisable en dehors de la boucle%
-		\footnote{%
-			De nombreux langages ne le permettent d'ailleurs pas
-			ou ont un comportement indéterminé si on le fait.%
-		}.
+	\begin{LDA}
+	\Stmt \K{pour} i \K{de} 2 \K{à} 0 \K{faire} \RComment La boucle n’est pas exécutée.
+	\Stmt \K{pour} i \K{de} 1 \K{à} 10 \K{par} -1 \K{faire} \RComment La boucle n’est pas exécutée.
+	\Stmt \K{pour} i \K{de} 1 \K{à} 1 \K{par} 5 \K{faire} \RComment La boucle est exécutée 1 fois.
+	\end{LDA}
+	
+	\marginicon{attention}
+	Il faut aussi veiller à ne pas modifier dans la séquence d’instructions une des
+	variables de contrôle \lda{début}, \lda{fin} ou \lda{pas}~! Il
+	est aussi fortement déconseillé de modifier «~manuellement~» la
+	\lda{variable} de contrôle au sein de la boucle
+	\lda{pour}. Il ne faut pas l’initialiser en début de boucle,
+	et ne pas s’occuper de sa modification, l’instruction 
+	\lda{i \Gets i + pas} 
+	étant automatique et implicite à chaque étape de la boucle. 
+	
+	La variable de contrôle ne servant que pour la boucle
+	et étant forcement entière,
+	on va considérer qu'il n'est pas nécessaire de la déclarer
+	et qu'elle n'est pas utilisable en dehors de la boucle%
+	\footnote{%
+		De nombreux langages ne le permettent d'ailleurs pas
+		ou ont un comportement indéterminé si on le fait.%
+	}.
 
 	\subsection{Exemples -- Afficher des nombres}
 	%===================================================
@@ -647,6 +647,147 @@
 	fois, alors que dans \lda{tant que}, 
 	le nombre de parcours peut être nul si la condition initiale est fausse. 
 	La schéma ci-dessous propose un récapitulatif.
+
+
+% ================================
+\section{Les suites}
+% ================================
+
+	Nous avons vu quelques exemples d'algorithmes
+	qui affichent une suite de nombres
+	(par exemple, afficher les nombres pairs).
+	Nous avons pu les résoudre facilement
+	avec un \lda{\algorithmicfor}
+	en choisissant judicieusement les valeurs de début et de fin
+	ainsi que le pas.
+	
+	Ce n'est pas toujours aussi simple.
+	Nous allons voir deux exemples plus complexes
+	et les solutions qui vont avec.
+	Elles pourront se généraliser à beaucoup d'autres exemples.
+	
+	\subsubsection{Exemple - Afficher les carrés}
+	%--------------------------------------------
+	
+		On veut afficher les $n$ premiers nombres carrés parfaits :
+		$1$, $4$, $9$, $16$, $25$\dots
+
+		Si on vous demande : "Quel est le 7\ieme{} nombre à afficher ?".
+		Vous répondrez : "Facile ! C'est $7^2$, soit $49$".
+		Plus généralement, le nombre à afficher 
+		lors du $i$\ieme{} passage dans la boucle est $i^2$.
+
+		\begin{tabular}{l|*{8}{>{\centering\arraybackslash}m{8mm}}}
+		 étape & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\\hline
+		 valeur à afficher & 1 & 4 & 9 & 16 & 25 & 36 & 49 & 64 \\
+		\end{tabular}
+		
+		L'algorithme qui en découle est :
+		
+		\begin{LDA}
+			\Algo{suiteCarrés}{\Par{n}{entier}}{}
+				\For{i}{1}{n}{}
+					\Write $i^2$
+				\EndFor
+			\EndAlgo
+		\end{LDA}
+
+		Dans cette solution,
+		la variable de contrôle compte simplement le nombre d’itérations.
+		On calcule le nombre à afficher en fonction cette variable de contrôle 
+		(ici le carré convient).
+		Par une vieille habitude des programmeurs%
+		\footnote{%
+			Née avec le langage FORTRAN 
+			où la variable $i$ était par défaut une variable entière.
+		},
+		une variable de contrôle 
+		qui se contente de compter les passages dans la boucle 
+		est souvent nommée $i$. 
+		On l’appelle aussi «~itérateur~».	
+
+		Cette solution peut être utilisée
+		chaque fois qu'on peut calculer le nombre à afficher
+		en fonction de $i$.
+		
+	\subsubsection{Exemple - Une suite un peu plus complexe}
+	%-------------------------------------------------------
+	 
+		Écrire un algorithme qui affiche 
+		les $n$ premiers nombres de la suite :
+		1, 2, 4, 7, 11, 16\dots{}
+		
+		Comme on peut le constater, 
+		à chaque étape on ajoute un peu plus au nombre précédent.
+		\[ 
+			1 
+			\xrightarrow{+1} 2 
+			\xrightarrow{+2} 4
+			\xrightarrow{+3} 7 
+			\xrightarrow{+4} 11 
+			\xrightarrow{+5} 16 
+			\dots
+		\] 
+
+		Ici, difficile de partir de la solution de l'exemple précédent
+		car il est n'est pas facile de trouver la fonction $f(i)$
+		qui permet de calculer le nombre à afficher en fonction de i. 
+		
+		Par contre, il est assez simple de calculer ce nombre 
+		en fonction du précédent.
+		\[
+			\mbox{nb à afficher} = \mbox{nb affiché juste avant} + i
+		\]
+		Sauf pour le premier, qui ne peut pas être calculé
+		en fonction du précédent.
+		Une solution élégante et facilement adaptable
+		à d'autres situations est :
+		
+		\begin{LDA}
+			\Algo{suite}{\Par{n}{entier}}{}
+				\Decl{val}{entier}
+				\Let val \Gets \textit{1\iere{} valeur à afficher}
+				\For{i}{1}{n}{}
+					\Write val
+					\Let val \Gets \textit{la valeur suivante calculée à partir de la valeur courante}
+				\EndFor
+			\EndAlgo
+		\end{LDA}
+		
+		qui, dans notre exemple précis, devient :
+
+		\begin{LDA}
+			\Algo{suite}{\Par{n}{entier}}{}
+				\Decl{val}{entier}
+				\Let val \Gets 1
+				\For{i}{1}{n}{}
+					\Write val
+					\Let val \Gets val + i
+				\EndFor
+			\EndAlgo
+		\end{LDA}
+
+	\subsubsection{Exercices}
+	%-------------------------------------------------------
+		
+		\begin{Exercice}{Suites}
+			Écrire les algorithmes qui affichent
+			les $n$ premiers termes des suites suivantes.
+			À vous de voir quel est le canevas de solution
+			le plus adapté.
+			\begin{enumerate}[label=\alph*)]
+			\item -1, -2, -3, -4, -5, -6\dots
+			\item 1, 3, 6, 10, 15, 21, 28\dots
+			\item 1, 0, 1, 0, 1, 0, 1, 0\dots
+			\item 1, 2, 0, 1, 2, 0, 1, 2\dots
+			\item 1, 2, 3, 1, 2, 3, 1, 2\dots
+			\item 1, 2, 3, 2, 1, 2, 3, 2\dots
+			\end{enumerate}			
+		\end{Exercice}
+		
+% ================================
+\section{Acquisition de données multiples}
+% ================================
 
 % ================================
 \section{Exercices récapitulatifs}
