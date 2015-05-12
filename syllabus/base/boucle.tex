@@ -424,7 +424,7 @@
 	\subsection{Exemple -- Afficher uniquement les nombres pairs}
 	%===========================================================
 
-		Cela se complique un peu. 
+%		Cela se complique un peu. 
 		Cette fois-ci on affiche uniquement 
 		les nombres \textbf{pairs} jusqu’à la limite $n$.
 		
@@ -437,8 +437,7 @@
 %		De 1 à $n$, il y a exactement «~$n$ DIV $2$~» nombres à afficher. 
 %		La difficulté vient du lien à faire entre la variable de
 %		contrôle et le nombre à afficher.
-
-		\textbf{Solution.}
+%		\textbf{Solution.}
 		Une solution possible est :
 %		On garde le lien entre la variable de contrôle 
 %		et le nombre à afficher. 
@@ -497,6 +496,8 @@
 		%\EndAlgo
 		%\end{LDA}
 
+\clearpage
+
 	\subsection{Exercices}
 	% =====================================
 
@@ -504,47 +505,55 @@
 			Quels sont les affichages réalisés lors de l’exécution
 			des algorithmes suivants~?
 			
-			\begin{LDA}
-			\Algo{boucle5}{}{}
-				\Decl{x}{entier}
-				\Decl{ok}{booléen}
-				\Let x \Gets 3
-				\Let ok \Gets vrai
-				\For{i}{1}{5}{}
-					\Let x \Gets x + i
-					\Let ok \Gets ok ET (x MOD 2 = 0)
-				\EndFor
-				\If{ok}
-					\Write x
-				\Else
-					\Write 2 * x
-				\EndIf
-			\EndAlgo
-			\end{LDA}
-		
-			\begin{LDA}
-			\Algo{boucle6}{}{}
-				\Decl{fin}{entiers}
-				\For{i}{1}{3}{}
-					\Let fin \Gets 6 * i - 11
-					\For{j}{1}{fin}{3}
-						\Write 10 * i + j
+			\begin{minipage}[t]{6cm}
+				\begin{LDA}
+				\Algo{boucle5}{}{}
+					\Decl{x}{entier}
+					\Decl{ok}{booléen}
+					\Let x \Gets 3
+					\Let ok \Gets vrai
+					\For{i}{1}{5}{}
+						\Let x \Gets x + i
+						\Let ok \Gets ok ET (x MOD 2 = 0)
 					\EndFor
-				\EndFor
-			\EndAlgo
-			\end{LDA}
+					\If{ok}
+						\Write x
+					\Else
+						\Write 2 * x
+					\EndIf
+				\EndAlgo
+				\end{LDA}
+			\end{minipage}
+			\quad
+			\begin{minipage}[t]{6cm}
+				\begin{LDA}
+				\Algo{boucle6}{}{}
+					\Decl{fin}{entiers}
+					\For{i}{1}{3}{}
+						\Let fin \Gets 6 * i - 11
+						\For{j}{1}{fin}{3}
+							\Write 10 * i + j
+						\EndFor
+					\EndFor
+				\EndAlgo
+				\end{LDA}
+			\end{minipage}
 
 		\end{Exercice}
 
-		\begin{Exercice}{Afficher les n premiers}
+		\begin{Exercice}{Afficher des nombres}
+			Reprenons un exercice déjà donné avec le \lda{\algorithmicwhile}.
 			En utilisant un \lda{\algorithmicfor},
 			écrire un algorithme qui reçoit un entier $n$ positif et affiche
 			\begin{enumerate}[label=\alph*)]
 			\item les nombres de 1 à $n$ ;
 			\item les nombres de 1 à $n$ en ordre décroissant ;
-			\item les $n$ premiers carrés parfaits (1, 4, 9\dots) ;
-			\item les nombres impairs de 1 à $n$ ;
-			\item les $n$ premiers nombres impairs.
+			\item les nombres de -n à n ;
+			\item les multiples de 5 de 1 à n ;
+			\item les multiples de n de 1 à 100.
+%			%\item les $n$ premiers carrés parfaits (1, 4, 9\dots) ;
+			%\item les nombres impairs de 1 à $n$ ;
+			%\item les $n$ premiers nombres impairs.
 			\end{enumerate}
 		\end{Exercice}
 
@@ -562,18 +571,22 @@
 	\EndRepeat{condition}
 	\end{LDA}
 
+		\begin{wrapfigure}{r}{6cm}
+		\vskip-4mm
+		\includegraphics[width=0.35\textwidth]{image/boucle-faire}
+				\label{fig:boucle-faire}
+		\vskip-10mm
+		\end{wrapfigure}
+
 	Comme avec le tant-que, 
 	il faut que la séquence d’instructions comprise entre
 	\lda{\K{faire}} et \lda{\K{tant que}} 
 	contienne au moins une instruction qui modifie la condition de
 	telle manière qu’elle puisse devenir \textbf{vraie} à un moment donné
 	pour arrêter l’itération. 
-	Le schéma ci-dessous décrit le déroulement de cette boucle. 
-
-	\begin{center}
-	\includegraphics[width=0.35\textwidth]{image/boucle-faire}
-	\label{fig:boucle-faire}
-	\end{center}
+	Le schéma ci-contre décrit le déroulement de cette boucle. 
+	
+\clearpage
 
 	%\subsection{Exercices}
 	%=====================
@@ -600,9 +613,28 @@
 		
 		\end{Exercice}
 
+		\begin{Exercice}{Afficher des nombres}
+			Reprenons un exercice déjà fait avec le \lda{\algorithmicwhile}
+			et le \lda{\algorithmicfor}
+			en utilisant cette fois un \lda{\algorithmicuntil}.
+			Écrire un algorithme qui reçoit un entier $n$ positif et affiche
+			\begin{enumerate}[label=\alph*)]
+			\item les nombres de 1 à $n$ ;
+			\item les nombres de 1 à $n$ en ordre décroissant ;
+			\item les nombres de -n à n ;
+			\item les multiples de 5 de 1 à n ;
+			\item les multiples de n de 1 à 100.
+			\end{enumerate}
+		\end{Exercice}
+
 %======================================
 \section{Quel type de boucle choisir~?}
 %======================================
+
+		\begin{wrapfigure}{r}{10cm}
+		\includegraphics[width=.6\textwidth]{image/boucle-choixtype}
+				\label{fig:boucle-choix}
+		\end{wrapfigure}
 
 	En pratique, il est possible d’utiliser systématiquement la boucle 
 	\lda{tant que} qui peut s’adapter à toutes les situations. 
@@ -615,11 +647,6 @@
 	fois, alors que dans \lda{tant que}, 
 	le nombre de parcours peut être nul si la condition initiale est fausse. 
 	La schéma ci-dessous propose un récapitulatif.
-
-	\begin{center}
-		\includegraphics[width=0.66\textwidth]{image/boucle-choixtype}
-		\label{fig:boucle-choix}
-	\end{center}
 
 % ================================
 \section{Exercices récapitulatifs}
