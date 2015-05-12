@@ -300,18 +300,8 @@
 			\item les nombres de -n à n ;
 			\item les multiples de 5 de 1 à n ;
 			\item les multiples de n de 1 à 100.
-%			\item les $n$ premiers nombres impairs
-%			(attention, c'est un peu plus difficile).
 			\end{enumerate}
 		\end{Exercice}
-
-		%\begin{Exercice}{Somme de chiffres}
-			%\marginicon{java}
-			%Écrire un algorithme qui calcule la somme des chiffres qui forment un
-			%nombre naturel $n$. Attention, on donne au départ \textbf{le} nombre et
-			%pas ses chiffres. Exemple~: 133045 doit donner comme résultat 16,
-			%car 1 + 3 + 3 + 0 + 4 + 5 = 16.
-		%\end{Exercice}
 
 \clearpage
 %====================
@@ -331,7 +321,6 @@
 	\end{LDA}
 
 	\begin{wrapfigure}{r}{8cm}
-	%\vskip-4mm
 	\includegraphics[width=0.5\textwidth]{image/boucle-pour}
 			\label{fig:boucle-pour}
 	\vskip-10mm
@@ -424,7 +413,6 @@
 	\subsection{Exemple -- Afficher uniquement les nombres pairs}
 	%===========================================================
 
-%		Cela se complique un peu. 
 		Cette fois-ci on affiche uniquement 
 		les nombres \textbf{pairs} jusqu’à la limite $n$.
 		
@@ -434,14 +422,7 @@
 		Notez que $n$ peut être impair. 
 		Si $n$ vaut $11$, l’affichage est le même que pour $10$.
 		On peut utiliser un \og{}pour\fg{}.
-%		De 1 à $n$, il y a exactement «~$n$ DIV $2$~» nombres à afficher. 
-%		La difficulté vient du lien à faire entre la variable de
-%		contrôle et le nombre à afficher.
-%		\textbf{Solution.}
 		Une solution possible est :
-%		On garde le lien entre la variable de contrôle 
-%		et le nombre à afficher. 
-%		Dans ce cas, on commence à $2$ et le pas doit être de $2$.
 
 		\begin{LDA}
 		\Algo{afficherPair}{\Par{n}{entier}}{} 
@@ -454,48 +435,6 @@
 		La section sur les suites proposera d'autres solutions
 		pour ce problème.
 		
-		%\textbf{Solution 2.}
-		%La variable de contrôle compte simplement le nombre d’itérations.
-		%Il faut alors calculer le nombre à afficher en fonction de la variable
-		%de contrôle (ici le double de celle-ci convient)
-
-		%\begin{LDA}
-		%\Algo{afficherPair}{\Par{n}{entier}}{} 
-			%\For{i}{1}{n DIV 2}{} 
-				%\Write 2 * i 
-			%\EndFor
-		%\EndAlgo
-		%\end{LDA}
-
-		%Par une vieille habitude des programmeurs%
-		%\footnote{%
-			%Née avec le langage FORTRAN 
-			%où la variable $i$ était par défaut une variable entière.
-		%},
-		%une variable de contrôle qui se contente de compter les passages dans
-		%la boucle est souvent nommée $i$. 
-		%On l’appelle aussi «~itérateur~».
-
-	%\subsection{Exemple -- Afficher les premiers nombres pairs}
-	%%============================================================
-	
-		%Voici un problème proche du précédent~:
-		%on affiche cette fois les $n$ premiers nombres pairs.
-		
-		%\textbf{Exemple}~:~les $10$ premiers nombres pairs sont~:~$2$, $4$, $6$, $8$, 
-		%$10$, $12$, $14$, $16$, $18$, $20$.
-		
-		%Il est plus simple de partir de la solution 2 de l’exemple précédent
-		%en changeant simplement la valeur finale de la boucle.
-
-		%\begin{LDA}
-		%\Algo{afficherPair}{\Par{n}{entier}}{} 
-			%\For{i}{1}{n}{} 
-				%\Write 2 * i 
-			%\EndFor
-		%\EndAlgo
-		%\end{LDA}
-
 \clearpage
 
 	\subsection{Exercices}
@@ -551,9 +490,6 @@
 			\item les nombres de -n à n ;
 			\item les multiples de 5 de 1 à n ;
 			\item les multiples de n de 1 à 100.
-%			%\item les $n$ premiers carrés parfaits (1, 4, 9\dots) ;
-			%\item les nombres impairs de 1 à $n$ ;
-			%\item les $n$ premiers nombres impairs.
 			\end{enumerate}
 		\end{Exercice}
 
@@ -586,11 +522,7 @@
 	pour arrêter l’itération. 
 	Le schéma ci-contre décrit le déroulement de cette boucle. 
 	
-\clearpage
-
-	%\subsection{Exercices}
-	%=====================
-	
+\clearpage	
 		\begin{Exercice}{Compréhension d’algorithmes}
 			Quels sont les affichages réalisés lors de l’exécution
 			des algorithmes suivants~?
@@ -802,42 +734,51 @@
 	dans une seule et même variable et la traiter avant de passer
 	à la suivante.
 	Prenons un exemple concret pour mieux comprendre.
+
+	\begin{quote}
+	On veut pouvoir calculer (et retourner)
+	la somme d’une série de nombres donnés par l’utilisateur. 
+	\end{quote}
+
+	Il faut d’abord se demander 
+	comment l’utilisateur va pouvoir indiquer
+	combien de nombres il faut additionner 
+	ou quand est-ce que le dernier nombre à additionner a été entré. 
+	Voyons quelques possibilités.
 	
-	\subsection{Exemple -- Somme de nombres}
-
-		On veut pouvoir calculer (et retourner)
-		la somme d’une série de nombres donnés par l’utilisateur. 
-		Il faut d’abord se demander 
-		comment l’utilisateur va pouvoir indiquer
-		combien de nombres il faut additionner ou quand est-ce que le dernier
-		nombre à additionner a été entré. Voyons quelques possibilités.
-
-		\medskip
-		\textbf{Variante 1}~: 
-		
+	\subsection{Variante 1 : nombre de valeurs connu} 
+	%------------------------------------------------	
+	
 		L’utilisateur indique le nombre de termes au départ.
 		Ce problème est proche de ce qui a déjà été fait.
 		
-		\begin{Pseudocode}
+		\begin{LDA}
 		\LComment Lit des valeurs entières et retourne la somme des valeurs lues.
-		\Module{sommeNombres}{}{entier} \RComment Variante 1
-			\Decl nbValeurs : entier \RComment nb de valeurs à additionner
-			\Decl valeur : entier \RComment un des termes de l’addition
-			\Decl somme : entier \RComment la somme
-			\Decl i : entier \RComment itérateur
+		\Algo{sommeNombres}{}{entier} \RComment Variante 1
+			\Decl{nbValeurs}{entier} \RComment nb de valeurs à additionner
+			\Decl{valeur}{entier} \RComment un des termes de l’addition
+			\Decl{somme}{entier} \RComment la somme
 			\Let somme \Gets 0 \RComment la somme se construit petit à petit. 0 au départ
 			\Read nbValeurs
-			\For{i \K{de} 1 \K{à} nbValeurs} 
+			\For{i}{1}{nbValeurs}{} 
 				\Read valeur
 				\Let somme \Gets somme + valeur 
 			\EndFor
 			\Return somme
-		\EndModule
-		\end{Pseudocode}
+		\EndAlgo
+		\end{LDA}
 
-		\medskip
-		\textbf{Variante 2}~: 
-		
+		\begin{Exercice}{Afficher les nombres impairs}
+			Écrire un algorithme qui demande une série
+			de valeurs entières à l'utilisateur
+			et qui affiche celles qui sont impaires.
+			L'algorithme commence par demander à l'utilisateur
+			le nombre de valeurs qu'il désire donner.
+		\end{Exercice}
+			
+	\subsection{Variante 2 : stop ou encore}
+	%------------------------------------------------	
+	
 		Après chaque nombre, 
 		on demande à l’utilisateur s’il y a encore un nombre à additionner.
 
@@ -848,21 +789,21 @@
 		envisager de demander en fin de boucle s’il reste
 		encore un nombre à additionner. Ce qui donne~:
 
-		\begin{Pseudocode}
+		\begin{LDA}
 		\LComment Lit des valeurs entières et retourne la somme des valeurs lues.
-		\Module{sommeNombres}{}{entier} \RComment Variante 2a
-			\Decl encore : booléen \RComment est-ce qu’il reste encore une valeur à additionner~?
-			\Decl valeur : entier \RComment un des termes de l’addition
-			\Decl somme : entier \RComment la somme
+		\Algo{sommeNombres}{}{entier} \RComment Variante 2a
+			\Decl{encore}{booléen} \RComment est-ce qu’il reste encore une valeur à additionner~?
+			\Decl{valeur}{entier} \RComment un des termes de l’addition
+			\Decl{somme}{entier} \RComment la somme
 			\Let somme \Gets 0
 			\Repeat 
 				\Read valeur
 				\Let somme \Gets somme + valeur 
 				\Read encore
-			\Until{NON encore}
+			\EndRepeat{NON encore}
 			\Return somme
-		\EndModule
-		\end{Pseudocode}
+		\EndAlgo
+		\end{LDA}
 		
 		Avec cette solution, on additionne au moins une valeur. 
 		Si on veut pouvoir tenir compte du
@@ -870,12 +811,12 @@
 		additionner aucune valeur, il faut utiliser un «~tant que~» et donc
 		poser la question avant d’entrer dans la boucle.
 
-		\begin{Pseudocode}
+		\begin{LDA}
 		\LComment Lit des valeurs entières et retourne la somme des valeurs lues.
-		\Module{sommeNombres}{}{entier} \RComment Variante 2b
-			\Decl encore : booléen \RComment est-ce qu’il reste encore une valeur à additionner~?
-			\Decl valeur : entier \RComment un des termes de l’addition
-			\Decl somme : entier \RComment la somme
+		\Algo{sommeNombres}{}{entier} \RComment Variante 2b
+			\Decl{encore}{booléen} \RComment est-ce qu’il reste encore une valeur à additionner~?
+			\Decl{valeur}{entier} \RComment un des termes de l’addition
+			\Decl{somme}{entier} \RComment la somme
 			\Let somme \Gets 0
 			\Read encore
 			\While{encore} 
@@ -884,11 +825,19 @@
 				\Read encore
 			\EndWhile
 			\Return somme
-		\EndModule
-		\end{Pseudocode}
+		\EndAlgo
+		\end{LDA}
 
-		\medskip
-		\textbf{Variante 3}~:
+		\begin{Exercice}{Compter les nombres impairs}
+			Écrire un algorithme qui demande une série
+			de valeurs entières à l'utilisateur
+			et qui lui affiche le nombre de valeurs impairs
+			qu'il a donné.
+			Après chaque valeur entrée,
+			l'algorithme demande à l'utilisateur s'il y en a encore d'autres.
+		\end{Exercice}
+
+	\subsection{Variante 3 : valeur sentinelle}
 		
 		L’utilisateur entre une valeur spéciale pour indiquer la fin. 
 		On parle de valeur \textbf{sentinelle}. 
@@ -905,11 +854,11 @@
 		qu’il faut effectuer une lecture avant et une autre à
 		la fin de la boucle.
 
-		\begin{Pseudocode}
+		\begin{LDA}
 		\LComment Lit des valeurs entières et retourne la somme des valeurs lues.
-		\Module{sommeNombres}{}{entier} \RComment Variante 3
-			\Decl valeur : entier \RComment un des termes de l’addition
-			\Decl somme : entier \RComment la somme
+		\Algo{sommeNombres}{}{entier} \RComment Variante 3
+			\Decl{valeur}{entier} \RComment un des termes de l’addition
+			\Decl{somme}{entier} \RComment la somme
 			\Let somme \Gets 0
 			\Read valeur
 			\While{valeur ${\geq}$ 0} 
@@ -917,21 +866,31 @@
 				\Read valeur \RComment remarquer l’endroit où on lit une valeur.
 			\EndWhile
 			\Return somme
-		\EndModule
-		\end{Pseudocode}
+		\EndAlgo
+		\end{LDA}
 
-		\marginicon{reflexion}
-		\textbf{Réflexions}~: 
-		\begin{liste}
-		\item
+		\begin{Exercice}{Choix de la valeur sentinelle}
 			Quelle valeur sentinelle prendrait-on 
 			pour additionner une série de cotes d’interrogations~? 
 			Une série de températures~?
-		\item
-			Dans les solutions 2 et 3 on lit une variable booléenne. 
-			Comment un programmeur pourrait-il réaliser 
-			cette instruction de façon pratique~?		
-		\end{liste}
+		\end{Exercice}
+
+		\begin{Exercice}{Afficher les nombres impairs}
+			Écrire un algorithme qui demande une série
+			de valeurs entières non nulles à l'utilisateur
+			et qui affiche celles qui sont impaires
+			La fin des données sera signalée 
+			par la valeur sentinelle 0.
+		\end{Exercice}
+
+		\begin{Exercice}{Compter le nombre de réussites}
+			Écrire un algorithme qui demande une série
+			de cotes (entières, sur 20) à l'utilisateur
+			et qui affiche le pourcentage de réussites.
+			La fin des données sera signalée 
+			par une valeur sentinelle que vous pouvez choisir.
+		\end{Exercice}
+			
 % ================================
 \section{Exercices récapitulatifs}
 % ================================
@@ -962,6 +921,14 @@
 		Écrire un algorithme qui affiche les nombres premiers inférieurs ou
 		égaux à un entier positif donné. Le module de cet algorithme fera appel
 		de manière répétée mais économique à celui de l’exercice précédent.
+	\end{Exercice}
+
+	\begin{Exercice}{Somme de chiffres}
+		\marginicon{java}
+		Écrire un algorithme qui calcule la somme des chiffres qui forment un
+		nombre naturel $n$. Attention, on donne au départ \textbf{le} nombre et
+		pas ses chiffres. Exemple~: 133045 doit donner comme résultat 16,
+		car 1 + 3 + 3 + 0 + 4 + 5 = 16.
 	\end{Exercice}
 	
 	\begin{Exercice}{Nombre parfait}
