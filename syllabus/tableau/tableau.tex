@@ -37,14 +37,15 @@
 		\begin{itemize}
 		\item
 			le traitement de début de journée, qui consiste essentiellement à mettre
-			les compteurs des quantités vendues pour chaque produit à 0
+			les compteurs des quantités vendues pour chaque produit à 0 ;
 		\item
 			le traitement itératif durant toute la journée~: 
 			au fur et à mesure des ventes, 
 			il convient de les enregistrer, 
 			c’est-à-dire d’ajouter au compteur des ventes d’un produit 
 			la quantité vendue de ce produit ; 
-			ce traitement itératif s’interrompra lorsque la valeur 0 sera introduite
+			ce traitement itératif s’interrompra 
+			lorsque la valeur -1 sera introduite ;
 		\item
 			le traitement final, consistant à communiquer les valeurs des compteurs
 			pour chaque produit.
@@ -80,7 +81,7 @@
 				\Read quantité
 				\Empty
 				\Switch{numéroProduit \K{vaut}}
-					\Stmt 0~: cpt1 \Gets cpt10 + quantité
+					\Stmt 0~: cpt0 \Gets cpt0 + quantité
 					\Stmt 1~: cpt1 \Gets cpt1 + quantité
 					\Stmt 2~: cpt2 \Gets cpt2 + quantité
 					\Stmt 3~: cpt3 \Gets cpt3 + quantité
@@ -123,11 +124,11 @@
 		les \textbf{variables indicées} ou \textbf{tableaux}.
 	
 		Au lieu d’avoir à manier dix compteurs distincts
-		(\lda{cpt0}, \lda{cpt21}, etc.), 
+		(\lda{cpt0}, \lda{cpt1}, etc.), 
 		nous allons envisager une seule «~grande~» variable 
 		\lda{cpt} compartimentée en dix «~sous-variables~» 
 		qui se distingueront les unes des autres par un indice~: 
-		\lda{cpt0} deviendrait ainsi \lda{cpt[1]}, 
+		\lda{cpt0} deviendrait ainsi \lda{cpt[0]}, 
 		\lda{cpt1} deviendrait \lda{cpt[1]}, 
 		et ainsi de suite jusqu’à
 		\lda{cpt9} qui deviendrait \lda{cpt[9]}.
@@ -178,7 +179,7 @@
 			\Decl{cpt}{\Array{10}{entiers}}
 			\Decl{i, numéroProduit, quantité}{entiers}
 			\Empty
-			\For{i}{1}{10}{}
+			\For{i}{0}{9}{}
 				\Let cpt[i] \Gets 0
 			\EndFor
 			\Empty
@@ -197,7 +198,7 @@
 				\Empty
 			\EndWhile
 			\Empty
-			\For{i}{1}{10}{}
+			\For{i}{0}{9}{}
 				\Write "quantité vendue de produit ", i, ": ", cpt[i]
 			\EndFor
 			\Empty
