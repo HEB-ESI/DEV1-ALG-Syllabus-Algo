@@ -190,7 +190,7 @@
 \algdef{SE}[WHILE]{While}{EndWhile}[1]
   {\printandpush\algorithmicwhile\ #1\ \algorithmicdo}
   {\popandprint\algorithmicend\ \algorithmicwhile}%
-\algdef{SE}[FOR]{For}{EndFor}[4]
+\algdef{SE}[FOR]{For}{EndFor}[4][1]
   {\printandpush\algorithmicfor\ #1 \K{de} #2 \K{à} #3\ifthenelse{\equal{#4}{}}{}{ \K{par} #4}\ \algorithmicdo}
   {\popandprint\algorithmicend\ \algorithmicfor}%
 \algdef{SE}[REPEAT]{Repeat}{EndRepeat}
