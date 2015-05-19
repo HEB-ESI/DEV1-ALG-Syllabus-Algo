@@ -229,94 +229,212 @@
 		son utilisation.
 	
 	% ==================
-	\section{Notations}
+	\section{Déclaration}
 	% ==================
 	
 		\marginicon{definition}
 		Pour déclarer un tableau, on écrit~:
 	
 		\begin{LDA}
-		\Decl{nomTableau}{\Array{taille}{TypeElément}}
+			\Decl{nomTableau}{\Array{<taille>}{<TypeElément>}}
 		\end{LDA}
-		
+
 		où \lda{TypeElément} est le type des éléments 
 		que l’on trouvera dans le tableau.
 		Tous les types sont permis. 
-	
+
+	% ==================
+	\section{Utilisation}
+	% ==================
+			
+		Un élément (une case) du tableau peut être accédé
+		via la notation
+		\begin{LDA}
+			\Stmt tab[i]	\Comment{élément du tableau 'tab' d'indice i}
+		\end{LDA}
+		
 		Une fois un tableau déclaré, 
-		seuls les éléments d’indice compris entre
-		0 et taille-1 peuvent être utilisés. 
+		seuls les éléments d’indice compris entre 0%
+		\footnote{%
+			Nous considérons que la première case du tableau
+			porte le numéro 0 comme c'est le cas dans beaucoup de langage
+			de programmation (comme Java par exemple).
+			Plus loin, nous verrons une notation alternative
+			qui permet de choisir un autre numéro de début pour le tableau
+			ce qui sera plus naturel pour certains problèmes.
+		}
+		et taille-1 peuvent être utilisés. 
 		Par exemple, si on déclare~:
 	
 		\begin{LDA}
-		\Decl{tabEntiers}{\Array{100}{entiers}}
+			\Decl{tabEntiers}{\Array{100}{entiers}}
 		\end{LDA}
 		
 		il est interdit d’utiliser \lda{tabEntiers[-1]} ou
 		\lda{tabEntiers[100]}. 
-		De plus, chaque élément
-		\lda{tabEntiers[i]} (avec $0 \leq i < 100$) 
+	
+	% ==================
+	\section{Initialisation}
+	% ==================
+
+		Chaque élément d'un tableau
 		doit être manié avec la même précaution 
 		qu’une variable simple, 
 		c’est-à-dire qu’on ne peut utiliser un élément du tableau 
 		qui n’aurait pas été préalablement affecté ou initialisé.
-	
-		N.B.~: Nous considérons que la première case du tableau
-		porte le numéro 0 comme c'est le cas dans beaucoup de langage
-		de programmation (comme Java par exemple).
-		Plus loin, nous verrons une notation alternative
-		qui permet de choisir un autre numéro de début pour le tableau
-		ce qui sera plus naturel pour certains problèmes.
 
+		L'initialisation d'un tableau peut se faire 
+		via une série d'assignations, une case par case
+		mais on va aussi se permettre une notation compacte%
+		\footnote{
+			Peu de langages de programmation 
+			ont une notation compacte de ce genre. 
+			Java, par exemple, en possède une version moins puissante.
+			C'est pourquoi, en début d'apprentissage, 
+			on vous demandera souvent d'initialiser des tableaux
+			sans utiliser cette notation compacte.
+		} :
+		
+		\begin{LDA}
+			\Let tab \Gets \{2, 3, 5, 7, 11\} 
+			\RComment{équivalent à tab[0] \Gets 2, tab[1] \Gets 3, tab[2] \Gets 5\dots}
+			\Let tab \Gets \{0, \dots, 0\} 
+			\RComment{tous les éléments du tableau sont initialisés à 0}
+		\end{LDA}
+
+		Par contre, on ne se permettra pas de demander ou d'afficher 
+		un tableau en une seule instruction; 
+		il faut des instructions \lda{\textbf{demander}} 
+		et \lda{\textbf{afficher}}
+		individuelles pour chacun des éléments.
+		
 	% ==============================
 	\section{Tableau et paramètres}
 	% ==============================
 	
-		Un tableau peut être passé en paramètre à un module 
+		Le type \emph{tableau} étant un type à part entière,
+		il est tout-à-fait éligible comme type
+		pour les paramètres et la valeur de retour d'un algorithme.
+		Plus précisément :
+		\begin{itemize}
+		\item \In : 
+			indique que l'algorithme va consulter les valeurs 
+			du tableau reçu en paramètre. 
+			Les élements doivent donc avoir été initialisés
+			avant d'appeler l'algorihtme.
+			
+			\begin{LDA}
+				\LComment{Affiche les éléments d'un tableau}
+				\Algo{affiche}{\Par{tab\In}{\Array{10}{entiers}}}{} 
+					\For{i}{0}{9}
+						\Write tab[i]
+					\EndFor
+				\EndAlgo 
+	
+				\Empty
+				\LComment{Utilisation possible}
+				\Decl{monTab}{\Array{10}{entiers}}
+				\Let monTab \Gets \{2,3,5,7,11,13,17,19,23,29\}
+				\Stmt afficher(monTab)
+			\end{LDA}
+
+
+		\item \In\Out :
+			indique que l'algorithme va consulter/modifier les valeurs 
+			du tableau reçu en paramètre. 
+
+			\begin{LDA}
+				\LComment{Inverse les éléments du tableau}
+				\Algo{inverse}{\Par{tab\In\Out}{\Array{10}{entiers}}}{} 
+					\For{i}{0}{9}
+						\Let tab[i] \Gets -tab[i]
+					\EndFor
+				\EndAlgo 
+	
+				\Empty
+				\LComment{Utilisation possible}
+				\Decl{monTab}{\Array{10}{entiers}}
+				\Let monTab \Gets \{2,3,5,7,11,13,17,19,23,29\}
+				\Stmt inverse(monTab)
+			\end{LDA}
+
+		\item \Out :
+			indique que l'algorithme va assigner des valeurs 
+			au tableau reçu en paramètre.
+			Les éléments de ce tableau n'ont donc pas à être initialisés
+			avant d'appeler cet algorithme. 
+
+			\begin{LDA}
+				\LComment{Initialise un tableau de 10 entiers reçu en paramètre}
+				\Algo{initialiser}{\Par{tab\Out}{\Array{10}{entiers}}}{}
+					\For{i}{0}{9}
+						\Let tab[i] \Gets i
+					\EndFor
+				\EndAlgo 
+				\Empty
+				\LComment{Utilisation possible}
+				\Decl{monTab}{\Array{10}{entiers}}
+				\Stmt initialiser(monTab)
+			\end{LDA}
+
+		\item retour :
+			indique que l'algorithme va déclarer et retourner le tableau.
+
+			\begin{LDA}
+				\LComment{Retourne un tableau initialisé de 10 entiers}
+				\Algo{créer}{}{\Array{10}{entiers}}
+					\Decl{tab}{\Array{10}{entiers}}
+					\For{i}{0}{9}
+						\Let tab[i] \Gets i
+					\EndFor
+					\Return tab
+				\EndAlgo 
+				\Empty
+				\LComment{Utilisation possible}
+				\Decl{monTab}{\Array{10}{entiers}}
+				\Let monTab \Gets créer()
+			\end{LDA}
+
+		\end{itemize}
+		
+		\medskip
+		Un tableau peut être passé en paramètre à un algorithme 
 		mais qu’en est-il de sa taille ? 
-		Il serait utile de pouvoir appeler le même module avec des
+		Il serait utile de pouvoir appeler le même algorithme avec des
 		tableaux de tailles différentes. 
 		Pour permettre cela, la taille du tableau reçu en paramètre 
-		est déclarée avec une variable 
-		(qui peut être considéré comme un paramètre entrant).
+		est déclarée avec une variable (souvent \emph{n})
+		qui peut être considéré comme un paramètre entrant
+		et peut être utilisé dans l'algorithme.
+		Idem pour un tableau en retour.
 	
 		\textbf{Exemple~:}
 		
 		\begin{LDA}
-			\Algo{brol}{\Par{tab}{\Array{n}{entiers}}}{}
-				\Write "J’ai reçu un tableau de ", n, " éléments".
+			\LComment{Affiche un tableau de taille quelconque}
+			\Algo{afficher}{\Par{tab}{\Array{n}{entiers}}}{}
+				\Write "Tableau de ", n, " éléments".
+				\For{i}{0}{n-1}
+					\Write tab[i]
+				\EndFor
+			\EndAlgo
+			\Empty
+			\LComment Crée un tableau d'entiers de taille n, l'initialise à 0 et le retourne.
+			\Algo{créerTableau}{n : entier}{\Array{n}{entiers}}
+				\Decl{tab}{\Array{n}{entiers}}
+				\For{i}{0}{n-1}
+					\Let tab[i] \Gets 0
+				\EndFor
+				\Return tab
+			\EndAlgo
+			\Empty
+			\Algo{principalAppelTableau}{}{}
+				\Decl{entiers}{\Array{10}{entiers}}
+				\Let entiers \Gets créerTableau()
+				\Stmt afficher(entiers)
 			\EndAlgo
 		\end{LDA}
-	
-		Ce $n$ va prendre la taille précise du tableau
-		utilisé à chaque appel et peut être utilisé
-		dans le corps du module. 	
-		Notons qu’on admet également qu’un module retourne un tableau. 
-		
-		\begin{LDA}
-		\LComment Crée un tableau d'entiers de taille 10, l'initialise à 0 et le retourne.
-		\Algo{créerTableau}{}{\Array{n}{entiers}}
-			\Decl{tab}{\Array{n}{entiers}}
-			\For{i}{0}{9}{}
-				\Let tab[i] \Gets 0
-			\EndFor
-			\Return tab
-		\EndAlgo
-		\Empty
-		\Algo{principalAppelTableau}{}{}
-			\Decl{entiers}{\Array{n}{entiers}}
-			\Let entiers \Gets créerTableau()
-			\For{i}{0}{9}{}
-				\Write entiers[i]
-			\EndFor
-		\EndAlgo
-		\end{LDA}
-		
-		Par contre, on ne peut pas lire ou afficher un tableau 
-		en une seule instruction; 
-		il faut des instructions de lecture 
-		ou d'affichage individuelles pour chacun de ses éléments.
-			
+					
 	% ==============================================
 	\section{Parcours d'un tableau à une dimension} 
 	\label{Les parcours de tableaux}
