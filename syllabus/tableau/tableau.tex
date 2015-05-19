@@ -478,3 +478,271 @@
 			\end{itemize}
 			La fiche \vref{fiche:tab-parcours-partiel}
 			détaille un parcours partiel.
+
+	% ==============================================
+	\section{Taille logique et taille physique} 
+	% ==============================================
+
+		Parfois, on ne sait pas exactement 
+		quelle taille doit avoir un tableau.
+		Imaginons, par exemple,
+		qu'il s'agisse de demander des valeurs à l'utilisateur
+		et de les stocker dans un tableau pour un traitement ultérieur.
+		Supposons que l'utilisateur va indiquer la fin des données
+		par une valeur sentinelle.
+		Impossible de savoir, à priori, combien de valeurs il va entrer
+		et, par conséquent, la taille à donner au tableau.
+		
+		Une solution est de créer un tableau suffisament grand
+		pour tous les cas%
+		\footnote{%
+			En tout cas, 
+			suffisament grand pour tous les cas qu'on accepte
+			de prendre en compte; il faudra bien fixer une limite.
+		} 
+		quitte à n'en n'utiliser qu'une partie.
+		Mais comment savoir quelle est la partie du tableau
+		qui est effectivement utilisée ?
+		Comprenez bien qu'il \textbf{n'y a pas de concept de case vide}.
+		Rien de différencie une case utilisée d'une case non utilisée.
+		On s'en sort en retenant, dans une variable,
+		le nombre de case effectivement utilisées%
+		\footnote{%
+			Cases qui, par hypothèse, doivent se situer dans la partie basse
+			du tableau.
+		}.
+		
+		\marginicon{definition}
+		La \textbf{taille physique} d'un tableau 
+		est le nombre de cases qu'il contient.
+		Sa \textbf{taille logique}
+		est le nombre de cases actuellement utilises.
+		
+		\paragraph{Exemple.}
+		L'algorithme ci-dessous 
+		demande des valeurs positives à l'utilisateur 
+		et les stocke dans un tableau (maxmimum 1000).
+		Toute valeur négative ou nulle est une valeur sentinelle.
+		\begin{LDA}
+			\Algo{stockerValeurs}{}{}
+				\Decl{tab}{\Array{1000}{entiers}}
+				\Decl{nbÉléments}{entier} \RComment{C'est la taille logique}
+				\Decl{valeur}{entier}
+				\Let nbÉléments \Gets 0
+				\Read valeur
+				\While{valeur > 0 ET nbÉléments < 1000}
+					\Let tab[nbÉléments] \Gets valeur
+					\Let nbÉléments \Gets nbÉléments + 1
+					\Read valeur
+				\EndWhile
+				\If{valeur > 0}		\RComment{Pourquoi tester valeur et pas nbÉléments ?}
+					\Write "La limite physique a été atteinte"
+				\EndIf
+			\EndAlgo
+		\end{LDA}
+
+		\begin{Exercice}{Modifier l'exemple}
+			Tel quel, l'exemple ci-dessus n'est pas très intéressant.
+			Ce serait mieux s'il retournait le tableau 
+			ce qui permettrait effectivement un traitement ultérieur
+			des valeurs.
+			Modifiez-le en ce sens.
+		\end{Exercice}
+		
+	% ==============================================
+	\section{Gérer les données dans un tableau non trié} 
+	% ==============================================
+		
+		Une utilisation courante des tableaux
+		est le stockage des données changeantes.
+		Lors de l'évolution de l'algorithme
+		des données sont ajoutées, recherchées, supprimées, modifiées.
+		
+		Par exemple, imaginons que l'école 
+		organise un événement libre et gratuit pour les étudiants.
+		Mais pour y assister, ils doivent s'inscrire.
+		On veut fournir ce qu'il faut pour :
+		\begin{itemize}
+		\item inscrire un éudiant ;
+		\item vérifier si un étudiant est inscrit ;
+		\item désinscrire un étudiant (s'il change d'avis par exemple) ;
+		\item afficher la liste des inscrits.
+		\end{itemize}
+
+		Voyons les algorithmes qui implémentent ces fonctionnalités.
+		On peut imaginer retenir dans un tableau
+		les numéros des étudiants inscrits%
+		\footnote{%
+			Une vraie solution de ce problème
+			utiliserait probablement une base de données
+			mais ça c'est une autre histoire et un autre cours ;)
+		}.
+		Il nous faut alors gérer la taille logique du tableau.
+		On a donc deux variables :
+		\begin{itemize}
+		\item \lda{inscrits} : le tableau des numéros d'étudiants
+		\item \lda{nbInscrits} : le nombre d'étudiants actuellement inscrits (la taille logique du tableau)
+		\end{itemize}
+		
+		Nous allons considérer que les numéros d'étudiants
+		ne sont pas triés dans le tableau.
+		Dans la section suivante
+		nous verrons ce qui change si nous maintenons un ordre
+		parmi les étudiants.
+		
+		Par exemple, on pourrait avoir la situation suivante :
+		\begin{center}
+			\lda{inscrits} = 
+			\smallskip
+			\begin{tabular}{*{10}{|>{\centering\arraybackslash}m{1cm}}|}
+				\hline
+				42010 & 41390 & 43342 & 42424 & ? & ? & ? & ? & \dots \\
+				\hline
+			\end{tabular}
+			\smallskip
+			\lda{nbInscrits = 4}
+		\end{center}
+		indiquant qu'il y a pour les moment quatre étudiants inscrits
+		dont les numéros sont ceux repris 
+		dans les quatre premières cases du tableau.
+		
+		\subsection{Inscription}
+		
+			Commençons par l'inscription.
+			Pour inscrire un étudiant, il suffit de l'ajouter à la suite
+			dans le tableau.
+			Par exemple, en partant de la situation décrite ci-dessus,
+			l'inscription de l'étudiant numéro 42123 aboutit à la situation
+			suivante :
+			\begin{center}
+				\lda{inscrits} = 
+				\smallskip
+				\begin{tabular}{*{10}{|>{\centering\arraybackslash}m{1cm}}|}
+					\hline
+					42010 & 41390 & 43342 & 42424 & 42123 & ? & ? & ? & \dots \\
+					\hline
+				\end{tabular}
+				\smallskip
+				\lda{nbInscrits = 5}
+			\end{center}
+			
+			L'algorithme est assez simple :
+			
+			\begin{LDA}
+				\LComment{Inscrit un étudiant de numéro donné.}
+				\Algo{inscrire}{\Par{inscrits\In\Out}{\Array{n}{entiers}}, \Par{nbInscrits\In\Out}{entier}, \Par{numéro}{entier}}{}
+					\LComment{On peut imaginer vérifier que l'étudiant n'est pas déjà inscrit}
+					\LComment{On peut imaginer vérifier qu'il reste de la place (c-à-d que le tableau n'est pas plein)}
+					\Let inscrits[nbInscrits] \Gets numéro
+					\Let nbInscrits \Gets nbInscrits + 1
+				\EndAlgo
+			\end{LDA}
+		
+		\subsection{Vérifier inscription}
+	
+			Pour vérifier si un étudiant est déja inscrit,
+			il faut le rechercher dans la partie utilisée du tableau.
+			Cette recherche se fait via un parcours avec sortie
+			prématurée. On pourrait se contenter de retourner un
+			booléen indiquant si oui ou non on l'a trouvé
+			mais retournons plutôt un entier indiquant l'indice où
+			il est (-1 si on ne l'a pas trouvé), ce sera plus utile.
+			
+			\begin{LDA}
+				\LComment{Vérifie si un étudiant est inscrit et donne sa position (-1 si non inscrit)}
+				\Algo{vérifier}{\Par{inscrits\In}{\Array{n}{entiers}}, \Par{nbInscrits\In}{entier}, \Par{numéro}{entier}}{entier}
+					\Decl{i}{entier}
+					\Let i \Gets 0
+					\While{i < nbInscrits ET inscrits[i] $\ne$ numéro}
+						\Let i \Gets i + 1
+					\EndWhile
+					\If{i < nbInscrits}
+						\Return i
+					\Else
+						\Return -1
+					\EndIf
+				\EndAlgo
+			\end{LDA}
+			
+			La fiche (A ECRIRE) reprend cet algorithme
+			dans un cadre plus général et met en avant
+			les variantes et les pièges à éviter.
+
+		\subsection{Désinscription}
+		
+			Pour désinscrire un étudiant,
+			il faut le trouver dans le tableau et l'enlever.
+			Attention, il ne peut pas y avoir de trou dans un tableau
+			(il n'y a pas de case vide).
+			Le plus simple est d'y déplacer le dernier élément.
+			Par exemple,
+			reprenons la situation après inscription de l'étudiant
+			numéro 42123.
+			La désincription de l'étudiant numéro 41390 donnerait%
+			\footnote{
+				Nous avons volontairement indiqué le 42123 en 5\ieme{} position.
+				Il est toujours là mais ne sera pas considéré par les
+				algorithmes puisque cette case est au-delà de la taille logique
+				(donnée par la variable \lda{nbInscrits}).
+			}
+
+			\begin{center}
+				\lda{inscrits} = 
+				\smallskip
+				\begin{tabular}{*{10}{|>{\centering\arraybackslash}m{1cm}}|}
+					\hline
+					42010 & 42123 & 43342 & 42424 & 42123 & ? & ? & ? & \dots \\
+					\hline
+				\end{tabular}
+				\smallskip
+				\lda{nbInscrits = 4}
+			\end{center}
+			
+			L'algorithme est assez simple à écrire
+			si on utilise la recherche écrite juste avant :
+			
+			\begin{LDA}
+				\LComment{Vérifie si un étudiant est inscrit et donne sa position (-1 si non inscrit)}
+				\Algo{désinscrire}{\Par{inscrits\In\Out}{\Array{n}{entiers}}, \Par{nbInscrits\In\Out}{entier}, \Par{numéro}{entier}}{entier}
+					\Decl{pos}{entier}
+					\Let pos \Gets vérifier(inscrits, nbInscrits, numéro)
+					\LComment{On pourrait vérifier et générer une erreur si l'étudiant n'est pas inscrit}
+					\Let inscrits[pos] \Gets inscrits[nbInscrits-1]
+					\Let nbInscrits \Gets nbInscrits - 1					
+				\EndAlgo
+			\end{LDA}
+			
+		\subsection{Exercices}
+			
+			\begin{Exercice}{Éviter la double inscription}
+				Comment modifier l'algorithme d'inscription
+				pour s'assurer qu'un étudiant ne s'inscrive pas deux fois ?
+			\end{Exercice}
+
+			\begin{Exercice}{Limite au nombre d'inscriptions}
+				Comment modifier l'algorithme d'inscription
+				pour refuser une inscription si le nombre maximal
+				de participant est atteint
+				en supposant que ce maximum est égal à la taille physique du tableau ?
+			\end{Exercice}
+
+			\begin{Exercice}{Vérifier la déinscription}
+				Que se passerait-il avec l'algorithme
+				de désinscription tel qu'il est
+				si on demande à désinscrire un étudiant non inscrit ?
+				Que suggérez-vous comme changement ?
+			\end{Exercice}
+
+			\begin{Exercice}{Optimiser la déinscription}
+				Dans l'algorithme de désinscription tel qu'il est,
+				voyez-vous un cas où on effectue une opération inutile ?
+				Avez-vous une proposition pour l'éviter ?
+			\end{Exercice}
+
+	% ==============================================
+	\section{Gérer les données dans un tableau trié} 
+	% ==============================================
+
+	% ==============================================
+	\section{Des tableaux qui ne commencent pas à 0} 
+	% ==============================================
