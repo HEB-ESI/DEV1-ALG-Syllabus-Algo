@@ -315,7 +315,7 @@
 	d’une valeur de départ jusqu’à une valeur finale.
 	
 	\begin{LDA}
-	\For{variable}{début}{fin}{pas}
+	\For[pas]{variable}{début}{fin}
 		\Stmt séquence d’instructions à exécuter
 	\EndFor
 	\end{LDA}
@@ -383,7 +383,7 @@
 		
 		\begin{LDA}
 		\Algo{compterJusque5}{}{}
-			\For{nb}{1}{5}{} \RComment par défaut le pas est de 1
+			\For{nb}{1}{5} \RComment par défaut le pas est de 1
 				\Write nb 
 			\EndFor
 		\EndAlgo
@@ -393,7 +393,7 @@
 		
 		\begin{LDA}
 		\Algo{compterJusqueN}{\Par{n}{entier}}{}
-			\For{nb}{1}{n}{}
+			\For{nb}{1}{n}
 				\Write nb 
 			\EndFor
 		\EndAlgo
@@ -403,7 +403,7 @@
 		
 		\begin{LDA}
 		\Algo{compterÀReboursDécroissant}{\Par{n}{entier}}{}
-			\For{nb}{n}{1}{-1}{}
+			\For[-1]{nb}{n}{1}
 				\Write nb 
 			\EndFor
 			\Write "Partez !"
@@ -426,7 +426,7 @@
 
 		\begin{LDA}
 		\Algo{afficherPair}{\Par{n}{entier}}{} 
-			\For{nb}{2}{n}{2} 
+			\For[2]{nb}{2}{n} 
 				\Write nb 
 			\EndFor
 		\EndAlgo
@@ -451,7 +451,7 @@
 					\Decl{ok}{booléen}
 					\Let x \Gets 3
 					\Let ok \Gets vrai
-					\For{i}{1}{5}{}
+					\For{i}{1}{5}
 						\Let x \Gets x + i
 						\Let ok \Gets ok ET (x MOD 2 = 0)
 					\EndFor
@@ -468,9 +468,9 @@
 				\begin{LDA}
 				\Algo{boucle6}{}{}
 					\Decl{fin}{entiers}
-					\For{i}{1}{3}{}
+					\For{i}{1}{3}
 						\Let fin \Gets 6 * i - 11
-						\For{j}{1}{fin}{3}
+						\For[3]{j}{1}{fin}
 							\Write 10 * i + j
 						\EndFor
 					\EndFor
@@ -618,7 +618,7 @@
 		
 		\begin{LDA}
 			\Algo{suiteCarrés}{\Par{n}{entier}}{}
-				\For{i}{1}{n}{}
+				\For{i}{1}{n}
 					\Write $i^2$
 				\EndFor
 			\EndAlgo
@@ -679,7 +679,7 @@
 			\Algo{suite}{\Par{n}{entier}}{}
 				\Decl{val}{entier}
 				\Let val \Gets \textit{1\iere{} valeur à afficher}
-				\For{i}{1}{n}{}
+				\For{i}{1}{n}
 					\Write val
 					\Let val \Gets \textit{la valeur suivante calculée à partir de la valeur courante}
 				\EndFor
@@ -692,7 +692,7 @@
 			\Algo{suite}{\Par{n}{entier}}{}
 				\Decl{val}{entier}
 				\Let val \Gets 1
-				\For{i}{1}{n}{}
+				\For{i}{1}{n}
 					\Write val
 					\Let val \Gets val + i
 				\EndFor
@@ -760,7 +760,7 @@
 			\Decl{somme}{entier} \RComment la somme
 			\Let somme \Gets 0 \RComment la somme se construit petit à petit. 0 au départ
 			\Read nbValeurs
-			\For{i}{1}{nbValeurs}{} 
+			\For{i}{1}{nbValeurs}
 				\Read valeur
 				\Let somme \Gets somme + valeur 
 			\EndFor

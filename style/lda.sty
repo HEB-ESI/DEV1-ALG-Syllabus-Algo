@@ -181,7 +181,7 @@
 % \While{cond}
 % \EndWhile
 %
-% \For{i \K{de} 1 \K{à} n}
+% \For{i}{1}{n}	// ou For[pas]{i}{1}{n}
 % \EndFor
 %
 % \Repeat
@@ -191,7 +191,7 @@
   {\printandpush\algorithmicwhile\ #1\ \algorithmicdo}
   {\popandprint\algorithmicend\ \algorithmicwhile}%
 \algdef{SE}[FOR]{For}{EndFor}[4][1]
-  {\printandpush\algorithmicfor\ #1 \K{de} #2 \K{à} #3\ifthenelse{\equal{#4}{}}{}{ \K{par} #4}\ \algorithmicdo}
+  {\printandpush\algorithmicfor\ #2 \K{de} #3 \K{à} #4\ifthenelse{\equal{#1}{1}}{}{ \K{par} #1}\ \algorithmicdo}
   {\popandprint\algorithmicend\ \algorithmicfor}%
 \algdef{SE}[REPEAT]{Repeat}{EndRepeat}
   {\printandpush\algorithmicrepeat}[1]
