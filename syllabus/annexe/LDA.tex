@@ -143,7 +143,7 @@
 	\end{minipage}
 	
 	\begin{LDA}
-		\Switch{expression \K{vaut}}
+		\Switch{expression}
 			\Case{liste${}_1$ de valeurs séparées par des virgules }
 				\Stmt Instructions
 			\Case{liste${}_2$ de valeurs séparées par des virgules }
@@ -172,7 +172,7 @@
 	\
 	\begin{minipage}[t]{6.5cm}	
 	\begin{LDA}
-		\For{indice \K{de} début \K{à} fin [\K{par} pas]}
+		\For[pas]{indice}{début}{fin}
 			\Stmt Instructions
 		\EndFor
 	\end{LDA}
@@ -185,11 +185,17 @@
 		\EndRepeat{condition}
 	\end{LDA}
 	\end{minipage}
-		
-	La boucle \lda{pour} ne peut être utilisée que pour des entiers.
-
-	Il n'est \textbf{pas nécessaire} de déclarer l'indice.
-	Il ne peut être utilisé en dehors de la boucle et ne peut pas
-	être modifié à l'intérieur de la boucle.
-	De même, le \lda{début}, la \lda{fin} et le \lda{pas} 
-	ne peuvent pas être modifiés dans la boucle.
+	
+	\begin{itemize}
+	\item
+		La boucle \lda{pour} ne peut être utilisée que pour des entiers.
+	\item
+		Le \lda{\K{par} pas} peut être omis si le pas vaut 1.
+	\item
+		Il n'est \textbf{pas nécessaire} de déclarer l'indice.
+		Il ne peut être utilisé en dehors de la boucle et ne peut pas
+		être modifié à l'intérieur de la boucle.
+		De même, le \lda{début}, la \lda{fin} et le \lda{pas} 
+		ne peuvent pas être modifiés dans la boucle.
+	\end{itemize}
+	

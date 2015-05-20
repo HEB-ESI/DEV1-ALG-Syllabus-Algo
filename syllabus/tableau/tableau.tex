@@ -746,3 +746,147 @@
 	% ==============================================
 	\section{Des tableaux qui ne commencent pas à 0} 
 	% ==============================================
+
+		Les tableaux que nous avons vu jusqu'à présent
+		\emph{commencent à 0}
+		ce qui signifie que la première case est d'indice 0.
+		Il peut être intéressant d'utiliser des tableaux
+		qui commencent à un autre indice.
+		
+		\paragraph{Exemple.}
+		Imaginons l'algorithme qui permet de convertir un numéro
+		de jour en son intitulé : 1 donne "lundi", 2 donne "mardi",
+		\dots{}
+		Une solution possible, sans tableau, serait :
+		
+		\begin{LDA}
+			\Algo{intituléJour}{\Par{numéroJour}{entier}}{chaine}
+				\Switch{numéroJour}
+				\Case{1} \algorithmicreturn{} "lundi"
+				\Case{2} \algorithmicreturn{} "mardi"
+				\Case{3} \algorithmicreturn{} "mercredi"
+				\Case{4} \algorithmicreturn{} "jeudi"
+				\Case{5} \algorithmicreturn{} "vendredi"
+				\Case{6} \algorithmicreturn{} "samedi"
+				\Case{7} \algorithmicreturn{} "dimanche"
+				\EndSwitch
+			\EndAlgo
+		\end{LDA}
+		
+		Mais une solution plus élégante passe par l'utilisation d'un tableau.
+		Appelons-le \lda{nomsJours} et stockons-y les noms des jours
+		comme illustré ci-dessous.
+
+		\begin{center}
+			\begin{tabular}{*{7}{>{\centering\arraybackslash}m{15mm}}}
+				1 & 2 & 3 & 4 & 5 & 6 & 7
+				\\\hline
+				\multicolumn{1}{|>{\centering\arraybackslash}m{15mm}|}{"lundi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mardi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mercredi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"jeudi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"vendredi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"samedi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"dimanche"}
+				\\\hline
+			\end{tabular}
+		\end{center}
+
+		Pour obtenir le nom d'un jour, il suffit d'écrire : 
+		\lda{nomsJours[numéroJour]}.
+		
+		On voit dans cet exemple
+		qu'il est plus naturel que le tableau commence à 1.
+		Pour déclarer un tel tableau, 
+		nous utiliserons la notation suivante :
+		
+		\begin{LDA}
+			\Decl{nomsJours}{\Array[1]{7}{chaine}}
+		\end{LDA}
+		
+		L'algorihtme devient :
+		\begin{LDA}
+			\Algo{intituléJour}{\Par{numéroJour}{entier}}{chaine}
+				\Decl{nomsJours}{\Array[1]{7}{chaine}}
+				\Let nomsJours \Gets \{"lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"\}
+				\Return nomsJours[numéroJour]
+			\EndAlgo
+		\end{LDA}
+		
+		\paragraph{Comment traduire ça dans un langage de programmation ?}
+		Certains langages permettent de choisir l'indice de début d'un tableau.
+		D'autres l'imposent, parfois à 1 comme Cobol 
+		mais le plus souvent à 0 comme Java.
+		Que faire dans ce cas ? Il existe deux stratégies.
+		
+		La première passe par une conversion d'indice.
+		On stocke les données dans le tableau 
+		comme nous l'impose le langage
+		\begin{center}
+			\begin{tabular}{*{7}{>{\centering\arraybackslash}m{15mm}}}
+				0 & 1 & 2 & 3 & 4 & 5 & 6
+				\\\hline
+				\multicolumn{1}{|>{\centering\arraybackslash}m{15mm}|}{"lundi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mardi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mercredi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"jeudi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"vendredi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"samedi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"dimanche"}
+				\\\hline
+			\end{tabular}
+		\end{center}
+		et on accède à l'intitulé du jour $i$ dans la case $i-1$.
+		Ce qui donne
+
+		\begin{LDA}
+			\Algo{intituléJour}{\Par{numéroJour}{entier}}{chaine}
+				\Decl{nomsJours}{\Array{7}{chaine}}
+				\Let nomsJours \Gets \{"lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"\}
+				\Return nomsJours[numéroJour-1]
+			\EndAlgo
+		\end{LDA}
+		
+		La seconde approche crée un tableau avec une case en plus
+		et n'utilise pas la première.
+
+		\begin{center}
+			\begin{tabular}{>{\centering\arraybackslash}m{5mm}*{7}{>{\centering\arraybackslash}m{15mm}}}
+				0 & 1 & 2 & 3 & 4 & 5 & 6 & 7
+				\\\hline
+				\multicolumn{1}{|>{\centering\arraybackslash}m{5mm}|}{} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"lundi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mardi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mercredi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"jeudi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"vendredi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"samedi"} &
+				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"dimanche"}
+				\\\hline
+			\end{tabular}
+		\end{center}
+		L'algorithme devient
+
+		\begin{LDA}
+			\Algo{intituléJour}{\Par{numéroJour}{entier}}{chaine}
+				\Decl{nomsJours}{\Array{8}{chaine}}
+				\Let nomsJours \Gets \{"", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"\}
+				\Return nomsJours[numéroJour]
+			\EndAlgo
+		\end{LDA}
+		
+		Cette seconde approche est à préférer 
+		car elle modifie le moins l'algorithme de départ 
+		et entrainera moins d'erreurs de conversion.
+		Mais elle n'est pas toujours possible.
+		Par exemple, imaginons qu'on veuille prendre 
+		des relevés de températures (arrondies à l'entier) à Bruxelles 
+		et retenir le nombre de fois que chaque température a été relevée.
+		Le plus évident serait d'utiliser un tableau allant de -30 à 40
+		où la case $i$ donne le nombre de fois 
+		que la température $i$ a été relevée.
+		Pour cet exemple, impossible d'utiliser la seconde approche
+		mais la première est toujours possible en stockant
+		le nombre de relevés de la températue $i$ dans la case $i+30$.
+		
+		

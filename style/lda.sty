@@ -165,7 +165,7 @@
 \algdef{Ce}[ELSE]{IF}{Else}{EndIf}
   {\popandprint\pushindent\algorithmicelse}%
 \algdef{SE}[SWITCH]{Switch}{EndSwitch}[1]
-  {\printandpush\algorithmicswitch\ #1}
+  {\printandpush\algorithmicswitch\ #1 \K{ vaut}}
   {\popandprint\algorithmicend\ \algorithmicswitch}%
 \algdef{C}[SWITCH]{SWITCH}{Case}[1]
   {\popandprint\pushindent\ #1:}%
@@ -219,7 +219,10 @@
 % Tableaux
 % \Array{n}{T}
 %-----------------------------------------------
-\newcommand{\Array}[2]{tableau~de~#1~#2}
+\newcommand{\Array}[3][0]{%
+	tableau~%
+	\ifthenelse{\equal{#1}{0}}{de~#2~#3}{[#1~à~#2] de #3}%	
+}
 
 %% Classe
 %\algdef{SE}[CLASS]{Class}{EndClass}[1]
