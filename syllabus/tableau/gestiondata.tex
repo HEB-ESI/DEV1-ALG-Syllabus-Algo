@@ -2,6 +2,10 @@
 \chapter{Gérer les données dans un tableau}
 %==========================================
 
+	\begin{TODO}
+		Voir ce qui va devenir des fiches.
+	\end{TODO}
+	
 	Une utilisation courante des tableaux
 	est le stockage des données changeantes.
 	Lors de l'évolution de l'algorithme
@@ -64,6 +68,7 @@
 		dans les quatre premières cases du tableau.
 		
 		\subsection{Inscription}
+		%---------------------------------------------
 		
 			Commençons par l'inscription.
 			Pour inscrire un étudiant, il suffit de l'ajouter à la suite
@@ -95,7 +100,8 @@
 				\EndAlgo
 			\end{LDA}
 		
-		\subsection{Vérifier inscription}
+		\subsection{Vérifier une inscription}
+		%---------------------------------------------
 	
 			Pour vérifier si un étudiant est déja inscrit,
 			il faut le rechercher dans la partie utilisée du tableau.
@@ -126,6 +132,7 @@
 			les variantes et les pièges à éviter.
 
 		\subsection{Désinscription}
+		%---------------------------------------------
 		
 			Pour désinscrire un étudiant,
 			il faut le trouver dans le tableau et l'enlever.
@@ -159,8 +166,12 @@
 			si on utilise la recherche écrite juste avant :
 			
 			\begin{LDA}
-				\LComment{Vérifie si un étudiant est inscrit et donne sa position (-1 si non inscrit)}
-				\Algo{désinscrire}{\Par{inscrits\In\Out}{\Array{n}{entiers}}, \Par{nbInscrits\In\Out}{entier}, \Par{numéro}{entier}}{entier}
+				\LComment{désinscrit l'étudiant donné}
+				\Algo{désinscrire}{
+						\Par{inscrits\In\Out}{\Array{n}{entiers}}, 
+						\Par{nbInscrits\In\Out}{entier}, 
+						\Par{numéro\In}{entier}
+						}{entier}
 					\Decl{pos}{entier}
 					\Let pos \Gets vérifier(inscrits, nbInscrits, numéro)
 					\LComment{On pourrait vérifier et générer une erreur si l'étudiant n'est pas inscrit}
@@ -170,6 +181,7 @@
 			\end{LDA}
 			
 		\subsection{Exercices}
+		%---------------------------------------------
 			
 			\begin{Exercice}{Éviter la double inscription}
 				Comment modifier l'algorithme d'inscription
@@ -200,10 +212,835 @@
 	\section{Données triées} 
 	% ==============================================
 
+		Imaginons à présent que nous maintenons un ordre
+		dans les données du tableau.
+		
+		Si on reprend l'exemple utilisé pour les données non triées,
+		on a :
+		\begin{center}
+			\lda{inscrits} = 
+			\smallskip
+			\begin{tabular}{*{10}{|>{\centering\arraybackslash}m{1cm}}|}
+				\hline
+				41390 & 42010 & 42424 & 43342 & ? & ? & ? & ? & \dots \\
+				\hline
+			\end{tabular}
+			\smallskip
+			\lda{nbInscrits = 4}
+		\end{center}
+		
+		Qu'est-ce que ça change au niveau des algorithmes ?
+		Beaucoup ! 
+		Par exemple,
+		plus question de placer un nouvel inscrit à la suite des autres;
+		il faut trouver sa place.
+		
+		\subsection{Rechercher la position inscription}
+		%---------------------------------------------
+
+			Tous les algorithmes que nous allons voir
+			dans le cadre de données triées ont une partie en commun :
+			la recherche de la position du numéro, s'il est présent
+			ou de la position où il aurait dû être s'il est absent.
+			Commençons par ça.
+			
+			L'algorithme est assez proche de celui de la vérification
+			d'une inscriptione vu précédemment si ce n'est
+			qu'on peut s'arrêter dès qu'on trouve un numéro plus grand.
+			On va aussi ajouter un booléen 
+			indiquant si la valeur a été trouvée.
+
+			\begin{LDA}
+				\LComment{Recherche un étudiant.}
+				\LComment{- trouvé : indique si oui ou non il a été trouvé}
+				\LComment{- pos : indique la position où a été trouvé l'étudiant ou la position où il aurait du être}
+				\Algo{rechercher}{
+						\Par{inscrits\In}{\Array{n}{entiers}}, 
+						\Par{nbInscrits\In}{entier}, 
+						\\\hfill\Par{numéro\In}{entier},
+						\Par{trouvé\Out}{booléen},
+						\Par{pos\Out}{entier}
+						}{}
+					\Let pos \Gets 0
+					\While{pos < nbInscrits ET inscrits[pos] < numéro}
+						\Let pos \Gets pos + 1
+					\EndWhile
+					\Let trouvé \Gets pos < nbInscrits ET inscrits[pos] = numéro
+				\EndAlgo
+			\end{LDA}
+			
+			Comprenez-vous pourquoi l'expression assignée à \lda{trouvé}
+			est composée de deux parties ?
+
+		\subsection{Inscrire un étudiant}
+		%---------------------------------------------
+				
+			L'inscription d'un étudiant se fait en trois étapes :
+			\begin{enumerate}
+			\item
+				On recherche l'étudiant via l'algorihme qu'on vient de voir,
+				ce qui nous donne la place où le placer.
+			\item
+				On libère la place pour l'y mettre.
+				Comprenez-bien que cette opération n'est pas triviale.
+				Si vous tenez des cartes en main, 
+				il est tout aussi facile d'y insérer une nouvelle carte
+				à n'importe quelle position.
+				Avec un tableau,
+				il en va tout autrement ;
+				pour insérer un élement à un endroit donné,
+				il faut décaler tous les suivants d'une position sur la droite.
+			\item
+				On peut placer l'élément à la position libérée.
+			\end{enumerate} 
+			
+			Ce qui nous donne :
+			
+			\begin{LDA}
+				\LComment{Inscrit un étudiant de numéro donné.}
+				\Algo{inscrire}{
+						\Par{inscrits\In\Out}{\Array{n}{entiers}}, 
+						\Par{nbInscrits\In\Out}{entier}, 
+						\Par{numéro\In}{entier}
+						}{}
+					\Decl{pos}{entier}
+					\Decl{trouvé}{booléen}
+					\Stmt rechercher( inscrits, nbInscrits, numéro, trouvé, pos )
+					\Stmt décalerDroite( inscrits, pos, nbInscrits)
+					\Let inscrits[pos] \Gets numéro
+					\Let nbInscrits \Gets nbInscrits + 1
+				\EndAlgo
+				\Empty
+				\LComment{Décale d'une position à droite les élements entre la position début et fin}
+				\Algo{décalerDroite}{
+						\Par{tab\In\Out}{\Array{n}{entiers}}, 
+						\Par{début\In}{entier}, 
+						\Par{fin\In}{entier}
+						}{}
+					\For[-1]{i}{fin}{début}
+						\Let tab[i+1] \Gets tab[i]
+					\EndFor
+				\EndAlgo
+			\end{LDA}
+		
+		\subsection{Vérifier une inscription}
+		%---------------------------------------------
+
+			Cette opération est triviale.
+			
+			\begin{LDA}
+				\LComment{Vérifie si un étudiant est inscrit et donne sa position (-1 si non inscrit)}
+				\Algo{vérifier}{
+						\Par{inscrits\In}{\Array{n}{entiers}}, 
+						\Par{nbInscrits\In}{entier}, 
+						\Par{numéro}{entier}
+						}{entier}
+					\Decl{pos}{entier}
+					\Decl{trouvé}{booléen}
+					\Stmt rechercher( inscrits, nbInscrits, numéro, trouvé, pos )
+					\If{trouvé}
+						\Return pos
+					\Else
+						\Return -1
+					\EndIf
+				\EndAlgo
+			\end{LDA}
+			
+		\subsection{Désinscription}
+		%---------------------------------------------
+		
+			Ici, il va falloir décaler vers la gauche
+			les élements qui suivent celui à supprimer.
+
+			\begin{LDA}
+				\LComment{désinscrit l'étudiant donné}
+				\Algo{désinscrire}{
+						\Par{inscrits\In\Out}{\Array{n}{entiers}}, 
+						\Par{nbInscrits\In\Out}{entier}, 
+						\Par{numéro\In}{entier}
+						}{entier}
+					\Decl{pos}{entier}
+					\Decl{trouvé}{booléen}
+					\Stmt rechercher( inscrits, nbInscrits, numéro, trouvé, pos )
+					\Stmt décalerDroite( inscrits, pos+1, nbInscrits)
+					\Let nbInscrits \Gets nbInscrits - 1					
+				\EndAlgo
+				\Empty
+				\LComment{Décale d'une position à gauche les élements entre la position début et fin}
+				\Algo{décalerGauche}{
+						\Par{tab\In\Out}{\Array{n}{entiers}}, 
+						\Par{début\In}{entier}, 
+						\Par{fin\In}{entier}
+						}{}
+					\For{i}{début}{fin}
+						\Let tab[i-1] \Gets tab[i]
+					\EndFor
+				\EndAlgo
+			\end{LDA}
+			
+		\subsection{Exercices}
+		%---------------------------------------------
+			
+			\begin{Exercice}{Éviter la double inscription}
+				Comment modifier l'algorithme d'inscription
+				pour s'assurer qu'un étudiant ne s'inscrive pas deux fois ?
+			\end{Exercice}
+
+			\begin{Exercice}{Limite au nombre d'inscriptions}
+				Comment modifier l'algorithme d'inscription
+				pour refuser une inscription si le nombre maximal
+				de participant est atteint
+				en supposant que ce maximum est égal à la taille physique du tableau ?
+			\end{Exercice}
+
+			\begin{Exercice}{Vérifier la déinscription}
+				Que se passerait-il avec l'algorithme
+				de désinscription tel qu'il est
+				si on demande à désinscrire un étudiant non inscrit ?
+				Que suggérez-vous comme changement ?
+			\end{Exercice}
+
+		\subsection{Intérêt de trier les valeurs ?}
+		%---------------------------------------------
+
+			Est-ce que trier les valeurs est vraiment intéressant ?
+			On voit que la recherche est un peu plus rapide
+			(en moyenne 2x plus rapide si l'élement ne s'y trouve pas).
+			Par contre, l'ajout et la suppression d'un élement
+			sont plus lents.
+			Tout ça avec des algorithmes plus complexes à écrire
+			et à comprendre.
+			Le gain ne parait pas évident
+			et en effet, en l'état, il ne l'est pas.
+			
+			Mais c'est sans compter 
+			un autre algorithme de recherche, beaucoup plus rapide,
+			la recherche dichotomique, que nous allons voir maintenant.
+			
 	% ==============================================
 	\section{La recherche dichotomique} 
 	% ==============================================
 
+		La recherche dichotomique 
+		est un algorithme de recherche d'une valeur dans un tableau trié.
+		Il a pour essence de réduire à chaque étape 
+		la taille de l’ensemble de recherche de moitié, 
+		jusqu’à ce qu’il ne reste qu’un seul élément 
+		dont la valeur devrait être celle recherchée, 
+		sauf bien entendu en cas d’inexistence de cette valeur 
+		dans l’ensemble de départ. 
+	
+		Pour l'expliquer,
+		on va prendre un tableau d'entiers complétement rempli.
+		Il sera facile d'adapter la solution à un tableau partiellement
+		rempli (avec une taille logique) 
+		ou un tableau contenant tout autre type de valeurs
+		qui peut s'ordonner.
+		
+		{\sffamily\bfseries\upshape
+		Description de l’algorithme}
+	
+		Soit \lda{val} la valeur recherchée dans une zone délimitée 
+		par les indices \lda{indiceGauche} et \lda{indiceDroit}. 
+		On commence par déterminer l’élément médian, 
+		c’est-à-dire celui qui se trouve « au milieu » 
+		de la zone de recherche ; 
+		son indice sera déterminé par la formule
+	
+		{\centering
+		\lda{indiceMédian \Gets (indiceGauche + indiceDroit) DIV 2}\par{}
+		}
+	
+		N.B.~: cet élément médian n'est pas tout à fait au milieu 
+		dans le cas d'une zone contenant un nombre pair d'éléments.
+		On compare alors \lda{val} avec la valeur de cet élément médian ; 
+		il est possible qu’on ait trouvé la valeur cherchée; 
+		sinon, on partage la zone de recherche en deux parties~: 
+		une qui \textbf{ne contient certainement pas} la valeur cherchée 
+		et une qui \textbf{pourrait la contenir}. 
+		C’est cette deuxième partie qui devient la nouvelle zone de recherche. 
+		On réitère le processus jusqu’à ce que la valeur cherchée soit trouvée ou
+		que la zone de recherche soit réduite à sa plus simple expression,
+		c’est-à-dire un seul élément.
+	
+		{\sffamily\bfseries
+		Algorithme}
+		
+		\begin{LDA}
+			\Algo{rechercheDichotomique}{
+					\\\hfill
+					\Par{tab\In}{\Array{n}{entiers}}, 
+					\Par{valeur\In}{entier}, 
+					\Par{pos\Out}{entier}
+					}{booléen}
+				\Decl{indiceDroit, indiceGauche, indiceMédian}{entiers}
+				\Decl{candidat}{T}
+				\Decl{trouvé}{booléen}
+				\Empty
+				\Let indiceGauche \Gets 0
+				\Let indiceDroit \Gets n-1
+				\Let trouvé \Gets faux
+				\Empty
+				\While{NON trouvé ET indiceGauche {${\leq}$} indiceDroit}
+					\Let indiceMédian \Gets (indiceGauche + indiceDroit) DIV 2
+					\Let candidat \Gets tab[indiceMédian]
+					\If{candidat = valeur} 
+						\Let trouvé \Gets vrai
+					\ElsIf{candidat < valeur}
+						\Let indiceGauche \Gets indiceMédian + 1
+						\RComment on garde la partie droite
+					\Else
+						\Let indiceDroit \Gets indiceMédian – 1
+						\RComment on garde la partie gauche
+					\EndIf
+				\EndWhile
+				\Empty
+				\If{trouvé}
+					\Let pos \Gets indiceMédian
+				\Else
+					\Let pos \Gets indiceGauche
+					\RComment dans le cas où la valeur n’est pas trouvée,
+					\Empty 
+					\RComment on vérifiera que indiceGauche donne la valeur où elle pourrait être insérée.
+				\EndIf
+				\Empty
+				\Return trouvé
+			\EndAlgo
+		\end{LDA}
+		
+		{\sffamily\bfseries\upshape
+		Exemple de recherche fructueuse}
+
+		Supposons que l’on recherche la valeur \textbf{23} 
+		dans un tableau de 20 entiers. 
+		La zone ombrée représente à chaque fois la partie de recherche, 
+		qui est au départ le tableau dans son entièreté.
+		Au départ,
+		\lda{indiceGauche} vaut 0 et
+		\lda{indiceDroit} vaut 19.
+
+		\begin{center}
+		\scriptsize
+		\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{2.5mm}}}
+		 \textcolor{gray}{0} &
+		 \textcolor{gray}{1} &
+		 \textcolor{gray}{2} &
+		 \textcolor{gray}{3} &
+		 \textcolor{gray}{4} &
+		 \textcolor{gray}{5} &
+		 \textcolor{gray}{6} &
+		 \textcolor{gray}{7} &
+		 \textcolor{gray}{8} &
+		 \textcolor{gray}{9} &
+		 \textcolor{gray}{10} &
+		 \textcolor{gray}{11} &
+		 \textcolor{gray}{12} &
+		 \textcolor{gray}{13} &
+		 \textcolor{gray}{14} &
+		 \textcolor{gray}{15} &
+		 \textcolor{gray}{16} &
+		 \textcolor{gray}{17} &
+		 \textcolor{gray}{18} &
+		 \textcolor{gray}{19}
+			 \\
+		\end{tabular}
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{2.5mm}|}}
+			\hline
+			{\cellcolor{gray!25}  1} &
+			{\cellcolor{gray!25}  3} &
+			{\cellcolor{gray!25}  5} &
+			{\cellcolor{gray!25}  7} &
+			{\cellcolor{gray!25}  7} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25} 10} &
+			{\cellcolor{gray!25} 10} &
+			{\cellcolor{gray!25} 15} &
+			{\cellcolor{gray!25} 16} &
+			{\cellcolor{gray!25} 20} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 25} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 29} &
+			{\cellcolor{gray!25} 29}\\\hline
+		\end{tabular}
+		\end{center}
+		
+		\bigskip
+
+		\textit{Première étape}~:
+		\lda{indiceMédian \Gets (0 + 19) DIV 2}, c’est-à-dire 9. 
+		Comme la valeur en position 9 est 15, 
+		la valeur cherchée doit se trouver à sa droite, et
+		on prend comme nouvelle zone de recherche celle délimitée par
+		\lda{indiceGauche} qui vaut 10 et \lda{indiceDroit} qui vaut 19.
+		
+		\bigskip
+		
+		\begin{center}
+		\scriptsize
+		\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{2.5mm}}}
+		 \textcolor{gray}{0} &
+		 \textcolor{gray}{1} &
+		 \textcolor{gray}{2} &
+		 \textcolor{gray}{3} &
+		 \textcolor{gray}{4} &
+		 \textcolor{gray}{5} &
+		 \textcolor{gray}{6} &
+		 \textcolor{gray}{7} &
+		 \textcolor{gray}{8} &
+		 \textcolor{gray}{9} &
+		 \textcolor{gray}{10} &
+		 \textcolor{gray}{11} &
+		 \textcolor{gray}{12} &
+		 \textcolor{gray}{13} &
+		 \textcolor{gray}{14} &
+		 \textcolor{gray}{15} &
+		 \textcolor{gray}{16} &
+		 \textcolor{gray}{17} &
+		 \textcolor{gray}{18} &
+		 \textcolor{gray}{19}
+			 \\
+		\end{tabular}
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{2.5mm}|}}
+			\hline
+			{ 1} &
+			{  3} &
+			{  5} &
+			{  7} &
+			{  7} &
+			{  9} &
+			{  9} &
+			{ 10} &
+			{ 10} &
+			{ 15} &
+			{\cellcolor{gray!25} 16} &
+			{\cellcolor{gray!25} 20} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 25} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 29} &
+			{\cellcolor{gray!25} 29}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\bigskip
+
+		\textit{Deuxième étape}~:
+		\lda{indiceMédian \Gets (10 + 19) DIV 2}, c’est-à-dire 14. 
+		Comme on y trouve la valeur 25, 
+		on garde les éléments situées à la gauche de celui-ci ; 
+		la nouvelle zone de recherche est [10, 13].
+				
+		\begin{center}
+		\scriptsize
+		\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{2.5mm}}}
+		 \textcolor{gray}{0} &
+		 \textcolor{gray}{1} &
+		 \textcolor{gray}{2} &
+		 \textcolor{gray}{3} &
+		 \textcolor{gray}{4} &
+		 \textcolor{gray}{5} &
+		 \textcolor{gray}{6} &
+		 \textcolor{gray}{7} &
+		 \textcolor{gray}{8} &
+		 \textcolor{gray}{9} &
+		 \textcolor{gray}{10} &
+		 \textcolor{gray}{11} &
+		 \textcolor{gray}{12} &
+		 \textcolor{gray}{13} &
+		 \textcolor{gray}{14} &
+		 \textcolor{gray}{15} &
+		 \textcolor{gray}{16} &
+		 \textcolor{gray}{17} &
+		 \textcolor{gray}{18} &
+		 \textcolor{gray}{19}
+			 \\
+		\end{tabular}
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{2.5mm}|}}
+			\hline
+			{ 1} &
+			{  3} &
+			{  5} &
+			{  7} &
+			{  7} &
+			{  9} &
+			{  9} &
+			{ 10} &
+			{ 10} &
+			{ 15} &
+			{\cellcolor{gray!25} 16} &
+			{\cellcolor{gray!25} 20} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 23} &
+			{ 25} &
+			{ 28} &
+			{ 28} &
+			{ 28} &
+			{ 29} &
+			{ 29}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\bigskip
+
+		\textit{Troisième étape}~:
+		\lda{indiceMédian \Gets (10 + 13) DIV 2}, c’est-à-dire 11 
+		où se trouve l’élément 20. 
+		La zone de recherche devient
+		\lda{indiceGauche} vaut 12 et \lda{indiceDroit} vaut 13.
+
+		
+		\begin{center}
+		\scriptsize
+		\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{2.5mm}}}
+		 \textcolor{gray}{0} &
+		 \textcolor{gray}{1} &
+		 \textcolor{gray}{2} &
+		 \textcolor{gray}{3} &
+		 \textcolor{gray}{4} &
+		 \textcolor{gray}{5} &
+		 \textcolor{gray}{6} &
+		 \textcolor{gray}{7} &
+		 \textcolor{gray}{8} &
+		 \textcolor{gray}{9} &
+		 \textcolor{gray}{10} &
+		 \textcolor{gray}{11} &
+		 \textcolor{gray}{12} &
+		 \textcolor{gray}{13} &
+		 \textcolor{gray}{14} &
+		 \textcolor{gray}{15} &
+		 \textcolor{gray}{16} &
+		 \textcolor{gray}{17} &
+		 \textcolor{gray}{18} &
+		 \textcolor{gray}{19}
+			 \\
+		\end{tabular}
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{2.5mm}|}}
+			\hline
+			{ 1} &
+			{  3} &
+			{  5} &
+			{  7} &
+			{  7} &
+			{  9} &
+			{  9} &
+			{ 10} &
+			{ 10} &
+			{ 15} &
+			{ 16} &
+			{ 20} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 23} &
+			{ 25} &
+			{ 28} &
+			{ 28} &
+			{ 28} &
+			{ 29} &
+			{ 29}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\bigskip
+
+		\textit{Quatrième étape~:}
+		\lda{indiceMédian \Gets (12 + 13) DIV 2}, 
+		c’est-à-dire 12 où se trouve la valeur cherchée ; 
+		la recherche est terminée.
+
+	{\sffamily\bfseries\upshape
+	Exemple de recherche infructueuse}
+
+		Recherchons à présent la valeur \textbf{8}. 
+		Les étapes de la recherche vont donner successivement
+		
+		\begin{center}
+		\scriptsize
+		\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{2.5mm}}}
+		 \textcolor{gray}{0} &
+		 \textcolor{gray}{1} &
+		 \textcolor{gray}{2} &
+		 \textcolor{gray}{3} &
+		 \textcolor{gray}{4} &
+		 \textcolor{gray}{5} &
+		 \textcolor{gray}{6} &
+		 \textcolor{gray}{7} &
+		 \textcolor{gray}{8} &
+		 \textcolor{gray}{9} &
+		 \textcolor{gray}{10} &
+		 \textcolor{gray}{11} &
+		 \textcolor{gray}{12} &
+		 \textcolor{gray}{13} &
+		 \textcolor{gray}{14} &
+		 \textcolor{gray}{15} &
+		 \textcolor{gray}{16} &
+		 \textcolor{gray}{17} &
+		 \textcolor{gray}{18} &
+		 \textcolor{gray}{19}
+			 \\
+		\end{tabular}
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{2.5mm}|}}
+			\hline
+			{\cellcolor{gray!25}  1} &
+			{\cellcolor{gray!25}  3} &
+			{\cellcolor{gray!25}  5} &
+			{\cellcolor{gray!25}  7} &
+			{\cellcolor{gray!25}  7} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25} 10} &
+			{\cellcolor{gray!25} 10} &
+			{\cellcolor{gray!25} 15} &
+			{\cellcolor{gray!25} 16} &
+			{\cellcolor{gray!25} 20} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 23} &
+			{\cellcolor{gray!25} 25} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 28} &
+			{\cellcolor{gray!25} 29} &
+			{\cellcolor{gray!25} 29}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\begin{center}
+		\scriptsize
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{2.5mm}|}}
+			\hline
+			{\cellcolor{gray!25}  1} &
+			{\cellcolor{gray!25}  3} &
+			{\cellcolor{gray!25}  5} &
+			{\cellcolor{gray!25}  7} &
+			{\cellcolor{gray!25}  7} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25} 10} &
+			{\cellcolor{gray!25} 10} &
+			{ 15} &
+			{ 16} &
+			{ 20} &
+			{ 23} &
+			{ 23} &
+			{ 25} &
+			{ 28} &
+			{ 28} &
+			{ 28} &
+			{ 29} &
+			{ 29}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\begin{center}
+		\scriptsize
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{2.5mm}|}}
+			\hline
+			{ 1} &
+			{  3} &
+			{  5} &
+			{  7} &
+			{  7} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25}  9} &
+			{\cellcolor{gray!25} 10} &
+			{\cellcolor{gray!25} 10} &
+			{ 15} &
+			{ 16} &
+			{ 20} &
+			{ 23} &
+			{ 23} &
+			{ 25} &
+			{ 28} &
+			{ 28} &
+			{ 28} &
+			{ 29} &
+			{ 29}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\begin{center}
+		\scriptsize
+		\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{2.5mm}|}}
+			\hline
+			{ 1} &
+			{  3} &
+			{  5} &
+			{  7} &
+			{  7} &
+			{\cellcolor{gray!25}  9} &
+			{  9} &
+			{ 10} &
+			{ 10} &
+			{ 15} &
+			{ 16} &
+			{ 20} &
+			{ 23} &
+			{ 23} &
+			{ 25} &
+			{ 28} &
+			{ 28} &
+			{ 28} &
+			{ 29} &
+			{ 29}\\\hline
+		\end{tabular}
+		\end{center}
+
+		\smallskip
+
+		Arrivé à ce stade, 
+		la zone de recherche s’est réduite à un seul élément.
+		Ce n’est pas celui qu’on recherche 
+		mais c’est à cet endroit qu’il se serait trouvé ; 
+		c’est donc là qu’on pourra éventuellement l'insérer. 
+		Le paramètre de sortie prend la valeur 5.
+
 	% ==============================================
 	\section{Introduction à la complexité} 
 	% ==============================================
+
+		L’algorithme de recherche dichotomique 
+		est beaucoup plus rapide que l’algorithme de recherche linéaire. 
+		Mais qu’est-ce que cela veut dire exactement ? 
+		Comment le mesure-t-on ? 
+		Quels critères utilise-t-on ?
+	
+		On pourrait se dire que pour comparer deux algorithmes, 
+		il suffit de les traduire tous les deux 
+		dans un langage de programmation, 
+		de les exécuter et de comparer leur temps d’exécution. 
+		Cela pose toutefois quelques problèmes
+				
+		\begin{itemize}
+			\item 
+				Il faut que les programmes soient exécutés 
+				dans des environnements strictement identiques 
+				ce qui n’est pas toujours le cas ou facile à vérifier.
+			\item 
+				Le test ne porte que sur un (voir quelques uns) jeu(x) de tests. 
+				Comment en tirer un enseignement général ? 
+				Que se passerait-il avec des données plus importantes ? 
+				Avec des données différentes ?
+		\end{itemize}
+		
+		En fait, un chiffre précis ne nous intéresse pas. 
+		Ce qui est intéressant à connaitre, 
+		c’est l’évolution de la rapidité de l’algorithme 
+		(plus précisément, le nombre d’opérations de base) 
+		en fonction de la \textbf{taille} du problème à résoudre. 
+		Comment va-t-il se comporter sur de «~gros~» problèmes ?
+	
+		Dans le cas de la recherche dans un tableau, 
+		la taille du problème 
+		est la taille du tableau dans lequel on recherche un élément. 
+		On peut considérer que l’opération de base est la comparaison 
+		avec un élément du tableau. 
+		La question est alors la suivante~: 
+		pour un tableau de taille $n$, 
+		à combien de comparaisons faut-il procéder 
+		pour trouver l’élément (ou se rendre compte de son absence) ?
+	
+		{\bfseries
+		Pour la recherche linéaire}
+	
+			Cela dépend évidemment de la position de la valeur à trouver. 
+			Dans le meilleur des cas c’est 1, 
+			dans le pire c’est $n$ mais on peut dire, 
+			qu’en moyenne, 
+			cela entraine «~$n/2$~» comparaisons 
+			(que ce soit pour la trouver ou se rendre compte de son absence).
+	
+		{\bfseries
+		Pour la recherche dichotomique}
+	
+			Ici, la zone de recherche est divisée par 2, à chaque étape. 
+			Imaginons une liste de 64 éléments~: 
+			après 6 étapes, on arrive à un élément isolé. 
+			Pour une liste de taille $n$, 
+			on peut en déduire que le nombre de comparaisons 
+			est au maximum l'exposant qu'il faut donner à 2 pour obtenir $n$, 
+			soit «~$\log_2(n)$~».
+	
+		{\sffamily\bfseries\upshape
+		Comparaisons}
+	
+		Voici un tableau comparatif du nombre de comparaison 
+		en fonction de la taille $n$
+	
+		\begin{center}
+		\begin{tabular}{
+				|>{\raggedright\arraybackslash}m{4.4300003cm}
+				|>{\raggedleft\arraybackslash}m{0.507cm}
+				|>{\raggedleft\arraybackslash}m{0.71900004cm}
+				|>{\raggedleft\arraybackslash}m{0.93100005cm}
+				|>{\raggedleft\arraybackslash}m{1.2479999cm}
+				|>{\raggedleft\arraybackslash}m{1.4599999cm}
+				|>{\raggedleft\arraybackslash}m{1.671cm}|}
+		\hline
+		$n$ & 10 & 100 & 1000 & 10.000 & 100.000 & 1 million \\
+		\hline
+		recherche linéaire & 5 & 50 & 500 & 5.000 & 50.000 & 500.000 \\
+		\hline
+		recherche dichotomique & 4 & 7 & 10 & 14 & 17 & 20 \\
+		\hline
+		\end{tabular}
+		\end{center}
+		
+		On voit que c’est surtout pour des grands problèmes 
+		que la recherche dichotomique montre toute son efficacité. 
+		On voit aussi que ce qui est important pour mesurer la complexité 
+		c'est l'ordre de grandeur du nombre de comparaisons. 
+	
+		On dira que la recherche simple 
+		est un algorithme de complexité linéaire
+		(c'est-à-dire que le nombre d'opérations est de l'ordre de $n$ 
+		ou proportionnel à $n$ ou encore que si on double la taille
+		du problème, le temps va aussi être doublé) 
+		ce qu’on note en langage plus mathématique $O(n)$
+		(prononcé «~grand $O$ de $n$~»). 
+		Pour la recherche dichotomique, la complexité est logarithmique, 
+		et on le note $O(\log_2(n))$.
+	
+		Comparons les complexités les plus courantes.
+		\begin{center}
+		\begin{tabular}{
+			|>{\centering\arraybackslash}m{2cm}
+			|>{\raggedright\arraybackslash}m{0.8cm}
+			|>{\raggedright\arraybackslash}m{0.8cm}
+			|>{\raggedright\arraybackslash}m{1.0cm}
+			|>{\raggedright\arraybackslash}m{1.3cm}
+			|>{\raggedright\arraybackslash}m{1.287cm}
+			|>{\raggedright\arraybackslash}m{1.425cm}
+			|>{\raggedright\arraybackslash}m{1.714cm}|}
+		\hline
+		$n$ & 10 & 100 & 1000 & $10^4$ & $10^5$ & $10^6$ & $10^9$ \\
+		\hline
+		$O(1)$ & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+		\hline
+		$O(\log_2(n))$ & 4 & 7 & 10 & 14 & 17 & 20 & 30\\
+		\hline
+		$O(n)$ & 10 & 100 & 1000 & $10^4$ & $10^5$ & $10^6$ & $10^9$ \\
+		\hline
+		$O(n^2)$ & 100 & $10^4$ & $10^6$ & $10^8$ & $10^10$ & $10^{12}$ & $10^{18}$ \\
+		\hline
+		$O(n^3)$ & 1000 & $10^6$ & $10^9$ & $10^{12}$ & $10^{15}$ & $10^{18}$ & $10^{27}$ \\
+		\hline
+		$O(2^n)$ & 1024 & $10^{30}$ & $10^{301}$ & $10^{3010}$ & $10^{30102}$ 
+				 & $10^{301029}$ & $10^{301029995}$ \\
+		\hline
+		\end{tabular}
+		\end{center}
+		
+		On voit ainsi que si on trouve un algorithme correct 
+		pour résoudre un problème mais que cet algorithme 
+		est de complexité exponentielle 
+		alors cet algorithme ne sert à rien en pratique. 
+		Par exemple un algorithme de recherche de complexité exponentielle, 
+		exécuté sur une machine pouvant effectuer un milliard de comparaisons par secondes, 
+		prendrait plus de dix mille milliards d’années 
+		pour trouver une valeur dans un tableau de 100 éléments.
