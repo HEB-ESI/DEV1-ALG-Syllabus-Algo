@@ -626,19 +626,36 @@
 		Mais comment savoir quelle est la partie du tableau
 		qui est effectivement utilisée ?
 		Comprenez bien qu'il \textbf{n'y a pas de concept de case vide}.
-		Rien de différencie une case utilisée d'une case non utilisée.
+		Rien ne différencie une case utilisée d'une case non utilisée.
 		On s'en sort en retenant, dans une variable,
 		le nombre de case effectivement utilisées%
 		\footnote{%
 			Cases qui, par hypothèse, doivent se situer dans la partie basse
 			du tableau.
 		}.
-		
+			
 		\marginicon{definition}
 		La \textbf{taille physique} d'un tableau 
 		est le nombre de cases qu'il contient.
 		Sa \textbf{taille logique}
-		est le nombre de cases actuellement utilises.
+		est le nombre de cases actuellement utilisées.
+	
+		\paragraph{Exemple.}
+		Voici un tableau qui ne contient pour l'instant que quatre nombres.
+		\begin{center}
+			\begin{tabular}{*{10}{|>{\centering\arraybackslash}m{5mm}}|}
+				\hline
+				10 & 4 & 3 & 7 & ? & ? & ? & ? & ? & ? \\
+				\hline
+			\end{tabular}
+			\\\medskip
+			\lda{taillePhysique = 10}
+			\qquad
+			\lda{tailleLogique = 4}
+		\end{center}
+		Les cases indiquées par "?" ne sont pas vides ;
+		elles contiennent une valeur qui n'est probablement pas connue
+		et en tout cas pas pertinente.
 		
 		\paragraph{Exemple.}
 		L'algorithme ci-dessous 
@@ -779,10 +796,10 @@
 		et n'utilise pas la première.
 
 		\begin{center}
-			\begin{tabular}{>{\centering\arraybackslash}m{5mm}*{7}{>{\centering\arraybackslash}m{15mm}}}
+			\begin{tabular}{>{\centering\arraybackslash}m{2mm}*{7}{>{\centering\arraybackslash}m{15mm}}}
 				0 & 1 & 2 & 3 & 4 & 5 & 6 & 7
 				\\\hline
-				\multicolumn{1}{|>{\centering\arraybackslash}m{5mm}|}{} &
+				\multicolumn{1}{|>{\centering\arraybackslash}m{2mm}|}{} &
 				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"lundi"} &
 				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mardi"} &
 				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mercredi"} &
@@ -816,5 +833,12 @@
 		Pour cet exemple, impossible d'utiliser la seconde approche
 		mais la première est toujours possible en stockant
 		le nombre de relevés de la températue $i$ dans la case $i+30$.
+		
+		\begin{Exercice}{Nombre de jours dans un mois}
+			Écrire un algorithme qui reçoit un numéro de mois (de 1 à 12)
+			ainsi qu'une année et donne le nombre de jours dans ce mois
+			(en tenant compte des années bissextiles).
+			N'hésitez pas à réutiliser des algorithmes déjà écrits.
+		\end{Exercice}
 		
 		
