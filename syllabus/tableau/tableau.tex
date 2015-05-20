@@ -238,15 +238,10 @@
 			\Decl{nomTableau}{\Array{taille}{TypeElément}}
 		\end{LDA}
 
-		où :
-		\begin{itemize}
-		\item
-			\lda{taille} est le nombre d'éléments ;
-		\item
-			\lda{TypeElément} est le type des éléments 
+		où \lda{taille} est le nombre d'éléments 
+		et \lda{TypeElément} est le type des éléments 
 			que l’on trouvera dans le tableau.
 			Tous les types sont permis. 
-		\end{itemize}
 		
 	% ==================
 	\section{Utilisation}
@@ -277,7 +272,23 @@
 		
 		il est interdit d’utiliser \lda{tabEntiers[-1]} ou
 		\lda{tabEntiers[100]}. 
+
+		\begin{Exercice}{Déclarer et initialiser}
+			Écrire un algorithme qui déclare un tableau de 100 chaines
+			et mette votre nom dans la 3\ieme{} case du tableau.
+		\end{Exercice}
 	
+		\begin{Exercice}{Initialiser un tableau à son indice}
+			Écrire un algorithme qui déclare un tableau de 100 entiers
+			et initialise chaque élément à la valeur de son indice.
+			Ainsi, la case numéro $i$ contiendra la valeur $i$.
+		\end{Exercice}
+
+		\begin{Exercice}{Initialiser un tableau aux valeurs de 1 à 100}
+			Écrire un algorithme qui déclare un tableau de 100 entiers
+			et y met les nombres de 1 à 100.
+		\end{Exercice}
+		
 	% ==================
 	\section{Initialisation}
 	% ==================
@@ -310,12 +321,12 @@
 			\RComment{l'élement d'indice i est initialisé à la valeur i}
 		\end{LDA}
 
-		Par contre, on ne se permettra pas de demander ou d'afficher 
-		un tableau en une seule instruction
-		mais on utilisera des instructions \lda{\textbf{demander}} 
-		et \lda{\textbf{afficher}}
-		individuelles pour chacun des éléments.
-		
+		%Par contre, on ne se permettra pas de demander ou d'afficher 
+		%un tableau en une seule instruction
+		%mais on utilisera des instructions \lda{\textbf{demander}} 
+		%et \lda{\textbf{afficher}}
+		%individuelles pour chacun des éléments.
+
 	% ==============================
 	\section{Tableau et paramètres}
 	% ==============================
@@ -323,71 +334,93 @@
 		Le type \emph{tableau} étant un type à part entière,
 		il est tout-à-fait éligible comme type
 		pour les paramètres et la valeur de retour d'un algorithme.
-		Plus précisément :
-		\begin{itemize}
-		\item \In : 
-			indique que l'algorithme va consulter les valeurs 
-			du tableau reçu en paramètre. 
-			Les élements doivent donc avoir été initialisés
-			avant d'appeler l'algorihtme.
+		Voyons cela en détail.
+
+		\subsection{Passer un tableau en paramètre}
+		%---------------------------------
+		
+			Les trois sortes de passages de paramètres sont possibles.
+			Plus précisément :
+			\begin{itemize}
+			\item \In : 
+				indique que l'algorithme va consulter les valeurs 
+				du tableau reçu en paramètre. 
+				Les élements doivent donc avoir été initialisés
+				avant d'appeler l'algorihtme.
+				
+				\textbf{Exemple~:}
 			
-			\begin{LDA}
-				\LComment{Affiche les éléments d'un tableau}
-				\Algo{affiche}{\Par{tab\In}{\Array{10}{entiers}}}{} 
-					\For{i}{0}{9}
-						\Write tab[i]
-					\EndFor
-				\EndAlgo 
+				\begin{LDA}
+					\LComment{Affiche les éléments d'un tableau}
+					\Algo{affiche}{\Par{tab\In}{\Array{10}{entiers}}}{} 
+						\For{i}{0}{9}
+							\Write tab[i]
+						\EndFor
+					\EndAlgo 
+		
+					\Empty
+					\LComment{Utilisation possible}
+					\Decl{monTab}{\Array{10}{entiers}}
+					\Let monTab \Gets \{2,3,5,7,11,13,17,19,23,29\}
+					\Stmt afficher(monTab)
+				\end{LDA}
+				
+				Rappelons qu'il s'agit du passage
+				par défaut si aucune flèche n'est indiquée.
+				
+			\item \In\Out :
+				indique que l'algorithme va consulter/modifier les valeurs 
+				du tableau reçu en paramètre. 
 	
-				\Empty
-				\LComment{Utilisation possible}
-				\Decl{monTab}{\Array{10}{entiers}}
-				\Let monTab \Gets \{2,3,5,7,11,13,17,19,23,29\}
-				\Stmt afficher(monTab)
-			\end{LDA}
-
-
-		\item \In\Out :
-			indique que l'algorithme va consulter/modifier les valeurs 
-			du tableau reçu en paramètre. 
-
-			\begin{LDA}
-				\LComment{Inverse les éléments du tableau}
-				\Algo{inverse}{\Par{tab\In\Out}{\Array{10}{entiers}}}{} 
-					\For{i}{0}{9}
-						\Let tab[i] \Gets -tab[i]
-					\EndFor
-				\EndAlgo 
+				\textbf{Exemple~:}
+			
+				\begin{LDA}
+					\LComment{Inverse les éléments du tableau}
+					\Algo{inverse}{\Par{tab\In\Out}{\Array{10}{entiers}}}{} 
+						\For{i}{0}{9}
+							\Let tab[i] \Gets -tab[i]
+						\EndFor
+					\EndAlgo 
+		
+					\Empty
+					\LComment{Utilisation possible}
+					\Decl{monTab}{\Array{10}{entiers}}
+					\Let monTab \Gets \{2,3,5,7,11,13,17,19,23,29\}
+					\Stmt inverse(monTab)
+				\end{LDA}
 	
-				\Empty
-				\LComment{Utilisation possible}
-				\Decl{monTab}{\Array{10}{entiers}}
-				\Let monTab \Gets \{2,3,5,7,11,13,17,19,23,29\}
-				\Stmt inverse(monTab)
-			\end{LDA}
+			\item \Out :
+				indique que l'algorithme va assigner des valeurs 
+				au tableau reçu en paramètre.
+				Les éléments de ce tableau n'ont donc pas à être initialisés
+				avant d'appeler cet algorithme. 
+	
+				\textbf{Exemple~:}
+			
+				\begin{LDA}
+					\LComment{Initialise un tableau reçu en paramètre}
+					\Algo{initialiser}{\Par{tab\Out}{\Array{10}{entiers}}}{}
+						\For{i}{0}{9}
+							\Let tab[i] \Gets i
+						\EndFor
+					\EndAlgo 
+					\Empty
+					\LComment{Utilisation possible}
+					\Decl{monTab}{\Array{10}{entiers}}
+					\Stmt initialiser(monTab)
+				\end{LDA}
 
-		\item \Out :
-			indique que l'algorithme va assigner des valeurs 
-			au tableau reçu en paramètre.
-			Les éléments de ce tableau n'ont donc pas à être initialisés
-			avant d'appeler cet algorithme. 
+			\end{itemize}
 
-			\begin{LDA}
-				\LComment{Initialise un tableau de 10 entiers reçu en paramètre}
-				\Algo{initialiser}{\Par{tab\Out}{\Array{10}{entiers}}}{}
-					\For{i}{0}{9}
-						\Let tab[i] \Gets i
-					\EndFor
-				\EndAlgo 
-				\Empty
-				\LComment{Utilisation possible}
-				\Decl{monTab}{\Array{10}{entiers}}
-				\Stmt initialiser(monTab)
-			\end{LDA}
+		\subsection{Retourner un tableau}
+		%---------------------------------
+			
+			Comme pour n'importe quel autre type,
+			un algorithme peut retourner un tableau.
+			Ce sera à lui de le déclarer et de lui donner des valeurs.
 
-		\item retour :
-			indique que l'algorithme va déclarer et retourner le tableau.
-
+			\textbf{Exemple~:}
+			
 			\begin{LDA}
 				\LComment{Retourne un tableau initialisé de 10 entiers}
 				\Algo{créer}{}{\Array{10}{entiers}}
@@ -402,69 +435,111 @@
 				\Decl{monTab}{\Array{10}{entiers}}
 				\Let monTab \Gets créer()
 			\end{LDA}
+		
+		\subsection{Paramétrer la taille}
+		%---------------------------------
+		
+			Un tableau peut être passé en paramètre à un algorithme 
+			mais qu’en est-il de sa taille ? 
+			Plus haut, nous avons écrit un algorithme qui affiche
+			un tableau de 10 entiers.
+			Il serait utile de pouvoir appeler le même algorithme avec des
+			tableaux de tailles différentes. 
+			Pour permettre cela, la taille du tableau reçu en paramètre 
+			est déclarée avec un nom (souvent \emph{n})
+			qui peut être considéré comme un paramètre entrant
+			et peut être utilisé dans l'algorithme.
+			Idem pour un tableau en retour.
+		
+			\textbf{Exemple~:}
+			
+			\begin{LDA}
+				\LComment{Affiche un tableau de taille quelconque}
+				\Algo{afficher}{\Par{tab}{\Array{n}{entiers}}}{}
+					\Write "Tableau de ", n, " éléments".
+					\For{i}{0}{n-1}
+						\Write tab[i]
+					\EndFor
+				\EndAlgo
+				\Empty
+				\LComment Crée un tableau d'entiers de taille n, l'initialise à 0 et le retourne.
+				\Algo{créerTableau}{n : entier}{\Array{n}{entiers}}
+					\Decl{tab}{\Array{n}{entiers}}
+					\For{i}{0}{n-1}
+						\Let tab[i] \Gets 0
+					\EndFor
+					\Return tab
+				\EndAlgo
+				\Empty
+				\Algo{principalAppelTableau}{}{}
+					\Decl{entiers}{\Array{10}{entiers}}
+					\Let entiers \Gets créerTableau()
+					\Stmt afficher(entiers)
+				\EndAlgo
+			\end{LDA}
 
-		\end{itemize}
+		\subsection{Exercices}
+		%---------------------------------
 		
-		\medskip
-		Un tableau peut être passé en paramètre à un algorithme 
-		mais qu’en est-il de sa taille ? 
-		Il serait utile de pouvoir appeler le même algorithme avec des
-		tableaux de tailles différentes. 
-		Pour permettre cela, la taille du tableau reçu en paramètre 
-		est déclarée avec une variable (souvent \emph{n})
-		qui peut être considéré comme un paramètre entrant
-		et peut être utilisé dans l'algorithme.
-		Idem pour un tableau en retour.
-	
-		\textbf{Exemple~:}
+			\begin{Exercice}{Trouver les entêtes}
+				Écrire les entêtes (et uniquement les entêtes)
+				des algorithmes qui résolvent les problèmes suivants :
+				\begin{enumerate}[label=\alph*)]
+				\item
+					Écrire un algorithme qui 
+					inverse tous les éléments négatifs dans un tableau d'entiers.
+				\item
+					Écrire un algorithme qui
+					donne le nombre d'éléments négatifs dans un tableau d'entiers.
+				\item
+					Écrire un algorithme qui
+					détermine si un tableau d'entiers contient au moins un nombre négatif.
+				\item
+					Écrire un algorithme qui
+					détermine si un tableau de chaine contient
+					une chaine donnée en paramètre.
+				\item
+					Écrire un algorithme qui
+					détermine si un tableau de chaine contient
+					au moins deux occurences de la même chaine,
+					quelle qu'elle soit.
+				\item
+					Écrire un algorithme qui 
+					retourne un tableau donnant les $n$ premiers nombres premiers,
+					où $n$ est un paramètre de l'algorithme.
+				\item
+					Écrire un algorithme qui 
+					reçoit un tableau d'entiers
+					et retourne un tableau de booléens de la même taille
+					où la case $i$ indique si oui ou non
+					le nombre reçu dans la case $i$ est strictement positif.
+				\end{enumerate}
+			\end{Exercice}
 		
-		\begin{LDA}
-			\LComment{Affiche un tableau de taille quelconque}
-			\Algo{afficher}{\Par{tab}{\Array{n}{entiers}}}{}
-				\Write "Tableau de ", n, " éléments".
-				\For{i}{0}{n-1}
-					\Write tab[i]
-				\EndFor
-			\EndAlgo
-			\Empty
-			\LComment Crée un tableau d'entiers de taille n, l'initialise à 0 et le retourne.
-			\Algo{créerTableau}{n : entier}{\Array{n}{entiers}}
-				\Decl{tab}{\Array{n}{entiers}}
-				\For{i}{0}{n-1}
-					\Let tab[i] \Gets 0
-				\EndFor
-				\Return tab
-			\EndAlgo
-			\Empty
-			\Algo{principalAppelTableau}{}{}
-				\Decl{entiers}{\Array{10}{entiers}}
-				\Let entiers \Gets créerTableau()
-				\Stmt afficher(entiers)
-			\EndAlgo
-		\end{LDA}
-					
 	% ==============================================
-	\section{Parcours d'un tableau à une dimension} 
+	\section{Parcours d'un tableau} 
 	\label{Les parcours de tableaux}
 	% ==============================================
-	
+
 		Dans la plupart des problèmes que vous rencontrerez
-		vous serez amener à parcourir le tableau 
-		dans sa totalité ou en partie.
+		vous serez amener à parcourir un tableau.
 		Il est important de maitriser ce parcours.
 		Examinons les situations courantes 
 		et voyons quelles solutions conviennent.
-				
+	
 		\subsection{Parcours complet}
+		%----------------------------
 		
-			Pour parcourir complètement un tableau, 
-			on peut utiliser la boucle \K{pour}.
+			Vous avez déjà vu dans les exemples
+			comment parcourir tous les éléments d'un tableau.
+			On s'en sort facilement avec une boucle \K{pour}.
 			La fiche \vref{fiche:tab-parcours-complet}
 			décrit comment afficher tous les élements d'un tableau.
 			On pourrait faire autre chose avec ces éléments :
 			les sommer, les comparer\dots
-		
-		\subsection{Parcours avec sortie prématurée}
+				
+		\subsection{Parcours partiel}
+		%----------------------------
 		
 			Parfois, on ne doit pas forcément parcourir 
 			le tableau jusqu'au bout
@@ -475,7 +550,7 @@
 			\item on cherche la présence d'un élément et on vient de le trouver ;
 			\item on vérifie qu'il n'y a pas de $0$ et on vient d'en trouver un.
 			\end{itemize}
-
+	
 			Pour résoudre ce problème,
 			on peut partir du parcours complet et :
 			\begin{itemize}
@@ -486,7 +561,12 @@
 			\end{itemize}
 			La fiche \vref{fiche:tab-parcours-partiel}
 			détaille un parcours partiel.
-
+		
+		\subsection{Exercices}
+		%---------------------
+		
+		<<TODO>>
+						
 	% ==============================================
 	\section{Taille logique et taille physique} 
 	% ==============================================
