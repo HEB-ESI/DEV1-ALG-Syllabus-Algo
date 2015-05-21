@@ -30,6 +30,13 @@
 		utiliserait probablement une base de données
 		mais ça c'est une autre histoire et un autre cours ;)
 	}.
+	Comme le tableau ne sera généralement pas rempli,
+	on va gérer sa taille logique.
+	On a donc deux variables :
+	\begin{itemize}
+	\item \lda{inscrits} : le tableau des numéros d'étudiants
+	\item \lda{nbInscrits} : le nombre d'étudiants actuellement inscrits (la taille logique du tableau)
+	\end{itemize}
 	
 	On va envisager deux cas :
 	\begin{enumerate}
@@ -43,14 +50,9 @@
 	\section{Données non triées} 
 	% ==============================================
 		
-		Pour garder les numéros d'étudiants dans un tableau,
-		il nous faut gérer sa taille logique.
-		On a donc deux variables :
-		\begin{itemize}
-		\item \lda{inscrits} : le tableau des numéros d'étudiants
-		\item \lda{nbInscrits} : le nombre d'étudiants actuellement inscrits (la taille logique du tableau)
-		\end{itemize}
-				
+		Dans cette approche, 
+		les valeurs sont stockées dans le tableau 
+		dans un ordre quelconque.
 		Par exemple, on pourrait avoir la situation suivante :
 		\begin{center}
 			\lda{inscrits} = 
@@ -170,6 +172,7 @@
 				\Algo{désinscrire}{
 						\Par{inscrits\In\Out}{\Array{n}{entiers}}, 
 						\Par{nbInscrits\In\Out}{entier}, 
+						\\\hfill
 						\Par{numéro\In}{entier}
 						}{entier}
 					\Decl{pos}{entier}
@@ -269,8 +272,14 @@
 				\EndAlgo
 			\end{LDA}
 			
-			Comprenez-vous pourquoi l'expression assignée à \lda{trouvé}
-			est composée de deux parties ?
+			Comprenez-vous pourquoi :
+			\begin{itemize}
+			\item
+				on trouve un < dans la condition du tant que et pas un $\neq$~?
+			\item
+				l'expression assignée à \lda{trouvé} est composée de deux parties
+				et utilise un =~?
+			\end{itemize}
 
 		\subsection{Inscrire un étudiant}
 		%---------------------------------------------
@@ -333,7 +342,8 @@
 				\Algo{vérifier}{
 						\Par{inscrits\In}{\Array{n}{entiers}}, 
 						\Par{nbInscrits\In}{entier}, 
-						\Par{numéro}{entier}
+						\\\hfill
+						\Par{numéro\In}{entier}
 						}{entier}
 					\Decl{pos}{entier}
 					\Decl{trouvé}{booléen}
@@ -357,6 +367,7 @@
 				\Algo{désinscrire}{
 						\Par{inscrits\In\Out}{\Array{n}{entiers}}, 
 						\Par{nbInscrits\In\Out}{entier}, 
+						\\\hfill
 						\Par{numéro\In}{entier}
 						}{entier}
 					\Decl{pos}{entier}
@@ -408,7 +419,7 @@
 			(en moyenne 2x plus rapide si l'élement ne s'y trouve pas).
 			Par contre, l'ajout et la suppression d'un élement
 			sont plus lents.
-			Tout ça avec des algorithmes plus complexes à écrire
+			En plus, les algorithmes sont plus complexes à écrire
 			et à comprendre.
 			Le gain ne parait pas évident
 			et en effet, en l'état, il ne l'est pas.
@@ -444,70 +455,28 @@
 		par les indices \lda{indiceGauche} et \lda{indiceDroit}. 
 		On commence par déterminer l’élément médian, 
 		c’est-à-dire celui qui se trouve « au milieu » 
-		de la zone de recherche ; 
+		de la zone de recherche%
+		\footnote{%
+			Cet élément médian n'est pas tout à fait au milieu 
+			dans le cas d'une zone contenant un nombre pair d'éléments.
+		} ; 
 		son indice sera déterminé par la formule
 	
 		{\centering
 		\lda{indiceMédian \Gets (indiceGauche + indiceDroit) DIV 2}\par{}
 		}
 	
-		N.B.~: cet élément médian n'est pas tout à fait au milieu 
-		dans le cas d'une zone contenant un nombre pair d'éléments.
 		On compare alors \lda{val} avec la valeur de cet élément médian ; 
 		il est possible qu’on ait trouvé la valeur cherchée; 
 		sinon, on partage la zone de recherche en deux parties~: 
 		une qui \textbf{ne contient certainement pas} la valeur cherchée 
 		et une qui \textbf{pourrait la contenir}. 
 		C’est cette deuxième partie qui devient la nouvelle zone de recherche. 
+		On adapte \lda{indiceGauche} ou \lda{indiceDroit} en conséquence.
 		On réitère le processus jusqu’à ce que la valeur cherchée soit trouvée ou
 		que la zone de recherche soit réduite à sa plus simple expression,
 		c’est-à-dire un seul élément.
-	
-		{\sffamily\bfseries
-		Algorithme}
-		
-		\begin{LDA}
-			\Algo{rechercheDichotomique}{
-					\\\hfill
-					\Par{tab\In}{\Array{n}{entiers}}, 
-					\Par{valeur\In}{entier}, 
-					\Par{pos\Out}{entier}
-					}{booléen}
-				\Decl{indiceDroit, indiceGauche, indiceMédian}{entiers}
-				\Decl{candidat}{T}
-				\Decl{trouvé}{booléen}
-				\Empty
-				\Let indiceGauche \Gets 0
-				\Let indiceDroit \Gets n-1
-				\Let trouvé \Gets faux
-				\Empty
-				\While{NON trouvé ET indiceGauche {${\leq}$} indiceDroit}
-					\Let indiceMédian \Gets (indiceGauche + indiceDroit) DIV 2
-					\Let candidat \Gets tab[indiceMédian]
-					\If{candidat = valeur} 
-						\Let trouvé \Gets vrai
-					\ElsIf{candidat < valeur}
-						\Let indiceGauche \Gets indiceMédian + 1
-						\RComment on garde la partie droite
-					\Else
-						\Let indiceDroit \Gets indiceMédian – 1
-						\RComment on garde la partie gauche
-					\EndIf
-				\EndWhile
-				\Empty
-				\If{trouvé}
-					\Let pos \Gets indiceMédian
-				\Else
-					\Let pos \Gets indiceGauche
-					\RComment dans le cas où la valeur n’est pas trouvée,
-					\Empty 
-					\RComment on vérifiera que indiceGauche donne la valeur où elle pourrait être insérée.
-				\EndIf
-				\Empty
-				\Return trouvé
-			\EndAlgo
-		\end{LDA}
-		
+			
 		{\sffamily\bfseries\upshape
 		Exemple de recherche fructueuse}
 
@@ -900,6 +869,51 @@
 		c’est donc là qu’on pourra éventuellement l'insérer. 
 		Le paramètre de sortie prend la valeur 5.
 
+		{\sffamily\bfseries
+		Algorithme}
+		
+		\begin{LDA}
+			\Algo{rechercheDichotomique}{
+					\\\hfill
+					\Par{tab\In}{\Array{n}{entiers}}, 
+					\Par{valeur\In}{entier}, 
+					\Par{pos\Out}{entier}
+					}{booléen}
+				\Decl{indiceDroit, indiceGauche, indiceMédian}{entiers}
+				\Decl{candidat}{T}
+				\Decl{trouvé}{booléen}
+				\Empty
+				\Let indiceGauche \Gets 0
+				\Let indiceDroit \Gets n-1
+				\Let trouvé \Gets faux
+				\Empty
+				\While{NON trouvé ET indiceGauche {${\leq}$} indiceDroit}
+					\Let indiceMédian \Gets (indiceGauche + indiceDroit) DIV 2
+					\Let candidat \Gets tab[indiceMédian]
+					\If{candidat = valeur} 
+						\Let trouvé \Gets vrai
+					\ElsIf{candidat < valeur}
+						\Let indiceGauche \Gets indiceMédian + 1
+						\RComment on garde la partie droite
+					\Else
+						\Let indiceDroit \Gets indiceMédian – 1
+						\RComment on garde la partie gauche
+					\EndIf
+				\EndWhile
+				\Empty
+				\If{trouvé}
+					\Let pos \Gets indiceMédian
+				\Else
+					\Let pos \Gets indiceGauche
+					\RComment dans le cas où la valeur n’est pas trouvée,
+					\Empty 
+					\RComment on vérifiera que indiceGauche donne la valeur où elle pourrait être insérée.
+				\EndIf
+				\Empty
+				\Return trouvé
+			\EndAlgo
+		\end{LDA}
+
 	% ==============================================
 	\section{Introduction à la complexité} 
 	% ==============================================
@@ -907,140 +921,195 @@
 		L’algorithme de recherche dichotomique 
 		est beaucoup plus rapide que l’algorithme de recherche linéaire. 
 		Mais qu’est-ce que cela veut dire exactement ? 
+		En est-on sûr ? 
 		Comment le mesure-t-on ? 
 		Quels critères utilise-t-on ?
-	
-		On pourrait se dire que pour comparer deux algorithmes, 
-		il suffit de les traduire tous les deux 
-		dans un langage de programmation, 
-		de les exécuter et de comparer leur temps d’exécution. 
-		Cela pose toutefois quelques problèmes
-				
-		\begin{itemize}
-			\item 
-				Il faut que les programmes soient exécutés 
-				dans des environnements strictement identiques 
-				ce qui n’est pas toujours le cas ou facile à vérifier.
-			\item 
-				Le test ne porte que sur un (voir quelques uns) jeu(x) de tests. 
-				Comment en tirer un enseignement général ? 
-				Que se passerait-il avec des données plus importantes ? 
-				Avec des données différentes ?
-		\end{itemize}
+		De façon générale, comment comparer la vitesse
+		de deux algorithmes différents qui résolvent le même problème.
 		
-		En fait, un chiffre précis ne nous intéresse pas. 
-		Ce qui est intéressant à connaitre, 
-		c’est l’évolution de la rapidité de l’algorithme 
-		(plus précisément, le nombre d’opérations de base) 
-		en fonction de la \textbf{taille} du problème à résoudre. 
-		Comment va-t-il se comporter sur de «~gros~» problèmes ?
+		\subsection{Une approche pratique : la simulation numérique}
 	
-		Dans le cas de la recherche dans un tableau, 
-		la taille du problème 
-		est la taille du tableau dans lequel on recherche un élément. 
-		On peut considérer que l’opération de base est la comparaison 
-		avec un élément du tableau. 
-		La question est alors la suivante~: 
-		pour un tableau de taille $n$, 
-		à combien de comparaisons faut-il procéder 
-		pour trouver l’élément (ou se rendre compte de son absence) ?
-	
-		{\bfseries
-		Pour la recherche linéaire}
-	
-			Cela dépend évidemment de la position de la valeur à trouver. 
-			Dans le meilleur des cas c’est 1, 
-			dans le pire c’est $n$ mais on peut dire, 
-			qu’en moyenne, 
-			cela entraine «~$n/2$~» comparaisons 
-			(que ce soit pour la trouver ou se rendre compte de son absence).
-	
-		{\bfseries
-		Pour la recherche dichotomique}
-	
-			Ici, la zone de recherche est divisée par 2, à chaque étape. 
-			Imaginons une liste de 64 éléments~: 
-			après 6 étapes, on arrive à un élément isolé. 
-			Pour une liste de taille $n$, 
-			on peut en déduire que le nombre de comparaisons 
-			est au maximum l'exposant qu'il faut donner à 2 pour obtenir $n$, 
-			soit «~$\log_2(n)$~».
-	
-		{\sffamily\bfseries\upshape
-		Comparaisons}
-	
-		Voici un tableau comparatif du nombre de comparaison 
-		en fonction de la taille $n$
-	
-		\begin{center}
-		\begin{tabular}{
-				|>{\raggedright\arraybackslash}m{4.4300003cm}
-				|>{\raggedleft\arraybackslash}m{0.507cm}
-				|>{\raggedleft\arraybackslash}m{0.71900004cm}
-				|>{\raggedleft\arraybackslash}m{0.93100005cm}
-				|>{\raggedleft\arraybackslash}m{1.2479999cm}
-				|>{\raggedleft\arraybackslash}m{1.4599999cm}
-				|>{\raggedleft\arraybackslash}m{1.671cm}|}
-		\hline
-		$n$ & 10 & 100 & 1000 & 10.000 & 100.000 & 1 million \\
-		\hline
-		recherche linéaire & 5 & 50 & 500 & 5.000 & 50.000 & 500.000 \\
-		\hline
-		recherche dichotomique & 4 & 7 & 10 & 14 & 17 & 20 \\
-		\hline
-		\end{tabular}
-		\end{center}
+			On pourrait se dire que pour comparer deux algorithmes, 
+			il suffit de les traduire tous les deux 
+			dans un langage de programmation, 
+			de les exécuter et de comparer leur temps d’exécution. 
+			Cette technique pose toutefois quelques problèmes :			
+			\begin{itemize}
+				\item 
+					Il faut que les programmes soient exécutés 
+					dans des environnements strictement identiques 
+					ce qui n’est pas toujours le cas ou facile à vérifier.
+				\item
+					Certains environnements peuvent être favorables
+					à un algorithme par rapport à l'autre
+					ce qui ne serait pas le cas d'un autre environnement.
+					Par exemple, certaines architectures
+					sont plus rapides dans les calculs entiers
+					mais moins dans les calculs flottants.
+				\item 
+					Le test ne porte que sur un (voir quelques uns) jeu(x) de tests. 
+					Comment en tirer un enseignement général ? 
+					Que se passerait-il avec des données plus importantes ? 
+					Avec des données différentes ?
+			\end{itemize}		
+			En fait, un chiffre précis ne nous intéresse pas. 
+			Ce qui est vraiment intéressant,
+			c'est de savoir comment l'algorithme va se comporter
+			avec de grandes données.
+			C'est ce qu'apporte l'approche suivante.
 		
-		On voit que c’est surtout pour des grands problèmes 
-		que la recherche dichotomique montre toute son efficacité. 
-		On voit aussi que ce qui est important pour mesurer la complexité 
-		c'est l'ordre de grandeur du nombre de comparaisons. 
-	
-		On dira que la recherche simple 
-		est un algorithme de complexité linéaire
-		(c'est-à-dire que le nombre d'opérations est de l'ordre de $n$ 
-		ou proportionnel à $n$ ou encore que si on double la taille
-		du problème, le temps va aussi être doublé) 
-		ce qu’on note en langage plus mathématique $O(n)$
-		(prononcé «~grand $O$ de $n$~»). 
-		Pour la recherche dichotomique, la complexité est logarithmique, 
-		et on le note $O(\log_2(n))$.
-	
-		Comparons les complexités les plus courantes.
-		\begin{center}
-		\begin{tabular}{
-			|>{\centering\arraybackslash}m{2cm}
-			|>{\raggedright\arraybackslash}m{0.8cm}
-			|>{\raggedright\arraybackslash}m{0.8cm}
-			|>{\raggedright\arraybackslash}m{1.0cm}
-			|>{\raggedright\arraybackslash}m{1.3cm}
-			|>{\raggedright\arraybackslash}m{1.287cm}
-			|>{\raggedright\arraybackslash}m{1.425cm}
-			|>{\raggedright\arraybackslash}m{1.714cm}|}
-		\hline
-		$n$ & 10 & 100 & 1000 & $10^4$ & $10^5$ & $10^6$ & $10^9$ \\
-		\hline
-		$O(1)$ & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
-		\hline
-		$O(\log_2(n))$ & 4 & 7 & 10 & 14 & 17 & 20 & 30\\
-		\hline
-		$O(n)$ & 10 & 100 & 1000 & $10^4$ & $10^5$ & $10^6$ & $10^9$ \\
-		\hline
-		$O(n^2)$ & 100 & $10^4$ & $10^6$ & $10^8$ & $10^10$ & $10^{12}$ & $10^{18}$ \\
-		\hline
-		$O(n^3)$ & 1000 & $10^6$ & $10^9$ & $10^{12}$ & $10^{15}$ & $10^{18}$ & $10^{27}$ \\
-		\hline
-		$O(2^n)$ & 1024 & $10^{30}$ & $10^{301}$ & $10^{3010}$ & $10^{30102}$ 
-				 & $10^{301029}$ & $10^{301029995}$ \\
-		\hline
-		\end{tabular}
-		\end{center}
+		\section{Une approche théorique : la complexité}
 		
-		On voit ainsi que si on trouve un algorithme correct 
-		pour résoudre un problème mais que cet algorithme 
-		est de complexité exponentielle 
-		alors cet algorithme ne sert à rien en pratique. 
-		Par exemple un algorithme de recherche de complexité exponentielle, 
-		exécuté sur une machine pouvant effectuer un milliard de comparaisons par secondes, 
-		prendrait plus de dix mille milliards d’années 
-		pour trouver une valeur dans un tableau de 100 éléments.
+			Avec cette approche,
+			on va déduire de l'algorithme
+			le nombre d’opérations de base à effectuer
+			en fonction de la \textbf{taille} du problème à résoudre
+			et en déduire 
+			comment il va se comporter sur de «~gros~» problèmes ?
+		
+			Dans le cas de la recherche dans un tableau, 
+			la taille du problème 
+			est la taille du tableau dans lequel on recherche un élément. 
+			On peut considérer que l’opération de base est la comparaison 
+			avec un élément du tableau. 
+			La question est alors la suivante~: 
+			pour un tableau de taille $n$, 
+			à combien de comparaisons faut-il procéder 
+			pour trouver l’élément (ou se rendre compte de son absence) ?
+		
+			{\bfseries
+			Pour la recherche linéaire}
+		
+				Cela dépend évidemment de la position de la valeur à trouver. 
+				Dans le meilleur des cas c’est 1, 
+				dans le pire c’est $n$ mais on peut dire, 
+				qu’en moyenne, 
+				cela entraine «~$n/2$~» comparaisons 
+				(que ce soit pour la trouver ou se rendre compte de son absence).
+		
+			{\bfseries
+			Pour la recherche dichotomique}
+		
+				Ici, la zone de recherche est divisée par 2, à chaque étape. 
+				Imaginons une liste de 64 éléments~: 
+				après 6 étapes, on arrive à un élément isolé. 
+				Pour une liste de taille $n$, 
+				on peut en déduire que le nombre de comparaisons 
+				est au maximum l'exposant qu'il faut donner à 2 pour obtenir $n$, 
+				soit «~$\log_2(n)$~».
+		
+			{\sffamily\bfseries\upshape
+			Comparaisons}
+		
+			Voici un tableau comparatif du nombre de comparaison 
+			en fonction de la taille $n$
+		
+			\begin{center}
+			\begin{tabular}{
+					|>{\raggedright\arraybackslash}m{4.4300003cm}
+					|>{\raggedleft\arraybackslash}m{0.507cm}
+					|>{\raggedleft\arraybackslash}m{0.71900004cm}
+					|>{\raggedleft\arraybackslash}m{0.93100005cm}
+					|>{\raggedleft\arraybackslash}m{1.2479999cm}
+					|>{\raggedleft\arraybackslash}m{1.4599999cm}
+					|>{\raggedleft\arraybackslash}m{1.671cm}|}
+			\hline
+			$n$ & 10 & 100 & 1000 & 10.000 & 100.000 & 1 million \\
+			\hline
+			recherche linéaire & 5 & 50 & 500 & 5.000 & 50.000 & 500.000 \\
+			\hline
+			recherche dichotomique & 4 & 7 & 10 & 14 & 17 & 20 \\
+			\hline
+			\end{tabular}
+			\end{center}
+			
+			On voit que c’est surtout pour des grands problèmes 
+			que la recherche dichotomique montre toute son efficacité. 
+			On voit aussi que ce qui est important pour mesurer la complexité 
+			c'est l'ordre de grandeur du nombre de comparaisons. 
+		
+			On dira que la recherche simple 
+			est un algorithme de complexité linéaire
+			(c'est-à-dire que le nombre d'opérations est de l'ordre de $n$ 
+			ou proportionnel à $n$ ou encore que si on double la taille
+			du problème, le temps va aussi être doublé) 
+			ce qu’on note en langage plus mathématique $O(n)$
+			(prononcé «~grand $O$ de $n$~»). 
+			
+			Pour la recherche dichotomique, la complexité est logarithmique, 
+			et on le note $O(\log_2(n))$ ce qui veut dire
+			que si on double la taille du problème, 
+			on a juste une itération en plus dans la boucle.
+			
+			Comparons les complexités les plus courantes.
+			\begin{center}
+			\begin{tabular}{
+				|>{\centering\arraybackslash}m{2cm}
+				|>{\raggedright\arraybackslash}m{0.8cm}
+				|>{\raggedright\arraybackslash}m{0.8cm}
+				|>{\raggedright\arraybackslash}m{1.0cm}
+				|>{\raggedright\arraybackslash}m{1.3cm}
+				|>{\raggedright\arraybackslash}m{1.287cm}
+				|>{\raggedright\arraybackslash}m{1.425cm}
+				|>{\raggedright\arraybackslash}m{1.714cm}|}
+			\hline
+			$n$ & 10 & 100 & 1000 & $10^4$ & $10^5$ & $10^6$ & $10^9$ \\
+			\hline
+			$O(1)$ & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+			\hline
+			$O(\log_2(n))$ & 4 & 7 & 10 & 14 & 17 & 20 & 30\\
+			\hline
+			$O(n)$ & 10 & 100 & 1000 & $10^4$ & $10^5$ & $10^6$ & $10^9$ \\
+			\hline
+			$O(n^2)$ & 100 & $10^4$ & $10^6$ & $10^8$ & $10^10$ & $10^{12}$ & $10^{18}$ \\
+			\hline
+			$O(n^3)$ & 1000 & $10^6$ & $10^9$ & $10^{12}$ & $10^{15}$ & $10^{18}$ & $10^{27}$ \\
+			\hline
+			$O(2^n)$ & 1024 & $10^{30}$ & $10^{301}$ & $10^{3010}$ & $10^{30102}$ 
+					 & $10^{301029}$ & $10^{301029995}$ \\
+			\hline
+			\end{tabular}
+			\end{center}
+			
+			On voit ainsi que si on trouve un algorithme correct 
+			pour résoudre un problème mais que cet algorithme 
+			est de complexité exponentielle 
+			alors cet algorithme ne sert à rien en pratique. 
+			Par exemple un algorithme de recherche de complexité exponentielle, 
+			exécuté sur une machine pouvant effectuer un milliard de comparaisons par secondes, 
+			prendrait plus de dix mille milliards d’années 
+			pour trouver une valeur dans un tableau de 100 éléments.
+
+			\begin{Exercice}{Calcul de complexités}
+				Quelle est la complexité d'un algorithme qui :		
+				\begin{enumerate}[label=\alph*)]
+				\item 
+					recherche le maximum d'un tableau de $n$ éléments ?
+				\item 
+					remplace par 0 toutes les occurrences du maximum 
+					d'un tableau de $n$ éléments ?
+				\item 
+					vérifie si un tableau contient deux éléments égaux ?
+				\item 
+					trie par recherche des minima successifs ?
+				\item 
+					vérifie si les éléments d'un tableau forment un palindrome ?
+				\item
+					cherche un élément dans un tableau 
+					en essayant des cases au hasard jusqu'à le trouver ?
+				\end{enumerate}
+			\end{Exercice}
+
+			\begin{Exercice}{Gestion des données}
+				Comparez les algorithmes d'ajout, 
+				de recherche et de suppression
+				de valeurs dans le cas d'un tableau trié
+				et d'un tableau non trié.
+			\end{Exercice}
+			
+			\begin{Exercice}{Réflexion}
+				L’algorithme de recherche dichotomique 
+				est-il toujours à préférer à
+				l’algorithme de recherche linéaire ?
+			\end{Exercice}
+	
