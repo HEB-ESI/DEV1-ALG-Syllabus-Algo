@@ -126,8 +126,10 @@
 		Au lieu d’avoir à manier dix compteurs distincts
 		(\lda{cpt0}, \lda{cpt1}, etc.), 
 		nous allons envisager une seule «~grande~» variable 
-		\lda{cpt} compartimentée en dix «~sous-variables~» 
-		qui se distingueront les unes des autres par un indice~: 
+		\lda{cpt} compartimentée en dix «~cases~» ou «~sous-variables~»
+		(qu'on appelle aussi les «~éléments~» du tableau). 
+		Elles se distingueront les unes des autres par un numéro 
+		(on dit un «~indice~»)~: 
 		\lda{cpt0} deviendrait ainsi \lda{cpt[0]}, 
 		\lda{cpt1} deviendrait \lda{cpt[1]}, 
 		et ainsi de suite jusqu’à
@@ -241,7 +243,9 @@
 		où \lda{taille} est le nombre d'éléments 
 		et \lda{TypeElément} est le type des éléments 
 			que l’on trouvera dans le tableau.
-			Tous les types sont permis. 
+			Tous les types sont permis
+			mais tous les élements d'un même tableau
+			sont du même type. 
 		
 	% ==================
 	\section{Utilisation}
@@ -252,9 +256,7 @@
 		\begin{LDA}
 			\Stmt tab[i]	\Comment{élément du tableau 'tab' d'indice i}
 		\end{LDA}
-		
-		Une fois un tableau déclaré, 
-		seuls les éléments d’indice compris entre 0%
+		La première case du tableau porte l'indice \lda{0}%
 		\footnote{%
 			Nous considérons que la première case du tableau
 			porte le numéro 0 comme c'est le cas dans beaucoup de langage
@@ -262,20 +264,18 @@
 			Plus loin, nous verrons une notation alternative
 			qui permet de choisir un autre numéro de début pour le tableau
 			ce qui sera plus naturel pour certains problèmes.
-		}
-		et taille-1 peuvent être utilisés. 
+		},
+		la dernière l'indice \lda{taille-1}.
+		C'est considéré comme une erreur d'indiquer un indice
+		qui ne correspond pas à une case du tableau (trop petit ou trop grand).
 		Par exemple, si on déclare~:
-	
-		\begin{LDA}
-			\Decl{tabEntiers}{\Array{100}{entiers}}
-		\end{LDA}
-		
+		\lda{tabEntiers : {\Array{100}{entiers}}}	
 		il est interdit d’utiliser \lda{tabEntiers[-1]} ou
 		\lda{tabEntiers[100]}. 
 
 		\begin{Exercice}{Déclarer et initialiser}
 			Écrire un algorithme qui déclare un tableau de 100 chaines
-			et mette votre nom dans la 3\ieme{} case du tableau.
+			et met votre nom dans la 3\ieme{} case du tableau.
 		\end{Exercice}
 	
 		\begin{Exercice}{Initialiser un tableau à son indice}
@@ -346,9 +346,7 @@
 				indique que l'algorithme va consulter les valeurs 
 				du tableau reçu en paramètre. 
 				Les élements doivent donc avoir été initialisés
-				avant d'appeler l'algorihtme.
-				
-				\textbf{Exemple~:}
+				avant d'appeler l'algorihtme. Exemple~:
 			
 				\begin{LDA}
 					\LComment{Affiche les éléments d'un tableau}
@@ -370,9 +368,7 @@
 				
 			\item \In\Out :
 				indique que l'algorithme va consulter/modifier les valeurs 
-				du tableau reçu en paramètre. 
-	
-				\textbf{Exemple~:}
+				du tableau reçu en paramètre. Exemple~:
 			
 				\begin{LDA}
 					\LComment{Inverse les éléments du tableau}
@@ -393,9 +389,7 @@
 				indique que l'algorithme va assigner des valeurs 
 				au tableau reçu en paramètre.
 				Les éléments de ce tableau n'ont donc pas à être initialisés
-				avant d'appeler cet algorithme. 
-	
-				\textbf{Exemple~:}
+				avant d'appeler cet algorithme. Exemple~:
 			
 				\begin{LDA}
 					\LComment{Initialise un tableau reçu en paramètre}
@@ -446,7 +440,7 @@
 			Il serait utile de pouvoir appeler le même algorithme avec des
 			tableaux de tailles différentes. 
 			Pour permettre cela, la taille du tableau reçu en paramètre 
-			est déclarée avec un nom (souvent \emph{n})
+			peut être déclarée avec un nom (habituellement \emph{n})
 			qui peut être considéré comme un paramètre entrant
 			et peut être utilisé dans l'algorithme.
 			Idem pour un tableau en retour.
@@ -457,13 +451,13 @@
 				\LComment{Affiche un tableau de taille quelconque}
 				\Algo{afficher}{\Par{tab}{\Array{n}{entiers}}}{}
 					\Write "Tableau de ", n, " éléments".
-					\For{i}{0}{n-1}
+					\For{i}{0}{n-1} \RComment{Attention ! le dernier élément est à l'indice n-1}
 						\Write tab[i]
 					\EndFor
 				\EndAlgo
 				\Empty
 				\LComment Crée un tableau d'entiers de taille n, l'initialise à 0 et le retourne.
-				\Algo{créerTableau}{n : entier}{\Array{n}{entiers}}
+				\Algo{créer}{n : entier}{\Array{n}{entiers}}
 					\Decl{tab}{\Array{n}{entiers}}
 					\For{i}{0}{n-1}
 						\Let tab[i] \Gets 0
@@ -471,16 +465,13 @@
 					\Return tab
 				\EndAlgo
 				\Empty
-				\Algo{principalAppelTableau}{}{}
-					\Decl{entiers}{\Array{10}{entiers}}
-					\Let entiers \Gets créerTableau()
+				\Algo{test}{}{}
+					\Decl{entiers}{\Array{20}{entiers}}
+					\Let entiers \Gets créerTableau(20)
 					\Stmt afficher(entiers)
 				\EndAlgo
 			\end{LDA}
 
-		\subsection{Exercices}
-		%---------------------------------
-		
 			\begin{Exercice}{Trouver les entêtes}
 				Écrire les entêtes (et uniquement les entêtes)
 				des algorithmes qui résolvent les problèmes suivants :
@@ -538,33 +529,6 @@
 			On pourrait faire autre chose avec ces éléments :
 			les sommer, les comparer\dots
 				
-		\subsection{Parcours partiel}
-		%----------------------------
-		
-			Parfois, on ne doit pas forcément parcourir 
-			le tableau jusqu'au bout
-			mais on pourra s'arrêter prématurément 
-			si une certaine condition est remplie.
-			Par exemple~:
-			\begin{itemize}
-			\item on cherche la présence d'un élément et on vient de le trouver ;
-			\item on vérifie qu'il n'y a pas de $0$ et on vient d'en trouver un.
-			\end{itemize}
-	
-			Pour résoudre ce problème,
-			on peut partir du parcours complet et :
-			\begin{itemize}
-			\item
-				Transformer le \K{pour} en \K{tant que}.
-			\item
-				Introduire un test d'arrêt.
-			\end{itemize}
-			La fiche \vref{fiche:tab-parcours-partiel}
-			détaille un parcours partiel.
-		
-		\subsection{Exercices}
-		%---------------------
-		
 			\begin{Exercice}{Inverser les éléments}
 				Écrire un algorithme qui 
 				inverse tous les éléments négatifs dans un tableau d'entiers.
@@ -588,6 +552,35 @@
 				donne le nombre d'éléments négatifs dans un tableau d'entiers.
 			\end{Exercice}
 
+		\subsection{Parcours partiel}
+		%----------------------------
+		
+			Parfois, on ne doit pas forcément parcourir 
+			le tableau jusqu'au bout
+			mais on pourra s'arrêter prématurément 
+			si une certaine condition est remplie.
+			Par exemple~:
+			\begin{itemize}
+			\item 
+				on cherche la présence d'un élément et on vient de le trouver ;
+			\item 
+				on vérifie qu'il n'y a pas de $0$ et on vient d'en trouver un ;
+			\item
+				on vérifie que tous les éléments sont positifs
+				et on vient d'en trouver un qui est négatif ou nul.
+			\end{itemize}
+	
+			Pour résoudre ce problème,
+			on peut partir du parcours complet et :
+			\begin{itemize}
+			\item
+				Transformer le \K{pour} en \K{tant que}.
+			\item
+				Introduire un test d'arrêt.
+			\end{itemize}
+			La fiche \vref{fiche:tab-parcours-partiel}
+			détaille un parcours partiel.
+				
 			\begin{Exercice}{Tester la présence de négatifs}
 				Écrire un algorithme qui
 				détermine si un tableau d'entiers contient au moins un nombre négatif.
@@ -627,12 +620,10 @@
 		qui est effectivement utilisée ?
 		Comprenez bien qu'il \textbf{n'y a pas de concept de case vide}.
 		Rien ne différencie une case utilisée d'une case non utilisée.
-		On s'en sort en retenant, dans une variable,
-		le nombre de case effectivement utilisées%
-		\footnote{%
-			Cases qui, par hypothèse, doivent se situer dans la partie basse
-			du tableau.
-		}.
+		On s'en sort en stockant les valeurs 
+		dans la partie basse du tableau (à gauche)
+		et en retenant, dans une variable,
+		le nombre de case effectivement utilisées.
 			
 		\marginicon{definition}
 		La \textbf{taille physique} d'un tableau 
@@ -654,11 +645,12 @@
 			\lda{tailleLogique = 4}
 		\end{center}
 		Les cases indiquées par "?" ne sont pas vides ;
-		elles contiennent une valeur qui n'est probablement pas connue
-		et en tout cas pas pertinente.
+		elles peuvent être non initialisées
+		(et on ne peut pas tester si une case est non initialisée)
+		ou bien contenir une valeur qui n'est pas pertinente.
 		
 		\paragraph{Exemple.}
-		L'algorithme ci-dessous 
+		L'algorithme suivant 
 		demande des valeurs positives à l'utilisateur 
 		et les stocke dans un tableau (maxmimum 1000).
 		Toute valeur négative ou nulle est une valeur sentinelle.
@@ -759,70 +751,77 @@
 		\end{LDA}
 		
 		\paragraph{Comment traduire ça dans un langage de programmation ?}
-		Certains langages permettent de choisir l'indice de début d'un tableau.
+		Certains langages comme Pascal
+		permettent de choisir l'indice de début d'un tableau.
 		D'autres l'imposent, parfois à 1 comme Cobol 
 		mais le plus souvent à 0 comme Java.
 		Que faire dans ce cas ? Il existe deux stratégies.
 		
-		La première passe par une conversion d'indice.
-		On stocke les données dans le tableau 
-		comme nous l'impose le langage
-		\begin{center}
-			\begin{tabular}{*{7}{>{\centering\arraybackslash}m{15mm}}}
-				0 & 1 & 2 & 3 & 4 & 5 & 6
-				\\\hline
-				\multicolumn{1}{|>{\centering\arraybackslash}m{15mm}|}{"lundi"} &
-				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mardi"} &
-				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mercredi"} &
-				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"jeudi"} &
-				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"vendredi"} &
-				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"samedi"} &
-				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"dimanche"}
-				\\\hline
-			\end{tabular}
-		\end{center}
-		et on accède à l'intitulé du jour $i$ dans la case $i-1$.
-		Ce qui donne
-
-		\begin{LDA}
-			\Algo{intituléJour}{\Par{numéroJour}{entier}}{chaine}
-				\Decl{nomsJours}{\Array{7}{chaine}}
-				\Let nomsJours \Gets \{"lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"\}
-				\Return nomsJours[numéroJour-1]
-			\EndAlgo
-		\end{LDA}
+		\begin{enumerate}
+		\item
+			La première passe par une conversion d'indice.
+			On stocke les données dans le tableau 
+			comme nous l'impose le langage
+			
+				\begin{tabular}{*{7}{>{\centering\arraybackslash}m{15mm}}}
+					0 & 1 & 2 & 3 & 4 & 5 & 6
+					\\\hline
+					\multicolumn{1}{|>{\centering\arraybackslash}m{15mm}|}{"lundi"} &
+					\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mardi"} &
+					\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mercredi"} &
+					\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"jeudi"} &
+					\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"vendredi"} &
+					\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"samedi"} &
+					\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"dimanche"}
+					\\\hline
+				\end{tabular}
+				
+			et on accède à l'intitulé du jour $i$ dans la case $i-1$.
+			Ce qui donne
+	
+			\begin{LDA}
+				\Algo{intituléJour}{\Par{numéroJour}{entier}}{chaine}
+					\Decl{nomsJours}{\Array{7}{chaine}}
+					\Let nomsJours \Gets \{"lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"\}
+					\Return nomsJours[numéroJour-1]
+				\EndAlgo
+			\end{LDA}
+			\bigskip
+			
+		\item
+			La seconde approche crée un tableau avec une case en plus
+			et n'utilise pas la première.
+				
+				\begin{tabular}{>{\centering\arraybackslash}m{2mm}*{7}{>{\centering\arraybackslash}m{15mm}}}
+					0 & 1 & 2 & 3 & 4 & 5 & 6 & 7
+					\\\hline
+					\multicolumn{1}{|>{\centering\arraybackslash}m{2mm}|}{} &
+					\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"lundi"} &
+					\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mardi"} &
+					\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mercredi"} &
+					\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"jeudi"} &
+					\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"vendredi"} &
+					\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"samedi"} &
+					\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"dimanche"}
+					\\\hline
+				\end{tabular}
+				
+			L'algorithme devient
+	
+			\begin{LDA}
+				\Algo{intituléJour}{\Par{numéroJour}{entier}}{chaine}
+					\Decl{nomsJours}{\Array{8}{chaine}}
+					\Let nomsJours \Gets \{"", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"\}
+					\Return nomsJours[numéroJour]
+				\EndAlgo
+			\end{LDA}
 		
-		La seconde approche crée un tableau avec une case en plus
-		et n'utilise pas la première.
-
-		\begin{center}
-			\begin{tabular}{>{\centering\arraybackslash}m{2mm}*{7}{>{\centering\arraybackslash}m{15mm}}}
-				0 & 1 & 2 & 3 & 4 & 5 & 6 & 7
-				\\\hline
-				\multicolumn{1}{|>{\centering\arraybackslash}m{2mm}|}{} &
-				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"lundi"} &
-				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mardi"} &
-				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"mercredi"} &
-				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"jeudi"} &
-				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"vendredi"} &
-				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"samedi"} &
-				\multicolumn{1}{>{\centering\arraybackslash}m{15mm}|}{"dimanche"}
-				\\\hline
-			\end{tabular}
-		\end{center}
-		L'algorithme devient
-
-		\begin{LDA}
-			\Algo{intituléJour}{\Par{numéroJour}{entier}}{chaine}
-				\Decl{nomsJours}{\Array{8}{chaine}}
-				\Let nomsJours \Gets \{"", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"\}
-				\Return nomsJours[numéroJour]
-			\EndAlgo
-		\end{LDA}
+		\end{enumerate}
 		
 		Cette seconde approche est à préférer 
 		car elle modifie le moins l'algorithme de départ 
-		et entrainera moins d'erreurs de conversion.
+		et entrainera moins d'erreurs de conversion
+		(au prix d'un faible gaspillage de la mémoire).
 		Mais elle n'est pas toujours possible.
 		Par exemple, imaginons qu'on veuille prendre 
 		des relevés de températures (arrondies à l'entier) à Bruxelles 
