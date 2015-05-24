@@ -83,7 +83,7 @@
 		\Stmt 2) Calculer le maximum de \lda{maxab} et du troisième nombre, ce qui donne le résultat.
 	\end{LDA}
 
-	Qu'on peut illustrer ainsi :
+	qu'on peut illustrer ainsi :
 	
 	\begin{center}
 	\begin{tikzpicture}[auto]
@@ -211,7 +211,7 @@
 		\begin{minipage}{4cm}
 			\begin{LDA}
 				\LComment {Code appelant}
-				\Stmt algo(expr)
+				\Stmt monAlgo(expr)
 				\Empty
 			\end{LDA}
 		\end{minipage}
@@ -228,6 +228,43 @@
 		commençait pas l'affectation
 		\lda{par \Gets expr}.
 		
+		\textbf{Exemple.} 
+		Reprenons l'exemple de \lda{max3}.
+		
+		\begin{minipage}{4cm}
+			\begin{LDA}
+				\LComment {Code appelant}
+				\Decl {max}{réel}
+				\Let max \Gets max3(3, 2, 5)
+				\Empty
+			\end{LDA}
+		\end{minipage}
+		\quad
+		\begin{minipage}{8cm}
+			\begin{LDA}[1]
+				\LComment {Code appelé}
+				\Algo{max3}{\Par{a\In}{réel}, \Par{b\In}{réel}, \Par{c\In}{réel}}{réel}
+					\Decl{maxab, max}{réels}
+					\Let maxab \Gets max2(a,b)
+					\Let max \Gets max2(maxab,c)
+					\Return max
+				\EndAlgo
+			\end{LDA}
+		\end{minipage}
+		\\
+		\begin{minipage}{12cm}
+			\begin{tabular}{|>{\centering\arraybackslash}m{2cm}|*{5}{>{\centering\arraybackslash}m{2cm}}|}
+				\hline
+				\verb_max3(3,2,5)_ & {a} & {b} & {c} & {maxab} & {max}\\
+				\hline
+				2 & {3}	& {2}	& {5}	& {\verb_#_}		& {\verb_#_}	 \\
+				3 & {3}	& {2}	& {5}	& {indéfini}		& {indéfini}	 \\
+				4 & {3}	& {2}	& {5}	& {3}		& {indéfini}	 \\
+				5 & {3}	& {2}	& {5}	& {3}		& {5}	\\
+				\hline
+			\end{tabular}
+		\end{minipage}
+		
 	%==================================
 	\subsection{Le paramètre en sortie}
 	%==================================
@@ -242,7 +279,7 @@
 		On fera suivre le nom du paramètre d'une flèche
 		vers le haut (\Out) pour rappeler son rôle.
 		Un tel paramètre n'aura pas de valeur
-		au début de l'algorithme mais s'en verra attribuée une
+		au début de l'algorithme mais s'en verra attribuer une
 		par l'algorithme.
 		
 		Lors de l'appel, on fournit une \textbf{variable}
@@ -255,15 +292,15 @@
 		correspondant à cette même durée exprimée en heures, minutes et secondes.
 		En voici le schéma et la solution :
 		\begin{center}
-		\flowalgorrr{totalSec (entier)}{versHMS}{H (entier)}{M (entier)}{S (entier)}
+		\flowalgorrr{totalSec (entier)}{versHMS}{heuresÉcoulées (entier)}{minutesÉcoulées (entier)}{secondesÉcoulées (entier)}
 		\end{center}
 			
-		\begin{LDA}
-			\Algo{versHMS}{\Par{totalSec\In}{entier}, \Par{H\Out}{entier}, 
-						   \Par{M\Out}{entier}, \Par{S\Out}{entier}}{}
-				\Let H \Gets totalSec DIV (60*60)
-				\Let M \Gets totalSec MOD (60*60) DIV 60				
-				\Let S \Gets totalSec MOD 60
+		\begin{LDA}[1]
+			\Algo{versHMS}{\Par{totalSec\In}{entier}, \Par{heuresÉcoulées\Out}{entier}, 
+						   \Par{minutesÉcoulées\Out}{entier}, \Par{secondesÉcoulées\Out}{entier}}{}
+				\Let heuresÉcoulées \Gets totalSec DIV (60*60)
+				\Let minutesÉcoulées \Gets totalSec MOD (60*60) DIV 60				
+				\Let secondesÉcoulées \Gets totalSec MOD 60
 			\EndAlgo
 		\end{LDA}
 		
@@ -275,11 +312,24 @@
 		\begin{LDA}
 			\Stmt versHMS(65536, heure, minute, seconde)
 		\end{LDA}
+		
+		\begin{minipage}{12cm}
+			\begin{tabular}{|>{\centering\arraybackslash}m{2cm}|*{4}{>{\centering\arraybackslash}m{2.5cm}}|}
+				\hline
+				\tiny{versHMS(65536, heure, minute, seconde)} & {totalSec} & {heuresÉcoulées} & {minutesÉcoulées} & {secondesÉcoulées}\\
+				\hline
+				1 & {65536}	& {indéfini}		& {indéfini}		& {indéfini}	 \\
+				2 & {65536}	& {18}			& {indéfini}		& {indéfini}	 \\
+				3 & {65536}	& {18}			& {12}			& {indéfini}	 \\
+				4 & {65536}	& {18}			& {12}			& {16}	\\
+				\hline
+			\end{tabular}
+		\end{minipage}
 
 		C'est comme si,
 		à la fin de l'algorithme \lda{versHMS},
 		on avait les assignations suivantes :
-		\\\lda{heure \Gets H}, \lda{minute \Gets M} et \lda{seconde \Gets S}.
+		\\\lda{heure \Gets heuresÉcoulées}, \lda{minute \Gets minutesÉcoulées} et \lda{seconde \Gets secondesÉcoulées}.
 				
 	%==================================
 	\subsection{Le paramètre en entrée-sortie}
@@ -303,7 +353,7 @@
 
 		\begin{minipage}{6cm}		
 			\begin{center}
-			\flowalgov{nb (réel)}{valAboslue}
+			\flowalgov{nb (réel)}{valAbsolue}
 			\end{center}
 		\end{minipage}
 		\quad
@@ -327,7 +377,7 @@
 		on avait une première ligne pour donner sa valeur au paramètre
 		(\lda{nb \Gets température})
 		et une dernière ligne pour effectuer l'assignation opposée
-		(\lda{nb \Gets température}).
+		(\lda{température \Gets nb}).
 		
 %==================================
 \section{La valeur de retour}
