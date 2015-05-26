@@ -35,6 +35,17 @@
 % -------------------------------------------------------------
 \usepackage{parskip}
 
+% Pour barrer d'une croix tout un block
+% \begin{wrong}\begin{LDA}...\end{LDA}\end{wrong}
+\usepackage{environ}
+\NewEnviron{wrong}{%
+	\begin{tikzpicture}
+		\node (box){\begin{minipage}{\linewidth}\BODY\end{minipage}};
+		\draw[gray] (box.north west) -- (box.south east); % pour un trait en diagonale principale
+		\draw[gray] (box.south west) -- (box.north east); % pour un autre trait en diagonale 
+	\end{tikzpicture}
+	}
+	
 % ===================================================
 %   Paragraphes spéciaux
 % ===================================================

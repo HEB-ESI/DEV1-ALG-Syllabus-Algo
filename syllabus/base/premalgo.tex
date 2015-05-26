@@ -1269,50 +1269,87 @@
 		que doivent avoir nos algorithmes.
 		Qu'est ce qui permet d'améliorer la lisibilité d'un algorithme ?
 		
-		Il y a d'abord la \textbf{mise en page} qui aide le lecteur
-		à avoir une meilleure vue d'ensemble de l'algorithme,
-		à en repérer rapidement la structure générale.
-		Ainsi, dans ce syllabus :
-		\begin{itemize}
-		\item 
-			Les mots imposés 
-			(on parle de \emph{mots-clés}\index{mots-clés})
-			sont mis en évidence (en gras%
-			\footnote{%
-				Difficile de mettre en gras avec un bic.
-				Dans une version écrite vous pouvez :
-				souligner le mot, le mettre en couleur ou
-				l'écrire en majuscule.%
-			}).
+		\begin{enumerate}
 		\item
-			Les instructions à l'intérieur de l'algorithme sont 
-			\emph{indentées}\index{indentation}
-			(décalées vers la droite).
-			On indentera également les instructions
-			à l'intérieur des choix et des boucles.
-		\item
-			Des lignes verticales relient le début et la fin
-			de quelque chose. 
-			Ici, un algorithme mais on pourra l'utiliser
-			également pour les choix et les boucles. 
-		\end{itemize}
+			Il y a d'abord la \textbf{mise en page} qui aide le lecteur
+			à avoir une meilleure vue d'ensemble de l'algorithme,
+			à en repérer rapidement la structure générale.
+			Ainsi, dans ce syllabus :
+			\begin{itemize}
+			\item 
+				Les mots imposés 
+				(on parle de \emph{mots-clés}\index{mots-clés})
+				sont mis en évidence (en gras%
+				\footnote{%
+					Difficile de mettre en gras avec un bic.
+					Dans une version écrite vous pouvez :
+					souligner le mot, le mettre en couleur ou
+					l'écrire en majuscule.%
+				}).
+			\item
+				Les instructions à l'intérieur de l'algorithme sont 
+				\emph{indentées}\index{indentation}
+				(décalées vers la droite).
+				On indentera également les instructions
+				à l'intérieur des choix et des boucles.
+			\item
+				Des lignes verticales relient le début et la fin
+				de quelque chose. 
+				Ici, un algorithme mais on pourra l'utiliser
+				également pour les choix et les boucles. 
+			\end{itemize}
+			
+			\textbf{Exemples à ne pas suivre.}
+			\\
+			\begin{wrong}
+				\begin{LDA}
+					\Entete{duréeTrajet}{\Par{vitesseMS, distanceKM}{réel}}{réel}
+					\Decl{distanceM}{réel}
+					\Let distanceM \Gets 1000 * distanceKM
+					\Return distanceM / vitesseMS
+					\Stmt \K{Fin algorithme}
+				\end{LDA}
+			\end{wrong}
+			
+			\begin{wrong}
+				\begin{LDA}
+					\Algo{duréeTrajet}{\Par{vitesseMS, distanceKM}{réel}}{réel}
+						\Decl{distanceM}{réel}
+						\Let \quad distanceM \Gets 1000 * distanceKM
+						\qquad \K{return} distanceM / vitesseMS
+					\EndAlgo
+				\end{LDA}
+			\end{wrong}
+	
+			Il faudra préférer
+			\begin{LDA}
+			\Algo{duréeTrajet}{\Par{vitesseMS, distanceKM}{réel}}{réel}
+				\Decl{distanceM}{réel}
+				\Let distanceM \Gets 1000 * distanceKM
+				\Return distanceM / vitesseMS
+			\EndAlgo
+			\end{LDA}
+			\medskip
 		
-		Il y a, ensuite, l'écriture des instructions elles-mêmes.
-		Ainsi :
-		\begin{itemize}
 		\item
-			Il faut choisir soigneusement les noms 
-			(d'algorithmes, de paramètres, de variables\dots)
-		\item
-			Il faut décomposer (ou au contraire fusionner)
-			des calculs pour arriver au résultat qu'on jugera
-			le plus lisible.
-		\item 
-			On peut introduire des commentaires et/ou
-			des constantes. 
-			Deux concepts que nous allons développer maintenant.
-		\end{itemize}
-					
+			Il y a, ensuite, l'écriture des instructions elles-mêmes.
+			Ainsi :
+			\begin{itemize}
+			\item
+				Il faut choisir soigneusement les noms 
+				(d'algorithmes, de paramètres, de variables\dots)
+			\item
+				Il faut décomposer (ou au contraire fusionner)
+				des calculs pour arriver au résultat qu'on jugera
+				le plus lisible.
+			\item 
+				On peut introduire des commentaires et/ou
+				des constantes. 
+				Deux concepts que nous allons développer maintenant.
+			\end{itemize}
+			
+		\end{enumerate}
+				
 		%------------------------------------------------
 		\subsection{Les commentaires}\index{commentaires}
 		%------------------------------------------------
