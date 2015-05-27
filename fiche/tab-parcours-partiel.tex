@@ -82,11 +82,18 @@
 		initialisé à vrai avec un \lda{\dots ET tousPositifs}
 		dans le test.
 
+		Dans tous les cas,
+		faites attention à ne pas utiliser \lda{tab[i]}
+		si vous n'êtes pas sûr du \lda{i}.
+		C'est particulièrement vrai après la boucle.
+		
 \Section{Alternatives}
 
-	\begin{minipage}{9.0cm}
+	\begin{minipage}[b]{80mm}
 		\begin{LDA}
-			\Algo{tousPositifs}{\Par{tab}{\Array{n}{entiers}}}{booléen}
+			\Algo{tousPositifs}{
+				\\\hfill
+				\Par{tab}{\Array{n}{entiers}}}{booléen}
 				\For{i}{0}{n-1}
 					\If{tab[i] = 0}
 						\Return false
@@ -97,13 +104,15 @@
 		\end{LDA}
 	\end{minipage}
 	\quad
-	\begin{minipage}{4.5cm}
+	\begin{minipage}{60mm}
 		On rencontre parfois ce genre de solutions.
 		Elle est plus simple à écrire car on ne doit
 		pas gérer manuellement l'indice
 		mais le lecteur doit attendre de lire
 		le code de la boucle pour comprendre
 		que le parcours ne sera pas toujous complet.
+		
+		Nous vous demandons de ne pas l'utiliser en 1\iere{} année.
 	\end{minipage}
 
 					
