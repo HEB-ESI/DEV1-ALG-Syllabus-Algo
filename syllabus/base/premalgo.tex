@@ -720,15 +720,15 @@
 			vrai en l’occurrence. 
 			Ce résultat peut être assigné à une variable booléenne.			
 
-			\paragraph{Exemples.}
+			\textbf{Exemples.}
 			Voici quelques assignations correctes 
 			(les variables à gauche du \Gets sont des variables booléennes) :
-			\begin{itemize}
-				\item \lda{positif \Gets nb>0 \RComment positif est mis à vrai si le nb est positif} 
-				\item \lda{adulte \Gets âge$\ge$21 \RComment adulte est vrai si l'âge est 21 ou plus}
-				\item \lda{réussi \Gets cote$\ge$10 \RComment réussi est mis à vrai si la cote est supérieure ou égale à 10}
-				\item \lda{parfait \Gets nbFautes=0 \RComment c'est parfait si le nombre de fautes est 0}
-			\end{itemize}
+			\begin{LDA}
+				\Let positif \Gets nb>0 \RComment positif est mis à vrai si le nb est positif 
+				\Let adulte \Gets âge$\ge$21 \RComment adulte est vrai si l'âge est 21 ou plus
+				\Let réussi \Gets cote$\ge$10 \RComment réussi est mis à vrai si la cote est supérieure ou égale à 10
+				\Let parfait \Gets nbFautes=0 \RComment c'est parfait si le nombre de fautes est 0
+			\end{LDA}
 		
 			\begin{Exercice}{Écrire des expressions booléennes}
 				Pour chacune des phrases suivantes,
@@ -758,12 +758,16 @@
 			pour donner un résultat du même type.
 	
 			\begin{center}
-			\begin{tabular}{m{1cm}|m{3cm}|m{8cm}}
+			\begin{tabular}{m{15mm}|m{3cm}|m{8cm}}
+			opérateur & nom & description \\
+			\hline
 			\raggedleft \lda{NON} & négation & vrai devient faux et inversement\\
 			\raggedleft \lda{ET} & conjonction logique & vrai si les 2 conditions sont vraies\\
 			\raggedleft \lda{OU} & disjonction logique & vrai si au moins une des 2 conditions est vraie\\
+			\hline
 			\end{tabular}
 			\end{center}
+			\medskip
 			
 			Ce qu'on peut résumer par les tableaux suivants :
 			
@@ -787,7 +791,7 @@
 			\end{tabular}
 			\end{center}
 
-\clearpage			
+%\clearpage			
 			On peut les utiliser 
 			pour donner une valeur à une variable booléenne.
 			Par exemple :
@@ -817,30 +821,57 @@
 			\lda{tarifRéduit \Gets âge$<$18 OU $\ge$60}
 	
 			\paragraph{Loi de De Morgan.}
-			Lorsqu'on a une expression complexe faisant intervenir
-			des négations, on peut utiliser la \emph{Loi de De Morgan}
-			pour la simplifier.
-			Cette loi stipule que :
-			\[
-				\mathrm{NON}\ (a\ \mathrm{ET}\ b) \Leftrightarrow \mathrm{NON}\ a\ \mathrm{OU}\ \mathrm{NON}\ b
-			\]
-			\[
-				\mathrm{NON}\ (a\ \mathrm{OU}\ b) \Leftrightarrow \mathrm{NON}\ a\ \mathrm{ET}\ \mathrm{NON}\ b
-			\]
-			
-			Par exemple : \lda{tarifRéduit \Gets NON (18$\le$âge ET âge$<$60)}
-			\\peut s'écrire aussi : \lda{tarifRéduit \Gets (NON 18$\le$âge) OU (NON âge$<$60)}
-			\\ce qui se simplifie en : \lda{tarifRéduit \Gets âge$<$18 OU 60$\le$âge}
-
+				Lorsqu'on a une expression complexe faisant intervenir
+				des négations, on peut utiliser la \emph{Loi de De Morgan}
+				pour la simplifier.
+				Cette loi stipule que :
+				\[
+					\mathrm{NON}\ (a\ \mathrm{ET}\ b) \Leftrightarrow \mathrm{NON}\ a\ \mathrm{OU}\ \mathrm{NON}\ b
+				\]
+				\[
+					\mathrm{NON}\ (a\ \mathrm{OU}\ b) \Leftrightarrow \mathrm{NON}\ a\ \mathrm{ET}\ \mathrm{NON}\ b
+				\]
+				
+				Par exemple : \lda{tarifRéduit \Gets NON (18$\le$âge ET âge$<$60)}
+				\\peut s'écrire aussi : \lda{tarifRéduit \Gets (NON 18$\le$âge) OU (NON âge$<$60)}
+				\\ce qui se simplifie en : \lda{tarifRéduit \Gets âge$<$18 OU 60$\le$âge}
+	
 			\paragraph{Priorités et parenthèses.}
-			Lorsqu'on écrit une expression mêlant les opérateurs logiques,
-			on considère que NON est prioritaire sur ET qui l'est sur OU.
+				Lorsqu'on écrit une expression mêlant les opérateurs logiques,
+				on considère que NON est prioritaire sur ET qui l'est sur OU.
+				
+				Ainsi l'expression : \lda{NON a OU b ET c}
+				doit se comprendre : \lda{(NON a) OU (b ET c)}.
+				Vous pouvez toujours ajouter des parenthèses non nécessaires
+				pour vous assurer d'être bien compris.
+
+			\paragraph{Évaluation court-circuitée.}\label{court-circuit}
 			
-			Ainsi l'expression : \lda{NON a OU b ET c}
-			doit se comprendre : \lda{(NON a) OU (b ET c)}.
-			Vous pouvez toujours ajouter des parenthèses non nécessaires
-			pour vous assurer d'être bien compris.
-			 
+				Les opérateurs ET et OU sont des opérateurs court-circuités.
+				Cela signifie que le calcul s'arrête dès qu'on peut être sûr
+				de la réponse finale.
+				En particulier, si la première partie d'un ET est fausse,
+				on est sûr que le résultat sera faux quelle que soit la suite.
+				Et si la première partie d'un OU est vraie 
+				on est sûr que le résultat sera vrai.
+				
+				Pourquoi un tel comportement ?
+				Cela permet de gagner du temps bien sûr,
+				mais cela permet également d'éviter des erreurs d'exécution.
+				 
+				\textbf{Exemples.}
+				\begin{LDA}
+					\Let ok \Gets 1/b < 0.1
+						\RComment provoque une erreur et un arrêt
+						de l'algorithme si \lda{b=0}. 
+					\Let ok \Gets b$\neq$0 ET 1/b < 0.1
+						\RComment donne la valeur \lda{faux} à \lda{ok} 
+						si \lda{b=0} (court-circuit). 
+					\Let ok \Gets 1/b < 0.1 ET b$\neq$0
+						\RComment provoque une erreur et un arrêt
+						de l'algorithme si \lda{b=0}. 
+				\end{LDA}
+				
 			\begin{Exercice}{Simplifier des expressions booléennes}
 				Voici quelques assignations correctes du point de vue de la
 				syntaxe mais contenant des lourdeurs d’écriture.
