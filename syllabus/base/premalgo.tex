@@ -354,28 +354,30 @@
 			est un calcul, une combinaison de variables et
 			d’opérateurs. Une expression a une valeur.
 					
-			\paragraph{Exemples d'assignations correctes.}
+			\paragraph{Exemples.}
 			%------------------------------------------------
 				
-				\begin{LDA}
-				\Let somme \Gets nombre1 + nombre2
-				\Let denRes \Gets den1 * den2
-				\Let cpt \Gets cpt + 1
-				%\Let delta \Gets b**2 – 4*a*c
-				\Let test \Gets a < b \RComment pour une variable logique
-				\Let maChaine \Gets "bonjour"
-				\Let maChaine \Gets bonjour	\RComment comprenez-vous la différence ?
-				%\Let uneChaine \Gets concat(maChaine, "jour")
-				\end{LDA}
+				Quelques assignations correctes :
 				
-			\paragraph{Exemples d'assignations incorrectes}
-			%--------------------------------------------------				
 				\begin{LDA}
-				\Let somme + 1 \Gets 3
-				\RComment somme + 1 n’est pas une variable
-				\Let somme \Gets 3n
-				\RComment 3n n’est ni un nom de variable correct ni une expression correcte
+					\Let somme \Gets nombre1 + nombre2
+					\Let denRes \Gets den1 * den2
+					\Let cpt \Gets cpt + 1
+					\Let test \Gets a < b \RComment pour une variable logique
+					\Let maChaine \Gets "bonjour"
+					\Let maChaine \Gets bonjour	\RComment comprenez-vous la différence ?
 				\end{LDA}
+
+				Et d'autres qui ne le sont pas :
+			
+				\begin{wrong}
+					\begin{LDA}
+					\Let somme + 1 \Gets 3
+					\RComment somme + 1 n’est pas une variable
+					\Let somme \Gets 3n
+					\RComment 3n n’est ni un nom de variable correct ni une expression correcte
+					\end{LDA}
+				\end{wrong}
 				
 			\paragraph{Remarques}
 			%------------------------
