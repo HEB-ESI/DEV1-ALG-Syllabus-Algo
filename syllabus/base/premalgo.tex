@@ -1048,14 +1048,83 @@
 			
 				On voit que les DIV et MOD avec des puissances de 10
 				permettent de garder les chiffres de droite (MOD)
-				ou d'enlever les chiffres de droites (DIV).
+				ou d'enlever les chiffres de droite (DIV).
 				Combinés, ils permettent d'extraire n'importe quel
 				chiffre d'un nombre.
 				
-				\textbf{Exemple} : 65536 DIV 100 MOD 10 = 5.
-									
+				\textbf{Exemple} : (65536 DIV 100) MOD 10 = 5.
+
 		%---------------------
-		\subsection{Exercices sur les difficultés de calcul}
+		\subsection{Le hasard}\index{hasard}\index{aléatoire}
+		%---------------------
+			
+			Il existe de nombreuses applications 
+			qui font intervenir le hasard.
+			Par exemple dans les jeux où on doit mélanger des cartes,
+			lancer des dés, 
+			faire apparaitre des ennemis de façon aléatoire\dots
+			
+			Le vrai hasard n'existe pas en algorithmique
+			puisqu'il s'agit de suivre des étapes précises
+			dans un ordre fixé.
+			Pourtant, on peut concevoir des algorithmes
+			qui \emph{simulent} le hasard%
+			\footnote{%
+				On parle de pseudo-hasard
+				ou d'algorithmes pseudo-aléatoires.
+			}.
+			À partir d'un nombre donné%
+			\footnote{%
+				Ce nombre peut être fixé ou généré à partir
+				de l'environnement 
+				(par exemple, l'horloge interne).
+			}
+			(qu'on appelle \emph{graine} ou \emph{seed} en anglais)
+			ils fournissent une suite de nombres qui \emph{ont l'air}
+			aléatoires.			
+			Concevoir de tels algorithmes est très compliqué
+			et dépasse largement le cadre de ce cours.
+			Nous allons juste supposer qu'on dispose,
+			sans devoir l'écrire,
+			d'un algorithme qui fournit un entier aléatoire.
+			
+			\begin{center}
+				\flowalgod{n (entier)}{hasard}{entier (entre 1 et n)}
+			\end{center}
+			
+			Dans nos algorithmes,
+			nous pourrons donc écrire \lda{hasard(n)}
+			pour obtenir un nombre entier aléatoire
+			entre $1$ et $n$ inclus.
+			
+			\textbf{Exemple.}
+			\begin{LDA}
+				\LComment{Simule le lancé d'un dé}
+				\Algo{dé}{}{entier}
+					\Return hasard(6)
+				\EndAlgo
+			\end{LDA}
+
+			Cet algorithme \lda{hasard()}
+			peut être utilisé pour générer des nombres
+			appartenant à d'autres intervalles.
+			
+			\begin{Exercice}{Chiffre aléatoire}
+				Écrivez un algorithme qui donne un chiffre
+				(de 0 à 9 donc) aléatoire.
+			\end{Exercice}
+
+			\begin{Exercice}{Nombre aléatoire entre min et max}
+				Écrivez un algorithme
+				qui donne un nombre entier aléatoire
+				compris entre \lda{min} et \lda{max} inclus.
+				\begin{LDA}
+				\Entete{hasard}{\Par{min, max}{entiers}}{entier}
+				\end{LDA}
+			\end{Exercice}
+			
+		%---------------------
+		\subsection{Exercices récapitulatifs sur les difficultés de calcul}
 		%---------------------
 		\label{prem-ex-cplx}
 		
@@ -1158,6 +1227,12 @@
 				Font exception, les multiples de 100 
 				(sauf les multiples de 400 qui sont bien bissextiles). 
 				Ainsi $2012$ et $2400$ sont bissextiles mais pas $2010$ ni $2100$.
+			\end{Exercice}
+
+			\begin{Exercice}{Un double au dés}
+				Écrire un algorithme qui simule le lancer de deux dés
+				et indique s'il y a eu un double 
+				(les deux dés montrant une face identique).
 			\end{Exercice}
 			 		 
 	%===================================
