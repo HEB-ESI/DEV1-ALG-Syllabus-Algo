@@ -1179,7 +1179,6 @@
 				\end{center}
 			\end{Exercice}
 
-\clearpage	
 			\begin{Exercice}{Nombre entier positif se terminant par un 0}
 				Calculer si un nombre donné se termine par un 0.
 			\end{Exercice}
@@ -1695,35 +1694,13 @@
 			via la reconnaissance vocale\dots)
 			ne nous intéresse pas ici.
 	
-			On peut combiner les demandes et écrire :
+			On peut combiner les demandes :
 			
 			\begin{LDA}
 				\Read{longueur, largeur}
 				\Write{surfaceRectangle(longueur, largeur)}
 			\end{LDA}
 		
-		%-----------------------------------------
-		\subsection{Algorithme sans paramètre}
-		%-----------------------------------------
-			
-			Les paramètres d'un algorithme sont destinés
-			aux autres algorithmes qui vont l'utiliser.
-			Ils ne sont pas présents lorsque les données
-			sont précisées par l'utilisateur.
-			Idem pour la valeur de retour.
-			Au final, on pourrait écrire :
-	
-			\begin{LDA}
-				\Algo{TestSurface}{}{}
-					\Decl{longueur, largeur}{réel}
-					\Read{longueur, largeur}
-					\Write{surfaceRectangle(longueur, largeur)}
-				\EndAlgo
-			\end{LDA}
-		
-			Cet algorithme n'a ni paramètre ni valeur de retour
-			mais il fait appel (utilise) un autre algorithme.
-
 		%-----------------------------------------
 		\subsection{Préférer les paramètres}
 		%-----------------------------------------
@@ -1735,3 +1712,23 @@
 			car il peut être utilisé (appelé) dans un autre algorithme
 			pour résoudre une partie du problème.
 			
+			Rien n'empêche d'écrire, à partir de là,
+			un algorithme qui interagit avec l'utilisateur
+			et fait appel à l'algorithme qui réalise le calcul.
+			Par exemple :
+			\begin{LDA}
+				\Algo{TestSurface}{}{}
+					\Decl{longueur, largeur}{réel}
+					\Read{longueur, largeur}
+					\Write{surfaceRectangle(longueur, largeur)}
+				\EndAlgo
+			\end{LDA}
+
+			\begin{Exercice}{Conversion en heures-minutes-secondes}
+				Écrire un algorithme qui permet à l'utilisateur
+				de donner le nombre de secondes écoulées depuis minuit
+				et qui affiche le moment de la journée correspondant
+				en heures-minutes-secondes.
+				Par exemple, si on est 3726 secondes après minuit
+				alors il est 1h2'6''.
+			\end{Exercice}

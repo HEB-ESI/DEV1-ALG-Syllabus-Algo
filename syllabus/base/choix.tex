@@ -58,20 +58,46 @@
 			\node[draw, below of=Test] (Instr) {nb \Gets -nb};
 			\node[right of=Instr] (Empty) {};		          
 			\node[draw, circle, below of=Instr] (End) {};		          
-			\draw[->] (Test) -- (Instr) node[near start] {Oui};
+			\draw[->] (Test) -- (Instr) node[near start] {Vrai};
 			\draw[->] (Instr) -- (End);
-			\draw[->] (Test) to[out=0,in=0] node[near start] {Non}  (End);
+			\draw[->] (Test) to[out=0,in=0] node[near start] {Faux}  (End);
 		\end{tikzpicture}	
 	\end{minipage}
 	\quad
 	\begin{minipage}{6cm}
-		\begin{LDA}
+		\begin{LDA}[1]
 			\If{nb<0}
 				\Let nb \Gets -nb
 			\EndIf
 		\end{LDA}
 	\end{minipage}
 
+	Traçons-le dans deux cas différents pour bien illustrer 
+	son déroulement.
+	
+	\begin{center}
+	\begin{tabular}{|>{\centering\arraybackslash}m{1cm}
+					|*{2}{>{\centering\arraybackslash}m{1cm}}|}
+		\hline
+			\verb_#_  & nb & test \\			
+		\hline
+			  & -3                   & {}   \\
+			1 & {\color{gray}$\mid$} & vrai \\
+			2 & 3                    & {}   \\
+		\hline
+	\end{tabular}
+	\qquad
+	\begin{tabular}{|>{\centering\arraybackslash}m{1cm}
+					|*{2}{>{\centering\arraybackslash}m{1cm}}|}
+		\hline
+			\verb_#_  & nb & test \\			
+		\hline
+			  & 3                    & {}   \\
+			1 & {\color{gray}$\mid$} & faux \\
+		\hline
+	\end{tabular}
+	\end{center}
+	
 	La condition peut être n'importe quelle expression (calcul)
 	dont le résultat est un booléen (vrai ou faux).
 
@@ -120,13 +146,29 @@
 			\Write nombre
 		\EndIf
 		\end{LDA}
+	
+		\begin{LDA}
+		\If{ok = vrai OU ok = faux}
+			\Write nombre
+		\EndIf
+		\end{LDA}
+	
+		\begin{LDA}
+		\If{ok = vrai ET ok = faux}
+			\Write nombre
+		\EndIf
+		\end{LDA}
 	\end{Exercice}
-		
+
+\pagebreak		
 %===============================
 \section{Le si-sinon}
 \index{si-sinon}
 %===============================
 	
+	La construction \lda{si-sinon}
+	permet d'exécuter certaines instructions
+	ou d'autres en fonction d'un test.
 	Pour illustrer cette instruction,
 	nous allons nous pencher sur un grand classique,
 	la recherche de maximum.
@@ -149,15 +191,15 @@
 			\node[draw,left  of=Empty] (If) {max \Gets nb1};		          
 			\node[draw,right  of=Empty] (Else) {max \Gets nb2};		          
 			\node[draw, circle, below of=Empty] (End) {};
-			\draw[->] (Test) -| (If) node[left, midway] {Oui};
+			\draw[->] (Test) -| (If) node[left, midway] {Vrai};
 			\draw[->] (If) |- (End);
-			\draw[->] (Test) -| (Else) node[right, midway] {Non};
+			\draw[->] (Test) -| (Else) node[right, midway] {Faux};
 			\draw[->] (Else) |- (End);
 		\end{tikzpicture}	
 	\end{minipage}
 	\quad
 	\begin{minipage}{6cm}
-		\begin{LDA}
+		\begin{LDA}[1]
 			\If{nb1>nb2}
 				\Let max \Gets nb1
 			\Else
@@ -166,6 +208,43 @@
 		\end{LDA}
 	\end{minipage}
 
+	Traçons-le dans différentes situations.
+	
+	\begin{tabular}{|>{\centering\arraybackslash}m{6mm}
+					|*{4}{>{\centering\arraybackslash}m{1cm}}|}
+		\hline
+			\verb_#_  & nb1 & nb2 & max & test \\			
+		\hline
+			  & 3 & 2 & indéfini & {} \\
+			1 & {\color{gray}$\mid$} & {\color{gray}$\mid$} & indéfini & vrai \\
+			2 & {\color{gray}$\mid$} & {\color{gray}$\mid$} & 3        & {} \\
+		\hline
+	\end{tabular}
+	\quad
+	\begin{tabular}{|>{\centering\arraybackslash}m{6mm}
+					|*{4}{>{\centering\arraybackslash}m{1cm}}|}
+		\hline
+			\verb_#_  & nb1 & nb2 & max & test \\			
+		\hline
+			  & 4 & 42 & indéfini & {} \\
+			1 & {\color{gray}$\mid$} & {\color{gray}$\mid$} & indéfini & faux \\
+			4 & {\color{gray}$\mid$} & {\color{gray}$\mid$} & 42        & {} \\
+		\hline
+	\end{tabular}
+	
+	Le cas où les deux nombres sont égaux est également géré.
+	
+	\begin{tabular}{|>{\centering\arraybackslash}m{1cm}
+					|*{4}{>{\centering\arraybackslash}m{1cm}}|}
+		\hline
+			\verb_#_  & nb1 & nb2 & max & test \\			
+		\hline
+			  & 4 & 4 & indéfini & {} \\
+			1 & {\color{gray}$\mid$} & {\color{gray}$\mid$} & indéfini & faux \\
+			4 & {\color{gray}$\mid$} & {\color{gray}$\mid$} & 4        & {} \\
+		\hline
+	\end{tabular}
+	
 	\begin{Exercice}{Compréhension}
 		Tracez ces algorithmes et donnez la valeur de retour.
 	
@@ -220,23 +299,27 @@
 		Remplacer chacune de ces portions d’algorithme par un minimum
 		d’instructions qui auront un effet équivalent.
 	
-		\begin{LDA}
-		\If{condition}
-			\Let ok \Gets vrai
-		\Else
-			\Let ok \Gets faux
-		\EndIf
-		\end{LDA}
-	
-		\begin{LDA}
-		\If{a $>$ b}
-			\Let ok \Gets faux
-		\Else
-			\If{a $\leq$ b}
+		\begin{minipage}[t]{7cm}
+			\begin{LDA}
+			\If{condition}
 				\Let ok \Gets vrai
+			\Else
+				\Let ok \Gets faux
 			\EndIf
-		\EndIf
-		\end{LDA}
+			\end{LDA}
+		\end{minipage}
+		\quad
+		\begin{minipage}[t]{7cm}		
+			\begin{LDA}
+			\If{a $>$ b}
+				\Let ok \Gets faux
+			\Else
+				\If{a $\leq$ b}
+					\Let ok \Gets vrai
+				\EndIf
+			\EndIf
+			\end{LDA}
+		\end{minipage}
 	\end{Exercice}
 
 	\begin{Exercice}{Maximum de 2 nombres}
@@ -286,48 +369,86 @@
 \index{si-sinon-si}
 %============================
 
+	Avec cette construction,
+	on peut indiquer à un endroit de l'algorithme
+	plus que deux chemins possibles.
 	Partons à nouveau d'un exemple pour illustrer cette instruction.
 	
-	\begin{Emphase}
-		\paragraph{Exemple.}
-		On voudrait mettre dans la chaine \lda{signe}
-		la valeur \lda{"positif"}, \lda{"négatif"}
-		ou \lda{"nul"}
-		selon qu'un nombre donné est positif, négatif ou nul.
-		
-		Ici, lorsqu'on va examiner le nombre, 
-		trois chemins vont s'offrir à nous.
+	\paragraph{Exemple.}
+	On voudrait mettre dans la chaine \lda{signe}
+	la valeur \lda{"positif"}, \lda{"négatif"}
+	ou \lda{"nul"}
+	selon qu'un nombre donné est positif, négatif ou nul.
+	
+	Ici, lorsqu'on va examiner le nombre, 
+	trois chemins vont s'offrir à nous.
 
-		\begin{minipage}{9cm}
-			\begin{tikzpicture}[auto]
-				\sffamily				
-				\node[draw, diamond] (Test) {\ \ };
-				\node[draw,below=1cm of Test] (nul) {signe \Gets "nul"};
-				\node[draw,left=0.5cm  of nul] (pos) {signe \Gets "positif"};		          
-				\node[draw,right=0.5cm  of nul] (neg) {signe \Gets "négatif"};		          
-				\node[draw, circle, below=1cm of nul] (End) {};
-				\draw[->] (Test) -| (pos) node[left, near end] {nb>0};
-				\draw[->] (Test) -- (nul) node[midway] {nb=0};
-				\draw[->] (Test) -| (neg) node[right, near end] {nb<0};
-				\draw[->] (pos) |- (End);
-				\draw[->] (nul) -- (End);
-				\draw[->] (neg) |- (End);
- 			\end{tikzpicture}	
-		\end{minipage}
-		\quad
-		\begin{minipage}{4cm}
-			\begin{LDA}
-				\If{nb>0}
-					\Let signe \Gets "positif"
-				\ElsIf{nb=0}
-					\Let signe \Gets "nul"
-				\Else
-					\Let signe \Gets "négatif"
-				\EndIf
-			\end{LDA}
-		\end{minipage}
-	\end{Emphase}
-		
+	\begin{minipage}{9cm}
+		\begin{tikzpicture}[auto]
+			\sffamily				
+			\node[draw, diamond] (Test) {\ \ };
+			\node[draw,below=1cm of Test] (nul) {signe \Gets "nul"};
+			\node[draw,left=0.5cm  of nul] (pos) {signe \Gets "positif"};		          
+			\node[draw,right=0.5cm  of nul] (neg) {signe \Gets "négatif"};		          
+			\node[draw, circle, below=1cm of nul] (End) {};
+			\draw[->] (Test) -| (pos) node[left, near end] {nb>0};
+			\draw[->] (Test) -- (nul) node[midway] {nb=0};
+			\draw[->] (Test) -| (neg) node[right, near end] {nb<0};
+			\draw[->] (pos) |- (End);
+			\draw[->] (nul) -- (End);
+			\draw[->] (neg) |- (End);
+		\end{tikzpicture}	
+	\end{minipage}
+	\quad
+	\begin{minipage}{4cm}
+		\begin{LDA}[1]
+			\If{nb>0}
+				\Let signe \Gets "positif"
+			\ElsIf{nb=0}
+				\Let signe \Gets "nul"
+			\Else
+				\Let signe \Gets "négatif"
+			\EndIf
+		\end{LDA}
+	\end{minipage}
+	
+	Traçons-le
+	
+	\begin{tabular}{|*{2}{>{\centering\arraybackslash}m{4mm}}
+					 *{2}{>{\centering\arraybackslash}m{9mm}}|}
+		\hline
+			\verb_#_  & nb & signe & test \\			
+		\hline
+			  & 2                    & indéfini             & {}   \\
+			1 & {\color{gray}$\mid$} & {\color{gray}$\mid$} & vrai \\
+			2 & {\color{gray}$\mid$} & "positif"            & {}   \\
+		\hline
+	\end{tabular}
+	\quad
+	\begin{tabular}{|*{2}{>{\centering\arraybackslash}m{4mm}}
+					 *{2}{>{\centering\arraybackslash}m{9mm}}|}
+		\hline
+			\verb_#_  & nb & signe & test \\			
+		\hline
+			  & 0                    & indéfini             & {}   \\
+			1 & {\color{gray}$\mid$} & {\color{gray}$\mid$} & faux \\
+			3 & {\color{gray}$\mid$} & {\color{gray}$\mid$} & vrai \\
+			4 & {\color{gray}$\mid$} & "nul"                & {}   \\
+		\hline
+	\end{tabular}
+	\quad
+	\begin{tabular}{|*{2}{>{\centering\arraybackslash}m{4mm}}
+					 *{2}{>{\centering\arraybackslash}m{9mm}}|}
+		\hline
+			\verb_#_  & nb & signe & test \\			
+		\hline
+			  & 0                    & indéfini             & {}   \\
+			1 & {\color{gray}$\mid$} & {\color{gray}$\mid$} & faux \\
+			3 & {\color{gray}$\mid$} & {\color{gray}$\mid$} & faux \\
+			6 & {\color{gray}$\mid$} & "négatif"            & {}   \\
+		\hline
+	\end{tabular}
+	
 	\paragraph{Remarques.}
 	\begin{itemize}
 	\item
@@ -342,6 +463,8 @@
 		On pourrait écrire la même chose 
 		avec des \lda{\K{si-sinon}} imbriqués
 		mais le \lda{\K{si-sinon-si}} est plus lisible.
+		
+		\begin{wrong}
 		\begin{LDA}
 			\If{nb>0}
 				\Let signe \Gets "positif"
@@ -353,17 +476,14 @@
 				\EndIf
 			\EndIf
 		\end{LDA}
-		\medskip
+		\end{wrong}
 	\item
 		Lorsqu'une condition est testée,
 		on sait que toutes celles au-dessus
 		se sont avérées fausses.
 		Cela permet parfois de simplifier la condition.
-	\end{itemize}
 
-\clearpage
-	\begin{Emphase}
-		\paragraph{Exemple.}
+		\textbf{Exemple.}
 		Supposons que le prix unitaire d'un produit (\lda{prixUnitaire})
 		dépende de la quantité achetée (\lda{quantité}). 
 		En dessous de 10 unités, on le paie 10\texteuro{} l'unité.
@@ -379,9 +499,8 @@
 				\Let prixUnitaire \Gets 6
 			\EndIf
 		\end{LDA}
+	\end{itemize}
 		
-	\end{Emphase}
-			
 	\begin{Exercice}{Maximum de 3 nombres}
 		\marginicon{java}
 		Écrire un algorithme qui, étant donné trois nombres quelconques,
@@ -402,6 +521,12 @@
 		ou quelconque.
 	\end{Exercice}
 
+	\begin{Exercice}{Dés identiques}
+		Écrire un algorithme qui lance trois dés
+		et indique si on a obtenu 3 dés identiques,
+		2 ou aucun.
+	\end{Exercice}
+
 	\begin{Exercice}{Grade}
 		Écrire un algorithme qui retourne le grade d'un étudiant 
 		suivant la moyenne qu'il a obtenue.
@@ -417,6 +542,13 @@
 		\end{itemize}
 	\end{Exercice}
 
+	\begin{Exercice}{Tirer une carte}
+		Écrire un algorithme qui affiche l'intitulé d'une carte
+		tirée au hasard dans un paquet de 52 cartes.
+		Par exemple, "As de coeur", "3 de pique", "Valet de carreau"
+		ou encore "Roi de trèfle".
+	\end{Exercice}
+
 \clearpage
 %=====================
 \section{Le selon-que}
@@ -429,53 +561,52 @@
 	de la valeur précise d'une variable
 	(ou d'une expression).
 
-	\begin{Emphase}
-		\paragraph{Exemple.}
-		Imaginons qu'une variable (\lda{numéroJour}) 
-		contienne un numéro de jour de la semaine
-		et qu'on veuille mettre dans une variable (\lda{nomJour})
-		le nom du jour correspondant 
-		("lundi" pour 1, "mardi" pour 2\dots)
-		
-		On peut écrire une solution avec un \lda{\K{si-sinon-si}}
-		mais le \lda{\K{selon-que}} est plus lisible.
+	\paragraph{Exemple.}
+	Imaginons qu'une variable (\lda{numéroJour}) 
+	contienne un numéro de jour de la semaine
+	et qu'on veuille mettre dans une variable (\lda{nomJour})
+	le nom du jour correspondant 
+	("lundi" pour 1, "mardi" pour 2\dots)
+	
+	On peut écrire une solution avec un \lda{\K{si-sinon-si}}
+	mais le \lda{\K{selon-que}} est plus lisible.
 
-		\begin{minipage}{6cm}
-			\begin{LDA}
-				\If{numéroJour=1}
-					\Let nomJour \Gets "lundi"
-				\ElsIf{numéroJour=2}
-					\Let nomJour \Gets "mardi"
-				\ElsIf{numéroJour=3}
-					\Let nomJour \Gets "mercredi"
-				\ElsIf{numéroJour=4}
-					\Let nomJour \Gets "jeudi"
-				\ElsIf{numéroJour=5}
-					\Let nomJour \Gets "vendredi"
-				\ElsIf{numéroJour=6}
-					\Let nomJour \Gets "samedi"
-				\Else
-					\Let nomJour \Gets "dimanche"
-				\EndIf
-			\end{LDA}
-		\end{minipage}
-		\quad
-		\begin{minipage}{6cm}
-			\begin{LDA}
-				\Switch{numéroJour}
-				\Case{1} nomJour \Gets "lundi"
-				\Case{2} nomJour \Gets "mardi"
-				\Case{3} nomJour \Gets "mercredi"
-				\Case{4} nomJour \Gets "jeudi"
-				\Case{5} nomJour \Gets "vendredi"
-				\Case{6} nomJour \Gets "samedi"
-				\Case{7} nomJour \Gets "dimanche"
-				\EndSwitch
-			\end{LDA}
-		\end{minipage}
+	\begin{minipage}{6cm}
+		\begin{wrong}
+		\begin{LDA}
+			\If{numéroJour=1}
+				\Let nomJour \Gets "lundi"
+			\ElsIf{numéroJour=2}
+				\Let nomJour \Gets "mardi"
+			\ElsIf{numéroJour=3}
+				\Let nomJour \Gets "mercredi"
+			\ElsIf{numéroJour=4}
+				\Let nomJour \Gets "jeudi"
+			\ElsIf{numéroJour=5}
+				\Let nomJour \Gets "vendredi"
+			\ElsIf{numéroJour=6}
+				\Let nomJour \Gets "samedi"
+			\Else
+				\Let nomJour \Gets "dimanche"
+			\EndIf
+		\end{LDA}
+		\end{wrong}
+	\end{minipage}
+	\qquad
+	\begin{minipage}{6cm}
+		\begin{LDA}
+			\Switch{numéroJour}
+			\Case{1} nomJour \Gets "lundi"
+			\Case{2} nomJour \Gets "mardi"
+			\Case{3} nomJour \Gets "mercredi"
+			\Case{4} nomJour \Gets "jeudi"
+			\Case{5} nomJour \Gets "vendredi"
+			\Case{6} nomJour \Gets "samedi"
+			\Case{7} nomJour \Gets "dimanche"
+			\EndSwitch
+		\end{LDA}
+	\end{minipage}
 		
-	\end{Emphase}
-
 	\paragraph{Remarques.}
 	\begin{itemize}
 	\item
@@ -513,6 +644,7 @@
 		comprend toujours 28 jours.
 	\end{Exercice}
 		
+%==============================
 \section{Exercices de synthèse}
 %==============================
 
@@ -552,6 +684,16 @@
 		Qu’est-ce qui change si on inclut les bornes~?
 	\end{Exercice}
 
+	\begin{Exercice}{Le prix des photocopies}
+		Un magasin de photocopies facture 0,10 \texteuro{} 
+		les dix premières photocopies, 
+		0,09 \texteuro{} les vingt suivantes 
+		et 0,08 \texteuro{} au-delà. 
+		Écrivez un algorithme 
+		qui reçoit le nombre de photocopies effectuées 
+		et qui affiche la facture correspondante.
+	\end{Exercice}
+
 	\begin{Exercice}{Nombre de jours dans un mois}
 		Écrire un algorithme qui donne le nombre de jours dans un mois.
 		Il reçoit en paramètre le numéro du mois (1 pour janvier\dots)
@@ -574,4 +716,5 @@
 		devant laquelle vous vous êtes arrêté, 
 		retourne vrai si vous êtes bien stationné et faux sinon.
 	\end{Exercice}
+
 	
