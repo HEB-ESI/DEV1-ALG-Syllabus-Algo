@@ -357,9 +357,12 @@
 			\Let nomVariable \Gets expression
 			\end{LDA}
 				
-			Rappelons qu’une \textbf{expression} 
-			est un calcul, une combinaison de variables et
-			d’opérateurs. Une expression a une valeur.
+			\marginicon{definition}
+			Une \textbf{expression} 
+			est un calcul faisant intervenir
+			des variables, des valeurs explicites
+			et des opérateurs (comme +, -, <\dots). 
+			Une expression a une \textbf{valeur}.
 					
 			\paragraph{Exemples.}
 			%------------------------------------------------
@@ -367,9 +370,9 @@
 				Quelques assignations correctes :
 				
 				\begin{LDA}
-					\Let somme \Gets nombre1 + nombre2
 					\Let denRes \Gets den1 * den2
 					\Let cpt \Gets cpt + 1
+					\Let moyenne \Gets (nombre1 + nombre2) / 2
 					\Let test \Gets a < b \RComment pour une variable logique
 					\Let maChaine \Gets "bonjour"
 					\Let maChaine \Gets bonjour	\RComment comprenez-vous la différence ?
