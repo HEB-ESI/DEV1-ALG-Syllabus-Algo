@@ -103,60 +103,19 @@
 	\end{tikzpicture}	
 	\end{center}
 	
-	Sur base de cette idée, comment faire concrètement
-	pour introduire le calcul du maximum de 2 nombres 
-	dans l’algorithme calculant le maximum de 3 nombres~? 
-	Une solution consiste à «~copier-coller~» 
-	les lignes de \lda{max2}
-	dans \lda{max3},
-	en adaptant son contenu au contexte~:~
-	\lda{maxab} est calculé 
-	et ré-utilisé dans un calcul ultérieur. 
-	Ceci donnerait~:
-
-	\begin{LDA}
-	\Algo{max3}{\Par{a}{réel}, \Par{b}{réel}, \Par{c}{réel}}{réel}
-		\Decl{maxab, max}{réels}
-		\If{a > b}
-			\Let maxab \Gets a
-		\Else
-			\Let maxab \Gets b
-		\EndIf
-		\If{maxab > c}
-			\Let max \Gets maxab
-		\Else
-			\Let max \Gets c
-		\EndIf
-		\Return max
-	\EndAlgo
-	\end{LDA}
-
-	Bien que correcte, cette démarche est cependant déconseillée 
-	et peut s’avérer fastidieuse, dangereuse et contre-productive.
-	\begin{itemize}
-	\item
-		Imaginons qu’il eût fallu de cette façon «~mixer~» deux
-		algorithmes d’une cinquantaine de lignes chacun. 
-		Le résultat serait un algorithme d’une centaine de lignes 
-		qui perdrait en lisibilité et clarté. 
-	\item
-		De plus, l’opération effectuée n’est pas sans risques~:~
-		que se passerait-il si les deux algorithmes 
-		contiennent chacun une variable nommée de manière identique~? 
-		Cette «~transplantation~» demande donc 
-		la vérification de toutes les variables utilisées, 
-		la réécriture des lignes de déclarations de variables 
-		de façon à y inclure celles du module «~greffé~», etc.
-	\end{itemize}
-	
-	Imaginons, par exemple, que l’on doive calculer le
-	maximum de 4 ou même 5 nombres. Le résultat serait un code long et
-	à l’allure répétitive. Une erreur serait vite arrivée et
-	serait difficile à détecter.
-	
-	Le mieux,
-	est d'utiliser (d'appeler) l'algorithme \lda{max2}
-	dans \lda{max3}.
+	Sur base de cette idée, 
+	on voit que calculer le maximum de trois nombres
+	peut se faire en calculant deux fois le maximum de deux nombres.
+	On ne va évidemment pas \emph{recopier}%
+	\footnote{
+		Cette approche serait fastidieuse,
+		engendrerait de nombreuses erreurs lors du recopiage
+		et serait difficile à lire.
+	} dans notre solution
+	ce qu'on a écrit pour le maximum de deux nombres ;
+	on va plutôt y faire référence c'est-à-dire
+	appeler l'algorithme \lda{max2}. 
+	Ce qui donne :
 
 	\begin{LDA}
 	\Algo{max3}{\Par{a}{réel}, \Par{b}{réel}, \Par{c}{réel}}{réel}
