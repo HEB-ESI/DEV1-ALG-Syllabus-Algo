@@ -70,7 +70,7 @@
 			En LDA, la solution s'écrit :
 			
 			\begin{LDA}
-				\Algo{surfaceRectangle}{\Par{longueur, largeur}{réel}}{réel}
+				\Algo{surfaceRectangle}{\Par{longueur, largeur}{réels}}{réel}
 					\Return longueur * largeur
 				\EndAlgo
 			\end{LDA}
@@ -203,7 +203,7 @@
 				Sommer deux nombres est un problème trivial.
 				L'algorithme s'écrit simplement :			
 				\begin{LDA}
-					\Algo{somme}{\Par{nombre1, nombre2}{réel}}{réel}
+					\Algo{somme}{\Par{nombre1, nombre2}{réels}}{réel}
 						\Return nombre1 + nombre2
 					\EndAlgo
 				\end{LDA}
@@ -549,8 +549,8 @@
 				
 				Voici une solution : 
 				\begin{LDA}[1]
-				\Algo{vitesseKMH}{\Par{distanceM, duréeS}{réel}}{réel}
-					\Decl{distanceKM, duréeH}{réel}
+				\Algo{vitesseKMH}{\Par{distanceM, duréeS}{réels}}{réel}
+					\Decl{distanceKM, duréeH}{réels}
 					\Let distanceKM \Gets 1000 * distanceM
 					\Let duréeH \Gets 3600 * duréeS
 					\Return $\frac{\textrm{distanceKM}}{\textrm{duréeH}}$
@@ -630,7 +630,7 @@
 				\end{multicols}
 				L'algorithme s'écrit :
 				\begin{LDA}[1]
-					\Algo{duréeTrajet}{\Par{vitesseMS, distanceKM}{réel}}{réel}
+					\Algo{duréeTrajet}{\Par{vitesseMS, distanceKM}{réels}}{réel}
 						\Decl{distanceM}{réel}
 						\Let distanceM \Gets 1000 * distanceKM
 						\Return distanceM / vitesseMS
@@ -1418,7 +1418,7 @@
 			\\
 			\begin{wrong}
 				\begin{LDA}
-					\Entete{duréeTrajet}{\Par{vitesseMS, distanceKM}{réel}}{réel}
+					\Entete{duréeTrajet}{\Par{vitesseMS, distanceKM}{réels}}{réel}
 					\Decl{distanceM}{réel}
 					\Let distanceM \Gets 1000 * distanceKM
 					\Return distanceM / vitesseMS
@@ -1428,17 +1428,17 @@
 			
 			\begin{wrong}
 				\begin{LDA}
-					\Algo{duréeTrajet}{\Par{vitesseMS, distanceKM}{réel}}{réel}
+					\Algo{duréeTrajet}{\Par{vitesseMS, distanceKM}{réels}}{réel}
 						\Decl{distanceM}{réel}
 						\Let \quad distanceM \Gets 1000 * distanceKM
-						\qquad \K{return} distanceM / vitesseMS
+						\qquad \K{retourner} distanceM / vitesseMS
 					\EndAlgo
 				\end{LDA}
 			\end{wrong}
 	
 			Il faudra préférer
 			\begin{LDA}
-			\Algo{duréeTrajet}{\Par{vitesseMS, distanceKM}{réel}}{réel}
+			\Algo{duréeTrajet}{\Par{vitesseMS, distanceKM}{réels}}{réel}
 				\Decl{distanceM}{réel}
 				\Let distanceM \Gets 1000 * distanceKM
 				\Return distanceM / vitesseMS
@@ -1537,7 +1537,7 @@
 			\begin{LDA}
 				\LComment{Calcule la surface d'un rectangle dont on donne la largeur et la longueur.}
 				\LComment{On considère que les données ne sont pas négatives.}
-				\Algo{surfaceRectangle}{\Par{longueur, largeur}{réel}}{réel}
+				\Algo{surfaceRectangle}{\Par{longueur, largeur}{réels}}{réel}
 					\Return longueur * largeur
 				\EndAlgo
 			\end{LDA}
@@ -1718,7 +1718,7 @@
 			Par exemple :
 			\begin{LDA}
 				\Algo{TestSurface}{}{}
-					\Decl{longueur, largeur}{réel}
+					\Decl{longueur, largeur}{réels}
 					\Read{longueur, largeur}
 					\Write{surfaceRectangle(longueur, largeur)}
 				\EndAlgo
