@@ -113,8 +113,8 @@
 		et serait difficile à lire.
 	} dans notre solution
 	ce qu'on a écrit pour le maximum de deux nombres ;
-	on va plutôt y faire référence c'est-à-dire
-	appeler l'algorithme \lda{max2}. 
+	on va plutôt y faire référence, 
+	c'est-à-dire appeler l'algorithme \lda{max2}. 
 	Ce qui donne :
 
 	\begin{LDA}
@@ -129,7 +129,7 @@
 	qu'on peut encore simplifier en :
 	
 	\begin{LDA}
-	\Algo{max3}{\Par{a}{réel}, \Par{b}{réel}, \Par{c}{réel}}{réel}
+	\Algo{max3}{\Par{a,b,c}{réels}}{réel}
 		\Return max2( max2(a,b) ,c)
 	\EndAlgo
 	\end{LDA}
@@ -163,8 +163,6 @@
 		Lors de l'appel, on fournit la \textbf{valeur}
 		ou, plus généralement une expression
 		dont la valeur sera donnée au paramète.
-
-		\textbf{Illustration.} 
 		Voici un cas général de paramètre en entrée.
 		
 		\begin{minipage}{4cm}
@@ -188,41 +186,48 @@
 		\lda{par \Gets expr}.
 		
 		\textbf{Exemple.} 
-		Reprenons l'exemple de \lda{max3}.
-		
-		\begin{minipage}{4cm}
-			\begin{LDA}
-				\LComment {Code appelant}
+		Reprenons l'exemple de \lda{max3}
+		en ajoutant un petit test.
+
+		\begin{LDA}[1]
+			\Algo{test}{}{} \RComment {Code appelant}
 				\Decl {max}{réel}
 				\Let max \Gets max3(3, 2, 5)
-				\Empty
-			\end{LDA}
-		\end{minipage}
-		\quad
-		\begin{minipage}{8cm}
-			\begin{LDA}[1]
-				\LComment {Code appelé}
-				\Algo{max3}{\Par{a\In}{réel}, \Par{b\In}{réel}, \Par{c\In}{réel}}{réel}
-					\Decl{maxab, max}{réels}
-					\Let maxab \Gets max2(a,b)
-					\Let max \Gets max2(maxab,c)
-					\Return max
-				\EndAlgo
-			\end{LDA}
-		\end{minipage}
-		\\
-		\begin{minipage}{12cm}
-			\begin{tabular}{|>{\centering\arraybackslash}m{2cm}|*{5}{>{\centering\arraybackslash}m{2cm}}|}
-				\hline
-				\verb_max3(3,2,5)_ & {a} & {b} & {c} & {maxab} & {max}\\
-				\hline
-				2 & {3}	& {2}	& {5}	& {\verb_#_}		& {\verb_#_}	 \\
-				3 & {3}	& {2}	& {5}	& {indéfini}		& {indéfini}	 \\
-				4 & {3}	& {2}	& {5}	& {3}		& {indéfini}	 \\
-				5 & {3}	& {2}	& {5}	& {3}		& {5}	\\
-				\hline
-			\end{tabular}
-		\end{minipage}
+				\Write max
+			\EndAlgo
+			\Empty
+			\Algo{max3}{\Par{a\In, b\In, c\In}{réels}}{réel}
+				\RComment {Code appelé}
+				\Decl{maxab, max}{réels}
+				\Let maxab \Gets max2(a,b)
+				\Let max \Gets max2(maxab,c)
+				\Return max
+			\EndAlgo
+		\end{LDA}
+
+		Traçons son exécution.
+		
+		\begin{tabular}{|>{\centering\arraybackslash}m{1cm}
+						|>{\centering\arraybackslash}m{16mm}
+						|*{5}{>{\centering\arraybackslash}m{16mm}}|}
+			\hline
+			  & \lda{test} & \multicolumn{5}{c|}{\lda{max3}} \\
+			\hline
+			\# & max  & {a} & {b} & {c} & {maxab} & {max}\\
+			\hline
+			2    & indéfini             &                      &                      &                      &                      &          \\
+			3,7  & {\color{gray}$\mid$} & 3                    & 2                    & 5                    &                      &          \\
+			8    & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & indéfini             & indéfini \\
+			9    & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & 3                    & indéfini \\
+			10   & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & 5        \\
+			11,3 & 5                    &                      &                      &                      &                      &          \\
+			\hline
+		\end{tabular}
+		
+		Note : Dans cet exemple, on trouve deux fois la variable \lda{max}.
+		Il s'agit bien de deux variables \textbf{différentes} ;
+		l'une est définie et connue dans \lda{test} ;
+		l'autre l'est dans \lda{max3}.
 		
 	%==================================
 	\subsection{Le paramètre en sortie}
@@ -243,6 +248,31 @@
 		
 		Lors de l'appel, on fournit une \textbf{variable}
 		qui recevra la valeur finale du paramètre.
+		Voici un cas général de paramètre en sortie.
+		
+		\begin{minipage}{4cm}
+			\begin{LDA}
+				\LComment {Code appelant}
+				\Stmt monAlgo(variable)
+				\Empty
+			\end{LDA}
+		\end{minipage}
+		\quad
+		\begin{minipage}{8cm}
+			\begin{LDA}
+				\LComment {Code appelé}
+				\Entete{monAlgo}{\Par{par\Out}{entier}}{}
+				\Stmt \dots
+			\end{LDA}
+		\end{minipage}
+
+		Il n'y a \textbf{pas de \lda{\algorithmicreturn}}
+		puisque les résultats sont en paramètres de sortie et pas comme
+		valeur \emph{retournée}.
+		C'est comme si,
+		à la fin de l'algorithme appelé,
+		on avait l'assignation :
+		\lda{variable \Gets par}.
 		
 		\paragraph{Exemple.}
 		On peut envisager un algorithme
@@ -254,41 +284,42 @@
 		\flowalgorrr{totalSec (entier)}{versHMS}{heuresÉcoulées (entier)}{minutesÉcoulées (entier)}{secondesÉcoulées (entier)}
 		\end{center}
 			
+		Voici une solution et un appel possible.
 		\begin{LDA}[1]
-			\Algo{versHMS}{\Par{totalSec\In}{entier}, \Par{heuresÉcoulées\Out}{entier}, 
-						   \Par{minutesÉcoulées\Out}{entier}, \Par{secondesÉcoulées\Out}{entier}}{}
+			\Algo{versHMS}{\Par{totalSec\In, heuresÉcoulées\Out, minutesÉcoulées\Out, secondesÉcoulées\Out}{\\\hfill entiers}}{}
 				\Let heuresÉcoulées \Gets totalSec DIV (60*60)
 				\Let minutesÉcoulées \Gets totalSec MOD (60*60) DIV 60				
 				\Let secondesÉcoulées \Gets totalSec MOD 60
 			\EndAlgo
+			\Empty
+			\Algo{test}{}{}
+				\Decl{heure,minute,seconde}{entiers}
+				\Stmt versHMS(65536, heure, minute, seconde)
+			\EndAlgo
 		\end{LDA}
 		
-		Il n'y a donc pas de \lda{\algorithmicreturn}
-		puisque les résultats sont en paramètres de sortie et pas comme
-		valeur \emph{retournée}.
-		Un appel possible pourrait être :
+		Traçons-le.
 
-		\begin{LDA}
-			\Stmt versHMS(65536, heure, minute, seconde)
-		\end{LDA}
-		
-		\begin{minipage}{12cm}
-			\begin{tabular}{|>{\centering\arraybackslash}m{2cm}|*{4}{>{\centering\arraybackslash}m{2.5cm}}|}
-				\hline
-				\tiny{versHMS(65536, heure, minute, seconde)} & {totalSec} & {heuresÉcoulées} & {minutesÉcoulées} & {secondesÉcoulées}\\
-				\hline
-				1 & {65536}	& {indéfini}		& {indéfini}		& {indéfini}	 \\
-				2 & {65536}	& {18}			& {indéfini}		& {indéfini}	 \\
-				3 & {65536}	& {18}			& {12}			& {indéfini}	 \\
-				4 & {65536}	& {18}			& {12}			& {16}	\\
-				\hline
-			\end{tabular}
-		\end{minipage}
-
-		C'est comme si,
-		à la fin de l'algorithme \lda{versHMS},
-		on avait les assignations suivantes :
-		\\\lda{heure \Gets heuresÉcoulées}, \lda{minute \Gets minutesÉcoulées} et \lda{seconde \Gets secondesÉcoulées}.
+		\begin{small}
+		\begin{tabular}{|>{\centering\arraybackslash}m{7mm}
+						|*{3}{>{\centering\arraybackslash}m{9mm}}
+						|>{\centering\arraybackslash}m{10mm}
+						 *{3}{>{\centering\arraybackslash}m{19mm}}
+						|}
+			\hline
+			  & \multicolumn{3}{c|}{\lda{test}} & \multicolumn{4}{c|}{\lda{versHMS}} \\
+			\hline
+			\# & {\scriptsize heure} & {\scriptsize minute} & {\scriptsize seconde} & {\scriptsize totalSec} & {\scriptsize heuresEcoulées} & {\scriptsize minutesEcoulées} & {\scriptsize secondesEcoulées}\\
+			\hline
+			9     & indéfini & indéfini & indéfini & {} & {} & {} & {} \\
+			10, 1 & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & 65536 & indéfini & indéfini & indéfini \\
+			3     & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & 10 & {\color{gray}$\mid$} & {\color{gray}$\mid$} \\
+			4     & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & 12 & {\color{gray}$\mid$} \\
+			5     & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & 16 \\
+			6, 10 & 10 & 12 & 16 &  &  &  &  \\
+			\hline
+		\end{tabular}
+		\end{small}
 				
 	%==================================
 	\subsection{Le paramètre en entrée-sortie}
@@ -303,12 +334,35 @@
 		Lors de l'appel, on fournit \textbf{une variable}.
 		Sa valeur est donnée au paramètre au début de l'algorithme.
 		À la fin de l'algorithme, la variable reçoit la valeur du paramètre.
+		Voici un cas général de paramètre en sortie.
 		
+		\begin{minipage}{4cm}
+			\begin{LDA}
+				\LComment {Code appelant}
+				\Stmt monAlgo(variable)
+				\Empty
+			\end{LDA}
+		\end{minipage}
+		\quad
+		\begin{minipage}{8cm}
+			\begin{LDA}
+				\LComment {Code appelé}
+				\Entete{monAlgo}{\Par{par\Out}{entier}}{}
+				\Stmt \dots
+			\end{LDA}
+		\end{minipage}
+
+		C'est comme si, dans le code appelé,
+		on avait une première ligne pour donner sa valeur au paramètre
+		(\lda{par \Gets variable})
+		et une dernière ligne pour effectuer l'assignation opposée
+		(\lda{variable \Gets par}). Il n'y a pas de \lda{\algorithmicreturn}.
+				
 		\paragraph{Exemple.}
 		On a déjà vu un algorithme qui retourne la valeur absolue d'un nombre.
 		On pourrait imaginer une variante qui \textbf{modifie}
 		le nombre reçu.
-		En voici le schéma et la solution :
+		En voici le schéma et la solution avec un appel possible :
 
 		\begin{minipage}{6cm}		
 			\begin{center}
@@ -317,26 +371,40 @@
 		\end{minipage}
 		\quad
 		\begin{minipage}{6cm}		
-			\begin{LDA}
+			\begin{LDA}[1]
 				\Algo{valAbsolue}{\Par{nb\In\Out}{réel}}{}
 					\If{nb<0}
 						\Let nb \Gets -nb
 					\EndIf
 				\EndAlgo
+				\Empty
+				\Algo{test}{}{}
+				\Decl{température}{réel}
+				\Let température \Gets -12.5
+				\Stmt valAbsolue(température)
+				\Write température
+				\EndAlgo
 			\end{LDA}
 		\end{minipage}
 		
-		Un appel possible pourrait être :
-
-		\begin{LDA}
-			\Stmt valAbsolue(température)
-		\end{LDA}
-	
-		C'est comme si, dans \lda{valAbsolue},
-		on avait une première ligne pour donner sa valeur au paramètre
-		(\lda{nb \Gets température})
-		et une dernière ligne pour effectuer l'assignation opposée
-		(\lda{température \Gets nb}).
+		Traçons-le.
+		
+		\begin{tabular}{|>{\centering\arraybackslash}m{1cm}
+						|>{\centering\arraybackslash}m{20mm}
+						|*{2}{>{\centering\arraybackslash}m{20mm}}|}
+			\hline
+			  & \lda{test} & \multicolumn{2}{c|}{\lda{valAbsolue}} \\
+			\hline
+			\# & température  & nb & test \\
+			\hline
+			8     & indéfini &  & \\
+			9     & -12.5    &  & \\
+			10, 1 & {\color{gray}$\mid$} & -12.5 & \\
+			2     & {\color{gray}$\mid$} & {\color{gray}$\mid$} & vrai \\
+			3     & {\color{gray}$\mid$} & 12.5 & \\
+			5, 10 & 12.5 &  & \\
+			\hline
+		\end{tabular}
 		
 %==================================
 \section{La valeur de retour}
