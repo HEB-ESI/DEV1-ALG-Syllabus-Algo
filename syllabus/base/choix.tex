@@ -112,7 +112,7 @@
 	\begin{Exercice}{Compréhension}
 		Tracez cet algorithme et donnez la valeur de retour.
 		\begin{LDA}
-		\Algo{exerciceA}{a, b~: entier}{entier}
+		\Algo{exerciceA}{a, b~: entiers}{entier}
 			\Decl{c}{entier}
 			\Let c \Gets 2 * a
 			\If{c > b}
@@ -249,7 +249,7 @@
 		Tracez ces algorithmes et donnez la valeur de retour.
 	
 		\begin{LDA}
-		\Algo{exerciceB}{b, a : entier}{entier}
+		\Algo{exerciceB}{b, a : entiers}{entier}
 			\Decl{c}{entier}
 			\If{a > b}
 				\Let c \Gets a DIV b
@@ -268,7 +268,7 @@
 		\end{multicols}
 	
 		\begin{LDA}
-		\Algo{exerciceC}{x1, x2~: entier}{entier}
+		\Algo{exerciceC}{x1, x2~: entiers}{entier}
 			\Decl{ok}{booléen}
 			\Let ok \Gets x1 > x2
 			\If{ok}
@@ -464,7 +464,7 @@
 		avec des \lda{\K{si-sinon}} imbriqués
 		mais le \lda{\K{si-sinon-si}} est plus lisible.
 		
-		\begin{wrong}
+		%\begin{wrong}
 		\begin{LDA}
 			\If{nb>0}
 				\Let signe \Gets "positif"
@@ -476,7 +476,7 @@
 				\EndIf
 			\EndIf
 		\end{LDA}
-		\end{wrong}
+		%\end{wrong}
 	\item
 		Lorsqu'une condition est testée,
 		on sait que toutes celles au-dessus
@@ -523,7 +523,7 @@
 
 	\begin{Exercice}{Dés identiques}
 		Écrire un algorithme qui lance trois dés
-		et indique si on a obtenu 3 dés identiques,
+		et indique si on a obtenu 3 dés de valeur identique,
 		2 ou aucun.
 	\end{Exercice}
 
@@ -545,7 +545,7 @@
 	\begin{Exercice}{Tirer une carte}
 		Écrire un algorithme qui affiche l'intitulé d'une carte
 		tirée au hasard dans un paquet de 52 cartes.
-		Par exemple, "As de coeur", "3 de pique", "Valet de carreau"
+		Par exemple, "As de cœur", "3 de pique", "Valet de carreau"
 		ou encore "Roi de trèfle".
 	\end{Exercice}
 
@@ -661,7 +661,7 @@
 		Écrire un algorithme 
 		qui reçoit la cote finale (sur 100)
 		d'un étudiant pour l'UE DEV1
-		et qui indique si l'étudiant à réussi cette UE.
+		et qui indique si l'étudiant a réussi cette UE.
 	\end{Exercice}		
 
 	\begin{Exercice}{Réussir GEN1}
