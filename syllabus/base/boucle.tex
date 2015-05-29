@@ -356,6 +356,12 @@
 \section{«~pour~»}\index{pour}
 %====================
 
+	\begin{wrapfigure}{r}{7cm}
+	\includegraphics[width=\linewidth]{image/boucle-pour}
+			\label{fig:boucle-pour}
+	\vskip-10mm
+	\end{wrapfigure}
+
 	Ici, on va plutôt indiquer 
 	\textbf{combien de fois} la tâche doit être répétée. 
 	Cela se fait au travers d’une
@@ -367,12 +373,6 @@
 		\Stmt séquence d’instructions à exécuter
 	\EndFor
 	\end{LDA}
-
-	\begin{wrapfigure}{r}{8cm}
-	\includegraphics[width=0.5\textwidth]{image/boucle-pour}
-			\label{fig:boucle-pour}
-	\vskip-10mm
-	\end{wrapfigure}
 
 	Dans ce type de structure, 
 	\lda{début}, \lda{fin} et \lda{pas}
@@ -390,6 +390,58 @@
 	plus petite que la valeur de \lda{fin}
 	(cf. le test dans l’organigramme ci-contre).
 
+	La variable de contrôle ne servant que pour la boucle
+	et étant forcement entière,
+	on va considérer qu'il n'est pas nécessaire de la déclarer
+	et qu'elle n'est pas utilisable en dehors de la boucle%
+	\footnote{%
+		De nombreux langages ne le permettent d'ailleurs pas
+		ou ont un comportement indéterminé si on le fait.%
+	}.
+
+	\subsection{Exemple - Afficher les nombres de 1 à 5}
+	%===================================================
+
+		Reprenons notre exemple d'affichage des nombres de 1 à 5.
+		Voici la solution avec un \lda{\algorithmicfor} 
+		et le traçage corrrespondant.
+
+		\begin{minipage}{55mm}
+			\begin{LDA}[1]
+				\Algo{compterJusque5}{}{}
+					\LComment par défaut le pas est de 1
+					\For{nb}{1}{5} 
+						\Write nb 
+					\EndFor
+				\EndAlgo
+			\end{LDA}
+		\end{minipage}
+		\qquad
+		\begin{minipage}{75mm}
+			\begin{tabular}{|>{\centering\arraybackslash}m{6mm}
+						|*{3}{>{\centering\arraybackslash}m{15mm}}|}
+				\hline
+					\verb_#_  & nb & condition & affichage \\			
+				\hline
+					3 & 1                    & vrai & {} \\
+					4 & {\color{gray}$\mid$} &      & 1  \\
+					3 & 2                    & vrai & {} \\
+					4 & {\color{gray}$\mid$} &      & 2  \\
+					3 & 3                    & vrai & {} \\
+					4 & {\color{gray}$\mid$} &      & 3  \\
+					3 & 4                    & vrai & {} \\
+					4 & {\color{gray}$\mid$} &      & 4  \\
+					3 & 5                    & vrai & {} \\
+					4 & {\color{gray}$\mid$} &      & 5  \\
+					3 & 6                    & faux & {} \\
+				\hline
+			\end{tabular}
+		\end{minipage}
+
+	\subsection{Quelques difficultés}
+	%===================================================
+
+	\paragraph{Cohérence.}
 	Il faut veiller à la cohérence de l’écriture de cette structure. On considérera
 	qu’au cas (à éviter) où \lda{début} est strictement supérieur à
 	\lda{fin} et le \lda{pas} est positif, la séquence d’instructions
@@ -405,7 +457,7 @@
 	\Stmt \K{pour} i \K{de} 1 \K{à} 1 \K{par} 5 \K{faire} \RComment La boucle est exécutée 1 fois.
 	\end{LDA}
 	
-	\marginicon{attention}
+	\paragraph{Modification.}
 	Il faut aussi veiller à ne pas modifier dans la séquence d’instructions une des
 	variables de contrôle \lda{début}, \lda{fin} ou \lda{pas}~! Il
 	est aussi fortement déconseillé de modifier «~manuellement~» la
@@ -415,29 +467,10 @@
 	\lda{i \Gets i + pas} 
 	étant automatique et implicite à chaque étape de la boucle. 
 	
-	La variable de contrôle ne servant que pour la boucle
-	et étant forcement entière,
-	on va considérer qu'il n'est pas nécessaire de la déclarer
-	et qu'elle n'est pas utilisable en dehors de la boucle%
-	\footnote{%
-		De nombreux langages ne le permettent d'ailleurs pas
-		ou ont un comportement indéterminé si on le fait.%
-	}.
-
 	\subsection{Exemples -- Afficher des nombres}
 	%===================================================
 
-		Restons avec notre exemple d'affichage des nombres de 1 à 5.
-		
-		\begin{LDA}
-		\Algo{compterJusque5}{}{}
-			\For{nb}{1}{5} \RComment par défaut le pas est de 1
-				\Write nb 
-			\EndFor
-		\EndAlgo
-		\end{LDA}
-
-		Si on veut généraliser à n nombres, on a :
+		Si on veut généraliser l'affichage à n nombres, on a :
 		
 		\begin{LDA}
 		\Algo{compterJusqueN}{\Par{n}{entier}}{}
@@ -483,8 +516,6 @@
 		La section sur les suites proposera d'autres solutions
 		pour ce problème.
 		
-\clearpage
-
 	\subsection{Exercices}
 	% =====================================
 
