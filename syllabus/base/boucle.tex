@@ -118,6 +118,22 @@
 		il va falloir ruser.
 		On peut obtenir le même résultat avec l'algorithme suivant :
 
+		\begin{minipage}{4cm}
+		\begin{LDA}
+		\Let nb \Gets 1
+		\Write{nb}
+		\Let nb \Gets 2
+		\Write{nb}
+		\Let nb \Gets 3
+		\Write{nb}
+		\Let nb \Gets 4
+		\Write{nb}
+		\Let nb \Gets 5
+		\Write{nb}
+		\end{LDA}
+		\end{minipage}
+		\quad ou encore \quad
+		\begin{minipage}{4cm}
 		\begin{LDA}[1]
 		\Let nb \Gets 1
 		\Write{nb}
@@ -131,7 +147,8 @@
 		\Write{nb}
 		\Let nb \Gets nb + 1
 		\end{LDA}
-
+		\end{minipage}
+		
 		Il est plus compliqué,
 		mais cette fois les lignes 2 et 3 se répètent exactement.
 		D'ailleurs, la dernière ligne ne sert à rien d'autre qu'à
@@ -155,10 +172,15 @@
 			mais pas souvent adaptée au problème à résoudre.
 		}.
 
+\clearpage
 %========================
 \section{«~tant que~»}\index{tant que}
 %========================
 	
+	\begin{wrapfigure}{r}{6cm}
+		\includegraphics[width=\linewidth]{image/boucle-tq}
+		\label{fig:boucle-tq}
+	\end{wrapfigure}
 	Le «~tant que~» est une structure qui demande à
 	l’exécutant de répéter une tâche (une ou plusieurs
 	instructions) tant qu’une condition donnée est vraie.
@@ -178,14 +200,10 @@
 	manière qu’elle puisse devenir \textbf{fausse} à un moment donné. Dans
 	le cas contraire, la condition reste indéfiniment vraie et la boucle va
 	tourner sans fin, c’est ce qu’on appelle une \textbf{boucle infinie}. 
-	L'ordinogramme ci-dessous décrit  le déroulement de cette structure. 
+	L'ordinogramme ci-contre décrit  le déroulement de cette structure. 
 	On remarquera que si la condition est fausse dès le début, 
 	la tâche n’est jamais exécutée.
 
-	\begin{center}
-	\includegraphics[width=0.4\textwidth]{image/boucle-tq}
-	\label{fig:boucle-tq}
-	\end{center}
 
 	\subsection{Exemple - Afficher les nombres de 1 à 5}
 	%===================================================
@@ -202,18 +220,47 @@
 		On continue tant que le nombre n'a pas dépassé 5.
 		Ce qui donne (en n'oubliant pas l'initialisation de \lda{nb}) :
 
-		\begin{LDA}
-			\Algo{compteur5}{}{}
-				\Decl{nb}{entier}
-				\Let nb \Gets 1
-				\While{nb $\le$ 5}
-					\Write{nb}
-					\Let nb \Gets nb + 1
-				\EndWhile
-			\EndAlgo
-		\end{LDA}
+		\begin{minipage}{5cm}
+			\begin{LDA}[1]
+				\Algo{compteur5}{}{}
+					\Decl{nb}{entier}
+					\Let nb \Gets 1
+					\While{nb $\le$ 5}
+						\Write{nb}
+						\Let nb \Gets nb + 1
+					\EndWhile
+				\EndAlgo
+			\end{LDA}
+		\end{minipage}
+		\quad
+		\begin{minipage}{8cm}
+			\begin{tabular}{|>{\centering\arraybackslash}m{6mm}
+						|*{3}{>{\centering\arraybackslash}m{2cm}}|}
+				\hline
+					\verb_#_  & nb & condition & affichage \\			
+				\hline
+					2 & indéfini & {} & {} \\
+					3 & 1                    & {}   & {} \\
+					4 & {\color{gray}$\mid$} & vrai & {} \\
+					5 & {\color{gray}$\mid$} &      & 1  \\
+					6 & 2                    & {}   & {} \\
+					4 & {\color{gray}$\mid$} & vrai & {} \\
+					5 & {\color{gray}$\mid$} &      & 2  \\
+					6 & 3                    & {}   & {} \\
+					4 & {\color{gray}$\mid$} & vrai & {} \\
+					5 & {\color{gray}$\mid$} &      & 3  \\
+					6 & 4                    & {}   & {} \\
+					4 & {\color{gray}$\mid$} & vrai & {} \\
+					5 & {\color{gray}$\mid$} &      & 4  \\
+					6 & 5                    & {}   & {} \\
+					4 & {\color{gray}$\mid$} & vrai & {} \\
+					5 & {\color{gray}$\mid$} &      & 5  \\
+					6 & 6                    & {}   & {} \\
+					4 & {\color{gray}$\mid$} & faux & {} \\
+				\hline
+			\end{tabular}
+		\end{minipage}
 
-\clearpage
 	\subsection{Exemple - Généralisation à n nombres}
 	%===================================================
 
