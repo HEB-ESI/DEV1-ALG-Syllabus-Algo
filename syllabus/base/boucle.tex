@@ -178,8 +178,16 @@
 %========================
 	
 	\begin{wrapfigure}{r}{6cm}
-		\includegraphics[width=\linewidth]{image/boucle-tq}
-		\label{fig:boucle-tq}
+		\begin{tikzpicture}[>=triangle 60, node distance = 1.5cm, auto]
+			\sffamily				
+			\node[draw, diamond, aspect=2] (Test) {condition vraie ?};
+			\node[draw, below of=Test] (Instr) {instructions à exécuter};
+			\node[draw, circle, below of=Instr] (End) {};		          
+			\draw[->] (Test) -- (Instr) node[near start] {Oui};
+			\draw[->] (Test.east) to[in=0,out=0] node[near start] {Non} (End.east);
+			\draw[->] (Instr.west) to[bend left] (Test.west);
+		\end{tikzpicture}	
+		\vspace{-1cm}
 	\end{wrapfigure}
 	Le «~tant que~» est une structure qui demande à
 	l’exécutant de répéter une tâche (une ou plusieurs
@@ -200,7 +208,7 @@
 	manière qu’elle puisse devenir \textbf{fausse} à un moment donné. Dans
 	le cas contraire, la condition reste indéfiniment vraie et la boucle va
 	tourner sans fin, c’est ce qu’on appelle une \textbf{boucle infinie}. 
-	L'ordinogramme ci-contre décrit  le déroulement de cette structure. 
+	L'ordinogramme ci-dessus décrit  le déroulement de cette structure. 
 	On remarquera que si la condition est fausse dès le début, 
 	la tâche n’est jamais exécutée.
 
@@ -357,9 +365,20 @@
 %====================
 
 	\begin{wrapfigure}{r}{7cm}
-	\includegraphics[width=\linewidth]{image/boucle-pour}
-			\label{fig:boucle-pour}
-	\vskip-10mm
+		\begin{tikzpicture}[>=triangle 60, node distance = 1.5cm, auto]
+			\sffamily				
+			\node[draw] (Init) {variable \Gets début};
+			\node[draw, diamond, aspect=2, below of=Init] (Test) {variable $\leq$ fin ?};
+			\node[draw, below of=Test] (Instr) {instructions à exécuter};
+			\node[draw, below of=Instr] (Incr) {variable \Gets variable + pas};
+			\node[draw, circle, below of=Incr] (End) {};		          
+			\draw[->] (Init) -- (Test);
+			\draw[->] (Test) -- (Instr) node[near start] {Vrai};
+			\draw[->] (Test.east) to[in=-30,out=0] node[near start] {Faux} (End.south);
+			\draw[->] (Instr) -- (Incr);
+			\draw[->] (Incr.west) to[bend left] (Test.west);
+		\end{tikzpicture}	
+		\vspace{-2cm}
 	\end{wrapfigure}
 
 	Ici, on va plutôt indiquer 
@@ -378,17 +397,12 @@
 	\lda{début}, \lda{fin} et \lda{pas}
 	peuvent être des constantes, 
 	des variables ou des expressions entières. 
+
 	Le \lda{pas} est facultatif, et généralement omis 
 	(dans ce cas, sa valeur par défaut est 1). 
-	Ce pas est parfois négatif, dans le cas d’un compte à rebours, 
-	par exemple \lda{pour n de 10 à 1 par -1}.
 
-	Quand le \lda{pas} est positif, la boucle s’arrête
+	La boucle s’arrête
 	lorsque la variable dépasse la valeur de \lda{fin}. 
-	Par contre, avec un \lda{pas} négatif, 
-	la boucle s’arrête lorsque la variable prend une valeur 
-	plus petite que la valeur de \lda{fin}
-	(cf. le test dans l’organigramme ci-contre).
 
 	La variable de contrôle ne servant que pour la boucle
 	et étant forcement entière,
@@ -399,7 +413,7 @@
 		ou ont un comportement indéterminé si on le fait.%
 	}.
 
-	\subsection{Exemple - Afficher les nombres de 1 à 5}
+	\subsection{Exemples}
 	%===================================================
 
 		Reprenons notre exemple d'affichage des nombres de 1 à 5.
@@ -438,38 +452,6 @@
 			\end{tabular}
 		\end{minipage}
 
-	\subsection{Quelques difficultés}
-	%===================================================
-
-	\paragraph{Cohérence.}
-	Il faut veiller à la cohérence de l’écriture de cette structure. On considérera
-	qu’au cas (à éviter) où \lda{début} est strictement supérieur à
-	\lda{fin} et le \lda{pas} est positif, la séquence d’instructions
-	n’est jamais exécutée (mais ce n’est pas le cas dans tous les langages
-	de programmation~!). Idem si \lda{début} est strictement inférieur à
-	\lda{fin} mais avec un \lda{pas} négatif.
-
-	\textbf{Exemples~}:
-
-	\begin{LDA}
-	\Stmt \K{pour} i \K{de} 2 \K{à} 0 \K{faire} \RComment La boucle n’est pas exécutée.
-	\Stmt \K{pour} i \K{de} 1 \K{à} 10 \K{par} -1 \K{faire} \RComment La boucle n’est pas exécutée.
-	\Stmt \K{pour} i \K{de} 1 \K{à} 1 \K{par} 5 \K{faire} \RComment La boucle est exécutée 1 fois.
-	\end{LDA}
-	
-	\paragraph{Modification.}
-	Il faut aussi veiller à ne pas modifier dans la séquence d’instructions une des
-	variables de contrôle \lda{début}, \lda{fin} ou \lda{pas}~! Il
-	est aussi fortement déconseillé de modifier «~manuellement~» la
-	\lda{variable} de contrôle au sein de la boucle
-	\lda{pour}. Il ne faut pas l’initialiser en début de boucle,
-	et ne pas s’occuper de sa modification, l’instruction 
-	\lda{i \Gets i + pas} 
-	étant automatique et implicite à chaque étape de la boucle. 
-	
-	\subsection{Exemples -- Afficher des nombres}
-	%===================================================
-
 		Si on veut généraliser l'affichage à n nombres, on a :
 		
 		\begin{LDA}
@@ -480,7 +462,36 @@
 		\EndAlgo
 		\end{LDA}
 
-		Et si on veut afficher un compte à rebours :
+\clearpage
+	\subsection{Un pas négatif}
+	%===================================================
+
+		\begin{wrapfigure}{r}{6cm}
+			\begin{tikzpicture}[>=triangle 60, node distance = 1.5cm, auto]
+				\sffamily				
+				\node[draw] (Init) {variable \Gets début};
+				\node[draw, diamond, aspect=2, below of=Init] (Test) {variable $\geq$ fin ?};
+				\node[draw, below of=Test] (Instr) {instructions à exécuter};
+				\node[draw, below of=Instr] (Incr) {variable \Gets variable + pas};
+				\node[draw, circle, below of=Incr] (End) {};		          
+				\draw[->] (Init) -- (Test);
+				\draw[->] (Test) -- (Instr) node[near start] {Vrai};
+				\draw[->] (Test.east) to[in=-30,out=0] node[near start] {Faux} (End.south);
+				\draw[->] (Instr) -- (Incr);
+				\draw[->] (Incr.west) to[bend left] (Test.west);
+			\end{tikzpicture}	
+			\vspace{-3cm}
+		\end{wrapfigure}
+
+		Le pas est parfois négatif, dans le cas d’un compte à rebours, 
+		par exemple.
+		Dans ce cas, 
+		la boucle s’arrête
+		lorsque la variable prend une valeur 
+		plus petite que la valeur de \lda{fin}
+		(cf. le test dans l’organigramme ci-contre).
+
+		\textbf{Exemple} : Compte à rebours à partir de n.
 		
 		\begin{LDA}
 		\Algo{compterÀReboursDécroissant}{\Par{n}{entier}}{}
@@ -491,6 +502,39 @@
 		\EndAlgo
 		\end{LDA}
 
+	\subsection{Cohérence}
+	%===================================================
+
+		Il faut veiller à la cohérence de l’écriture de cette structure. On considérera
+		qu’au cas (à éviter) où \lda{début} est strictement supérieur à
+		\lda{fin} et le \lda{pas} est positif, la séquence d’instructions
+		n’est jamais exécutée (mais ce n’est pas le cas dans tous les langages
+		de programmation~!). Idem si \lda{début} est strictement inférieur à
+		\lda{fin} mais avec un \lda{pas} négatif.
+	
+		\textbf{Exemples~}:
+	
+		\begin{LDA}
+		\Stmt \K{pour} i \K{de} 2 \K{à} 0 \K{faire} \RComment La boucle n’est pas exécutée.
+		\Stmt \K{pour} i \K{de} 1 \K{à} 10 \K{par} -1 \K{faire} \RComment La boucle n’est pas exécutée.
+		\Stmt \K{pour} i \K{de} 1 \K{à} 1 \K{par} 5 \K{faire} \RComment La boucle est exécutée 1 fois.
+		\end{LDA}
+
+	\subsection{Modification des variables de contrôle}
+	%===================================================
+		
+		\marginicon{attention}
+		Il est important de ne pas modifier 
+		dans la séquence d’instructions une des
+		variables de contrôle \lda{début}, \lda{fin} ou \lda{pas}~! 
+		Il est aussi fortement déconseillé de modifier «~manuellement~» la
+		\lda{variable} de contrôle au sein de la boucle
+		\lda{pour}. 
+		Il ne faut pas l’initialiser en début de boucle,
+		et ne pas s’occuper de sa modification, l’instruction 
+		\lda{i \Gets i + pas} 
+		étant automatique et implicite à chaque étape de la boucle. 
+	
 	\subsection{Exemple -- Afficher uniquement les nombres pairs}
 	%===========================================================
 
@@ -576,8 +620,26 @@
 \section{«~faire~–~tant que~»}
 %===================================
 
+	\begin{wrapfigure}{r}{4cm}
+		\begin{tikzpicture}[>=triangle 60, node distance = 2cm, auto]
+			\sffamily
+			\node[draw] (Instr) {instructions à exécuter};
+			\node[draw, diamond, aspect=2, below of=Instr] (Test) {Condition vraie ?};
+			\node[draw, circle, below of=Test] (End) {};		          
+			\draw[->] (Instr) -- (Test);
+			\draw[->] (Test) -- (End) node[near start] {Non};
+			\draw[->] (Test.east) to[in=0,out=0] node[near start] {Oui} (Instr.east);
+		\end{tikzpicture}	
+	\end{wrapfigure}
+
 	Cette structure est très proche du «faire~-~tant que~» 
-	à ceci près que le test est fait à la fin et pas au début. 
+	à ceci près que le test est fait à la fin et pas au début%
+	\footnote{%
+		Certains langages introduisent aussi (ou à la place)
+		un \lda{K{faire jusqu'à ce que}}.
+		Dans ce cas, la boucle continue lorsque le test est
+		\textbf{faux} et s'arrête lorsqu'il est vrai.
+	}. 
 	La tâche est donc toujours exécutée au moins une fois.
 
 	\begin{LDA}
@@ -586,13 +648,6 @@
 	\EndRepeat{condition}
 	\end{LDA}
 
-		\begin{wrapfigure}{r}{6cm}
-		\vskip-4mm
-		\includegraphics[width=0.35\textwidth]{image/boucle-faire}
-				\label{fig:boucle-faire}
-		\vskip-10mm
-		\end{wrapfigure}
-
 	Comme avec le tant-que, 
 	il faut que la séquence d’instructions comprise entre
 	\lda{\K{faire}} et \lda{\K{tant que}} 
@@ -600,8 +655,56 @@
 	telle manière qu’elle puisse devenir \textbf{vraie} à un moment donné
 	pour arrêter l’itération. 
 	Le schéma ci-contre décrit le déroulement de cette boucle. 
+
+	\subsection{Exemple}
+	%===================================================
+
+		Reprenons notre exemple d'affichage des nombres de 1 à 5.
+		Voici la solution et le traçage corrrespondant.
+
+		\begin{minipage}{5cm}
+			\begin{LDA}[1]
+				\Algo{compteur5}{}{}
+					\Decl{nb}{entier}
+					\Let nb \Gets 1
+					\Repeat
+						\Write{nb}
+						\Let nb \Gets nb + 1
+					\EndRepeat{nb $\le$ 5}
+				\EndAlgo
+			\end{LDA}
+		\end{minipage}
+		\quad
+		\begin{minipage}{8cm}
+			\begin{tabular}{|>{\centering\arraybackslash}m{6mm}
+						|*{3}{>{\centering\arraybackslash}m{2cm}}|}
+				\hline
+					\verb_#_  & nb & condition & affichage \\			
+				\hline
+					2 & indéfini & {} & {} \\
+					3 & 1                    & {}   & {} \\
+					5 & {\color{gray}$\mid$} &      & 1  \\
+					6 & 2                    & {}   & {} \\
+					7 & {\color{gray}$\mid$} & vrai & {} \\
+					5 & {\color{gray}$\mid$} &      & 2  \\
+					6 & 3                    & {}   & {} \\
+					7 & {\color{gray}$\mid$} & vrai & {} \\
+					5 & {\color{gray}$\mid$} &      & 3  \\
+					6 & 4                    & {}   & {} \\
+					7 & {\color{gray}$\mid$} & vrai & {} \\
+					5 & {\color{gray}$\mid$} &      & 4  \\
+					6 & 5                    & {}   & {} \\
+					7 & {\color{gray}$\mid$} & vrai & {} \\
+					5 & {\color{gray}$\mid$} &      & 5  \\
+					6 & 6                    & {}   & {} \\
+					7 & {\color{gray}$\mid$} & faux & {} \\
+				\hline
+			\end{tabular}
+		\end{minipage}
+
+	\subsection{Exercices}
+	%===================================================
 	
-\clearpage	
 		\begin{Exercice}{Compréhension d’algorithmes}
 			Quels sont les affichages réalisés lors de l’exécution
 			des algorithmes suivants~?
