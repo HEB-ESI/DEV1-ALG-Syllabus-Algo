@@ -162,7 +162,7 @@
 		
 		Lors de l'appel, on fournit la \textbf{valeur}
 		ou, plus généralement une expression
-		dont la valeur sera donnée au paramète.
+		dont la valeur sera donnée au paramètre.
 		Voici un cas général de paramètre en entrée.
 		
 		\begin{minipage}{4cm}
@@ -182,7 +182,7 @@
 		\end{minipage}
 		
 		C'est comme si l'algorithme \lda{monAlgo}
-		commençait pas l'affectation
+		commençait par l'affectation
 		\lda{par \Gets expr}.
 		
 		\textbf{Exemple.} 
@@ -313,10 +313,10 @@
 			\hline
 			9     & indéfini & indéfini & indéfini & {} & {} & {} & {} \\
 			10, 1 & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & 65536 & indéfini & indéfini & indéfini \\
-			3     & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & 10 & {\color{gray}$\mid$} & {\color{gray}$\mid$} \\
+			3     & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & 18 & {\color{gray}$\mid$} & {\color{gray}$\mid$} \\
 			4     & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & 12 & {\color{gray}$\mid$} \\
 			5     & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & {\color{gray}$\mid$} & 16 \\
-			6, 10 & 10 & 12 & 16 &  &  &  &  \\
+			6, 10 & 18 & 12 & 16 &  &  &  &  \\
 			\hline
 		\end{tabular}
 		\end{small}
@@ -347,7 +347,7 @@
 		\begin{minipage}{8cm}
 			\begin{LDA}
 				\LComment {Code appelé}
-				\Entete{monAlgo}{\Par{par\Out}{entier}}{}
+				\Entete{monAlgo}{\Par{par\In\Out}{entier}}{}
 				\Stmt \dots
 			\end{LDA}
 		\end{minipage}
@@ -412,7 +412,7 @@
 	
 	Une valeur de retour est toujours possible,
 	mais jamais obligatoire,
-	quels que soient les sortes des paramètres.
+	quelles que soient les sortes de paramètres.
 	Ainsi, on peut imaginer un algorithme
 	qui possède un paramètre en sortie \textbf{et}
 	qui retourne également une valeur.
@@ -420,7 +420,7 @@
 	Attention !
 	Un algorithme qui ne \textbf{retourne} rien (pas de \Gives)
 	n'a pas de valeur ;
-	il ne peut pas apparaître dans une expression
+	il ne peut pas apparaitre dans une expression
 	ou être assigné à une variable.
 
 %===================
@@ -430,22 +430,93 @@
 	Reprenons tout ce qu'on vient de voir
 	avec un exemple d'algorithme qui possède tous les types de paramètres.
 
-	\begin{LDA}
-		\Algo{test}{}{}
-			\Write f(pE1, pE2, pE3)
+	\begin{LDA}[1]
+		\Algo{testDivision}{}{}
+			\Decl {compteurAppels, nb1, nb2, quotient, resteDiv}{entiers}
+			\Let{compteurAppels \Gets 0}
+			\Let{nb1 \Gets 5}
+			\Let{nb2 \Gets 3}
+			\Let{quotient \Gets division(compteurAppels, nb1, nb2, resteDiv)}
+			\Write quotient
+			\Write resteDiv
+			\Write compteurAppels
+			\Let{nb1 \Gets 7}
+			\Let{nb2 \Gets 9}
+			\Let{quotient \Gets division(compteurAppels, nb1, nb2, resteDiv)}
+			\Write quotient
+			\Write resteDiv
+			\Write compteurAppels
 		\EndAlgo
 		\Empty
-		\Algo{f}{\Par{pF1\In}{entier}, \Par{pF2\Out}{entier}, \Par{pF3\In\Out}{entier}}{entier}
-			\Let{\color{gray} pF1 \Gets pE1} 
-			\Let{\color{gray} pF3 \Gets pE3} 
+		\Algo{division}{\Par{compteur\In\Out}{entier}, \Par{dividende\In}{entier}, \Par{diviseur\In}{entier}, \Par{reste\Out}{entier}}{entier}
+			\Let{\color{gray} compteur \Gets compteurAppels} 
+			\Let{\color{gray} dividende \Gets nb1} 
+			\Let{\color{gray} diviseur \Gets nb2} 
 			\Empty
 			\LComment Le code proprement dit de l'algorithme
+			\Decl {quotient}{entier}
+			\Let{compteur \Gets compteur + 1}
+			\Let{quotient \Gets dividende DIV diviseur}
+			\Let{reste \Gets dividende MOD diviseur}
 			\Empty
-			\Let{\color{gray} pE2 \Gets pF2} 
-			\Let{\color{gray} pE3 \Gets pF3} 
-			\Return réponse
+			\Let{\color{gray} compteurAppels \Gets compteur}
+			\Let{\color{gray} resteDivisionEntière \Gets reste} 
+			\Return quotient
 		\EndAlgo
 	\end{LDA}
+	
+	Traçons-le.
+		
+	\begin{tabular}{|>{\centering\arraybackslash}m{1cm}
+					|*{5}{>{\centering\arraybackslash}m{10mm}}
+					|*{5}{>{\centering\arraybackslash}m{10mm}}|}
+		\hline
+		  & \multicolumn{5}{c|}{\lda{testDivision}} & \multicolumn{5}{c|}{\lda{division}} \\
+		\hline
+		\# & \tiny{compteurAppels} & \tiny{nb1} & \tiny{nb2} 
+		& \tiny{quotient} & \tiny{resteDiv}  
+		& \tiny{compteur} & \tiny{dividende} & \tiny{diviseur} 
+		& \tiny{reste} & \tiny{quotient} \\
+		\hline
+		3  		& 0 	&  &  &  &  &  &  &  &  &  \\
+		4  		& {\color{gray}$\mid$} 	& 5 &  &  &  
+		&  &  &  &  & \\
+		5    	& {\color{gray}$\mid$} 	& {\color{gray}$\mid$}	& 3 &  &  
+		&  &  &  &  &  \\
+		6, 18  	& {\color{gray}$\mid$} 	& {\color{gray}$\mid$}	& {\color{gray}$\mid$} 	&  &  
+		& 0  					& 5  					& 3  					&  &  \\
+		25 		& {\color{gray}$\mid$} 	& {\color{gray}$\mid$}	& {\color{gray}$\mid$} 	&  &  
+		& 1 & {\color{gray}$\mid$}	& {\color{gray}$\mid$}	&  &  \\
+		26 		& {\color{gray}$\mid$} 	& {\color{gray}$\mid$} 	& {\color{gray}$\mid$} 	&  &  
+		& {\color{gray}$\mid$}	& {\color{gray}$\mid$}	& {\color{gray}$\mid$}	&  & 1 \\
+		27 		& {\color{gray}$\mid$} 	& {\color{gray}$\mid$} 	& {\color{gray}$\mid$} 	&  &  
+		& {\color{gray}$\mid$}	& {\color{gray}$\mid$}	& {\color{gray}$\mid$}	&  2
+		& {\color{gray}$\mid$} \\
+		32, 6 		& 1 	& {\color{gray}$\mid$} 	& {\color{gray}$\mid$} 	& 1 & 2  
+		&  &  &  &  &  \\
+		10  		& {\color{gray}$\mid$} 	& 7 & {\color{gray}$\mid$}	
+		& {\color{gray}$\mid$}  &  {\color{gray}$\mid$}
+		&  &  &  &  & \\
+		11    	& {\color{gray}$\mid$} 	& {\color{gray}$\mid$}	& 9 
+		& {\color{gray}$\mid$}  &  {\color{gray}$\mid$} 
+		&  &  &  &  &  \\
+		12, 18  	& {\color{gray}$\mid$} 	& {\color{gray}$\mid$}	& {\color{gray}$\mid$} 	
+		& {\color{gray}$\mid$}  &  {\color{gray}$\mid$} 
+		& 1  					& 7  					& 9  					&  &  \\
+		25 		& {\color{gray}$\mid$} 	& {\color{gray}$\mid$}	& {\color{gray}$\mid$} 	
+		& {\color{gray}$\mid$}  &  {\color{gray}$\mid$}  
+		& 2 & {\color{gray}$\mid$}	& {\color{gray}$\mid$}	&  &  \\
+		26 		& {\color{gray}$\mid$} 	& {\color{gray}$\mid$} 	& {\color{gray}$\mid$} 	
+		& {\color{gray}$\mid$}  &  {\color{gray}$\mid$}  
+		& {\color{gray}$\mid$}	& {\color{gray}$\mid$}	& {\color{gray}$\mid$}	&  & 0 \\
+		27 		& {\color{gray}$\mid$} 	& {\color{gray}$\mid$} 	& {\color{gray}$\mid$} 	
+		& {\color{gray}$\mid$}  &  {\color{gray}$\mid$}  
+		& {\color{gray}$\mid$}	& {\color{gray}$\mid$}	& {\color{gray}$\mid$}	&  7
+		& {\color{gray}$\mid$} \\
+		32, 6 		& 2 	& {\color{gray}$\mid$} 	& {\color{gray}$\mid$} 	& 0 & 7  
+		&  &  &  &  &  \\
+		\hline
+	\end{tabular}
 
 	Pour mieux se comprendre,
 	il est utile d'introduire un peu de vocabulaire.
@@ -461,10 +532,6 @@
 	et pour donner des valeurs 
 	aux paramètres effectifs \Out{} et \InOut{}
 	en fin d'algorithme.
-	
-	On comprend pourquoi \lda{pE1} peut être une expression quelconque
-	mais que \lda{pE2} et \lda{pE3} doivent être des variables,
-	puisqu'elle vont recevoir une valeur.
 	
 	À la fin de l'algorithme, 
 	c'est comme si la valeur retournée \emph{remplaçait} l'appel.
