@@ -191,7 +191,7 @@
 	\end{wrapfigure}
 	Le «~tant que~» est une structure qui demande à
 	l’exécutant de répéter une tâche (une ou plusieurs
-	instructions) tant qu’une condition donnée est vraie.
+	instruction(s)) tant qu’une condition donnée est vraie.
 
 	\begin{LDA}
 	\While{condition}
@@ -237,6 +237,7 @@
 						\Write{nb}
 						\Let nb \Gets nb + 1
 					\EndWhile
+					\Write{"nb vaut ", nb}
 				\EndAlgo
 			\end{LDA}
 		\end{minipage}
@@ -265,6 +266,7 @@
 					5 & {\color{gray}$\mid$} &      & 5  \\
 					6 & 6                    & {}   & {} \\
 					4 & {\color{gray}$\mid$} & faux & {} \\
+					8 & {\color{gray}$\mid$} & {}   & {nb vaut 6} \\
 				\hline
 			\end{tabular}
 		\end{minipage}
@@ -418,7 +420,7 @@
 
 		Reprenons notre exemple d'affichage des nombres de 1 à 5.
 		Voici la solution avec un \lda{\algorithmicfor} 
-		et le traçage corrrespondant.
+		et le traçage correspondant.
 
 		\begin{minipage}{55mm}
 			\begin{LDA}[1]
@@ -636,7 +638,7 @@
 	à ceci près que le test est fait à la fin et pas au début%
 	\footnote{%
 		Certains langages introduisent aussi (ou à la place)
-		un \lda{K{faire jusqu'à ce que}}.
+		un \lda{\K{faire jusqu'à ce que}}.
 		Dans ce cas, la boucle continue lorsque le test est
 		\textbf{faux} et s'arrête lorsqu'il est vrai.
 	}. 
@@ -660,7 +662,7 @@
 	%===================================================
 
 		Reprenons notre exemple d'affichage des nombres de 1 à 5.
-		Voici la solution et le traçage corrrespondant.
+		Voici la solution et le traçage correspondant.
 
 		\begin{minipage}{5cm}
 			\begin{LDA}[1]
@@ -671,6 +673,7 @@
 						\Write{nb}
 						\Let nb \Gets nb + 1
 					\EndRepeat{nb $\le$ 5}
+					\Write{"nb vaut ", nb}
 				\EndAlgo
 			\end{LDA}
 		\end{minipage}
@@ -698,6 +701,7 @@
 					5 & {\color{gray}$\mid$} &      & 5  \\
 					6 & 6                    & {}   & {} \\
 					7 & {\color{gray}$\mid$} & faux & {} \\
+					8 & {\color{gray}$\mid$} & {}   & {nb vaut 6} \\
 				\hline
 			\end{tabular}
 		\end{minipage}
@@ -723,14 +727,14 @@
 					\EndRepeat{NON pair ET NON grand}
 					\Write x
 				\EndAlgo
-			\end{LDA}			
+			\end{LDA}		
 		
 		\end{Exercice}
 
 		\begin{Exercice}{Afficher des nombres}
 			Reprenons un exercice déjà fait avec le \lda{\algorithmicwhile}
 			et le \lda{\algorithmicfor}
-			en utilisant cette fois un \lda{\algorithmicuntil}.
+			en utilisant cette fois un \lda{\algorithmicrepeat} \lda{\algorithmicwhile}.
 			Écrire un algorithme qui reçoit un entier $n$ positif et affiche
 			\begin{enumerate}[label=\alph*)]
 			\item les nombres de 1 à $n$ ;
@@ -831,7 +835,7 @@
 		Ici, il faut chercher une solution différente
 		car on ne connait pas au départ le nombre de valeurs à additionner et
 		donc le nombre d’exécution de la boucle. On va devoir passer à un
-		«~tant que~» ou un «faire - jusqu’à ce que». On peut
+		«~tant que~» ou un «faire - tant que». On peut
 		envisager de demander en fin de boucle s’il reste
 		encore un nombre à additionner. Ce qui donne~:
 
@@ -846,7 +850,7 @@
 				\Read valeur
 				\Let somme \Gets somme + valeur 
 				\Read encore
-			\EndRepeat{NON encore}
+			\EndRepeat{encore}
 			\Return somme
 		\EndAlgo
 		\end{LDA}
@@ -891,7 +895,7 @@
 		un terme valide de l’addition. Par exemple, si on veut
 		additionner des nombres positifs uniquement, la valeur -1 peut servir
 		de valeur sentinelle. Mais sans limite sur les nombres à additionner
-		(positifs, négatifs ou nuls) il n’est pas possible de
+		(positifs, négatifs ou nuls), il n’est pas possible de
 		choisir une sentinelle.
 
 		Ici, on se base sur la valeur entrée pour décider si on continue ou pas. 
@@ -924,7 +928,7 @@
 		\begin{Exercice}{Afficher les nombres impairs}
 			Écrire un algorithme qui demande une série
 			de valeurs entières non nulles à l'utilisateur
-			et qui affiche celles qui sont impaires
+			et qui affiche celles qui sont impaires.
 			La fin des données sera signalée 
 			par la valeur sentinelle 0.
 		\end{Exercice}
@@ -1046,6 +1050,7 @@
 		qui, dans notre exemple précis, devient :
 
 		\begin{LDA}
+			\LComment affiche la suite 1 2 4 7 11 16 ...
 			\Algo{suite}{\Par{n}{entier}}{}
 				\Decl{val}{entier}
 				\Let val \Gets 1
