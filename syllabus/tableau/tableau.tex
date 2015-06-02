@@ -16,7 +16,7 @@
 		apparaitra de façon naturelle.
 	
 		\textbf{Exemple.}
-		Statistisques de ventes.
+		Statistiques de ventes.
 		\begin{quote}	
 			Un gérant d’une entreprise commerciale 
 			souhaite connaitre l’impact 
@@ -58,7 +58,7 @@
 		\LComment Calcule et affiche la quantité vendue de 10 produits.
 		\Algo{statistiquesVentesSansTableau}{}{}
 			\Empty
-			\Decl{cpt0,cpt1, cpt2, cpt3, cpt4, cpt5, cpt6, cpt7, cpt8, cpt9}{entiers}
+			\Decl{cpt0, cpt1, cpt2, cpt3, cpt4, cpt5, cpt6, cpt7, cpt8, cpt9}{entiers}
 			\Decl{numéroProduit, quantité}{entiers}
 			\Empty
 			\Let cpt0 \Gets 0
@@ -244,7 +244,7 @@
 		et \lda{TypeElément} est le type des éléments 
 			que l’on trouvera dans le tableau.
 			Tous les types sont permis
-			mais tous les élements d'un même tableau
+			mais tous les éléments d'un même tableau
 			sont du même type. 
 		
 	% ==================
@@ -318,7 +318,7 @@
 			\Let tab \Gets \{0, \dots, 0\} 
 			\RComment{tous les éléments du tableau sont initialisés à 0}
 			\Let tab \Gets \{0, 1, 2, \dots\} 
-			\RComment{l'élement d'indice i est initialisé à la valeur i}
+			\RComment{l'élément d'indice i est initialisé à la valeur i}
 		\end{LDA}
 
 		%Par contre, on ne se permettra pas de demander ou d'afficher 
@@ -337,7 +337,7 @@
 		Voyons cela en détail.
 
 		\subsection{Passer un tableau en paramètre}
-		%---------------------------------
+		%------------------------------------------
 		
 			Les trois sortes de passages de paramètres sont possibles.
 			Plus précisément :
@@ -345,8 +345,8 @@
 			\item \In : 
 				indique que l'algorithme va consulter les valeurs 
 				du tableau reçu en paramètre. 
-				Les élements doivent donc avoir été initialisés
-				avant d'appeler l'algorihtme. Exemple~:
+				Les éléments doivent donc avoir été initialisés
+				avant d'appeler l'algorithme. Exemple~:
 			
 				\begin{LDA}
 					\LComment{Affiche les éléments d'un tableau}
@@ -360,7 +360,7 @@
 					\LComment{Utilisation possible}
 					\Decl{monTab}{\Array{10}{entiers}}
 					\Let monTab \Gets \{2,3,5,7,11,13,17,19,23,29\}
-					\Stmt afficher(monTab)
+					\Stmt affiche(monTab)
 				\end{LDA}
 				
 				Rappelons qu'il s'agit du passage
@@ -372,7 +372,7 @@
 			
 				\begin{LDA}
 					\LComment{Inverse les éléments du tableau}
-					\Algo{inverse}{\Par{tab\In\Out}{\Array{10}{entiers}}}{} 
+					\Algo{opposé}{\Par{tab\In\Out}{\Array{10}{entiers}}}{} 
 						\For{i}{0}{9}
 							\Let tab[i] \Gets -tab[i]
 						\EndFor
@@ -382,7 +382,7 @@
 					\LComment{Utilisation possible}
 					\Decl{monTab}{\Array{10}{entiers}}
 					\Let monTab \Gets \{2,3,5,7,11,13,17,19,23,29\}
-					\Stmt inverse(monTab)
+					\Stmt opposé(monTab)
 				\end{LDA}
 	
 			\item \Out :
@@ -487,12 +487,12 @@
 					détermine si un tableau d'entiers contient au moins un nombre négatif.
 				\item
 					Écrire un algorithme qui
-					détermine si un tableau de chaine contient
+					détermine si un tableau de chaines contient
 					une chaine donnée en paramètre.
 				\item
 					Écrire un algorithme qui
-					détermine si un tableau de chaine contient
-					au moins deux occurences de la même chaine,
+					détermine si un tableau de chaines contient
+					au moins deux occurrences de la même chaine,
 					quelle qu'elle soit.
 				\item
 					Écrire un algorithme qui 
@@ -513,7 +513,7 @@
 	% ==============================================
 
 		Dans la plupart des problèmes que vous rencontrerez
-		vous serez amener à parcourir un tableau.
+		vous serez amené à parcourir un tableau.
 		Il est important de maitriser ce parcours.
 		Examinons les situations courantes 
 		et voyons quelles solutions conviennent.
@@ -525,13 +525,13 @@
 			comment parcourir tous les éléments d'un tableau.
 			On s'en sort facilement avec une boucle \K{pour}.
 			La fiche \vref{fiche:tab-parcours-complet}
-			décrit comment afficher tous les élements d'un tableau.
+			décrit comment afficher tous les éléments d'un tableau.
 			On pourrait faire autre chose avec ces éléments :
 			les sommer, les comparer\dots
 				
-			\begin{Exercice}{Inverser les éléments}
+			\begin{Exercice}{Inverser le signe des éléments}
 				Écrire un algorithme qui 
-				inverse tous les éléments négatifs dans un tableau d'entiers.
+				inverse le signe de tous les éléments négatifs dans un tableau d'entiers.
 			\end{Exercice}
 
 			\begin{Exercice}{Somme}
@@ -608,11 +608,11 @@
 		Impossible de savoir, à priori, combien de valeurs il va entrer
 		et, par conséquent, la taille à donner au tableau.
 		
-		Une solution est de créer un tableau suffisament grand
+		Une solution est de créer un tableau suffisamment grand
 		pour tous les cas%
 		\footnote{%
 			En tout cas, 
-			suffisament grand pour tous les cas qu'on accepte
+			suffisamment grand pour tous les cas qu'on accepte
 			de prendre en compte; il faudra bien fixer une limite.
 		} 
 		quitte à n'en n'utiliser qu'une partie.
@@ -623,7 +623,7 @@
 		On s'en sort en stockant les valeurs 
 		dans la partie basse du tableau (à gauche)
 		et en retenant, dans une variable,
-		le nombre de case effectivement utilisées.
+		le nombre de cases effectivement utilisées.
 			
 		\marginicon{definition}
 		La \textbf{taille physique} d'un tableau 
@@ -652,7 +652,7 @@
 		\paragraph{Exemple.}
 		L'algorithme suivant 
 		demande des valeurs positives à l'utilisateur 
-		et les stocke dans un tableau (maxmimum 1000).
+		et les stocke dans un tableau (maximum 1000).
 		Toute valeur négative ou nulle est une valeur sentinelle.
 		\begin{LDA}
 			\Algo{stockerValeurs}{}{}
@@ -684,7 +684,7 @@
 	\section{Des tableaux qui ne commencent pas à 0} 
 	% ==============================================
 
-		Les tableaux que nous avons vu jusqu'à présent
+		Les tableaux que nous avons vus jusqu'à présent
 		\emph{commencent à 0}
 		ce qui signifie que la première case est d'indice 0.
 		Il peut être intéressant d'utiliser des tableaux
@@ -738,13 +738,13 @@
 		nous utiliserons la notation suivante :
 		
 		\begin{LDA}
-			\Decl{nomsJours}{\Array[1]{7}{chaine}}
+			\Decl{nomsJours}{\Array[1]{7}{chaines}}
 		\end{LDA}
 		
-		L'algorihtme devient :
+		L'algorithme devient :
 		\begin{LDA}
 			\Algo{intituléJour}{\Par{numéroJour}{entier}}{chaine}
-				\Decl{nomsJours}{\Array[1]{7}{chaine}}
+				\Decl{nomsJours}{\Array[1]{7}{chaines}}
 				\Let nomsJours \Gets \{"lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"\}
 				\Return nomsJours[numéroJour]
 			\EndAlgo
@@ -781,7 +781,7 @@
 	
 			\begin{LDA}
 				\Algo{intituléJour}{\Par{numéroJour}{entier}}{chaine}
-					\Decl{nomsJours}{\Array{7}{chaine}}
+					\Decl{nomsJours}{\Array{7}{chaines}}
 					\Let nomsJours \Gets \{"lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"\}
 					\Return nomsJours[numéroJour-1]
 				\EndAlgo
@@ -810,7 +810,7 @@
 	
 			\begin{LDA}
 				\Algo{intituléJour}{\Par{numéroJour}{entier}}{chaine}
-					\Decl{nomsJours}{\Array{8}{chaine}}
+					\Decl{nomsJours}{\Array{8}{chaines}}
 					\Let nomsJours \Gets \{"", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"\}
 					\Return nomsJours[numéroJour]
 				\EndAlgo
@@ -831,13 +831,13 @@
 		que la température $i$ a été relevée.
 		Pour cet exemple, impossible d'utiliser la seconde approche
 		mais la première est toujours possible en stockant
-		le nombre de relevés de la températue $i$ dans la case $i+30$.
+		le nombre de relevés de la température $i$ dans la case $i+30$.
 
 		\begin{Exercice}{Lancers de dé}
 			Écrire un algorithme qui lance $n$ fois un dé
 			et compte le nombre de fois que chaque valeur apparait.
 			\begin{LDA}
-			\Entete{lancersDé}{\Par{n}{entier}}{\Array[1]{6}{entier}}
+			\Entete{lancersDé}{\Par{n}{entier}}{\Array[1]{6}{entiers}}
 			\end{LDA}
 		\end{Exercice}
 		

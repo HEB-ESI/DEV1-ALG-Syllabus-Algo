@@ -29,7 +29,7 @@
 	\subsubsection*{[A] Sans variable booléenne}
 	
 		\begin{LDA}
-			\Algo{tousPositifs}{\Par{tab}{\Array{n}{entiers}}}{booléen}
+			\Algo{contientZéro}{\Par{tab}{\Array{n}{entiers}}}{booléen}
 				\Decl{i}{entier}
 				\Let i \Gets 0
 				\While{i < n ET tab[i] $\neq$ 0}
@@ -47,7 +47,7 @@
 	\subsubsection*{[B] Avec variable booléenne}
 
 		\begin{LDA}
-			\Algo{tousPositifs}{\Par{tab}{\Array{n}{entiers}}}{booléen}
+			\Algo{contientZéro}{\Par{tab}{\Array{n}{entiers}}}{booléen}
 				\Decl{i}{entier}
 				\Decl{zéroPrésent}{booléen}
 				\Let zéroPrésent \Gets faux
@@ -62,7 +62,7 @@
 
 		Au sortir de la boucle,
 		l'indice \lda{i} ne désigne pas l'élément
-		qui nous à permis d'arrêter mais le suivant.
+		qui nous a permis d'arrêter mais le suivant.
 		Si nécessaire, on peut remplacer l'intérieur de la boucle par :
 
 		\begin{LDA}
@@ -75,8 +75,8 @@
 		
 		Dans notre exemple, 
 		on cherche un élément particulier (un 0).
-		Dans le cas où on vérifie si tous les élements possèdent 
-		une certaine propriéte (être positifs par exemple),
+		Dans le cas où on vérifie si tous les éléments possèdent 
+		une certaine propriété (être positifs par exemple),
 		on veillera à adapter le nom du booléen et son utilisation
 		(par exemple un booléen appelé \lda{tousPositifs},
 		initialisé à vrai avec un \lda{\dots ET tousPositifs}
@@ -110,7 +110,7 @@
 		pas gérer manuellement l'indice
 		mais le lecteur doit attendre de lire
 		le code de la boucle pour comprendre
-		que le parcours ne sera pas toujous complet.
+		que le parcours ne sera pas toujours complet.
 		
 		Nous vous demandons de ne pas l'utiliser en 1\iere{} année.
 	\end{minipage}
