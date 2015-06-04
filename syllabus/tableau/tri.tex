@@ -21,22 +21,22 @@
 	en insérant toute nouvelle valeur au \emph{bon} endroit.
 
 	Dans certaines situations,
-	on est amené à devoir trié tout un tableau.
+	on est amené à devoir trier tout un tableau.
 
 	\begin{enumerate}
 		\item 
 			D’abord les situations impliquant le classement total d’un ensemble de
-			données «~bru-tes~», c’est-à-dire complètement désordonnées. Prenons
-			pour exemple les feuilles récoltées en vrac à l’issue d’un examen ; il
+			données «~brutes~», c’est-à-dire complètement désordonnées. Prenons
+			pour exemple les feuilles récoltées en vrac à l’issue d’un examen~; il
 			y a peu de chances que celles-ci soient remises à l’examinateur de
-			manière ordonnée ; celui-ci devra donc procéder au tri de l’ensemble
+			manière ordonnée~; celui-ci devra donc procéder au tri de l’ensemble
 			des copies, par exemple par ordre alphabétique des noms des étudiants,
-			ou par numéro de groupe etc.
+			ou par numéro de groupe, etc.
 		\item 
-			Enfin, les situations qui consistent à devoir re-trier des données
+			Enfin, les situations qui consistent à devoir retrier des données
 			préalablement ordonnées sur un autre critère. Prenons l’exemple d’un
 			paquet de copies d’examen déjà triées sur l’ordre alphabétique des noms
-			des étudiants, et qu’on veut re-trier cette fois-ci sur les numéros de
+			des étudiants, et qu’on veut retrier cette fois-ci sur les numéros de
 			groupe. Il est clair qu’une méthode efficace veillera à conserver
 			l’ordre alphabétique déjà présent dans la première situation afin que
 			les copies apparaissent dans cet ordre dans chacun des groupes.
@@ -54,7 +54,7 @@
 	clé précédente est préservé pour des valeurs identiques de la nouvelle
 	clé, ce qui évite de faire des comparaisons sur les deux champs à la
 	fois. Les méthodes nommées \textbf{tri par insertion}, \textbf{tri
-	bulle} et \textbf{tri par recherche de minima successifs }(que nous
+	bulle} et \textbf{tri par recherche de minima successifs} (que nous
 	allons aborder dans ce chapitre) sont stables.
 
 	Certains tris sont évidemment plus performants que d’autres. Le choix
@@ -78,10 +78,10 @@
 
 	\marginicon{attention}
 	Dans ce chapitre, les algorithmes traiteront du tri dans un
-	\textbf{tableau d’entiers à une }\textbf{dimension}. Toute autre
+	\textbf{tableau d’entiers à une dimension}. Toute autre
 	situation peut bien entendu se ramener à celle-ci moyennant la
 	définition de la relation d’ordre propre au type de données utilisé. Ce
-	sera par exemple, l’ordre alphabétique pour les chaines de caractères,
+	sera par exemple l’ordre alphabétique pour les chaines de caractères,
 	l’ordre chronologique pour des objets \lda{Date} ou
 	\lda{Moment} (que nous verrons
 	plus tard), etc. De plus, le seul ordre envisagé sera l’ordre
@@ -111,13 +111,13 @@
 
 	Au départ de l’algorithme, le sous-tableau trié est le premier élément
 	du tableau. Comme il ne possède qu’un seul élément, ce sous-tableau est
-	donc bien ordonné ! Chaque étape consiste ensuite à prendre le premier
+	donc bien ordonné~! Chaque étape consiste ensuite à prendre le premier
 	élément du sous-tableau non trié et à l’insérer à la bonne place dans
 	le sous-tableau trié.
 
 	Prenons comme exemple un tableau \lda{tab} de 20 entiers. 	
-	Au départ, le	sous-tableau trié est formé du premier élément, 
-	\lda{tab[0]} qui vaut 20~:
+	Au départ, le sous-tableau trié est formé du premier élément, 
+	\lda{tab[0]}, qui vaut 20~:
 
 	\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{0.21cm}}}
 		 \textcolor{gray}{\scriptsize 0} &
@@ -169,7 +169,7 @@
 
 	\medskip
 	
-	L’étape suivante consiste à insérer \lda{tab[1]}, qui vaut 12, dans ce sous-tableau, de
+	L’étape suivante consiste à insérer \lda{tab[1]}, qui vaut 12, dans ce sous-tableau de
 	taille 2~:
 
 	\begin{tabular}{*{20}{>{\centering\sffamily\itshape\arraybackslash}m{0.21cm}}}
@@ -285,17 +285,17 @@
 	\begin{LDA}
 		\LComment Trie le tableau reçu en paramètre (via un tri par insertion).
 		\Algo{triInsertion}{\Par{tab\InOut}{\Array{n}{entiers}}}{}
-			\Decl{i, j, valAInsérer}{entiers}
+			\Decl{i, j, valÀInsérer}{entiers}
 			\For{i}{1}{n-1}
-				\Let valAInsérer \Gets tab[i]
-				\LComment recherche de l’endroit où insérer valAInsérer dans le 
+				\Let valÀInsérer \Gets tab[i]
+				\LComment recherche de l’endroit où insérer valÀInsérer dans le 
 				\LComment sous-tableau trié et décalage simultané des éléments
 				\Let j \Gets i - 1
-				\While{j ${\geq}$ 0 ET valAInsérer < tab[j]}
+				\While{j ${\geq}$ 0 ET valÀInsérer < tab[j]}
 					\Let tab[j+1] \Gets tab[j]
 					\Let j \Gets j – 1
 				\EndWhile
-				\Let tab[j+1] \Gets valAInsérer
+				\Let tab[j+1] \Gets valÀInsérer
 			\EndFor
 		\EndAlgo
 	\end{LDA}
@@ -306,8 +306,8 @@
 %=================================================
 	
 	Dans ce tri, on recherche à chaque étape la plus petite valeur de
-	l’ensemble non encore trié et on peut la placer immédiatement 
-	à sa position	définitive.
+	l’ensemble non encore trié et on la place immédiatement 
+	à sa position définitive.
 
 	\paragraph{Description de l’algorithme.}
 
@@ -366,9 +366,9 @@
 	\end{tabular}
 
 	Celui-ci devrait donc apparaitre en 1\iere{} position du tableau. 
-	Hors, cette position est occupée par la valeur 20. 
+	Or cette position est occupée par la valeur 20. 
 	Comment procéder dès lors pour ne perdre aucune valeur 
-	et sans faire appel à un second tableau ? 
+	et sans faire appel à un second tableau~? 
 	La solution est simple, il suffit d’échanger 
 	le contenu des deux éléments d’indices 0 et 9~:
 	
@@ -482,7 +482,7 @@
 	et le sous-tableau non trié par les 18 éléments suivants. 
 	
 	Et ainsi de suite, jusqu'à obtenir un sous-tableau trié 
-	comprend tout le tableau.
+	comprenant tout le tableau.
 	En pratique l’arrêt se fait une étape avant 
 	car lorsque le sous-tableau non trié n’est plus que de taille 1, 
 	il contient nécessairement le maximum de l’ensemble.
@@ -862,7 +862,7 @@
 		Parfois, on n’est pas intéressé par un tri complet de l’ensemble mais on
 		veut uniquement les «~$k$~» plus petites (ou plus grandes) valeurs. Le
 		tri par recherche des minima et le tri bulle sont particulièrement
-		adaptés à cette situation ; il suffit de les arrêter plus tôt. Par
+		adaptés à cette situation~; il suffit de les arrêter plus tôt. Par
 		contre, le tri par insertion est inefficace car il ne permet pas un
 		arrêt anticipé.
 
@@ -875,7 +875,7 @@
 		L'algorithme est plus simple à écrire si on utilise
 		une position supplémentaire en fin de tableau. Notons aussi qu’il faut
 		tenir compte du cas où il y a moins de valeurs que le nombre de valeurs
-		voulues ; c’est pourquoi on ajoute une variable indiquant le nombre
+		voulues~; c’est pourquoi on ajoute une variable indiquant le nombre
 		exact de valeurs dans le tableau.
 
 		Exemple~:
@@ -920,5 +920,5 @@
 			\textit{Ce site permet de visualiser les méthodes de tris en
 			fonctionnement. Il présente tous les tris vus en première plus quelques
 			autres comme le «~tri rapide~» («~quicksort~») que vous verrez en
-			deuxième année. }}
+			deuxième année.}}
 	\end{itemize}
