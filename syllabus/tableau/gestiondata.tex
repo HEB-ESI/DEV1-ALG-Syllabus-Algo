@@ -16,7 +16,7 @@
 	Mais pour y assister, ils doivent s'inscrire.
 	On veut fournir ce qu'il faut pour :
 	\begin{itemize}
-	\item inscrire un éudiant ;
+	\item inscrire un étudiant ;
 	\item vérifier si un étudiant est inscrit ;
 	\item désinscrire un étudiant (s'il change d'avis par exemple) ;
 	\item afficher la liste des inscrits.
@@ -105,7 +105,7 @@
 		\subsection{Vérifier une inscription}
 		%---------------------------------------------
 	
-			Pour vérifier si un étudiant est déja inscrit,
+			Pour vérifier si un étudiant est déjà inscrit,
 			il faut le rechercher dans la partie utilisée du tableau.
 			Cette recherche se fait via un parcours avec sortie
 			prématurée. On pourrait se contenter de retourner un
@@ -144,7 +144,7 @@
 			Par exemple,
 			reprenons la situation après inscription de l'étudiant
 			numéro 42123.
-			La désincription de l'étudiant numéro 41390 donnerait%
+			La désinscription de l'étudiant numéro 41390 donnerait%
 			\footnote{
 				Nous avons volontairement indiqué le 42123 en 5\ieme{} position.
 				Il est toujours là mais ne sera pas considéré par les
@@ -198,14 +198,14 @@
 				en supposant que ce maximum est égal à la taille physique du tableau ?
 			\end{Exercice}
 
-			\begin{Exercice}{Vérifier la déinscription}
+			\begin{Exercice}{Vérifier la désinscription}
 				Que se passerait-il avec l'algorithme
 				de désinscription tel qu'il est
 				si on demande à désinscrire un étudiant non inscrit ?
 				Que suggérez-vous comme changement ?
 			\end{Exercice}
 
-			\begin{Exercice}{Optimiser la déinscription}
+			\begin{Exercice}{Optimiser la désinscription}
 				Dans l'algorithme de désinscription tel qu'il est,
 				voyez-vous un cas où on effectue une opération inutile ?
 				Avez-vous une proposition pour l'éviter ?
@@ -248,7 +248,7 @@
 			Commençons par ça.
 			
 			L'algorithme est assez proche de celui de la vérification
-			d'une inscriptione vu précédemment si ce n'est
+			d'une inscription vu précédemment si ce n'est
 			qu'on peut s'arrêter dès qu'on trouve un numéro plus grand.
 			On va aussi ajouter un booléen 
 			indiquant si la valeur a été trouvée.
@@ -287,7 +287,7 @@
 			L'inscription d'un étudiant se fait en trois étapes :
 			\begin{enumerate}
 			\item
-				On recherche l'étudiant via l'algorihme qu'on vient de voir,
+				On recherche l'étudiant via l'algorithme qu'on vient de voir,
 				ce qui nous donne la place où le placer.
 			\item
 				On libère la place pour l'y mettre.
@@ -297,7 +297,7 @@
 				à n'importe quelle position.
 				Avec un tableau,
 				il en va tout autrement ;
-				pour insérer un élement à un endroit donné,
+				pour insérer un élément à un endroit donné,
 				il faut décaler tous les suivants d'une position sur la droite.
 			\item
 				On peut placer l'élément à la position libérée.
@@ -320,7 +320,7 @@
 					\Let nbInscrits \Gets nbInscrits + 1
 				\EndAlgo
 				\Empty
-				\LComment{Décale d'une position à droite les élements entre la position début et fin}
+				\LComment{Décale d'une position à droite les éléments entre la position début et fin}
 				\Algo{décalerDroite}{
 						\Par{tab\In\Out}{\Array{n}{entiers}}, 
 						\Par{début\In}{entier}, 
@@ -360,7 +360,7 @@
 		%---------------------------------------------
 		
 			Ici, il va falloir décaler vers la gauche
-			les élements qui suivent celui à supprimer.
+			les éléments qui suivent celui à supprimer.
 
 			\begin{LDA}
 				\LComment{désinscrit l'étudiant donné}
@@ -377,7 +377,7 @@
 					\Let nbInscrits \Gets nbInscrits - 1					
 				\EndAlgo
 				\Empty
-				\LComment{Décale d'une position à gauche les élements entre la position début et fin}
+				\LComment{Décale d'une position à gauche les éléments entre la position début et fin}
 				\Algo{décalerGauche}{
 						\Par{tab\In\Out}{\Array{n}{entiers}}, 
 						\Par{début\In}{entier}, 
@@ -416,8 +416,8 @@
 
 			Est-ce que trier les valeurs est vraiment intéressant ?
 			On voit que la recherche est un peu plus rapide
-			(en moyenne 2x plus rapide si l'élement ne s'y trouve pas).
-			Par contre, l'ajout et la suppression d'un élement
+			(en moyenne 2x plus rapide si l'élément ne s'y trouve pas).
+			Par contre, l'ajout et la suppression d'un élément
 			sont plus lents.
 			En plus, les algorithmes sont plus complexes à écrire
 			et à comprendre.
@@ -442,7 +442,7 @@
 		dans l’ensemble de départ. 
 	
 		Pour l'expliquer,
-		on va prendre un tableau d'entiers complétement rempli.
+		on va prendre un tableau d'entiers complètement rempli.
 		Il sera facile d'adapter la solution à un tableau partiellement
 		rempli (avec une taille logique) 
 		ou un tableau contenant tout autre type de valeurs
