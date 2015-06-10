@@ -702,10 +702,77 @@
 			utiliser la division entière et le reste.
 		\end{itemize}
 		
+		Parfois, le problème se site au niveau de la compréhension du vocabulaire.
 		Examinons ces situations une à une
 		en fournissant des exemples et des exercices
 		pour que cela devienne naturel pour vous.
-		
+
+		%------------------------------------------------------------------------
+		\subsection{Un peu de vocabulaire}
+		%------------------------------------------------------------------------
+
+			Une première difficulté que vous rencontrez généralement 
+			est liée au vocabulaire utilisé. 
+			Qu'entend-t-on exactement par un opérateur ? un opérande ? 
+			Fixons ces notions.
+			
+			\marginicon{definition}
+			\begin{description}
+			\item[expression]
+				Une expression indique un calcul à effectuer
+				(par exemple : (a + b) * c).
+				Une fois le calcul effectué, 
+				on obtient une valeur, d'un certain type.
+				Une expression est composée d'opérandes et d'opérateurs.
+			\item[opérateur]
+				Un opérateur est ce qui désigne une opération.
+				Exemple : \Verb_+_ désigne l'addition.
+			\item[opérande]
+				Un opérande est ce sur quoi porte l'opération.
+				Exemple : dans l'expression \Verb_a+b_, 
+				\Verb_a_ et \Verb_b_ sont les opérandes.
+				Une opérande peut être une sous-expression.
+				Exemple : Dans l'expression \Verb_(a+b) * c_, 
+				\Verb_(a+b)_ est l'opérande 
+				de gauche de l'opérateur \Verb_*_.
+			\item[unaire, binaire, ternaire]
+				Un opérateur qui agit sur deux opérandes (le plus fréquent)
+				est qualifié de binaire. 
+				On rencontre aussi des opérateurs unaires (ex: le \Verb_-_ 
+				dans l'expression \Verb_-a_).
+				En Java, vous rencontrerez aussi un opérateur ternaire (3 opérandes)
+				mais ils sont plus rares.
+			\item[littéral]
+				Un littéral est une valeur notée explicitement 
+				(comme \Verb_12_, \Verb_34.4_, \Verb_"bonjour"_)
+			\item[priorité]
+				Les opérateurs sont classés par priorité. 
+				Cela permet de savoir dans quel ordre les exécuter.
+				Les opérateurs classiques qu'on retrouve en mathématique ont une priorité
+				respective. 
+				Par exemple, la multiplication est prioritaire par rapport à l'addition.
+				C'est pourquoi l'expression \Verb_a + b * c_ 
+				est équivalent à \Verb_(a + b) * c_ et pas à \Verb_a + (b * c)_.
+				Les parenthèses permettent de modifier ou de souligner la priorité.
+			\end{description}
+			
+			\begin{Exercice}{Analyse d'expression}
+				Voici une série d'expressions.
+				On vous demande d'identifier tous les opérateurs
+				et leurs opérandes, 
+				d'indiquer si les opérateurs sont unaires ou binaires
+				et d'identifier les littéraux.
+				On vous demande aussi de fournir une version de l'expression
+				avec le moins de parenthèses possible et 
+				une autre avec un maximum de parenthèses
+				(tout en respectant le sens de l'expression bien sûr).
+				\begin{itemize}
+				\item \Verb_a+1_
+				\item \Verb_(a+b)*12-4*(-a-b)_ 
+				\item \Verb_a+(b*12)-4*-a_ 
+				\end{itemize}
+			\end{Exercice}
+			
 		%------------------------------------------------------------------------
 		\subsection{Les comparaisons et les assignations de variables booléennes}
 		%------------------------------------------------------------------------
