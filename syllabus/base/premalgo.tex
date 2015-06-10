@@ -6,11 +6,11 @@
 	Dans le chapitre précédent,
 	vous avez appris à analyser un problème
 	et à clairement le spécifier.
-	Il est temps d'écrire des solutions.
+	Il est temps d’écrire des solutions.
 	Pour cela, nous allons devoir trouver
 	comment passer des données au résultat
-	et l'exprimer dans un langage compris de tous, 
-	le \emph{Langage de Description d'Algorithmes} 
+	et l’exprimer dans un langage compris de tous, 
+	le \emph{Langage de Description d’Algorithmes} 
 	(ou \emph{LDA}).
 	
 	%================================================
@@ -18,21 +18,21 @@
 	%================================================
 	
 		%===================================
-		\subsection{Trouver l'algorithme}
+		\subsection{Trouver l’algorithme}
 		%=================================
 
-			Illustrons notre propos sur l'exemple 
+			Illustrons notre propos sur l’exemple 
 			qui a servi de fil conducteur
 			tout au long du chapitre précédent.
-			Rappelons l'énoncé et l'analyse qui en a été faite.
+			Rappelons l’énoncé et l’analyse qui en a été faite.
 			
 			\begin{Emphase}
 				\paragraph{Problème.}
-				Calculer la surface d'un rectangle 
+				Calculer la surface d’un rectangle 
 				à partir de sa longueur et sa largeur.
 			
 				\paragraph{Analyse.} 
-				Nous sommes arrivés à la spécification suivante :
+				Nous sommes arrivés à la spécification suivante~:
 				\begin{center}
 				\flowalgodd{longueur (réel positif)}{largeur (réel positif)}{surfaceRectangle}{réel}
 				\end{center}
@@ -40,34 +40,34 @@
 				\textbf{Exemples.} 
 				\begin{multicols}{2}
 					\begin{itemize}
-					\item \lda{surfaceRectangle(3,2)} donne $6$ ;
+					\item \lda{surfaceRectangle(3,2)} donne $6$~;
 					\item \lda{surfaceRectangle(3.5,1)} donne $3.5$.		
 					\end{itemize}
 				\end{multicols}
 			\end{Emphase}
 			
-			\paragraph{Comment résoudre ce problème ?} 
+			\paragraph{Comment résoudre ce problème~?} 
 			La toute première étape est de comprendre 
 			le lien entre les données et le résultat. 
-			Ici, on va se baser sur la formule de la surface :
+			Ici, on va se baser sur la formule de la surface~:
 			\[
 				\textrm{surface} = \textrm{longueur} * \textrm{largeur}
 			\]
-			La surface s'obtient donc en multipliant la longueur par la largeur%
+			La surface s’obtient donc en multipliant la longueur par la largeur%
 			\footnote{%
-				Trouver la bonne formule n'est pas toujours facile.
+				Trouver la bonne formule n’est pas toujours facile.
 				Dans votre vie professionnelle, 
 				vous devrez parfois écrire un algorithme
 				pour un domaine que vous connaissez peu,
 				voire pas du tout.
-				Il vous faudra alors chercher de l'aide,
+				Il vous faudra alors chercher de l’aide,
 				demander à des experts du domaine.
 				Dans ce cours,
 				nous essaierons de nous concentrer sur des problèmes
 				qui ne vous sont pas complètement étrangers.
 			}.
 			
-			En LDA, la solution s'écrit :
+			En LDA, la solution s’écrit~:
 			
 			\begin{LDA}
 				\Algo{surfaceRectangle}{\Par{longueur, largeur}{réels}}{réel}
@@ -76,13 +76,13 @@
 			\end{LDA}
 		
 			La paire \lda{\algorithmicalgo-\algorithmicend\ \algorithmicalgo}
-			permet de délimiter l'algorithme.
+			permet de délimiter l’algorithme.
 			La première ligne est appelée 
-			\textbf{l'entête}\index{entête} de l'algorithme.
-			On y retrouve :
+			\textbf{l’entête}\index{entête} de l’algorithme.
+			On y retrouve~:
 			\begin{itemize}
 				\item 
-					le nom de l'algorithme,
+					le nom de l’algorithme,
 				\item 
 					une déclaration des données, 
 					qu’on appellera ici les \textbf{paramètres}, 
@@ -91,51 +91,51 @@
 			\end{itemize}
 		
 			Les paramètres recevront des valeurs concrètes
-			au \textbf{début} de l’exécution de l'algorithme. 
+			au \textbf{début} de l’exécution de l’algorithme. 
 		
-			L'instruction \lda{\algorithmicreturn}\index{retourner}
-			permet d'indiquer la valeur du résultat, 
-			ce que l'algorithme \emph{retourne}.
+			L’instruction \lda{\algorithmicreturn}\index{retourner}
+			permet d’indiquer la valeur du résultat, 
+			ce que l’algorithme \emph{retourne}.
 			Si on spécifie une formule, un calcul,
-			c'est le résultat (on dit l'\emph{évaluation}) 
+			c’est le résultat (on dit l’\emph{évaluation}) 
 			de ce calcul qui est retourné et pas la formule.
 		
 			Pour indiquer le calcul à faire,
 			écrivez-le, pour le moment,
 			naturellement comme vous le feriez en mathématique.
-			La seule différence notable est l'utilisation de \lda{*}
+			La seule différence notable est l’utilisation de \lda{*}
 			pour indiquer une multiplication.
 			Nous donnerons plus de détails plus loin.
 	
-			Pour indiquer qu'on veut \textbf{exécuter} un algorithme
+			Pour indiquer qu’on veut \textbf{exécuter} un algorithme
 			(on dit aussi \emph{appeler})
-			il suffit d'indiquer son nom 
+			il suffit d’indiquer son nom 
 			et les valeur concrètes à donner aux paramètres.
 			Ainsi, \lda{surfaceRectangle(6,3)}
-			fait appel à l'algorithme correspondant
-			pour calculer la surface d'un rectangle
+			fait appel à l’algorithme correspondant
+			pour calculer la surface d’un rectangle
 			dont la longueur est $6$
 			et la largeur est $3$.
 
 		%===================================
-		\subsection{Vérifier l'algorithme}
+		\subsection{Vérifier l’algorithme}
 		\index{vérifier un algorithme}
 		%=================================
 		
 			Lorsque vous avez terminé un exercice,
-			vous le montrez à votre professeur pour qu'il
-			vous dise s'il est correct ou pas.
-			Fort bien !
+			vous le montrez à votre professeur pour qu’il
+			vous dise s’il est correct ou pas.
+			Fort bien~!
 			Mais vous pourriez trouver la réponse tout seul.
-			Il vous suffit d'exécuter l'algorithme
+			Il vous suffit d’exécuter l’algorithme
 			avec des exemples numériques et de vérifier que la réponse
 			fournie est correcte.
-			Votre professeur n'est indispensable que pour :
+			Votre professeur n’est indispensable que pour~:
 			\begin{itemize}
 			\item
-				vérifier qu'il fonctionne également
+				vérifier qu’il fonctionne également
 				dans certains cas particuliers
-				auxquels il est difficile de penser quand on débute ;
+				auxquels il est difficile de penser quand on débute~;
 			\item
 				donner son avis sur la qualité de votre solution
 				c-à-d essentiellement sur sa lisibilité.
@@ -143,11 +143,11 @@
 			\end{itemize}
 		
 			Vous éprouvez souvent des difficultés à tester un algorithme
-			car vous oubliez d'\textbf{éteindre votre cerveau}.
+			car vous oubliez d’\textbf{éteindre votre cerveau}.
 			Il faut agir comme une machine
-			et exécuter \textbf{ce qui est écrit} 
+			et exécuter \textbf{ce qui est écrit}, 
 			pas ce que vous pensez avoir écrit,
-			ce qu'il est censé faire.
+			ce qu’il est censé faire.
 			Cela demande un peu de pratique.
 
 			\paragraph{Exemple.} 
@@ -167,13 +167,13 @@
 			
 			\bigskip
 			\marginicon{attention}
-			\textbf{Attention} : 
+			\textbf{Attention}~: 
 			Dans tous les exercices qui suivront,
-			chaque fois qu'on vous demandera d'écrire un algorithme,
-			on attendra de vous : de spécifier le problème,
-			de fournir des exemples, d'écrire l'algorithme
+			chaque fois qu’on vous demandera d’écrire un algorithme,
+			on attendra de vous~: de spécifier le problème,
+			de fournir des exemples, d’écrire l’algorithme
 			et de le vérifier sur vos exemples.
-			Ce n'est que si tous ces éléments sont présents
+			Ce n’est que si tous ces éléments sont présents
 			que votre solution pourra être considérée comme complète.
 
 		%-------------------------------------------
@@ -183,32 +183,32 @@
 			Les exercices suivants ont déjà été analysés 
 			dans un précédent chapitre
 			et des exemples numériques ont été choisis.
-			Il ne vous reste plus qu'à écrire l'algorithme
+			Il ne vous reste plus qu’à écrire l’algorithme
 			et à le vérifier pour les exemples choisis.
 
 			Vous pouvez vous baser sur la fiche \vref{fiche:calcul-simple} 
 			qui résume la résolution 
-			du calcul de la surface d'un rectangle,
-			depuis l'analyse de l'énoncé jusqu'à l'algorithme
+			du calcul de la surface d’un rectangle,
+			depuis l’analyse de l’énoncé jusqu’à l’algorithme
 			et à sa vérification.
 	
 			\begin{Exercice}{Somme de 2 nombres}
 				Calculer la somme de deux nombres donnés.
 				\paragraph{Solution.}
 				Rappelons ce que nous avons obtenus 
-				lors de la phase d'analyse du problème.
+				lors de la phase d’analyse du problème.
 				\begin{center}
 					\flowalgodd{nombre1 (réel)}{nombre2 (réel)}{somme}{réel}
 				\end{center}
 				Sommer deux nombres est un problème trivial.
-				L'algorithme s'écrit simplement :			
+				L’algorithme s’écrit simplement~:			
 				\begin{LDA}
 					\Algo{somme}{\Par{nombre1, nombre2}{réels}}{réel}
 						\Return nombre1 + nombre2
 					\EndAlgo
 				\end{LDA}
 				Cet exercice est plutôt simple 
-				et il est facile de vérifier qu'il fournit
+				et il est facile de vérifier qu’il fournit
 				bien les bonnes réponses pour les exemples choisis.				
 				\begin{center}
 					\begin{tabular}{|c|cccc|c|}
@@ -277,13 +277,13 @@
 		Dans les exercices de la section précédente,
 		vous avez écrit quelques longues formules%
 		\footnote{%
-			Et ce n'est encore rien comparé à ce qui nous attend ;)%
+			Et ce n’est encore rien comparé à ce qui nous attend~;)%
 		}.
 		Pour que cela reste lisible,
 		il serait bon de pouvoir \emph{décomposer}
 		le calcul en étapes.
-		Pour ce faire, nous devons introduire deux nouvelles notions :
-		les \emph{variables locales} et \emph{l'assignation}.
+		Pour ce faire, nous devons introduire deux nouvelles notions~:
+		les \emph{variables locales} et \emph{l’assignation}.
 		
 		%-----------------------------------------
 		\subsection{Les variables}\index{variable}
@@ -292,22 +292,22 @@
 			\marginicon{definition}
 			Une \textbf{variable locale} (ou simplement variable)
 			est une zone mémoire à laquelle on a donné un nom
-			et qui contiendra des valeurs d'un type donné.
+			et qui contiendra des valeurs d’un type donné.
 			Elles vont servir à retenir des étapes intermédiaires
 			de calculs.
 			\begin{itemize}
 			\item
 				On parle de \textbf{variable}
 				car son contenu \emph{peut} changer
-				pendant le déroulement de l'algorithme.
+				pendant le déroulement de l’algorithme.
 			\item
-				On l'appelle \textbf{locale}
-				car elle n'est connue et utilisable qu'au sein
-				de l'algorithme où elle est déclarée%
+				On l’appelle \textbf{locale}
+				car elle n’est connue et utilisable qu’au sein
+				de l’algorithme où elle est déclarée%
 				\footnote{%
 					Certains langages proposent également des variables
 					\emph{globales} qui sont connues dans tout un programme.
-					Nous ne les utiliserons pas dans ce cours ;
+					Nous ne les utiliserons pas dans ce cours~;
 					voilà pourquoi on se contentera de dire "variable".%
 				}.
 			\end{itemize}		
@@ -315,10 +315,10 @@
 			une variable doit être \emph{déclarée}%
 			\footnote{%
 				Certains langages permettent 
-				d'utiliser des variables sans les déclarer.
+				d’utiliser des variables sans les déclarer.
 				Ce ne sera pas le cas de Java.
 			}
-			au début de l'algorithme. 	
+			au début de l’algorithme. 	
 			La déclaration\index{déclaration} d’une variable 
 			est l’instruction qui définit son nom et son type. 
 			On pourrait écrire~:
@@ -336,21 +336,21 @@
 				\Decl{longueur, largeur}{réels}
 			\end{LDA}
 			
-			Pour choisir le nom d'une variable,
-			les règles sont les mêmes que pour les données d'un problème.
+			Pour choisir le nom d’une variable,
+			les règles sont les mêmes que pour les données d’un problème.
 	
 		%-----------------------------------------
-		\subsection{L'assignation}\index{assignation}
+		\subsection{L’assignation}\index{assignation}
 		%--------------------------------------------
 	
 			\marginicon{definition}
-			L'\textbf{assignation} 
+			L’\textbf{assignation} 
 			(on dit aussi \emph{affectation interne}\index{affectation interne})
 			est une instruction qui donne une valeur 
 			à une variable ou la modifie.
 	
 			Cette instruction est probablement la plus importante
-			car c'est ce qui permet de retenir les résultats 
+			car c’est ce qui permet de retenir les résultats 
 			de calculs intermédiaires.
 			
 			\begin{LDA}
@@ -367,7 +367,7 @@
 			\paragraph{Exemples.}
 			%------------------------------------------------
 				
-				Quelques assignations correctes :
+				Quelques assignations correctes~:
 				
 				\begin{LDA}
 					\Let denRes \Gets den1 * den2
@@ -375,10 +375,10 @@
 					\Let moyenne \Gets (nombre1 + nombre2) / 2
 					\Let test \Gets a < b \RComment pour une variable logique
 					\Let maChaine \Gets "bonjour"
-					\Let maChaine \Gets bonjour	\RComment comprenez-vous la différence ?
+					\Let maChaine \Gets bonjour	\RComment comprenez-vous la différence~?
 				\end{LDA}
 
-				Et d'autres qui ne le sont pas :
+				Et d’autres qui ne le sont pas~:
 			
 				\begin{wrong}
 					\begin{LDA}
@@ -394,8 +394,8 @@
 			
 				\begin{itemize}
 				\item 
-					\textbf{Une assignation n'est pas une égalité, une définition}.
-					\\Ainsi, l'assignation \lda{cpt \Gets cpt + 1}
+					\textbf{Une assignation n’est pas une égalité, une définition}.
+					\\Ainsi, l’assignation \lda{cpt \Gets cpt + 1}
 					ne veut pas dire que $\textrm{cpt} = \textrm{cpt} + 1$,
 					ce qui est mathématiquement faux 
 					mais que la \emph{nouvelle} valeur de \lda{cpt}
@@ -419,13 +419,13 @@
 		\subsection{Tracer un algorithme}
 		%--------------------------------
 		
-			Pour vérifier qu'un algorithme est correct,
+			Pour vérifier qu’un algorithme est correct,
 			on sera souvent amené à le \textbf{tracer}.
-			Cela consiste à suivre l'évolution des variables
-			et à vérifier qu'elles contiennent bien à tout moment
+			Cela consiste à suivre l’évolution des variables
+			et à vérifier qu’elles contiennent bien à tout moment
 			la valeur attendue.
 			
-			\paragraph{Exemple.} Traçons des bouts d'algorithmes.
+			\paragraph{Exemple.} Traçons des bouts d’algorithmes.
 			
 			\begin{minipage}{4cm}
 			\begin{LDA}[1]
@@ -476,12 +476,12 @@
 			\end{tabular}
 			\end{minipage}
 			
-			\lda{c} ne peut pas être calculé car b n’a pas été initialisé;
+			\lda{c} ne peut pas être calculé car b n’a pas été initialisé~;
 			quant à \lda{d}, il n’est même pas déclaré~!
 
 			\begin{Exercice}{Tracer des bouts de code}
-				Suivez l'évolution des variables pour les bouts
-				d'algorithmes donnés.
+				Suivez l’évolution des variables pour les bouts
+				d’algorithmes donnés.
 	
 				\begin{minipage}{4cm}
 				\begin{LDA}[1]
@@ -540,14 +540,14 @@
 			\end{Exercice}
 		
 			\begin{Exercice}{Calcul de vitesse}
-				Soit le problème suivant :
+				Soit le problème suivant~:
 				\og
-					Calculer la vitesse (en km/h) d'un véhicule 
+					Calculer la vitesse (en km/h) d’un véhicule 
 					dont on donne la durée du parcours (en secondes) 
 					et la distance parcourue (en mètres).
 				\fg.
 				
-				Voici une solution : 
+				Voici une solution~: 
 				\begin{LDA}[1]
 				\Algo{vitesseKMH}{\Par{distanceM, duréeS}{réels}}{réel}
 					\Decl{distanceKM, duréeH}{réels}
@@ -557,9 +557,9 @@
 				\EndAlgo
 				\end{LDA}
 
-				L'algorithme, s'il est correct, devrait donner
-				une vitesse de 1 km/h pour une distance de 1000 mètres
-				et une durée de 3600 secondes.
+				L’algorithme, s’il est correct, devrait donner
+				une vitesse de 1~km/h pour une distance de 1000~mètres
+				et une durée de 3600~secondes.
 				Testez cet algorithme avec cet exemple.
 
 				\begin{center}
@@ -576,16 +576,16 @@
 				\end{tabular}
 				\end{center}
 				
-				Si vous trouvez qu'il n'est pas correct,
-				voyez ce qu'il faudrait changer pour le corriger.
+				Si vous trouvez qu’il n’est pas correct,
+				voyez ce qu’il faudrait changer pour le corriger.
 			\end{Exercice}
 		
 		%---------------------------------------------
 		\subsection{Exercices de décomposition}
 		%---------------------------------------------
 					
-			Savoir, face à un cas concret, s'il est préférable 
-			de décomposer le calcul ou pas, n'est pas toujours évident.	
+			Savoir, face à un cas concret, s’il est préférable 
+			de décomposer le calcul ou pas, n’est pas toujours évident.	
 			La section \vref{lisibilite}
 			sur la lisibilité vous apportera des arguments
 			qui permettront de trancher.
@@ -593,7 +593,7 @@
 			Les exercices qui suivent sont suffisamment complexes
 			que pour mériter une décomposition du calcul.
 			Ils ont déjà été analysés dans un précédent chapitre.
-			On vous demande à présent d'en rédiger une solution
+			On vous demande à présent d’en rédiger une solution
 			et de la tracer pour vérifier que le résultat est correct.
 			Vous pouvez vous baser sur la fiche \vref{fiche:calcul-complexe}
 			qui présente un exemple complet.
@@ -605,30 +605,30 @@
 				calculer la durée en secondes du trajet de ce véhicule.
 				
 				\paragraph{Solution.}
-				L'analyse du problème aboutit à :
+				L’analyse du problème aboutit à~:
 				\begin{center}
 					\flowalgodd{vitesseMS (réel positif)}{distanceKM (réel positif)}{duréeTrajet}{réel}
 				\end{center}
-				La formule qui lie les trois éléments est :
+				La formule qui lie les trois éléments est~:
 				\[
 					\mathrm{vitesse} = \frac{\mathrm{distance}}{\mathrm{temps}}
-					\qquad \mathrm{\ qu'on\ peut\ aussi\ exprimer}\qquad
+					\qquad \mathrm{\ qu’on\ peut\ aussi\ exprimer}\qquad
 					\mathrm{temps} = \frac{\mathrm{distance}}{\mathrm{vitesse}}					
 				\]
 				pour autant que les unités soient compatibles.
-				Dans notre cas, il faut d'abord convertir
-				la distance en mètres, selon la formule :
+				Dans notre cas, il faut d’abord convertir
+				la distance en mètres, selon la formule~:
 				\[
 					\mathrm{vitesseM} = 1000 * \mathrm{vitesseKM}					
 				\]
-				Quelques exemple numériques :
+				Quelques exemples numériques~:
 				\begin{multicols}{2}
 					\begin{itemize}
 					\item \lda{duréeeTrajet(1, 1) donne $1000$}
 					\item \lda{duréeeTrajet(0.5, 0.2) donne $400$}
 					\end{itemize}
 				\end{multicols}
-				L'algorithme s'écrit :
+				L’algorithme s’écrit~:
 				\begin{LDA}[1]
 					\Algo{duréeTrajet}{\Par{vitesseMS, distanceKM}{réels}}{réel}
 						\Decl{distanceM}{réel}
@@ -637,7 +637,7 @@
 					\EndAlgo
 				\end{LDA}
 				
-				Vérifions l'algorithme pour \lda{duréeeTrajet(1, 1)}
+				Vérifions l’algorithme pour \lda{duréeeTrajet(1, 1)}
 				\begin{center}
 				\begin{tabular}{|>{\centering\arraybackslash}m{1cm}|*{4}{>{\centering\arraybackslash}m{2cm}}|}
 					\hline
@@ -667,11 +667,11 @@
 			\end{Exercice}
 
 			\begin{Exercice}{Allure et vitesse}
-				L'allure d'un coureur est le temps qu'il met pour parcourir 1 km
+				L’allure d’un coureur est le temps qu’il met pour parcourir 1 km
 				(par exemple, $4'37''$).
 				On voudrait calculer sa vitesse (en km/h) à partir de son allure.
-				Par exemple, la vitesse d'un coureur ayant une allure de
-				$4'37''$ est de $12,996389892$ km/h. 
+				Par exemple, la vitesse d’un coureur ayant une allure de
+				$4'37''$ est de $12,996389892$~km/h. 
 			\end{Exercice}
 		
 			\begin{Exercice}{Cote moyenne}
@@ -686,18 +686,18 @@
 	%=============================================
 	
 		Vous êtes habitués à effectuer des calculs.
-		L'expérience nous montre toutefois que certains calculs
+		L’expérience nous montre toutefois que certains calculs
 		vous posent des difficultés.
 		Soit parce que ce sont des opérations que vous utilisez peu,
-		soit parce que vous n'avez pas l'habitude de les voir comme des
+		soit parce que vous n’avez pas l’habitude de les voir comme des
 		calculs.
-		Citons : 
+		Citons~: 
 		\begin{itemize}
 		\item
 			assigner des valeurs booléennes 
-			en fonction de comparaisons ;
+			en fonction de comparaisons~;
 		\item
-			manipuler les opérateurs logiques ;
+			manipuler les opérateurs logiques~;
 		\item
 			utiliser la division entière et le reste.
 		\end{itemize}
@@ -713,33 +713,33 @@
 
 			Une première difficulté que vous rencontrez généralement 
 			est liée au vocabulaire utilisé. 
-			Qu'entend-t-on exactement par un opérateur ? un opérande ? 
+			Qu’entend-on exactement par un opérateur~? un opérande~? 
 			Fixons ces notions.
 			
 			\marginicon{definition}
 			\begin{description}
 			\item[expression]
 				Une expression indique un calcul à effectuer
-				(par exemple : (a + b) * c).
+				(par exemple~: (a + b) * c).
 				Une fois le calcul effectué, 
-				on obtient une valeur, d'un certain type.
-				Une expression est composée d'opérandes et d'opérateurs.
+				on obtient une valeur d’un certain type.
+				Une expression est composée d’opérandes et d’opérateurs.
 			\item[opérateur]
 				Un opérateur est ce qui désigne une opération.
-				Exemple : \Verb_+_ désigne l'addition.
+				Exemple~: \Verb_+_ désigne l’addition.
 			\item[opérande]
-				Un opérande est ce sur quoi porte l'opération.
-				Exemple : dans l'expression \Verb_a+b_, 
+				Un opérande est ce sur quoi porte l’opération.
+				Exemple~: dans l’expression \Verb_a+b_, 
 				\Verb_a_ et \Verb_b_ sont les opérandes.
 				Une opérande peut être une sous-expression.
-				Exemple : Dans l'expression \Verb_(a+b) * c_, 
-				\Verb_(a+b)_ est l'opérande 
-				de gauche de l'opérateur \Verb_*_.
+				Exemple~: Dans l’expression \Verb_(a+b) * c_, 
+				\Verb_(a+b)_ est l’opérande 
+				de gauche de l’opérateur \Verb_*_.
 			\item[unaire, binaire, ternaire]
 				Un opérateur qui agit sur deux opérandes (le plus fréquent)
 				est qualifié de binaire. 
-				On rencontre aussi des opérateurs unaires (ex: le \Verb_-_ 
-				dans l'expression \Verb_-a_).
+				On rencontre aussi des opérateurs unaires (ex~: le \Verb_-_ 
+				dans l’expression \Verb_-a_).
 				En Java, vous rencontrerez aussi un opérateur ternaire (3 opérandes)
 				mais ils sont plus rares.
 			\item[littéral]
@@ -748,24 +748,24 @@
 			\item[priorité]
 				Les opérateurs sont classés par priorité. 
 				Cela permet de savoir dans quel ordre les exécuter.
-				Les opérateurs classiques qu'on retrouve en mathématique ont une priorité
+				Les opérateurs classiques qu’on retrouve en mathématique ont une priorité
 				respective. 
-				Par exemple, la multiplication est prioritaire par rapport à l'addition.
-				C'est pourquoi l'expression \Verb_a + b * c_ 
-				est équivalent à \Verb_(a + b) * c_ et pas à \Verb_a + (b * c)_.
+				Par exemple, la multiplication est prioritaire par rapport à l’addition.
+				C’est pourquoi l’expression \Verb_a + b * c_ 
+				est équivalente à \Verb_(a + b) * c_ et pas à \Verb_a + (b * c)_.
 				Les parenthèses permettent de modifier ou de souligner la priorité.
 			\end{description}
 			
-			\begin{Exercice}{Analyse d'expression}
-				Voici une série d'expressions.
-				On vous demande d'identifier tous les opérateurs
+			\begin{Exercice}{Analyse d’expression}
+				Voici une série d’expressions.
+				On vous demande d’identifier tous les opérateurs
 				et leurs opérandes, 
-				d'indiquer si les opérateurs sont unaires ou binaires
-				et d'identifier les littéraux.
-				On vous demande aussi de fournir une version de l'expression
-				avec le moins de parenthèses possible et 
+				d’indiquer si les opérateurs sont unaires ou binaires
+				et d’identifier les littéraux.
+				On vous demande aussi de fournir une version de l’expression
+				avec le moins de parenthèses possibles et 
 				une autre avec un maximum de parenthèses
-				(tout en respectant le sens de l'expression bien sûr).
+				(tout en respectant le sens de l’expression bien sûr).
 				\begin{itemize}
 				\item \Verb_a+1_
 				\item \Verb_(a+b)*12-4*(-a-b)_ 
@@ -779,33 +779,33 @@
 		\index{comparaisons}
 		
 			Si je vous dis que $3+1$ est un calcul
-			dont le résultat est $4$, un entier
-			vous n'aurez aucun mal à me croire ; 
+			dont le résultat est $4$, un entier,
+			vous n’aurez aucun mal à me croire~; 
 			cela vous parait évident.
-			Ce qui l'est peut-être moins c'est que $1<3$ est aussi
+			Ce qui l’est peut-être moins c’est que $1<3$ est aussi
 			un calcul dont le résultat est un \emph{booléen},
 			vrai en l’occurrence. 
 			Ce résultat peut être assigné à une variable booléenne.			
 
 			\textbf{Exemples.}
 			Voici quelques assignations correctes 
-			(les variables à gauche du \Gets sont des variables booléennes) :
+			(les variables à gauche du \Gets sont des variables booléennes)~:
 			\begin{LDA}
-				\Let positif \Gets nb>0 \RComment positif est mis à vrai si le nb est positif 
-				\Let adulte \Gets âge$\ge$21 \RComment adulte est vrai si l'âge est 21 ou plus
-				\Let réussi \Gets cote$\ge$10 \RComment réussi est mis à vrai si la cote est supérieure ou égale à 10
-				\Let parfait \Gets nbFautes=0 \RComment c'est parfait si le nombre de fautes est 0
+				\Let positif \Gets nb > 0 \RComment positif est mis à vrai si le nb est positif 
+				\Let adulte \Gets âge $\ge$ 21 \RComment adulte est vrai si l’âge est 21 ou plus
+				\Let réussi \Gets cote $\ge$ 10 \RComment réussi est mis à vrai si la cote est supérieure ou égale à 10
+				\Let parfait \Gets nbFautes = 0 \RComment c’est parfait si le nombre de fautes est 0
 			\end{LDA}
 		
 			\begin{Exercice}{Écrire des expressions booléennes}
 				Pour chacune des phrases suivantes,
-				écrivez l'assignation qui lui correspond.
+				écrivez l’assignation qui lui correspond.
 				\begin{itemize}
 				\item 
 					La variable booléenne \lda{négatif}
 					doit indiquer si le nombre \lda{montant} est négatif.
 				\item
-					Un groupe est complet s'il contient exactement 20 personnes.
+					Un groupe est complet s’il contient exactement 20 personnes.
 				\item
 					Un algorithme est considéré comme long si le nombre de lignes
 					dépasse 20.
@@ -836,7 +836,7 @@
 			\end{center}
 			\medskip
 			
-			Ce qu'on peut résumer par les tableaux suivants :
+			Ce qu’on peut résumer par les tableaux suivants~:
 			
 			\begin{center}
 			\begin{tabular}{|cccc|}
@@ -861,7 +861,7 @@
 %\clearpage			
 			On peut les utiliser 
 			pour donner une valeur à une variable booléenne.
-			Par exemple :
+			Par exemple~:
 			
 			\begin{small}
 			\begin{multicols}{2}
@@ -876,22 +876,22 @@
 			\end{multicols}
 			\end{small}
 	
-			Écrire des calculs utilisant ces opérateurs n'est pas facile
+			Écrire des calculs utilisant ces opérateurs n’est pas facile
 			car le français nous induit souvent en erreur
 			en nous poussant à utiliser un ET pour un OU et inversement
-			ou bien à utiliser des raccourcis d'écriture ambigus%
+			ou bien à utiliser des raccourcis d’écriture ambigus%
 			\footnote{%
 				Vous noterez que le nombre de "et" et de "ou"
 				dans cette phrase ne facilite pas sa compréhension ;)%
 			}. 
-			\\Par exemple, ne pas écrire : 
+			\\Par exemple, ne pas écrire~: 
 			\lda{tarifRéduit \Gets âge$<$18 OU $\ge$60}
 	
 			\paragraph{Loi de De Morgan.}
-				Lorsqu'on a une expression complexe faisant intervenir
+				Lorsqu’on a une expression complexe faisant intervenir
 				des négations, on peut utiliser la \emph{Loi de De Morgan}
 				pour la simplifier.
-				Cette loi stipule que :
+				Cette loi stipule que~:
 				\[
 					\mathrm{NON}\ (a\ \mathrm{ET}\ b) \Leftrightarrow \mathrm{NON}\ a\ \mathrm{OU}\ \mathrm{NON}\ b
 				\]
@@ -899,44 +899,44 @@
 					\mathrm{NON}\ (a\ \mathrm{OU}\ b) \Leftrightarrow \mathrm{NON}\ a\ \mathrm{ET}\ \mathrm{NON}\ b
 				\]
 				
-				Par exemple : \lda{tarifRéduit \Gets NON (18$\le$âge ET âge$<$60)}
-				\\peut s'écrire aussi : \lda{tarifRéduit \Gets (NON 18$\le$âge) OU (NON âge$<$60)}
-				\\ce qui se simplifie en : \lda{tarifRéduit \Gets âge$<$18 OU 60$\le$âge}
+				Par exemple~: \lda{tarifRéduit \Gets NON (18$\le$âge ET âge$<$60)}
+				\\peut s’écrire aussi~: \lda{tarifRéduit \Gets (NON 18$\le$âge) OU (NON âge$<$60)}
+				\\ce qui se simplifie en~: \lda{tarifRéduit \Gets âge$<$18 OU 60$\le$âge}
 	
 			\paragraph{Priorités et parenthèses.}
-				Lorsqu'on écrit une expression mêlant les opérateurs logiques,
-				on considère que NON est prioritaire sur ET qui l'est sur OU.
+				Lorsqu’on écrit une expression mêlant les opérateurs logiques,
+				on considère que NON est prioritaire sur ET qui l’est sur OU.
 				
-				Ainsi l'expression : \lda{NON a OU b ET c}
-				doit se comprendre : \lda{(NON a) OU (b ET c)}.
+				Ainsi l’expression~: \lda{NON a OU b ET c}
+				doit se comprendre~: \lda{(NON a) OU (b ET c)}.
 				Vous pouvez toujours ajouter des parenthèses non nécessaires
-				pour vous assurer d'être bien compris.
+				pour vous assurer d’être bien compris.
 
 			\paragraph{Évaluation court-circuitée.}\label{court-circuit}
 			
 				Les opérateurs ET et OU sont des opérateurs court-circuités.
-				Cela signifie que le calcul s'arrête dès qu'on peut être sûr
+				Cela signifie que le calcul s’arrête dès qu’on peut être sûr
 				de la réponse finale.
-				En particulier, si la première partie d'un ET est fausse,
+				En particulier, si la première partie d’un ET est fausse,
 				on est sûr que le résultat sera faux quelle que soit la suite.
-				Et si la première partie d'un OU est vraie 
+				Et si la première partie d’un OU est vraie 
 				on est sûr que le résultat sera vrai.
 				
-				Pourquoi un tel comportement ?
+				Pourquoi un tel comportement~?
 				Cela permet de gagner du temps bien sûr,
-				mais cela permet également d'éviter des erreurs d'exécution.
+				mais cela permet également d’éviter des erreurs d’exécution.
 				 
 				\textbf{Exemples.}
 				\begin{LDA}
 					\Let ok \Gets 1/b < 0.1
 						\RComment provoque une erreur et un arrêt
-						de l'algorithme si \lda{b=0}. 
+						de l’algorithme si \lda{b=0}. 
 					\Let ok \Gets b$\neq$0 ET 1/b < 0.1
 						\RComment donne la valeur \lda{faux} à \lda{ok} 
 						si \lda{b=0} (court-circuit). 
 					\Let ok \Gets 1/b < 0.1 ET b$\neq$0
 						\RComment provoque une erreur et un arrêt
-						de l'algorithme si \lda{b=0}. 
+						de l’algorithme si \lda{b=0}. 
 				\end{LDA}
 				
 			\begin{Exercice}{Simplifier des expressions booléennes}
@@ -955,7 +955,7 @@
 		
 			\begin{Exercice}{Expressions logiques}
 				Pour chacune des phrases suivantes,
-				écrivez l'assignation qui lui correspond.
+				écrivez l’assignation qui lui correspond.
 				\begin{itemize}
 				\item J’irai au cinéma si le film me plait et que j’ai 20\texteuro{} en poche.
 				\item Je n’irai pas au cinéma si je n’ai pas 20\texteuro{} en poche.
@@ -979,7 +979,7 @@
 			indique combien de fois on peut \emph{mettre} b dans a.
 			
 			\begin{minipage}{2cm}
-			\textbf{Exemples} :	
+			\textbf{Exemples}~:	
 			\\
 			\end{minipage}
 			\begin{minipage}{9cm}
@@ -995,20 +995,20 @@
 			
 			\marginicon{definition}
 			Le \textbf{reste} de la division entière de a par b
-			est ce qui n'a pas été repris dans la division.
+			est ce qui n’a pas été repris dans la division.
 			On va le noter \lda{a MOD b}
 			et on dira \emph{a modulo b}.
 	
 			Un exemple vous aidera à comprendre.	
-			Imaginons qu'une classe comprend 14 étudiants
-			qu'il faut réunir par 3
-			dans le cadre d'un travail de groupe.
+			Imaginons qu’une classe comprend 14 étudiants
+			qu’il faut réunir par 3
+			dans le cadre d’un travail de groupe.
 			On peut former 4 groupes 
 			mais il restera 2 étudiants ne pouvant former un groupe complet.
-			C'est le reste de la division de 14 par 3.
+			C’est le reste de la division de 14 par 3.
 			
 			\begin{minipage}{2cm}
-			\textbf{Exemples} :	
+			\textbf{Exemples}~:	
 			\\
 			\end{minipage}
 			\begin{minipage}{9cm}
@@ -1025,7 +1025,7 @@
 			\begin{Exercice}{Calculs}
 				Voici quelques petits calculs à compléter
 				faisant intervenir la division entière et le reste.
-				Par exemple : "14 DIV 3 = 4 reste 2"
+				Par exemple~: "14 DIV 3 = 4 reste 2"
 				siginifie que 14 DIV 3 = 4 et 14 MOD 3 = 2.
 				
 				\begin{multicols}{2}
@@ -1039,10 +1039,10 @@
 			\end{Exercice}
 
 			\begin{Exercice}{Les prix ronds}
-				Voici un algorithme qui reçoit une somme d'argent exprimée en centimes
-				et qui calcule le nombre (entier) de centimes qu'il
+				Voici un algorithme qui reçoit une somme d’argent exprimée en centimes
+				et qui calcule le nombre (entier) de centimes qu’il
 				faudrait ajouter à la somme pour tomber sur un prix rond en euros.
-				Testez-le avec des valeurs numériques. Est-il correct ?
+				Testez-le avec des valeurs numériques. Est-il correct~?
 				
 				\begin{LDA}
 				\Algo{versPrixRond}{\Par{prixCentimes}{entier}}{entier}
@@ -1069,15 +1069,15 @@
 			%-------------------------------------
 			
 				Les deux opérateurs \lda{MOD} et \lda{DIV}
-				sont-ils vraiment utiles ?
-				Oui ! Ils vont servir pour tester si un nombre
-				est un multiple d'un autre et pour extraire
-				des chiffres d'un nombre.
+				sont-ils vraiment utiles~?
+				Oui~! Ils vont servir pour tester si un nombre
+				est un multiple d’un autre et pour extraire
+				des chiffres d’un nombre.
 				Commençons par la divisibilité.
 
-				Imaginons qu'on veuille tester qu'un nombre est pair.
-				Qu'est-ce qu'un nombre pair ? Un nombre qui est multiple de 2.
-				C'est-à-dire dont le reste de la division par 2 est nul.
+				Imaginons qu’on veuille tester qu’un nombre est pair.
+				Qu’est-ce qu’un nombre pair~? Un nombre qui est multiple de 2.
+				C’est-à-dire dont le reste de la division par 2 est nul.
 				
 				\[
 				\textrm{nb pair} 
@@ -1085,9 +1085,9 @@
 					\quad\equiv\quad \textrm{nb MOD 2 = 0} 
 				\]
 				
-				On peut donc écrire : \lda{pair \Gets nb MOD 2 = 0}.
+				On peut donc écrire~: \lda{pair \Gets nb MOD 2 = 0}.
 	
-			\subsubsection{Extraire les chiffres d'un nombre}
+			\subsubsection{Extraire les chiffres d’un nombre}
 			%------------------------------------------------
 			
 				Faisons une petite expérience numérique.
@@ -1115,11 +1115,11 @@
 			
 				On voit que les DIV et MOD avec des puissances de 10
 				permettent de garder les chiffres de droite (MOD)
-				ou d'enlever les chiffres de droite (DIV).
-				Combinés, ils permettent d'extraire n'importe quel
-				chiffre d'un nombre.
+				ou d’enlever les chiffres de droite (DIV).
+				Combinés, ils permettent d’extraire n’importe quel
+				chiffre d’un nombre.
 				
-				\textbf{Exemple} : (65536 DIV 100) MOD 10 = 5.
+				\textbf{Exemple}~: (65536 DIV 100) MOD 10 = 5.
 
 		%---------------------
 		\subsection{Le hasard}\index{hasard}\index{aléatoire}
@@ -1131,29 +1131,29 @@
 			lancer des dés, 
 			faire apparaitre des ennemis de façon aléatoire\dots
 			
-			Le vrai hasard n'existe pas en algorithmique
-			puisqu'il s'agit de suivre des étapes précises
+			Le vrai hasard n’existe pas en algorithmique
+			puisqu’il s’agit de suivre des étapes précises
 			dans un ordre fixé.
 			Pourtant, on peut concevoir des algorithmes
 			qui \emph{simulent} le hasard%
 			\footnote{%
 				On parle de pseudo-hasard
-				ou d'algorithmes pseudo-aléatoires.
+				ou d’algorithmes pseudo-aléatoires.
 			}.
-			À partir d'un nombre donné%
+			À partir d’un nombre donné%
 			\footnote{%
 				Ce nombre peut être fixé ou généré à partir
-				de l'environnement 
-				(par exemple, l'horloge interne).
+				de l’environnement 
+				(par exemple, l’horloge interne).
 			}
-			(qu'on appelle \emph{graine} ou \emph{seed} en anglais)
-			ils fournissent une suite de nombres qui \emph{ont l'air}
+			(qu’on appelle \emph{graine} ou \emph{seed} en anglais)
+			ils fournissent une suite de nombres qui \emph{ont l’air}
 			aléatoires.			
 			Concevoir de tels algorithmes est très compliqué
 			et dépasse largement le cadre de ce cours.
-			Nous allons juste supposer qu'on dispose,
-			sans devoir l'écrire,
-			d'un algorithme qui fournit un entier aléatoire.
+			Nous allons juste supposer qu’on dispose,
+			sans devoir l’écrire,
+			d’un algorithme qui fournit un entier aléatoire.
 			
 			\begin{center}
 				\flowalgod{n (entier)}{hasard}{entier (entre 1 et n)}
@@ -1166,7 +1166,7 @@
 			
 			\textbf{Exemple.}
 			\begin{LDA}
-				\LComment{Simule le lancé d'un dé}
+				\LComment{Simule le lancer d’un dé}
 				\Algo{dé}{}{entier}
 					\Return hasard(6)
 				\EndAlgo
@@ -1174,7 +1174,7 @@
 
 			Cet algorithme \lda{hasard()}
 			peut être utilisé pour générer des nombres
-			appartenant à d'autres intervalles.
+			appartenant à d’autres intervalles.
 			
 			\begin{Exercice}{Chiffre aléatoire}
 				Écrivez un algorithme qui donne un chiffre
@@ -1195,11 +1195,11 @@
 		%---------------------
 		\label{prem-ex-cplx}
 		
-			Les exercices qui suivent n'ont pas tous été déjà analysés
+			Les exercices qui suivent n’ont pas tous été déjà analysés
 			et ils demandent des calculs faisant intervenir
-			des divisions entières, des restes et/ou des expressions booléennes.
-			Comme d'habitude, écrivez la spécification
-			si ça n'a pas encore été fait,
+			des divisions entières, des restes ou des expressions booléennes.
+			Comme d’habitude, écrivez la spécification
+			si ça n’a pas encore été fait,
 			donnez des exemples, rédigez un algorithme
 			et vérifiez-le.
 		
@@ -1226,13 +1226,13 @@
 				La technique pour vérifier si un nombre est
 				un multiple de 5 est de vérifier que le reste
 				de la division par 5 donne 0.
-				Ce qui donne :
+				Ce qui donne~:
 				\begin{LDA}[1]
 					\Algo{multiple5}{\Par{nombre}{entier}}{booléen}
 						\Return nombre MOD 5 = 0
 					\EndAlgo
 				\end{LDA}
-				Vérifions sur nos exemples :
+				Vérifions sur nos exemples~:
 				\begin{center}
 				\begin{tabular}{|c|c|c|c|c|}
 				\hline
@@ -1252,7 +1252,7 @@
 	
 			\begin{Exercice}{Les centaines}
 				Calculer la partie \emph{centaine}
-				d'un nombre entier positif quelconque.
+				d’un nombre entier positif quelconque.
 			\end{Exercice}
 	
 			\begin{Exercice}{Somme des chiffres}
@@ -1298,7 +1298,7 @@
 
 			\begin{Exercice}{Un double au dés}
 				Écrire un algorithme qui simule le lancer de deux dés
-				et indique s'il y a eu un double 
+				et indique s’il y a eu un double 
 				(les deux dés montrant une face identique).
 			\end{Exercice}
 			 		 
@@ -1307,73 +1307,73 @@
 	%===================================
 	
 		Dans la section précédente,
-		nous avons vu qu'il est possible de décomposer un calcul en étapes.
-		Mais quand faut-il le faire ?	
-		Ou, pour poser la question autrement :
+		nous avons vu qu’il est possible de décomposer un calcul en étapes.
+		Mais quand faut-il le faire~?	
+		Ou, pour poser la question autrement~:
 		
 			\begin{quote}
-				\textbf{Puisqu'il existe plusieurs algorithmes 
-				qui résolvent un problème, lequel préférer ?}
+				\textbf{Puisqu’il existe plusieurs algorithmes 
+				qui résolvent un problème, lequel préférer~?}
 			\end{quote}
 		
 		Répondre à cette question, 
-		c'est se demander ce qui fait la qualité d'un algorithme
-		ou d'un programme informatique.
-		Quels sont les critères qui permettent de juger ?
+		c’est se demander ce qui fait la qualité d’un algorithme
+		ou d’un programme informatique.
+		Quels sont les critères qui permettent de juger~?
 		
-		C'est un vaste sujet mais nous voudrions aborder les principaux.
+		C’est un vaste sujet mais nous voudrions aborder les principaux.
 		
 		%------------------------------------------
-		\subsection{L'efficacité}\index{efficacité}
+		\subsection{L’efficacité}\index{efficacité}
 		%------------------------------------------
 			
-			L'\textbf{efficacité}
-			désigne le fait que l'algorithme (le programme) résout%
+			L’\textbf{efficacité}
+			désigne le fait que l’algorithme (le programme) résout%
 			\footnote{%
-				À ne pas confondre avec \emph{l'efficience}
-				qui indique qu'il est économe en ressources.
+				À ne pas confondre avec \emph{l’efficience}
+				qui indique qu’il est économe en ressources.
 			}
 			bien le problème donné.
-			C'est un minimum !
+			C’est un minimum~!
 		
 		%-------------------------------------------
 		\subsection{La lisibilité}\index{lisibilité}
 		%-------------------------------------------
 		
 			La \textbf{lisibilité}
-			indique si une personne qui lit l'algorithme
+			indique si une personne qui lit l’algorithme
 			(ou le programme)
 			peut facilement percevoir comment il fonctionne.
-			C'est crucial car un algorithme (un programme) 
-			est \textbf{souvent lu} par de nombreuses personnes :
+			C’est crucial car un algorithme (un programme) 
+			est \textbf{souvent lu} par de nombreuses personnes~:
 			\begin{itemize}
 			\item
 				celles qui doivent se convaincre de sa validité
-				avant de passer à la programmation ;
+				avant de passer à la programmation~;
 			\item
 				celles qui doivent trouver les causes
-				d'une erreur lorsque celle-ci a été rencontrée%
+				d’une erreur lorsque celle-ci a été rencontrée%
 				\footnote{%
 					On parle du processus de \emph{déverminage}
-					(ou \emph{debugging} en Anglais).%
-				} ;
+					(ou \emph{debugging} en anglais).%
+				}~;
 			\item
-				celles qui doivent faire évoluer l'algorithme
+				celles qui doivent faire évoluer l’algorithme
 				ou le programme suite à une modification
-				du problème ;
+				du problème~;
 			\item
 				et, accessoirement, celles qui doivent le coter ;)
 			\end{itemize}
 			
-			C'est un critère \textbf{très important}
-			qu'il ne faut surtout pas sous-évaluer.
-			Vous en ferez d'ailleurs l'amère expérience :
-			si vous négligez la lisibilité d'un algorithme,
+			C’est un critère \textbf{très important}
+			qu’il ne faut surtout pas sous-évaluer.
+			Vous en ferez d’ailleurs l’amère expérience~:
+			si vous négligez la lisibilité d’un algorithme,
 			vous-même ne le comprendrez plus quand vous le relirez
-			quelques temps plus tard !
+			quelque temps plus tard~!
 			
 			Comparer la lisibilité de deux algorithmes
-			n'est pas une tâche évidente car c'est une notion subjective.
+			n’est pas une tâche évidente car c’est une notion subjective.
 			Il faut se demander quelle version va être le plus facilement
 			comprise par la majorité des lecteurs.		
 			La section \vref{lisibilite}
@@ -1385,32 +1385,32 @@
 	    %---------------------------------------
 	    
 			La \textbf{rapidité}
-			indique si l'algorithme (le programme)
-			permet d'arriver plus ou moins vite au résultat.
+			indique si l’algorithme (le programme)
+			permet d’arriver plus ou moins vite au résultat.
 			
-			C'est un critère qui est souvent sur-évalué, 
+			C’est un critère qui est souvent sur-évalué, 
 			essentiellement pour deux raisons.
 			\begin{itemize}
 				\item 
 					Il est trompeur. 
-					On peut croire une version plus rapide alors qu'il n'en est rien.
+					On peut croire une version plus rapide alors qu’il n’en est rien.
 					Par exemple, on peut se dire que décomposer un calcul
-					ralentit un programme puisqu'il doit gérer des variables
+					ralentit un programme puisqu’il doit gérer des variables
 					intermédiaires.
-					Ce n'est pas forcément le cas.
+					Ce n’est pas forcément le cas.
 					Les compilateurs modernes sont capables
 					de nombreuses prouesses pour optimiser le code
 					et fournir un résultat aussi rapide
-					qu'avec un calcul non décomposé.
+					qu’avec un calcul non décomposé.
 				\item
-					L'expérience montre que la recherche de rapidité
+					L’expérience montre que la recherche de rapidité
 					mène souvent à des algorithmes moins lisibles.
 					Or la lisibilité doit être privilégiée à la rapidité
 					car sinon il sera impossible de corriger et/ou
-					de faire évoluer l'algorithme.
+					de faire évoluer l’algorithme.
 			\end{itemize}
 		
-			Ce critère est un cas particulier de l'\emph{efficience}
+			Ce critère est un cas particulier de l’\emph{efficience}
 			qui traite de la gestion économe des ressources.
 			Nous reparlerons de rapidité
 			dans le chapitre consacré à la \emph{complexité}
@@ -1420,44 +1420,44 @@
 		\subsection{La taille}
 		%---------------------
 		
-			Nous voyons parfois des étudiants contents d'avoir
+			Nous voyons parfois des étudiants contents d’avoir
 			pu écrire un algorithme en moins de lignes.
-			Ce critère n'a \textbf{aucune importance} ;
-			un algorithme plus court n'est pas nécessairement
+			Ce critère n’a \textbf{aucune importance}~;
+			un algorithme plus court n’est pas nécessairement
 			plus rapide ni plus lisible.
 		
 		%----------------------		
 		\subsection{Conclusion}
 		%----------------------		
 			
-			Tout ces critères n'ont pas le même poids.
-			Le point le plus important est bien sûr d'écrire
-			un algorithme correct mais ne vous arrêtez pas là !
-			Demandez-vous s'il n'est pas possible de le re-travailler
+			Tous ces critères n’ont pas le même poids.
+			Le point le plus important est bien sûr d’écrire
+			un algorithme correct mais ne vous arrêtez pas là~!
+			Demandez-vous s’il n’est pas possible de le retravailler
 			pour améliorer sa lisibilité%
 			\footnote{%
 				On appelle \emph{refactorisation}
-				l'opération qui consiste à modifier
+				l’opération qui consiste à modifier
 				un algorithme ou un code
-				sans changer ce qu'il fait
+				sans changer ce qu’il fait
 				dans le but,
 				notamment, de le rendre plus lisible.
 			}.
 		
 	%======================
-	\section{Améliorer la lisibilité d'un algorithme}\label{lisibilite}\index{lisibilite}
+	\section{Améliorer la lisibilité d’un algorithme}\label{lisibilite}\index{lisibilite}
 	%======================
 		
 		On vient de le voir, la lisibilité est une qualité essentielle
 		que doivent avoir nos algorithmes.
-		Qu'est ce qui permet d'améliorer la lisibilité d'un algorithme ?
+		Qu’est-ce qui permet d’améliorer la lisibilité d’un algorithme~?
 		
 		\begin{enumerate}
 		\item
-			Il y a d'abord la \textbf{mise en page} qui aide le lecteur
-			à avoir une meilleure vue d'ensemble de l'algorithme,
+			Il y a d’abord la \textbf{mise en page} qui aide le lecteur
+			à avoir une meilleure vue d’ensemble de l’algorithme,
 			à en repérer rapidement la structure générale.
-			Ainsi, dans ce syllabus :
+			Ainsi, dans ce syllabus~:
 			\begin{itemize}
 			\item 
 				Les mots imposés 
@@ -1465,20 +1465,20 @@
 				sont mis en évidence (en gras%
 				\footnote{%
 					Difficile de mettre en gras avec un bic.
-					Dans une version écrite vous pouvez :
+					Dans une version écrite vous pouvez~:
 					souligner le mot, le mettre en couleur ou
-					l'écrire en majuscule.%
+					l’écrire en majuscule.%
 				}).
 			\item
-				Les instructions à l'intérieur de l'algorithme sont 
+				Les instructions à l’intérieur de l’algorithme sont 
 				\emph{indentées}\index{indentation}
 				(décalées vers la droite).
 				On indentera également les instructions
-				à l'intérieur des choix et des boucles.
+				à l’intérieur des choix et des boucles.
 			\item
 				Des lignes verticales relient le début et la fin
 				de quelque chose. 
-				Ici, un algorithme mais on pourra l'utiliser
+				Ici, un algorithme mais on pourra l’utiliser
 				également pour les choix et les boucles. 
 			\end{itemize}
 			
@@ -1515,18 +1515,18 @@
 			\medskip
 		
 		\item
-			Il y a, ensuite, l'écriture des instructions elles-mêmes.
-			Ainsi :
+			Il y a, ensuite, l’écriture des instructions elles-mêmes.
+			Ainsi~:
 			\begin{itemize}
 			\item
 				Il faut choisir soigneusement les noms 
-				(d'algorithmes, de paramètres, de variables\dots)
+				(d’algorithmes, de paramètres, de variables\dots)
 			\item
 				Il faut décomposer (ou au contraire fusionner)
-				des calculs pour arriver au résultat qu'on jugera
+				des calculs pour arriver au résultat qu’on jugera
 				le plus lisible.
 			\item 
-				On peut introduire des commentaires et/ou
+				On peut introduire des commentaires ou
 				des constantes. 
 				Deux concepts que nous allons développer maintenant.
 			\end{itemize}
@@ -1540,30 +1540,30 @@
 			\marginicon{definition}
 			\textbf{Commenter} un algorithme
 			signifie lui ajouter du texte explicatif
-			destiné au \textbf{lecteur} pour l'aider à mieux
-			comprendre le fonctionnement de l'algorithme.
-			Un commentaire n'est pas utilisé par celui qui exécute
-			l'algorithme; il ne modifie pas ce que l'algorithme fait.
+			destiné au \textbf{lecteur} pour l’aider à mieux
+			comprendre le fonctionnement de l’algorithme.
+			Un commentaire n’est pas utilisé par celui qui exécute
+			l’algorithme~; il ne modifie pas ce que l’algorithme fait.
 			
-			Habituellement, on distingue deux sortes de commentaires :
+			Habituellement, on distingue deux sortes de commentaires~:
 			\begin{itemize}
 			\item
-				Ceux placés \textbf{au-dessus} de l'algorithme
-				qui expliquent \textbf{ce que fait} l'algorithme
+				Ceux placés \textbf{au-dessus} de l’algorithme
+				qui expliquent \textbf{ce que fait} l’algorithme
 				et dans quelles \textbf{conditions} il fonctionne
 				(les contraintes sur les paramètres).
 			\item
-				Ceux placés \textbf{dans} l'algorithme
+				Ceux placés \textbf{dans} l’algorithme
 				qui expliquent \textbf{comment} il le fait.
 			\end{itemize}
 			
 			Commenter correctement un programme
-			est une tâche qui n'est pas évidente et qu'il faut travailler.
+			est une tâche qui n’est pas évidente et qu’il faut travailler.
 			Il faut arriver à apporter au lecteur
 			une information \textbf{utile}
-			qui n'apparait pas directement dans le code.
+			qui n’apparait pas directement dans le code.
 			Par exemple, il est contre-productif de répéter
-			ce que l'instruction dit déjà.
+			ce que l’instruction dit déjà.
 			Voici quelques mauvais commentaires
 			
 			\begin{LDA}
@@ -1590,20 +1590,20 @@
 			\end{LDA}
 			
 			\bigskip
-			Pour résumer :
+			Pour résumer~:
 			\begin{quote}
 				\bfseries
-				N'hésitez pas à mettre des commentaires
-				au-dessus du programme pour expliquer ce qu'il fait
-				et re-travaillez votre algorithme pour que tout
-				commentaire à l'intérieur de l'algorithme
+				N’hésitez pas à mettre des commentaires
+				au-dessus du programme pour expliquer ce qu’il fait
+				et retravaillez votre algorithme pour que tout
+				commentaire à l’intérieur de l’algorithme
 				devienne superflu.
 			\end{quote}
 
 			\paragraph{Exemple.}
 			Voici comment on pourrait commenter un de nos algorithmes.
 			\begin{LDA}
-				\LComment{Calcule la surface d'un rectangle dont on donne la largeur et la longueur.}
+				\LComment{Calcule la surface d’un rectangle dont on donne la largeur et la longueur.}
 				\LComment{On considère que les données ne sont pas négatives.}
 				\Algo{surfaceRectangle}{\Par{longueur, largeur}{réels}}{réel}
 					\Return longueur * largeur
@@ -1611,7 +1611,7 @@
 			\end{LDA}
 			
 			\begin{Exercice}{Commenter la durée du trajet}
-				Commentez l'algorithme qui calcule la durée d'un trajet
+				Commentez l’algorithme qui calcule la durée d’un trajet
 				(exercice \vref{algo:durée}).
 			\end{Exercice}
 			
@@ -1623,12 +1623,12 @@
 			valeur sont figés. La liste des constantes utilisées dans un algorithme
 			apparaitra dans la section déclaration des variables%
 			\footnote{%
-				Ou en dehors des algorithmes s'il s'agit d'une
+				Ou en dehors des algorithmes s’il s’agit d’une
 				constante universelle partagée par plusieurs algorithmes.%
 			} 
 			sous la forme suivante%
 			\footnote{%
-				L'usage est d'utiliser des noms en majuscule.%
+				L’usage est d’utiliser des noms en majuscule.%
 			}~:
 	
 			\begin{LDA}
@@ -1639,8 +1639,8 @@
 	
 			Il est inutile de spécifier leur type, celui-ci
 			étant défini implicitement par la valeur de la constante.	
-			L'utilisation de constantes dans vos algorithmes présente
-			les avantages suivants :
+			L’utilisation de constantes dans vos algorithmes présente
+			les avantages suivants~:
 			\begin{itemize}
 			\item
 				Une meilleure lisibilité du code,
@@ -1653,42 +1653,42 @@
 			
 			\begin{Exercice}{Utiliser une constante}
 				Trouvez un algorithme que vous avez écrit
-				où l'utilisation de constante
+				où l’utilisation de constante
 				pourrait améliorer la lisibilité de votre solution.
 			\end{Exercice}
 			
 	%=====================================
-	\section{Interagir avec l'utilisateur}
+	\section{Interagir avec l’utilisateur}
 	%=====================================
 	
-		Reprenons l'algorithme \lda{surfaceRectangle}
-		qui nous a souvent servi d'exemple.
-		Il permet de calculer la surface d'un rectangle
+		Reprenons l’algorithme \lda{surfaceRectangle}
+		qui nous a souvent servi d’exemple.
+		Il permet de calculer la surface d’un rectangle
 		dont on connait la longueur et la largeur.
-		Mais d'où viennent ces données ?
-		Et que faire du résultat ?
+		Mais d’où viennent ces données~?
+		Et que faire du résultat~?
 		
-		Tout d'abord, un algorithme peut utiliser 
+		Tout d’abord, un algorithme peut utiliser 
 		(on dit \textbf{appeler}\index{appel}) un autre algorithme%
 		\footnote{%
-			Cet autre algorithme doit exister \emph{quelque part} :
+			Cet autre algorithme doit exister \emph{quelque part}~:
 			sur la même page, une autre page, un autre document,
 			peu importe.
 			Quand on codera cet algorithme,
 			les contraintes seront plus fortes
-			car il faudra que l'ordinateur
+			car il faudra que l’ordinateur
 			trouve cet autre bout de code
-			pour pouvoir l'exécuter.
+			pour pouvoir l’exécuter.
 		}.
-		Pour ce faire, il doit spécifier les valeurs des paramètres ;
+		Pour ce faire, il doit spécifier les valeurs des paramètres~;
 		il peut alors utiliser le résultat.
-		L'appel s'écrit ainsi :
+		L’appel s’écrit ainsi~:
 		
 		\begin{LDA}
-			\Let surface \Gets surfaceRectangle(122,3.78) \RComment{On appelle l'algorithme surfaceRectangle}
+			\Let surface \Gets surfaceRectangle(122,3.78) \RComment{On appelle l’algorithme surfaceRectangle}
 		\end{LDA}
 		
-		L'appel d'un algorithme est considéré comme une expression,
+		L’appel d’un algorithme est considéré comme une expression,
 		un calcul qui, comme toute expression,
 		possède une valeur (la valeur retournée)
 		et peut intervenir dans un calcul plus grand, 
@@ -1701,26 +1701,26 @@
 			Si on veut écrire un programme concret (en Java par exemple)
 			qui permet de calculer des surfaces de rectangles,
 			il faudra bien que ce programme communique le résultat
-			à l'utilisateur du programme.
-			On va l'indiquer avec la commande \lda{\K{afficher}}. 
-			Ce qui donne :
+			à l’utilisateur du programme.
+			On va l’indiquer avec la commande \lda{\K{afficher}}. 
+			Ce qui donne~:
 			
 			\begin{LDA}
 				\Let surface \Gets surfaceRectangle(122,3.78)
 				\Write{surface}
 			\end{LDA}
 	
-			ou, plus simplement :
+			ou, plus simplement~:
 		
 			\begin{LDA}
 				\Write{surfaceRectangle(122,3.78)}
 			\end{LDA}
 	
-			L'instruction \lda{\K{afficher}} signifie 
-			que l'algorithme doit, à cet endroit de l'algorithme
-			communiquer une information à l'utilisateur.
+			L’instruction \lda{\K{afficher}} signifie 
+			que l’algorithme doit, à cet endroit de l’algorithme,
+			communiquer une information à l’utilisateur.
 			La façon dont il va communiquer cette information 
-			(à l'écran dans une application texte, 
+			(à l’écran dans une application texte, 
 			via une application graphique,
 			sur un cadran de calculatrice ou de montre,
 			sur une feuille de papier imprimée,
@@ -1728,19 +1728,19 @@
 			ne nous intéresse pas ici%
 			\footnote{%
 				Ce sera bien sûr une question importante
-				quand il s'agira de traduire l'algorithme en un programme.%
+				quand il s’agira de traduire l’algorithme en un programme.%
 			}.		
 	
 		%-----------------------------------------
 		\subsection{Demander des valeurs}\index{demander}
 		%-----------------------------------------
 	
-			Le bout d'algorithme qu'on vient d'écrire
-			n'est pas encore très utile puisqu'il calcule
+			Le bout d’algorithme qu’on vient d’écrire
+			n’est pas encore très utile puisqu’il calcule
 			toujours la surface du même rectangle.
-			Il serait intéressant de demander à l'utilisateur
+			Il serait intéressant de demander à l’utilisateur
 			ce que valent la longueur et la largeur.
-			C'est le but de la commande \lda{\K{demander}}. 
+			C’est le but de la commande \lda{\K{demander}}. 
 	
 			\begin{LDA}
 				\Read{longueur}
@@ -1748,9 +1748,9 @@
 				\Write{surfaceRectangle(longueur, largeur)}
 			\end{LDA}
 	
-			L'instruction \lda{\K{demander}}
-			signifie que l'utilisateur va,
-			à cet endroit de l'algorithme,
+			L’instruction \lda{\K{demander}}
+			signifie que l’utilisateur va,
+			à cet endroit de l’algorithme,
 			être sollicité pour donner une valeur 
 			qui sera affectée à une variable.
 			À nouveau, la façon dont il va indiquer cette valeur
@@ -1762,7 +1762,7 @@
 			via la reconnaissance vocale\dots)
 			ne nous intéresse pas ici.
 	
-			On peut combiner les demandes :
+			On peut combiner les demandes~:
 			
 			\begin{LDA}
 				\Read{longueur, largeur}
@@ -1775,15 +1775,15 @@
 			
 			Un algorithme avec paramètres 
 			est toujours plus intéressant
-			qu'un algorithme qui demande les données
+			qu’un algorithme qui demande les données
 			et affiche le résultat
 			car il peut être utilisé (appelé) dans un autre algorithme
 			pour résoudre une partie du problème.
 			
-			Rien n'empêche d'écrire, à partir de là,
-			un algorithme qui interagit avec l'utilisateur
-			et fait appel à l'algorithme qui réalise le calcul.
-			Par exemple :
+			Rien n’empêche d’écrire, à partir de là,
+			un algorithme qui interagit avec l’utilisateur
+			et fait appel à l’algorithme qui réalise le calcul.
+			Par exemple~:
 			\begin{LDA}
 				\Algo{TestSurface}{}{}
 					\Decl{longueur, largeur}{réels}
@@ -1793,7 +1793,7 @@
 			\end{LDA}
 
 			\begin{Exercice}{Conversion en heures-minutes-secondes}
-				Écrire un algorithme qui permet à l'utilisateur
+				Écrire un algorithme qui permet à l’utilisateur
 				de donner le nombre de secondes écoulées depuis minuit
 				et qui affiche le moment de la journée correspondant
 				en heures-minutes-secondes.
