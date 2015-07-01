@@ -16,7 +16,7 @@
 
 	Très tôt dans ce cours,
 	nous avons introduit le type \lda{chaine}
-	mais nous n'en n'avons encore fait que des usages basiques,
+	mais nous n'en avons encore fait que des usages basiques,
 	essentiellement des affichages.
 	Il est temps d'aller plus loin et de les \emph{manipuler},
 	c'est-à-dire d'examiner et de manipuler le contenu de chaines. 
@@ -51,7 +51,7 @@
 
 	D'autres langages, comme Python, n'ont pas de type caractère spécifique.
 	D'autres encore, comme C, ont un type caractère mais pas de type chaine
-	à proprement parlé; ils sont vus comme des tableaux de caractères. 
+	à proprement parler; ils sont vus comme des tableaux de caractères. 
 
 	Ici, nous introduirons un type \lda{caractère}
 	mais sans le distinguer clairement d'une chaine.
@@ -66,7 +66,7 @@
 
 	Pour pouvoir manipuler une chaine,
 	il faut pouvoir accéder aux caractères qui la composent.
-	Comme, il s'agit d'une opération de base souvent utilisée,
+	Comme il s'agit d'une opération de base souvent utilisée,
 	nous allons introduire une écriture compacte,
 	empruntée aux tableaux : 
 	\lda{chaine[i]} désigne le i\ieme{} caractère de la chaine
@@ -277,7 +277,7 @@
 				\Decl{posFraction, numérateur, dénominateur}{entiers}
 				\Let posFraction \Gets position(fraction,"/")
 				\Let numérateur \Gets nombre(souschaine(fraction,1,posFraction-1))
-				\Let dénominateur \Gets nombre(souschaine(fraction,long(fraction)-posFraction))
+				\Let dénominateur \Gets nombre(souschaine(fraction,posFraction+1,long(fraction)-posFraction))
 				\Return numérateur / dénominateur
 			\EndAlgo
 		\end{LDA}
@@ -348,7 +348,7 @@
 		L'empereur César utilisait une technique (on dit un \emph{chiffrement})
 		qui porte à présent son nom~:
 		remplacer chaque lettre du message par la lettre qui se situe 
-		$k$ position plus loin dans l'alphabet (cycliquement).
+		$k$ positions plus loin dans l'alphabet (cycliquement).
 		
 		Exemple~:~si $k$ vaut $2$, 
 		alors le texte clair "CESAR" devient "EGUCT" lorsqu'il est chiffré 
@@ -361,7 +361,7 @@
 		que des lettres majuscules ainsi que la valeur de $k$ et qui retourne
 		la version chiffrée du message.
 	
-		On vous demande également d'écrire le algorithme de déchiffrement.
+		On vous demande également d'écrire l'algorithme de déchiffrement.
 		Cet algorithme reçoit un message chiffré et la valeur de $k$ qui a été
 		utilisée pour le chiffrer et retourne le message en clair.
 		Attention~! Ce second algorithme est \textbf{très simple}.
