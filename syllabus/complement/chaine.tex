@@ -133,8 +133,8 @@
 	\begin{description}
 	\item[\lda{estLettre(car: caractère)\Gives~booléen}]
 		Cette fonction indique si un caractère est une lettre. 
-		Par exemple elle retourne vrai pour 'a', 'e', 'G', 'K', 
-		mais faux pour '4', '\$', '@'\dots %$ 
+		Par exemple elle retourne vrai pour "a", "e", "G", "K", 
+		mais faux pour "4", "\$", "@"\dots %$ 
 	\item[\lda{estMinuscule(car: caractère)\Gives~booléen}]	
 		Permet de savoir si le caractère est une lettre minuscule.
 	\item[\lda{estMajuscule(car: caractère)\Gives~booléen}]	
@@ -142,7 +142,7 @@
 	\item[\lda{estChiffre(car: caractère)\Gives~booléen}]	
 		Permet de savoir si un caractère est un chiffre. 
 		Elle retourne vrai uniquement pour les dix caractères 
-		'0', '1', '2', '3', '4', '5', '6', '7', '8' et '9' 
+		"0", "1", "2", "3", "4", "5", "6", "7", "8" et "9" 
 		et faux dans tous les autres cas.
 	\item[\lda{majuscule(texte: chaine)\Gives~chaine}]
 		Retourne une chaine où toutes les lettres du texte
@@ -162,11 +162,11 @@
 	\begin{description}
 	\item[\lda{numLettre(car: caractère)\Gives~entier}]
 		Retourne toujours un entier entre 1 et 26. 
-		Par exemple \lda{numLettre('E')} donnera 5, 
-		ainsi que \lda{numLettre('e')}, 
+		Par exemple \lda{numLettre("E")} donnera 5, 
+		ainsi que \lda{numLettre("e")}, 
 		cette fonction traite donc de la même manière 
 		les majuscules et les minuscules. 
-		\lda{numLettre} retournera aussi 5 pour les caractères 'é', 'è', 'ê', 'ë'\dots). 
+		\lda{numLettre} retournera aussi 5 pour les caractères "é", "è", "ê", "ë"\dots). 
 		Attention, il est interdit d'utiliser cette fonction 
 		si le caractère n'est pas une lettre !
 	\end{description}
@@ -179,7 +179,7 @@
 	\item[\lda{lettreMaj(n: entier)\Gives~caractère}]
 		Retourne la forme majuscule de la n\ieme{} lettre de l'alphabet 
 		(où \textit{n} sera obligatoirement compris entre 1 et 26). 
-		Par exemple, \lda{lettreMaj(13)} retourne 'M'.
+		Par exemple, \lda{lettreMaj(13)} retourne "M".
 	\item[\lda{lettreMin(n: entier)\Gives~caractère}]
 		Idem pour les minuscules.
 	\end{description}
