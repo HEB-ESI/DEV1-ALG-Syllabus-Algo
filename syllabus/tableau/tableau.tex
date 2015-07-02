@@ -254,12 +254,12 @@
 		Un élément (une case) du tableau peut être accédé
 		via la notation
 		\begin{LDA}
-			\Stmt tab[i]	\Comment{élément du tableau 'tab' d'indice i}
+			\Stmt tab[i]	\Comment{élément du tableau 'tab' à l'indice i}
 		\end{LDA}
 		La première case du tableau porte l'indice \lda{0}%
 		\footnote{%
 			Nous considérons que la première case du tableau
-			porte le numéro 0 comme c'est le cas dans beaucoup de langage
+			porte le numéro 0 comme c'est le cas dans beaucoup de langages
 			de programmation (comme Java par exemple).
 			Plus loin, nous verrons une notation alternative
 			qui permet de choisir un autre numéro de début pour le tableau
@@ -350,7 +350,7 @@
 			
 				\begin{LDA}
 					\LComment{Affiche les éléments d'un tableau}
-					\Algo{affiche}{\Par{tab\In}{\Array{10}{entiers}}}{} 
+					\Algo{afficher}{\Par{tab\In}{\Array{10}{entiers}}}{} 
 						\For{i}{0}{9}
 							\Write tab[i]
 						\EndFor
@@ -371,7 +371,7 @@
 				du tableau reçu en paramètre. Exemple~:
 			
 				\begin{LDA}
-					\LComment{Inverse les éléments du tableau}
+					\LComment{Inverser le signe des éléments du tableau}
 					\Algo{opposé}{\Par{tab\In\Out}{\Array{10}{entiers}}}{} 
 						\For{i}{0}{9}
 							\Let tab[i] \Gets -tab[i]
