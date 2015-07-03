@@ -905,13 +905,14 @@
 		la fin de la boucle.
 
 		\begin{LDA}
-		\LComment Lit des valeurs entières et retourne la somme des valeurs lues.
-		\Algo{sommeNombres}{}{entier} \RComment Variante 3
+		\LComment Lit des valeurs entières positives et retourne la somme des valeurs lues.
+		\LComment La valeur sentinelle est -1.
+		\Algo{sommeNombresPositifs}{}{entier} \RComment Variante 3
 			\Decl{valeur}{entier} \RComment un des termes de l’addition
 			\Decl{somme}{entier} \RComment la somme
 			\Let somme \Gets 0
 			\Read valeur
-			\While{valeur ${\geq}$ 0} 
+			\While{valeur ${\neq}$ -1} 
 				\Let somme \Gets somme + valeur 
 				\Read valeur \RComment remarquer l’endroit où on lit une valeur.
 			\EndWhile
