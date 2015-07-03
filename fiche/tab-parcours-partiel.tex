@@ -43,6 +43,7 @@
 		les deux parties du test.
 		Il faut absolument vérifier que l'indice est bon avant
 		de tester la valeur à cet indice.
+		Revoyez la notion de court-circuit (\vref{court-circuit} ).
 		
 	\subsubsection*{[B] Avec variable booléenne}
 
@@ -67,7 +68,7 @@
 
 		\begin{LDA}
 			\If{tab[i] = 0}
-				\Let zéroPrésent \Gets true
+				\Let zéroPrésent \Gets vrai
 			\Else
 				\Let i \Gets i + 1
 			\EndIf
@@ -89,32 +90,31 @@
 		
 \Section{Alternatives}
 
-	\begin{minipage}[b]{80mm}
+	\begin{wrapfigure}{l}{90mm}
 		\begin{LDA}
 			\Algo{tousPositifs}{
-				\\\hfill
 				\Par{tab}{\Array{n}{entiers}}}{booléen}
 				\For{i}{0}{n-1}
 					\If{tab[i] = 0}
-						\Return false
+						\Return faux
 					\EndIf
 				\EndFor
-				\Return true
+				\Return vrai
 			\EndAlgo
 		\end{LDA}
-	\end{minipage}
-	\quad
-	\begin{minipage}{60mm}
-		On rencontre parfois ce genre de solutions.
-		Elle est plus simple à écrire car on ne doit
-		pas gérer manuellement l'indice
-		mais le lecteur doit attendre de lire
-		le code de la boucle pour comprendre
-		que le parcours ne sera pas toujours complet.
-		
-		Nous vous demandons de ne pas l'utiliser en 1\iere{} année.
-	\end{minipage}
+	\end{wrapfigure}
 
+	On rencontre parfois ce genre de solutions.
+	Elle est plus simple à écrire car on ne doit
+	pas gérer manuellement l'indice
+	mais le lecteur doit attendre de lire
+	le code de la boucle pour comprendre
+	que le parcours ne sera pas toujours complet.
+	
+	Nous ne la recommandons pas en 1ère année
+	mais nous l'accepterons 
+	s'il s'agit d'un algorithme court
+	qui ne contient que ce parcours.
 					
 \Section{Quand l'utiliser ?}
 
