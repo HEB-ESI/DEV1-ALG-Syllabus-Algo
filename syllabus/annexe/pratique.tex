@@ -129,6 +129,59 @@
 	Ce sera sanctionné lors des évaluations.
 
 %===================================================
+\section{Assigner une valeur en fonction d'une condition}
+%===================================================
+
+	\begin{minipage}{9cm}
+		Examinons l'exemple ci-contre 
+		qui assigne un \lda{prix}
+		qui doit être différent en fonction
+		du droit ou non à un traif réduit.  
+	\end{minipage}
+	\quad
+	\begin{minipage}{4cm}
+		\begin{LDA}
+		\If{tarifRéduit}
+			\Let prix \Gets 8 
+		\Else
+			\Let prix \Gets 12 
+		\EndIf
+		\end{LDA}
+	\end{minipage}
+	\hskip-5mm
+	\includegraphics[width=1cm]{icon/do}
+
+	\begin{minipage}{9cm}
+		Nous voyons régulièrement
+		des étudiants écrire plutôt fièrement
+		la version ci-contre
+		en arguant qu'elle est plus courte,
+		donc mieux.
+
+		Elle comporte effectivement (un peu) moins de lignes
+		mais ce critère n'a que très peu d'importance.
+		Cette version n'est pas plus rapide
+		(elle est même plus lente en cas de traif réduit)
+		et elle est moins lisible car le lecteur
+		croit d'abord que le tarif est toujours de 12
+		avant de constater qu'il peut être différent.
+	\end{minipage}
+	\quad
+	\begin{minipage}{4cm}
+		\begin{LDA}
+		\Let prix \Gets 12 
+		\If{tarifRéduit}
+			\Let prix \Gets 8 
+		\EndIf
+		\end{LDA}
+	\end{minipage}
+	\hskip-5mm
+	\includegraphics[width=1cm]{icon/dont}
+
+	On vous demande de vous en tenir à la première version.
+	La seconde sera sanctionnée.
+	
+%===================================================
 \section{Interrompre une boucle pour}
 %===================================================
 
