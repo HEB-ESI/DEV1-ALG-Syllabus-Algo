@@ -1,0 +1,236 @@
+\chapter{Bonnes (et mauvaises) pratiques}
+
+	Au fil des années,
+	nous voyons souvent les étudiants écrire
+	les mêmes bouts de code qui sont discutables,
+	voire à proscrire.
+	Discutons ici des plus courants.
+	
+%===================================================
+\section{Tester un booléen}
+%===================================================
+
+	Lorsqu'il s'agit de comparer deux nombres dans la condition
+	d'un \K{si}, vous écrivez tous assez naturellement :
+	\lda{\K{si} (nb1<nb2) \dots}
+	\\Il ne vous viendrait pas à l'idée d'écrire :
+	\lda{\K{si} (nb1<nb2 = vrai) \dots}
+	
+	\bigskip
+	\begin{minipage}{9cm}
+		Avec un booléen, les choses sont moins simples.
+		Par exemple, si on doit faire quelque chose
+		si la variable \lda{adulte} est vraie,
+		vous êtes nombreux à écrire
+		le bout de code ci-contre,
+		en tout cas en début d'année.
+	\end{minipage}
+	\quad
+	\begin{minipage}{4cm}
+		\begin{LDA}
+		\If{adulte = vrai}
+			\Stmt \dots
+		\EndIf
+		\end{LDA}
+	\end{minipage}
+	\hskip-5mm
+	\includegraphics[width=1cm]{icon/dont}
+	
+	\bigskip
+	\begin{minipage}{9cm}
+		Cette écriture est correcte mais inutilement lourde.
+		La variable étant déjà un booléen qui vaut vrai ou faux,
+		il suffit d'écrire :
+	\end{minipage}
+	\quad
+	\begin{minipage}{4cm}
+		\begin{LDA}
+		\If{adulte}
+			\Stmt \dots
+		\EndIf
+		\end{LDA}
+	\end{minipage}
+	\hskip-5mm
+	\includegraphics[width=1cm]{icon/do}
+	
+	\bigskip
+	\begin{minipage}{9cm}
+		De même, si le test doit être vrai quand la variable booléenne
+		est fausse, il suffit d'écrire : 
+	\end{minipage}
+	\quad
+	\begin{minipage}{4cm}	
+		\begin{LDA}
+		\If{NON adulte}
+			\Stmt \dots
+		\EndIf
+		\end{LDA}
+	\end{minipage}
+	\hskip-5mm
+	\includegraphics[width=1cm]{icon/do}
+
+	\bigskip
+	On comprend que la première écriture vous vienne
+	d'abord et on la tolérera les premières séances
+	mais vous devrez vite vous en débarasser ;
+	elle ne sera pas tolérée lors des évaluations.
+	
+%===================================================
+\section{Assigner un booléen}
+%===================================================
+
+	Lorsqu'il s'agit de donner une valeur à un booléen,
+	on vous voit souvent écrire un si-sinon.
+	Ce n'est pas la bonne idée.
+
+	\bigskip
+	\begin{minipage}{9cm}
+		Par exemple,
+		si la variable booléenne \lda{nul} 
+		doit valoir \lda{vrai} si un nombre est égal à 0
+		et \lda{faux} sinon,
+		vous êtes nombreux à écrire le bout de code ci-contre.		
+	\end{minipage}
+	\quad
+	\begin{minipage}{4cm}
+		\begin{LDA}
+		\If{nb = 0}
+			\Let nul \Gets vrai
+		\Else
+			\Let nul \Gets faux
+		\EndIf
+		\end{LDA}
+	\end{minipage}
+	\hskip-5mm
+	\includegraphics[width=1cm]{icon/dont}
+
+	\bigskip
+	\begin{minipage}{9cm}
+		C'est correct mais inutilement compliqué.
+		Puisque on assigne \lda{vrai} si la condition
+		est vraie et \lda{faux} si la condition est
+		fausse, il suffit d'assigner la condition.
+		Ce qui donne :
+	\end{minipage}
+	\quad
+	\begin{minipage}{4cm}
+		\begin{LDA}
+		\Let nul \Gets nb = 0
+		\end{LDA}
+	\end{minipage}
+	\hskip-5mm
+	\includegraphics[width=1cm]{icon/do}
+
+	\bigskip
+	À nouveau,
+	on tolérera le si-sinon les premières séances
+	mais on attend de vous que vous passiez rapidement
+	à une simple assignation.
+	Ce sera sanctionné lors des évaluations.
+
+%===================================================
+\section{Interrompre une boucle pour}
+%===================================================
+
+	\begin{minipage}{6cm}
+		On voit trop souvent des étudiants écrire une boucle
+		pour et l'interrompre anticipativement en modifiant
+		l'indice, comme illustré par l'exemple ci-contre.
+	\end{minipage}
+	\quad
+	\begin{minipage}[t]{7cm}
+		\vskip-8mm
+		\begin{LDA}
+		\For{i}{1}{n}
+			\If{quelquechose}
+				\Let i \Gets n+1 \Comment {Pour interrompre la boucle}
+			\EndIf
+		\EndFor
+		\end{LDA}
+	\end{minipage}
+	\hskip-5mm
+	\includegraphics[width=1cm]{icon/dont}
+
+	\bigskip
+	Il est totalement interdit de modifier explicitement 
+	l'indice d'une boucle, quelle qu'en soit la raison.
+	Ce n'est pas une bonne idée en terme de lisibilité
+	et dans certains langages c'est interdit ou
+	cela ne fait pas ce qui est attendu.
+	
+	\begin{minipage}{7cm}
+	Nous tenons absolument que vous passiez par une boucle tant-que
+	et l'utilisation d'un booléen pour contrôler la fin.
+	Par exemple :
+	\end{minipage}
+	\quad
+	\begin{minipage}[t]{6cm}
+		\vskip-8mm
+		\begin{LDA}
+		\Let i \Gets 1
+		\Let fini \Gets faux
+		\While{i$\leq$n ET NON fini}
+			\If{quelquechose}
+				\Let fini \Gets vrai
+			\EndIf
+			\Let i \Gets i+1
+		\EndWhile
+		\end{LDA}
+	\end{minipage}
+	\hskip-5mm
+	\includegraphics[width=1cm]{icon/do}
+
+%===================================================
+\section{Plusieurs retourner}
+%===================================================
+	
+	Dans le cours,
+	nous vous avons donné comme règle :
+	\og{}Un seul \lda{retourner} par algorithme\fg{}.
+
+	Cette règle n'est pas partagée par tous les programmeurs.
+	Il existe un courant qui tolère plusieurs \lda{retourner}
+	dans certains cas précis.
+
+	\begin{minipage}{7cm}
+		Un cas concret est pour interrompre anticipativement une boucle.
+		Certains écrivent :
+	\end{minipage}
+	\quad
+	\begin{minipage}{6cm}
+		\begin{LDA}
+			\For{i}{1}{n}
+				\If{\dots}
+					\Return quelquechose
+				\EndIf
+			\EndFor
+			\Return autrechose
+		\end{LDA}
+	\end{minipage}
+	\hskip-5mm
+	\includegraphics[width=1cm]{icon/caution}
+	
+	\bigskip
+	\begin{minipage}{7cm}
+		Une autre situation est lorsque la valeur à retourner dépend d'un test.
+		On voit alors des bouts de code qui ressemblent à :
+	\end{minipage}
+	\quad
+	\begin{minipage}{6cm}
+		\begin{LDA}
+			\If{\dots}
+				\Return quelquechose
+			\Else
+				\Return autrechose
+			\EndIf
+		\end{LDA}
+	\end{minipage}
+	\hskip-5mm
+	\includegraphics[width=1cm]{icon/caution}
+	
+	Ces écritures seront tolérées dans ce cours
+	(et donc non sanctionnées)
+	mais nous ne les encourageons pas
+	par crainte d'abus : elles ne peuvent se
+	justifier que pour des algorithmes très courts.
+	
