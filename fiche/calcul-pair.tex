@@ -1,5 +1,5 @@
 %===================================
-\begin{Fiche}{Un nombre (im)pair}
+\begin{Fiche}{Un nombre pair}
 %===================================
 \label{fiche:calcul-pair}
 
@@ -36,78 +36,82 @@
 		\EndAlgo
 	\end{LDA}
 
-\Section{Alternatives}
+	Attention à éviter les mauvaises écritures 
+	expliquées à l'annexe \vref{B-ass-bool} :
+	pas de \lda{\K{si-sinon}}.
+	
+%\Section{Alternatives}
 
-	\begin{minipage}[t]{7.5cm}
-		\begin{LDA}
-		\Algo{estPair}{\Par{nombre}{entier}}{booléen}
-			\If{nombre MOD 2 = 0}
-				\Return vrai
-			\Else
-				\Return faux
-			\EndIf
-		\EndAlgo
-		\end{LDA}
-	\end{minipage}
-	\quad
-	\begin{minipage}[t]{6cm}
-		Certains étudiants se sentent plus à l'aise avec
-		la solution ci-contre en début d'année.			
-		C'est probablement parce qu'elle colle plus à la façon de l'exprimer
-		en français.
-		On les encourage toutefois à rapidement 
-		passer à la version plus compacte
-		et, une fois habitué, plus lisible.
-		Cette alternative sera sancitonnée dans les évaluations.
-	\end{minipage}
+	%\begin{minipage}[t]{7.5cm}
+		%\begin{LDA}
+		%\Algo{estPair}{\Par{nombre}{entier}}{booléen}
+			%\If{nombre MOD 2 = 0}
+				%\Return vrai
+			%\Else
+				%\Return faux
+			%\EndIf
+		%\EndAlgo
+		%\end{LDA}
+	%\end{minipage}
+	%\quad
+	%\begin{minipage}[t]{6cm}
+		%Certains étudiants se sentent plus à l'aise avec
+		%la solution ci-contre en début d'année.			
+		%C'est probablement parce qu'elle colle plus à la façon de l'exprimer
+		%en français.
+		%On les encourage toutefois à rapidement 
+		%passer à la version plus compacte
+		%et, une fois habitué, plus lisible.
+		%Cette alternative sera sancitonnée dans les évaluations.
+	%\end{minipage}
 
-	\hfil\rule{0.5\textwidth}{.4pt}\hfil
+	%\hfil\rule{0.5\textwidth}{.4pt}\hfil
 
-	\begin{minipage}[t]{7.5cm}
-		\begin{LDA}
-		\Algo{estPair}{\Par{nombre}{entier}}{booléen}
-			\Decl{pair}{booléen}
-			\If{nombre MOD 2 = 0}
-				\Let pair \Gets vrai
-			\Else
-				\Let pair \Gets faux
-			\EndIf
-			\Return pair
-		\EndAlgo
-		\end{LDA}
-	\end{minipage}
-	\quad
-	\begin{minipage}[t]{6cm}
-		Cette solution n'est pas non plus à privilégier.
-		On a un seul retour, ce qui est mieux,
-		mais le test est encore de trop.
-		Nous la sanctionnerons dans les évaluations.
-	\end{minipage}
+	%\begin{minipage}[t]{7.5cm}
+		%\begin{LDA}
+		%\Algo{estPair}{\Par{nombre}{entier}}{booléen}
+			%\Decl{pair}{booléen}
+			%\If{nombre MOD 2 = 0}
+				%\Let pair \Gets vrai
+			%\Else
+				%\Let pair \Gets faux
+			%\EndIf
+			%\Return pair
+		%\EndAlgo
+		%\end{LDA}
+	%\end{minipage}
+	%\quad
+	%\begin{minipage}[t]{6cm}
+		%Cette solution n'est pas non plus à privilégier.
+		%On a un seul retour, ce qui est mieux,
+		%mais le test est encore de trop.
+		%Nous la sanctionnerons dans les évaluations.
+	%\end{minipage}
 
-	\hfil\rule{0.5\textwidth}{.4pt}\hfil
+	%\hfil\rule{0.5\textwidth}{.4pt}\hfil
 
-	\begin{minipage}[t]{7.5cm}
-		\begin{LDA}
-		\Algo{estPair}{\Par{nombre}{entier}}{booléen}
-			\If{nombre MOD 2 = 0}
-				\Return vrai
-			\EndIf
-			\Return faux
-		\EndAlgo
-		\end{LDA}
-	\end{minipage}
-	\quad
-	\begin{minipage}[t]{6cm}
-		On rencontre également ce genre de solution
-		qui, pour certains, 
-		parait mieux que la précédente 
-		parce qu'elle ne contient pas de "sinon"
-		et est donc plus courte.
-		Il n'en n'est rien.
-		Rappelons que la longueur de l'algorithme
-		n'est pas, en soi, un critère de qualité. 
-		À proscrire, donc.
-	\end{minipage}
+	%\begin{minipage}[t]{7.5cm}
+		%\begin{LDA}
+		%\Algo{estPair}{\Par{nombre}{entier}}{booléen}
+			%\If{nombre MOD 2 = 0}
+				%\Return vrai
+			%\EndIf
+			%\Return faux
+		%\EndAlgo
+		%\end{LDA}
+	%\end{minipage}
+	%\quad
+	%\begin{minipage}[t]{6cm}
+		%On rencontre également ce genre de solution
+		%qui, pour certains, 
+		%parait mieux que la précédente 
+		%parce qu'elle ne contient pas de "sinon"
+		%et est donc plus courte.
+		%Il n'en n'est rien.
+		%Rappelons que la longueur de l'algorithme
+		%n'est pas, en soi, un critère de qualité. 
+		%À proscrire, donc.
+	%\end{minipage}
 	
 \Section{Quand l'utiliser ?}
 

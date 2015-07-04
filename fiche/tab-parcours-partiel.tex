@@ -87,34 +87,37 @@
 		faites attention à ne pas utiliser \lda{tab[i]}
 		si vous n'êtes pas sûr du \lda{i}.
 		C'est particulièrement vrai après la boucle.
+
+		Attention aussi à éviter les mauvaises pratiques 
+		expliquées à l'annexe \vref{B-for-break}.
 		
-\Section{Alternatives}
+%\Section{Alternatives}
 
-	\begin{wrapfigure}{l}{90mm}
-		\begin{LDA}
-			\Algo{tousPositifs}{
-				\Par{tab}{\Array{n}{entiers}}}{booléen}
-				\For{i}{0}{n-1}
-					\If{tab[i] = 0}
-						\Return faux
-					\EndIf
-				\EndFor
-				\Return vrai
-			\EndAlgo
-		\end{LDA}
-	\end{wrapfigure}
+	%\begin{wrapfigure}{l}{90mm}
+		%\begin{LDA}
+			%\Algo{tousPositifs}{
+				%\Par{tab}{\Array{n}{entiers}}}{booléen}
+				%\For{i}{0}{n-1}
+					%\If{tab[i] = 0}
+						%\Return faux
+					%\EndIf
+				%\EndFor
+				%\Return vrai
+			%\EndAlgo
+		%\end{LDA}
+	%\end{wrapfigure}
 
-	On rencontre parfois ce genre de solutions.
-	Elle est plus simple à écrire car on ne doit
-	pas gérer manuellement l'indice
-	mais le lecteur doit attendre de lire
-	le code de la boucle pour comprendre
-	que le parcours ne sera pas toujours complet.
+	%On rencontre parfois ce genre de solutions.
+	%Elle est plus simple à écrire car on ne doit
+	%pas gérer manuellement l'indice
+	%mais le lecteur doit attendre de lire
+	%le code de la boucle pour comprendre
+	%que le parcours ne sera pas toujours complet.
 	
-	Nous ne la recommandons pas en 1ère année
-	mais nous l'accepterons 
-	s'il s'agit d'un algorithme court
-	qui ne contient que ce parcours.
+	%Nous ne la recommandons pas en 1ère année
+	%mais nous l'accepterons 
+	%s'il s'agit d'un algorithme court
+	%qui ne contient que ce parcours.
 					
 \Section{Quand l'utiliser ?}
 
