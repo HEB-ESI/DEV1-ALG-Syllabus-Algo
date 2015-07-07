@@ -430,7 +430,21 @@
 	n'a pas de valeur ;
 	il ne peut pas apparaitre dans une expression
 	ou être assigné à une variable.
+	Ainsi, les utilisations suivantes de l'algorithme
+	\lda{valAbsolue}, décrit plus haut, sont incorrectes.
+	
+	\begin{wrong}
+	\begin{LDA}
+		\Write valAbsolue(température) + 1
+		\Let tempAbsolue \Gets valAbsolue(température)
+	\end{LDA}
+	\end{wrong}
 
+	Si un algorithme possède une seule valeur en sortie,
+	on préférera toujours une valeur en retour
+	à un paramètre en sortie;
+	le code appelant sera plus lisible.
+	
 %===================
 \section{Résumons}
 %===================
