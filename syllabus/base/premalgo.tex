@@ -1508,13 +1508,16 @@
 			\end{wrong}
 	
 			Il faudra préférer
-			\begin{LDA}
-			\Algo{duréeTrajet}{\Par{vitesseMS, distanceKM}{réels}}{réel}
-				\Decl{distanceM}{réel}
-				\Let distanceM \Gets 1000 * distanceKM
-				\Return distanceM / vitesseMS
-			\EndAlgo
-			\end{LDA}
+			
+			\begin{correct}
+				\begin{LDA}
+				\Algo{duréeTrajet}{\Par{vitesseMS, distanceKM}{réels}}{réel}
+					\Decl{distanceM}{réel}
+					\Let distanceM \Gets 1000 * distanceKM
+					\Return distanceM / vitesseMS
+				\EndAlgo
+				\end{LDA}
+			\end{correct}
 			\medskip
 		
 		\item
@@ -1569,11 +1572,13 @@
 			ce que l'instruction dit déjà.
 			Voici quelques mauvais commentaires
 			
-			\begin{LDA}
-				\LComment{Exemples de mauvais commentaires}
-				\Decl{longueur}{réel} \RComment{La longueur est un réel}
-				\Let somme \Gets 0 \RComment{On initialise la somme à 0} 
-			\end{LDA}
+			\begin{wrong}
+				\begin{LDA}
+					\LComment{Exemples de mauvais commentaires}
+					\Decl{longueur}{réel} \RComment{La longueur est un réel\quad.}
+					\Let somme \Gets 0 \RComment{On initialise la somme à 0} 
+				\end{LDA}
+			\end{wrong}
 			
 			Notez qu’un excès de commentaires peut être le révélateur
 			des problèmes de lisibilité du code lui-même.
@@ -1581,16 +1586,20 @@
 			peut s’avérer bien plus efficace que des commentaires. 
 			Ainsi, l’instruction
 	
-			\begin{LDA}
-			\Let nouveauCapital \Gets ancienCapital * (1 + taux / 100)
-			\end{LDA}
+			\begin{correct}
+				\begin{LDA}
+				\Let nouveauCapital \Gets ancienCapital * (1 + taux / 100)
+				\end{LDA}
+			\end{correct}
 	
 			dépourvue de commentaires est bien préférable aux lignes suivantes~:
 	
-			\begin{LDA}
-			\Let c1 \Gets c0 * (1 + t / 100) \RComment calcul du nouveau capital
-			\Empty \RComment c1 est le nouveau capital, c0 est l’ancien capital, t est le taux
-			\end{LDA}
+			\begin{wrong}
+				\begin{LDA}
+				\Let c1 \Gets c0 * (1 + t / 100) \RComment calcul du nouveau capital\quad.
+				\Empty \RComment c1 est le nouveau capital, c0 est l’ancien capital, t est le taux
+				\end{LDA}
+			\end{wrong}
 			
 			\bigskip
 			Pour résumer :

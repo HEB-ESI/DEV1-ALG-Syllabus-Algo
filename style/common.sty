@@ -39,11 +39,24 @@
 % \begin{wrong}\begin{LDA}...\end{LDA}\end{wrong}
 \usepackage{environ}
 \NewEnviron{wrong}{%
-	\begin{tikzpicture}
-		\node (box){\begin{minipage}{\linewidth}\BODY\end{minipage}};
-		\draw[gray] (box.north west) -- (box.south east); % pour un trait en diagonale principale
-		\draw[gray] (box.south west) -- (box.north east); % pour un autre trait en diagonale 
-	\end{tikzpicture}
+%	\begin{tikzpicture}
+%		\node (box){\begin{minipage}{\linewidth}\BODY\end{minipage}};
+%		\draw[gray] (box.north west) -- (box.south east); % pour un trait en diagonale principale
+%		\draw[gray] (box.south west) -- (box.north east); % pour un autre trait en diagonale 
+%	\end{tikzpicture}
+	\begin{minipage}{\linewidth-2mm}\BODY\end{minipage}
+	\hskip-5mm
+	\includegraphics[width=1cm]{icon/dont}
+	}
+\NewEnviron{correct}{%
+%	\begin{tikzpicture}
+%		\node (box){\begin{minipage}{\linewidth}\BODY\end{minipage}};
+%		\draw[gray] (box.north west) -- (box.south east); % pour un trait en diagonale principale
+%		\draw[gray] (box.south west) -- (box.north east); % pour un autre trait en diagonale 
+%	\end{tikzpicture}
+	\begin{minipage}{\linewidth-2mm}\BODY\end{minipage}
+	\hskip-5mm
+	\includegraphics[width=1cm]{icon/do}
 	}
 	
 % ===================================================
