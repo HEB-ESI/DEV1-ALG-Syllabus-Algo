@@ -185,47 +185,75 @@
 \section{Interrompre une boucle pour}\label{B-for-break}
 %===================================================
 
+	On voit trop souvent des étudiants écrire une boucle
+	pour et l'interrompre anticipativement en modifiant l'indice; 
+	c'est une très mauvaise idée.
+
 	\begin{minipage}{6cm}
-		On voit trop souvent des étudiants écrire une boucle
-		pour et l'interrompre anticipativement en modifiant
-		l'indice, comme illustré par l'exemple ci-contre.
+		Dans l'exemple ci-contre,
+		si une certain condition est vraie,
+		on donne une grande valeur à \lda{i}
+		pour sortir de la boucle.
 	\end{minipage}
 	\quad
 	\begin{minipage}[t]{7cm}
 		\vskip-8mm
 		\begin{LDA}
 		\For{i}{1}{n}
-			\If{quelquechose}
+			\Stmt \dots
+			\If{uneCondition}
 				\Let i \Gets n+1 \Comment {Pour interrompre la boucle}
 			\EndIf
+			\Stmt \dots
 		\EndFor
 		\end{LDA}
 	\end{minipage}
 	\hskip-5mm
 	\includegraphics[width=1cm]{icon/dont}
 
-	\bigskip
 	Il est totalement interdit de modifier explicitement 
 	l'indice d'une boucle, quelle qu'en soit la raison.
 	Ce n'est pas une bonne idée en terme de lisibilité
 	et dans certains langages c'est interdit ou
 	cela ne fait pas ce qui est attendu.
 	
-	\begin{minipage}{7cm}
-	Nous tenons absolument que vous passiez par une boucle tant-que
+	\begin{minipage}{6cm}
+	Nous tenons absolument à ce que vous passiez par une boucle tant-que
 	et l'utilisation d'un booléen pour contrôler la fin.
 	Par exemple :
 	\end{minipage}
 	\quad
-	\begin{minipage}[t]{6cm}
+	\begin{minipage}[t]{7cm}
 		\vskip-8mm
 		\begin{LDA}
 		\Let i \Gets 1
 		\Let fini \Gets faux
 		\While{i$\leq$n ET NON fini}
-			\If{quelquechose}
+			\Stmt \dots
+			\If{uneCondition}
 				\Let fini \Gets vrai
 			\EndIf
+			\Stmt \dots
+			\Let i \Gets i+1
+		\EndWhile
+		\end{LDA}
+	\end{minipage}
+	\hskip-5mm
+	\includegraphics[width=1cm]{icon/do}
+
+	\bigskip
+	\begin{minipage}{6cm}
+	Si le test est la première instruction de la boucle
+	et que la condition est courte,
+	on peut aussi se passer de la variable booléenne.
+	\end{minipage}
+	\quad
+	\begin{minipage}[t]{7cm}
+		\vskip-8mm
+		\begin{LDA}
+		\Let i \Gets 1
+		\While{i$\leq$n ET NON uneCondition}
+			\Stmt \dots
 			\Let i \Gets i+1
 		\EndWhile
 		\end{LDA}
