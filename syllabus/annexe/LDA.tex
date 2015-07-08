@@ -170,7 +170,7 @@
 	\end{LDA}
 	\end{minipage}
 	\
-	\begin{minipage}[t]{6.5cm}	
+	\begin{minipage}[t]{6.0cm}	
 	\begin{LDA}
 		\For[pas]{indice}{début}{fin}
 			\Stmt Instructions
@@ -178,7 +178,7 @@
 	\end{LDA}
 	\end{minipage}
 	\
-	\begin{minipage}[t]{4cm}	
+	\begin{minipage}[t]{3.2cm}	
 	\begin{LDA}
 		\Repeat
 			\Stmt Instructions
@@ -198,4 +198,54 @@
 		De même, le \lda{début}, la \lda{fin} et le \lda{pas} 
 		ne peuvent pas être modifiés dans la boucle.
 	\end{itemize}
+
+\subsection*{Les tableaux}
+%---------------------------------
+
+	Le type tableau se note \lda{\Array{n}{entiers}}.
+	Ainsi une déclaration ressemble à :
+	\begin{LDA}
+	\Decl{tab}{\Array{n}{entiers}}
+	\end{LDA}
 	
+	Les éléments se notent \lda{tab[0]} à \lda{tab[n-1]}.
+	On remarque que nous avons choisi de faire commencer les tableaux à 0
+	par défaut mais on peut choisir un autre début en écrivant :
+	\begin{LDA}
+	\Decl{tab}{\Array[1]{n}{entiers}}
+	\end{LDA}
+
+	On peut assigner toutes les valeurs d'un tableau 
+	via une notation compacte.
+	\begin{LDA}
+	\Let tab1 \Gets \{1,1,2,3,5,8,13\}
+	\Let tab2 \Gets \{1,\dots,1\}
+	\end{LDA}
+
+\subsection*{Les structures}
+%---------------------------------
+
+	Une structure se définit ainsi :
+	\begin{LDA}
+		\Struct{NomDeLaStructure}
+			\Decl{nomChamp1}{type1}
+			\Decl{nomChamp2}{type2}
+			\Stmt \dots
+			\Decl{nomChampN}{typeN}
+		\EndStruct
+	\end{LDA}
+	
+	On peut alors déclarer naturellement une variable structurée.
+	\begin{LDA}
+	\Decl{var}{NomDeLaStructure}
+	\end{LDA}
+	
+	Un champ s'accède grâce à la notation pointée : \lda{var.nomChamp}.
+	
+	Pour assigner une valeur à tous les champs d'une variable structurée,
+	on peut assigner chaque champ séparément avec la notation pointée
+	ou utiliser une notation compacte.
+	\begin{LDA}
+	\Let var \Gets \{valeurChamp1, valeurChamp2, \dots, valeurChampN\}
+	\end{LDA}
+	 
