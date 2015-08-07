@@ -881,13 +881,14 @@
 		\begin{Exercice}{Compter les nombres impairs}
 			Écrire un algorithme qui demande une série
 			de valeurs entières à l'utilisateur
-			et qui lui affiche le nombre de valeurs impairs
+			et qui lui affiche le nombre de valeurs impaires
 			qu'il a donné.
 			Après chaque valeur entrée,
 			l'algorithme demande à l'utilisateur s'il y en a encore d'autres.
 		\end{Exercice}
 
 	\subsection{Variante 3 : valeur sentinelle}
+	%------------------------------------------------	
 		
 		L’utilisateur entre une valeur spéciale pour indiquer la fin. 
 		On parle de valeur \textbf{sentinelle}. 
@@ -901,8 +902,8 @@
 		Ici, on se base sur la valeur entrée pour décider si on continue ou pas. 
 		Il faut donc \textbf{toujours} effectuer un test
 		après une lecture de valeur. C’est pour cela
-		qu’il faut effectuer une lecture avant et une autre à
-		la fin de la boucle.
+		qu’il faut effectuer une lecture avant la boucle
+		et une autre à la fin de la boucle.
 
 		\begin{LDA}
 		\LComment Lit des valeurs entières positives et retourne la somme des valeurs lues.
@@ -1062,9 +1063,6 @@
 			\EndAlgo
 		\end{LDA}
 
-	\subsubsection{Exercices}
-	%-------------------------------------------------------
-		
 		\begin{Exercice}{Suites}
 			Écrire les algorithmes qui affichent
 			les $n$ premiers termes des suites suivantes.
@@ -1084,6 +1082,11 @@
 \section{Exercices récapitulatifs}
 % ================================
 
+	Pour tous ces exercices,
+	nous vous donnons peu d'indications sur la solution à
+	mettre en \oe{}uvre.
+	À vous de jouer\dots{}
+	
 	\begin{Exercice}{Lire un nombre}
 		Écrire un algorithme 
 		qui demande à l'utilisateur un nombre entre 1 et $n$
