@@ -200,7 +200,18 @@
 		\subsection{Préciser les valeurs possibles}
 		%-----------------------------------------
 		
-			Le type choisi n'est pas toujours assez précis.
+			Nous aurions pu introduire un seul type numérique
+			mais nous avons choisi de distinguer les entiers et les réels.
+			Pourquoi ?
+			Préciser qu'une donnée de peut prendre que des valeurs entières
+			(par exemple dans le cas d'un numéro de mois)
+			aide le lecteur à mieux la comprendre.
+			Nous allons aussi pouvoir définir des opérations propres aux entiers
+			(le reste d'une division par exemple).
+			Enfin, pour des raisons techniques,
+			beaucoup de langages font cette distinction.
+			
+			Même ainsi, le type choisi n'est pas toujours assez précis.
 			Souvent, la donnée ne pourra prendre que certaines valeurs.
 			
 			\begin{Emphase}
@@ -297,10 +308,11 @@
 					\flowalgodd{longueur (3)}{largeur (2)}{surfaceRectangle}{6}
 				\end{center}
 			\item En notation compacte :
-				\lda{surfaceRectangle(3, 2)} donne $6$.
+				\lda{surfaceRectangle(3, 2)} donne/vaut $6$.
 			\end{itemize}
 		\end{Emphase}
 	
+\clearpage
 	%----------------------------------------------
 	\section{Exercices}
 	%----------------------------------------------
@@ -345,15 +357,11 @@
 			\begin{center}
 				\flowalgodd{nombre1 (réel)}{nombre2 (réel)}{somme}{réel}
 			\end{center}			 
-			Et voici quelques exemples numériques :			
-			\begin{multicols}{2}
-				\begin{itemize}
-				\item \lda{somme(3, 2)} donne $5$.
-				\item \lda{somme(-3, 2)} donne $-1$.
-				\item \lda{somme(3, 2.5)} donne $5.5$.
-				\item \lda{somme(-2.5, 2.5)} donne $0$.
-				\end{itemize}
-			\end{multicols}			
+			Et voici quelques exemples numériques :	
+				\lda{somme(3, 2)} donne $5$      \quad
+				\lda{somme(-3, 2)} donne $-1$    \quad
+				\lda{somme(3, 2.5)} donne $5.5$  \quad
+				\lda{somme(-2.5, 2.5)} donne $0$.
 		\end{Exercice}
 	
 		\begin{Exercice}{Moyenne de 2 nombres}
