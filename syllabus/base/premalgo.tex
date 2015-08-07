@@ -97,8 +97,8 @@
 			permet d'indiquer la valeur du résultat, 
 			ce que l'algorithme \emph{retourne}.
 			Si on spécifie une formule, un calcul,
-			c'est le résultat (on dit l'\emph{évaluation}) 
-			de ce calcul qui est retourné et pas la formule.
+			c'est le \textbf{résultat} (on dit l'\emph{évaluation}) 
+			de ce calcul qui est retourné et \textbf{pas la formule}.
 		
 			Pour indiquer le calcul à faire,
 			écrivez-le, pour le moment,
@@ -130,7 +130,7 @@
 			Il vous suffit d'exécuter l'algorithme
 			avec des exemples numériques et de vérifier que la réponse
 			fournie est correcte.
-			Votre professeur n'est indispensable que pour :
+			Votre professeur reste indispensable pour :
 			\begin{itemize}
 			\item
 				vérifier qu'il fonctionne également
@@ -858,7 +858,6 @@
 			\end{tabular}
 			\end{center}
 
-%\clearpage			
 			On peut les utiliser 
 			pour donner une valeur à une variable booléenne.
 			Par exemple :
@@ -1068,61 +1067,61 @@
 			\end{Exercice}
 			
 			
-			\subsubsection{Tester la divisibilité}
-			%-------------------------------------
-			
-				Les deux opérateurs \lda{MOD} et \lda{DIV}
-				sont-ils vraiment utiles ?
-				Oui ! Ils vont servir pour tester si un nombre
-				est un multiple d'un autre et pour extraire
-				des chiffres d'un nombre.
-				Commençons par la divisibilité.
+		\subsection{Tester la divisibilité}
+		%-------------------------------------
+		
+			Les deux opérateurs \lda{MOD} et \lda{DIV}
+			sont-ils vraiment utiles ?
+			Oui ! Ils vont servir pour tester si un nombre
+			est un multiple d'un autre et pour extraire
+			des chiffres d'un nombre.
+			Commençons par la divisibilité.
 
-				Imaginons qu'on veuille tester qu'un nombre est pair.
-				Qu'est-ce qu'un nombre pair ? Un nombre qui est multiple de 2.
-				C'est-à-dire dont le reste de la division par 2 est nul.
-				
-				\[
-				\textrm{nb pair} 
-					\quad\equiv\quad \textrm{nb divisible par 2} 
-					\quad\equiv\quad \textrm{nb MOD 2 = 0} 
-				\]
-				
-				On peut donc écrire : \lda{pair \Gets nb MOD 2 = 0}.
-	
-			\subsubsection{Extraire les chiffres d'un nombre}
-			%------------------------------------------------
+			Imaginons qu'on veuille tester qu'un nombre est pair.
+			Qu'est-ce qu'un nombre pair ? Un nombre qui est multiple de 2.
+			C'est-à-dire dont le reste de la division par 2 est nul.
 			
-				Faisons une petite expérience numérique.
-				\begin{center}
-				\begin{tabular}{|l|r|}\hline
-					calcul & résultat \\\hline
-					\hline
-					65536 MOD 10 & 6 \\  
-					65536 MOD 100 & 36 \\  
-					65536 MOD 1000 & 536 \\  
-					65536 MOD 10000 & 5536 \\ 
-					\hline 
-				\end{tabular}
-				\qquad
-				\begin{tabular}{|l|l|}\hline
-					calcul & résultat \\\hline
-					\hline
-					65536 DIV 10 & 6553 \\  
-					65536 DIV 100 & 655 \\  
-					65536 DIV 1000 & 65 \\  
-					65536 DIV 10000 & 6 \\ 
-					\hline 
-				\end{tabular}
-				\end{center}
+			\[
+			\textrm{nb pair} 
+				\quad\equiv\quad \textrm{nb divisible par 2} 
+				\quad\equiv\quad \textrm{nb MOD 2 = 0} 
+			\]
 			
-				On voit que les DIV et MOD avec des puissances de 10
-				permettent de garder les chiffres de droite (MOD)
-				ou d'enlever les chiffres de droite (DIV).
-				Combinés, ils permettent d'extraire n'importe quel
-				chiffre d'un nombre.
-				
-				\textbf{Exemple} : (65536 DIV 100) MOD 10 = 5.
+			On peut donc écrire : \lda{pair \Gets nb MOD 2 = 0}.
+
+		\subsection{Extraire les chiffres d'un nombre}
+		%------------------------------------------------
+		
+			Faisons une petite expérience numérique.
+			\begin{center}
+			\begin{tabular}{|l|r|}\hline
+				calcul & résultat \\\hline
+				\hline
+				65536 MOD 10 & 6 \\  
+				65536 MOD 100 & 36 \\  
+				65536 MOD 1000 & 536 \\  
+				65536 MOD 10000 & 5536 \\ 
+				\hline 
+			\end{tabular}
+			\qquad
+			\begin{tabular}{|l|l|}\hline
+				calcul & résultat \\\hline
+				\hline
+				65536 DIV 10 & 6553 \\  
+				65536 DIV 100 & 655 \\  
+				65536 DIV 1000 & 65 \\  
+				65536 DIV 10000 & 6 \\ 
+				\hline 
+			\end{tabular}
+			\end{center}
+		
+			On voit que les DIV et MOD avec des puissances de 10
+			permettent de garder les chiffres de droite (MOD)
+			ou d'enlever les chiffres de droite (DIV).
+			Combinés, ils permettent d'extraire n'importe quel
+			chiffre d'un nombre.
+			
+			\textbf{Exemple} : (65536 DIV 100) MOD 10 = 5.
 
 		%---------------------
 		\subsection{Le hasard}\index{hasard}\index{aléatoire}
@@ -1270,6 +1269,8 @@
 				que vaudrait la partie "heure".
 		
 				Ex~:~10000 secondes donnera 2 heures.
+				
+				Aide : L'heure n'est qu'un nombre exprimé en base 60 !
 			\end{Exercice}
 		
 			\begin{Exercice}{Conversion secondes en minutes}
@@ -1289,6 +1290,12 @@
 		
 				Ex~:~10000 secondes donnera 40 secondes.
 			\end{Exercice}	
+
+			\begin{Exercice}{Un double au dés}
+				Écrire un algorithme qui simule le lancer de deux dés
+				et indique s'il y a eu un double 
+				(les deux dés montrant une face identique).
+			\end{Exercice}
 		
 			\begin{Exercice}{Année bissextile}
 				\label{ex:bissextile}
@@ -1297,12 +1304,6 @@
 				Font exception, les multiples de 100 
 				(sauf les multiples de 400 qui sont bien bissextiles). 
 				Ainsi $2012$ et $2400$ sont bissextiles mais pas $2010$ ni $2100$.
-			\end{Exercice}
-
-			\begin{Exercice}{Un double au dés}
-				Écrire un algorithme qui simule le lancer de deux dés
-				et indique s'il y a eu un double 
-				(les deux dés montrant une face identique).
 			\end{Exercice}
 			 		 
 	%===================================
