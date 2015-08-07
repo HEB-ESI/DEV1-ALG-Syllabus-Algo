@@ -542,14 +542,7 @@
 		\end{itemize}
 	\end{Exercice}
 
-	\begin{Exercice}{Tirer une carte}
-		Écrire un algorithme qui affiche l'intitulé d'une carte
-		tirée au hasard dans un paquet de 52 cartes.
-		Par exemple, "As de cœur", "3 de pique", "Valet de carreau"
-		ou encore "Roi de trèfle".
-	\end{Exercice}
-
-\clearpage
+%\clearpage
 %=====================
 \section{Le selon-que}
 \index{selon-que}
@@ -572,7 +565,22 @@
 	mais le \lda{\K{selon-que}} est plus lisible.
 
 	\begin{minipage}{6cm}
-		\begin{wrong}
+		\begin{LDA}
+			\Switch{numéroJour}
+			\Case{1} nomJour \Gets "lundi"
+			\Case{2} nomJour \Gets "mardi"
+			\Case{3} nomJour \Gets "mercredi"
+			\Case{4} nomJour \Gets "jeudi"
+			\Case{5} nomJour \Gets "vendredi"
+			\Case{6} nomJour \Gets "samedi"
+			\Case{7} nomJour \Gets "dimanche"
+			\EndSwitch
+		\end{LDA}
+	\end{minipage}
+
+	remplace avantageusement
+
+	\begin{wrong}
 		\begin{LDA}
 			\If{numéroJour=1}
 				\Let nomJour \Gets "lundi"
@@ -590,22 +598,7 @@
 				\Let nomJour \Gets "dimanche"
 			\EndIf
 		\end{LDA}
-		\end{wrong}
-	\end{minipage}
-	\qquad
-	\begin{minipage}{6cm}
-		\begin{LDA}
-			\Switch{numéroJour}
-			\Case{1} nomJour \Gets "lundi"
-			\Case{2} nomJour \Gets "mardi"
-			\Case{3} nomJour \Gets "mercredi"
-			\Case{4} nomJour \Gets "jeudi"
-			\Case{5} nomJour \Gets "vendredi"
-			\Case{6} nomJour \Gets "samedi"
-			\Case{7} nomJour \Gets "dimanche"
-			\EndSwitch
-		\end{LDA}
-	\end{minipage}
+	\end{wrong}
 		
 	\paragraph{Remarques.}
 	\begin{itemize}
@@ -635,6 +628,13 @@
 	\begin{Exercice}{Numéro du jour}
 		Écrire un algorithme qui retourne le numéro du jour de la semaine
 		reçu en paramètre (1 pour "lundi", 2 pour "mardi"\dots).
+	\end{Exercice}
+
+	\begin{Exercice}{Tirer une carte}
+		Écrire un algorithme qui affiche l'intitulé d'une carte
+		tirée au hasard dans un paquet de 52 cartes.
+		Par exemple, "As de cœur", "3 de pique", "Valet de carreau"
+		ou encore "Roi de trèfle".
 	\end{Exercice}
 	
 	\begin{Exercice}{Nombre de jours dans un mois}
