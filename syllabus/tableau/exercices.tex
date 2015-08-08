@@ -120,7 +120,29 @@
 	\bigskip
 	
 	\begin{Exercice}{Le crible d'Ératosthène}
-		À écrire
+		\begin{quote}
+			\og{} Le crible d'Ératosthène est un procédé 
+			qui permet de trouver tous les nombres premiers inférieurs 
+			à un certain entier naturel donné N.
+			L'algorithme procède par élimination : 
+			il s'agit de supprimer d'une table des entiers de 2 à N 
+			tous les multiples d'un entier. 
+			En supprimant tous les multiples, 
+			à la fin il ne restera que les entiers qui ne sont multiples d'aucun entier, 
+			et qui sont donc les nombres premiers.
+			On commence par rayer les multiples de 2, 
+			puis à chaque fois on raye les multiples du plus petit entier restant.
+			On peut s'arrêter lorsque le carré du plus petit entier restant 
+			est supérieur au plus grand entier restant, car dans ce cas, 
+			tous les non-premiers ont déjà été rayés précédemment.\fg{}
+			(source : Wikipédia)
+		\end{quote}
+		Le tableau dont il est question peut être un simple tableau
+		de booléens; le booléen en position "i" indiquant 
+		si le nombre "i" est premier ou pas.
+
+		Écrire un algorithme qui reçoit un entier $N$
+		et affiche tous les entiers premiers de $1$ à $N$.
 	\end{Exercice}
 	
 	\begin{Exercice}{Mastermind}
