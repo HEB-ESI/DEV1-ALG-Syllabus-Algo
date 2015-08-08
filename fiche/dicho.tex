@@ -1,0 +1,74 @@
+%================================
+\begin{Fiche}{Recherche dichotomique}
+%================================
+\label{fiche:dicho}
+
+	Trouver rapidement la position d'une valeur donnée dans un tableau
+	\textbf{trié} d'entiers. 
+	Si la valeur n'est pas présente, 
+	on donnera la position où elle aurait du se trouver.
+
+\Section{Spécification}
+	
+	\textbf{Données} : 
+		\begin{itemize}
+		\item le tableau à analyser
+		\item la valeur recherchée
+		\end{itemize}
+		
+	\textbf{Résultat} :
+		\begin{itemize}
+		\item un booléen indiquant si la valeur a été trouvée
+		\item un entier indiquant
+			soit la position où la valeur a été trouvée
+			soit la position où elle aurait du être.
+		\end{itemize}
+
+\Section{Solution}
+
+		L'algorithme rapide que nous avons vu est la recherche
+		dichotomique.
+		
+		\begin{LDA}
+			\Algo{rechercheDichotomique}{
+					\\\hfill
+					\Par{tab\In}{\Array{n}{entiers}}, 
+					\Par{valeur\In}{entier}, 
+					\Par{pos\Out}{entier}
+					}{booléen}
+				\Decl{indiceDroit, indiceGauche, indiceMédian}{entiers}
+				\Decl{candidat}{T}
+				\Decl{trouvé}{booléen}
+				\Empty
+				\Let indiceGauche \Gets 0
+				\Let indiceDroit \Gets n-1
+				\Let trouvé \Gets faux
+				\Empty
+				\While{NON trouvé ET indiceGauche {${\leq}$} indiceDroit}
+					\Let indiceMédian \Gets (indiceGauche + indiceDroit) DIV 2
+					\Let candidat \Gets tab[indiceMédian]
+					\If{candidat = valeur} 
+						\Let trouvé \Gets vrai
+					\ElsIf{candidat < valeur}
+						\Let indiceGauche \Gets indiceMédian + 1
+						\RComment on garde la partie droite
+					\Else
+						\Let indiceDroit \Gets indiceMédian – 1
+						\RComment on garde la partie gauche
+					\EndIf
+				\EndWhile
+				\Empty
+				\If{trouvé}
+					\Let pos \Gets indiceMédian
+				\Else
+					\Let pos \Gets indiceGauche
+					\RComment dans le cas où la valeur n’est pas trouvée,
+					\Empty 
+					\RComment on vérifiera que indiceGauche donne la valeur où elle pourrait être insérée.
+				\EndIf
+				\Empty
+				\Return trouvé
+			\EndAlgo
+		\end{LDA}	
+	
+\end{Fiche}

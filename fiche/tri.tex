@@ -1,0 +1,95 @@
+%================================
+\begin{Fiche}{Tri d'un tableau}
+%================================
+\label{fiche:tri}
+
+	Trier un tableau d'entiers par ordre croissant.
+
+\Section{Spécification}
+	
+	\textbf{Données} : le tableau non trié, à trier.
+		
+	\textbf{Résultat} : ce même tableau trié.
+
+\Section{Solution}
+
+		Nous avons vu trois algorithmes
+
+		\subsection*{Le tri par insertion}
+		
+	\begin{LDA}
+		\LComment Trie le tableau reçu en paramètre (via un tri par insertion).
+		\Algo{triInsertion}{\Par{tab\InOut}{\Array{n}{entiers}}}{}
+			\Decl{i, j, valÀInsérer}{entiers}
+			\For{i}{1}{n-1}
+				\Let valÀInsérer \Gets tab[i]
+				\LComment recherche de l’endroit où insérer valÀInsérer dans le 
+				\LComment sous-tableau trié et décalage simultané des éléments
+				\Let j \Gets i - 1
+				\While{j ${\geq}$ 0 ET valÀInsérer < tab[j]}
+					\Let tab[j+1] \Gets tab[j]
+					\Let j \Gets j – 1
+				\EndWhile
+				\Let tab[j+1] \Gets valÀInsérer
+			\EndFor
+		\EndAlgo
+	\end{LDA}
+
+		\subsection*{Le tri par sélection des minima successifs}
+		
+	\begin{LDA}
+		\LComment Trie le tableau reçu en paramètre (via un tri par sélection des minima successifs).
+		\Algo{triSélectionMinimaSuccessifs}{\Par{tab\InOut}{\Array{n}{entiers}}}{}
+			\Decl{i, indiceMin}{entier}
+			\For{i}{0}{n – 2}
+			\RComment i correspond à l’étape de l’algorithme
+				\Let indiceMin \Gets positionMin( tab, i, n-1 )
+				\Stmt swap( tab[i], tab[indiceMin] )
+			\EndFor
+		\EndAlgo
+	\end{LDA}
+
+	\begin{LDA}
+		\LComment Retourne l’indice du minimum entre les indices début et fin du tableau reçu.
+		\Algo{positionMin}{\Par{tab\InOut}{\Array{n}{entiers}}, Par{début, fin}{entiers}}{entier}
+			\Decl{indiceMin, i}{entiers}
+			\Let indiceMin \Gets début
+			\For{i}{début+1}{fin}
+				\If{tab[i] < tab[indiceMin]}
+					\Decl indiceMin \Gets i
+				\EndIf
+			\EndFor
+			\Return indiceMin
+		\EndAlgo
+	\end{LDA}
+
+	\begin{LDA}
+		\LComment {Échange le contenu de 2 variables.}
+		\Algo{swap}{\Par{a\InOut, b\InOut}{entiers}}{}
+			\Decl{aux}{entiers}
+			\Let aux \Gets a
+			\Let a \Gets b
+			\Let b \Gets aux
+		\EndAlgo
+	\end{LDA}
+
+		\subsection*{Le tri bulle}
+
+	\begin{LDA}
+	\LComment Trie le tableau reçu en paramètre (via un tri bulle).
+		\Algo{triBulle}{\Par{tab\InOut}{\Array{n}{entiers}}}{}
+			\Decl{indiceBulle, i}{entiers}
+			\For{indiceBulle}{1}{n-1}
+				\For[-1]{i}{n – 1}{indiceBulle}
+					\If{tab[i] > tab[i + 1]}
+						\Stmt swap( tab[i], tab[i + 1] )
+						\RComment voir algorithme précédent
+					\EndIf
+				\EndFor
+			\EndFor
+		\EndAlgo
+	\end{LDA}
+
+
+	
+\end{Fiche}
