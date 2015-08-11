@@ -7,22 +7,22 @@
 \section{Motivation}
 %===================
 
-	Jusqu'à présent, 
+	Jusqu’à présent, 
 	les problèmes que nous avons abordés étaient relativement petits.
-	Nous avons pu les résoudre avec un algorithme d'un seul tenant.
+	Nous avons pu les résoudre avec un algorithme d’un seul tenant.
 	
 	Dans la réalité,
 	les problèmes sont plus gros 
 	et il devient nécessaire de les décomposer en sous-problèmes.
-	On parle d'une \emph{approche modulaire}.
-	Les avantages d'une telle décomposition sont multiples.
+	On parle d’une \emph{approche modulaire}.
+	Les avantages d’une telle décomposition sont multiples.
 	\begin{itemize}
 	\item
-		\textbf{Cela permet de libérer l'esprit.}
-		L'esprit humain ne peut pas traiter trop d'informations à la fois
+		\textbf{Cela permet de libérer l’esprit.}
+		L’esprit humain ne peut pas traiter trop d’informations à la fois
 		(\emph{surcharge cognitive}).
-		Lorsqu'un sous-problème est résolu,
-		on peut se libérer l'esprit et attaquer un autre sous-problème.
+		Lorsqu’un sous-problème est résolu,
+		on peut se libérer l’esprit et attaquer un autre sous-problème.
 	\item
 		\textbf{On peut réutiliser ce qui a été fait.}
 		Si un même sous-problème apparait plusieurs fois
@@ -33,14 +33,14 @@
 		\textbf{On accroit la lisibilité.}
 		Si, dans un algorithme, 
 		on appelle un autre algorithme pour résoudre un sous-problème,
-		le lecteur verra un nom d'algorithme qui peut être plus parlant
-		que les instructions qui se cachent derrière, même s'il y en a peu.
+		le lecteur verra un nom d’algorithme qui peut être plus parlant
+		que les instructions qui se cachent derrière, même s’il y en a peu.
 		Par exemple, \lda{dizaine(nb)} est plus parlant que
-		\lda{nb MOD 100 DIV 10} pour calculer les dizaines d'un nombre.
+		\lda{nb MOD 100 DIV 10} pour calculer les dizaines d’un nombre.
 	\end{itemize}
 
 	Parmis les autres avantages, 
-	que vous pourrez moins percevoir en début d'apprentissage,
+	que vous pourrez moins percevoir en début d’apprentissage,
 	citons la possibilité de répartir le travail dans une équipe.
 	
 	Un algorithme qui résout une partie de problème
@@ -91,7 +91,7 @@
 		\Stmt 2) Calculer le maximum de \lda{maxab} et du troisième nombre, ce qui donne le résultat.
 	\end{LDA}
 
-	qu'on peut illustrer ainsi :
+	qu’on peut illustrer ainsi~:
 	
 	\begin{center}
 	\begin{tikzpicture}[auto]
@@ -120,10 +120,10 @@
 		engendrerait de nombreuses erreurs lors du recopiage
 		et serait difficile à lire.
 	} dans notre solution
-	ce qu'on a écrit pour le maximum de deux nombres ;
+	ce qu’on a écrit pour le maximum de deux nombres~;
 	on va plutôt y faire référence, 
-	c'est-à-dire appeler l'algorithme \lda{max2}. 
-	Ce qui donne :
+	c’est-à-dire appeler l’algorithme \lda{max2}. 
+	Ce qui donne~:
 
 	\begin{LDA}
 	\Algo{max3}{\Par{a}{réel}, \Par{b}{réel}, \Par{c}{réel}}{réel}
@@ -134,7 +134,7 @@
 	\EndAlgo
 	\end{LDA}
 
-	qu'on peut encore simplifier en :
+	qu’on peut encore simplifier en~:
 	
 	\begin{LDA}
 	\Algo{max3}{\Par{a,b,c}{réels}}{réel}
@@ -147,12 +147,12 @@
 \index{paramètres}
 %=======================
 
-	Jusqu'à présent,
-	nous avons considéré que les paramètres d'un algorithme (ou \emph{module}\index{module})
+	Jusqu’à présent,
+	nous avons considéré que les paramètres d’un algorithme (ou \emph{module}\index{module})
 	correspondent à ses données et que le résultat, unique,
 	est retourné.
 
-	Il s'agit d'une situation fréquente mais pas obligatoire
+	Il s’agit d’une situation fréquente mais pas obligatoire
 	que nous pouvons généraliser.
 	En pratique, on peut rencontrer trois sortes de paramètres.
 
@@ -162,13 +162,13 @@
 
 		Le paramètre en \textbf{entrée}
 		est ce que nous connaissons déjà.
-		Il correspond à une donnée de l'algorithme.
-		Une valeur va lui être attribuée en début d'algorithme
+		Il correspond à une donnée de l’algorithme.
+		Une valeur va lui être attribuée en début d’algorithme
 		et elle ne sera pas modifiée.
-		On pourra faire suivre le nom du paramètre d'une flèche
+		On pourra faire suivre le nom du paramètre d’une flèche
 		vers le bas (\In) pour rappeler son rôle.
 		
-		Lors de l'appel, on fournit la \textbf{valeur}
+		Lors de l’appel, on fournit la \textbf{valeur}
 		ou, plus généralement une expression
 		dont la valeur sera donnée au paramètre.
 		Voici un cas général de paramètre en entrée.
@@ -189,12 +189,12 @@
 			\end{LDA}
 		\end{minipage}
 		
-		C'est comme si l'algorithme \lda{monAlgo}
-		commençait par l'affectation
+		C’est comme si l’algorithme \lda{monAlgo}
+		commençait par l’affectation
 		\lda{par \Gets expr}.
 		
 		\textbf{Exemple.} 
-		Reprenons l'exemple de \lda{max3}
+		Reprenons l’exemple de \lda{max3}
 		en ajoutant un petit test.
 
 		\begin{LDA}[1]
@@ -232,29 +232,29 @@
 			\hline
 		\end{tabular}
 		
-		Note : Dans cet exemple, on trouve deux fois la variable \lda{max}.
-		Il s'agit bien de deux variables \textbf{différentes} ;
-		l'une est définie et connue dans \lda{test} ;
-		l'autre l'est dans \lda{max3}.
+		Note~: Dans cet exemple, on trouve deux fois la variable \lda{max}.
+		Il s’agit bien de deux variables \textbf{différentes}~;
+		l’une est définie et connue dans \lda{test}~;
+		l’autre l’est dans \lda{max3}.
 		
 	%==================================
 	\subsection{Le paramètre en sortie}
 	%==================================
 
 		Le paramètre en \textbf{sortie}
-		correspond à un résultat de l'algorithme.
+		correspond à un résultat de l’algorithme.
 		Avec la notation que nous utilisons,
-		un algorithme ne peut retourner qu'une seule valeur
+		un algorithme ne peut retourner qu’une seule valeur
 		ce qui est parfois une contrainte trop forte.
-		Les paramètres en sortie vont permettre à l'algorithme
+		Les paramètres en sortie vont permettre à l’algorithme
 		de fournir plusieurs réponses.
-		On fera suivre le nom du paramètre d'une flèche
+		On fera suivre le nom du paramètre d’une flèche
 		vers le haut (\Out) pour rappeler son rôle.
-		Un tel paramètre n'aura pas de valeur
-		au début de l'algorithme mais s'en verra attribuer une
-		par l'algorithme.
+		Un tel paramètre n’aura pas de valeur
+		au début de l’algorithme mais s’en verra attribuer une
+		par l’algorithme.
 		
-		Lors de l'appel, on fournit une \textbf{variable}
+		Lors de l’appel, on fournit une \textbf{variable}
 		qui recevra la valeur finale du paramètre.
 		Voici un cas général de paramètre en sortie.
 		
@@ -274,12 +274,12 @@
 			\end{LDA}
 		\end{minipage}
 
-		Il n'y a \textbf{pas de \lda{\algorithmicreturn}}
+		Il n’y a \textbf{pas de \lda{\algorithmicreturn}}
 		puisque les résultats sont en paramètres de sortie et pas comme
 		valeur \emph{retournée}.
-		C'est comme si,
-		à la fin de l'algorithme appelé,
-		on avait l'assignation :
+		C’est comme si,
+		à la fin de l’algorithme appelé,
+		on avait l’assignation~:
 		\lda{variable \Gets par}.
 		
 		\paragraph{Exemple.}
@@ -287,7 +287,7 @@
 		qui reçoit une durée exprimée en seconde
 		et fournisse trois paramètres en sortie
 		correspondant à cette même durée exprimée en heures, minutes et secondes.
-		En voici le schéma et la solution :
+		En voici le schéma et la solution~:
 		\begin{center}
 		\flowalgorrr{totalSec (entier)}{versHMS}{heuresÉcoulées (entier)}{minutesÉcoulées (entier)}{secondesÉcoulées (entier)}
 		\end{center}
@@ -335,13 +335,13 @@
 
 		Le paramètre en \textbf{entrée-sortie}
 		correspond à une situation mixte.
-		Il est à la fois une donnée et un résultat de l'algorithme.
-		Cela signifie que l'algorithme a pour but de le modifier.
-		Un tel paramètre sera suivi d'une double flèche (\In\Out).
+		Il est à la fois une donnée et un résultat de l’algorithme.
+		Cela signifie que l’algorithme a pour but de le modifier.
+		Un tel paramètre sera suivi d’une double flèche (\In\Out).
 		
-		Lors de l'appel, on fournit \textbf{une variable}.
-		Sa valeur est donnée au paramètre au début de l'algorithme.
-		À la fin de l'algorithme, la variable reçoit la valeur du paramètre.
+		Lors de l’appel, on fournit \textbf{une variable}.
+		Sa valeur est donnée au paramètre au début de l’algorithme.
+		À la fin de l’algorithme, la variable reçoit la valeur du paramètre.
 		Voici un cas général de paramètre en sortie.
 		
 		\begin{minipage}{4cm}
@@ -360,17 +360,17 @@
 			\end{LDA}
 		\end{minipage}
 
-		C'est comme si, dans le code appelé,
+		C’est comme si, dans le code appelé,
 		on avait une première ligne pour donner sa valeur au paramètre
 		(\lda{par \Gets variable})
-		et une dernière ligne pour effectuer l'assignation opposée
-		(\lda{variable \Gets par}). Il n'y a pas de \lda{\algorithmicreturn}.
+		et une dernière ligne pour effectuer l’assignation opposée
+		(\lda{variable \Gets par}). Il n’y a pas de \lda{\algorithmicreturn}.
 				
 		\paragraph{Exemple.}
-		On a déjà vu un algorithme qui retourne la valeur absolue d'un nombre.
+		On a déjà vu un algorithme qui retourne la valeur absolue d’un nombre.
 		On pourrait imaginer une variante qui \textbf{modifie}
 		le nombre reçu.
-		En voici le schéma et la solution avec un appel possible :
+		En voici le schéma et la solution avec un appel possible~:
 
 		\begin{minipage}{6cm}		
 			\begin{center}
@@ -425,12 +425,12 @@
 	qui possède un paramètre en sortie \textbf{et}
 	qui retourne également une valeur.
 
-	Attention !
+	Attention~!
 	Un algorithme qui ne \textbf{retourne} rien (pas de \Gives)
-	n'a pas de valeur ;
+	n’a pas de valeur~;
 	il ne peut pas apparaitre dans une expression
 	ou être assigné à une variable.
-	Ainsi, les utilisations suivantes de l'algorithme
+	Ainsi, les utilisations suivantes de l’algorithme
 	\lda{valAbsolue}, décrit plus haut, sont incorrectes.
 	
 	\begin{wrong}
@@ -449,8 +449,8 @@
 \section{Résumons}
 %===================
 
-	Reprenons tout ce qu'on vient de voir
-	avec un exemple d'algorithme qui possède tous les types de paramètres.
+	Reprenons tout ce qu’on vient de voir
+	avec un exemple d’algorithme qui possède tous les types de paramètres.
 
 	\begin{LDA}[1]
 		\Algo{testDivision}{}{}
@@ -475,7 +475,7 @@
 			\Let{\color{gray} dividende \Gets nb1} 
 			\Let{\color{gray} diviseur \Gets nb2} 
 			\Empty
-			\LComment Le code proprement dit de l'algorithme
+			\LComment Le code proprement dit de l’algorithme
 			\Decl {quotient}{entier}
 			\Let{compteur \Gets compteur + 1}
 			\Let{quotient \Gets dividende DIV diviseur}
@@ -541,23 +541,23 @@
 	\end{tabular}
 
 	Pour mieux se comprendre,
-	il est utile d'introduire un peu de vocabulaire.
-	Les paramètres déclarés dans l'entête d'un algorithme
+	il est utile d’introduire un peu de vocabulaire.
+	Les paramètres déclarés dans l’entête d’un algorithme
 	sont appelés \textbf{paramètres formels}.
-	Les paramètres donnés à l'appel de l'algorihtme
+	Les paramètres donnés à l’appel de l’algorithme
 	sont appelés \textbf{paramètres effectifs}. 
 	
-	Les instructions en gris dans l'exemple ne sont pas écrites
-	mais c'est comme si elles étaient présentes
+	Les instructions en gris dans l’exemple ne sont pas écrites
+	mais c’est comme si elles étaient présentes
 	pour initialiser les paramètres formels \In{} et \InOut{}
-	en début d'algorithme
+	en début d’algorithme
 	et pour donner des valeurs 
 	aux paramètres effectifs \Out{} et \InOut{}
-	en fin d'algorithme.
+	en fin d’algorithme.
 	
-	À la fin de l'algorithme, 
-	c'est comme si la valeur retournée \emph{remplaçait} l'appel.
-	Dans notre exemple, c'est donc cette valeur retournée
+	À la fin de l’algorithme, 
+	c’est comme si la valeur retournée \emph{remplaçait} l’appel.
+	Dans notre exemple, c’est donc cette valeur retournée
 	qui sera affichée.
 	
 %===================
@@ -646,7 +646,7 @@
 		Parmi les instructions suivantes (où les variables
 		\lda{a}, \lda{b} et \lda{c}
 		sont des entiers), lesquelles font correctement appel 
-		à l'algorithme d’en-tête suivant~?
+		à l’algorithme d’en-tête suivant~?
 	
 		\begin{LDA}
 			\Entete{PGCD}{a\In,b\In~:~entiers}{entier}
@@ -680,18 +680,18 @@
 	\end{Exercice}
 	
 	\begin{Exercice}{Réussir GEN1}
-		Reprenons l'exercice \vref{algo:réussirGEN1}.
+		Reprenons l’exercice \vref{algo:réussirGEN1}.
 		Cette fois-ci on ne veut rien afficher
-		mais fournir deux résultats :
-		un booléen indiquant si l'étudiant a réussi ou pas
-		et un entier indiquant sa cote (qui n'a de sens que s'il a réussi). 
+		mais fournir deux résultats~:
+		un booléen indiquant si l’étudiant a réussi ou pas
+		et un entier indiquant sa cote (qui n’a de sens que s’il a réussi). 
 	\end{Exercice}
 
 	\begin{Exercice}{Tirer une carte}
-		L'exercice suivant a déjà été résolu. 
+		L’exercice suivant a déjà été résolu. 
 		Refaites une solution modulaire.
 		
-		Écrire un algorithme qui affiche l'intitulé d'une carte
+		Écrire un algorithme qui affiche l’intitulé d’une carte
 		tirée au hasard dans un paquet de 52 cartes.
 		Par exemple, "As de cœur", "3 de pique", "Valet de carreau"
 		ou encore "Roi de trèfle".
@@ -700,23 +700,23 @@
 	\begin{Exercice}{Nombre de jours dans un mois}
 		Écrire un algorithme qui donne le nombre de jours dans un mois.
 		Il reçoit en paramètre le numéro du mois (1 pour janvier\dots)
-		ainsi que l'année.
+		ainsi que l’année.
 		Pour le mois de février, 
-		il faudra répondre 28 ou 29 selon que l'année fournie
+		il faudra répondre 28 ou 29 selon que l’année fournie
 		est bissextile ou pas.
 		Vous devez réutiliser au maximum ce que vous avez déjà fait
-		lors d'exercices précédents (cf. exercice \vref{ex:bissextile}).
+		lors d’exercices précédents (cf. exercice \vref{ex:bissextile}).
 	\end{Exercice}
 
 	\begin{Exercice}{Valider une date}
 		Écrire un algorithme qui valide 
 		une date donnée par trois entiers~:~ l’année, le mois et le jour.
 		Vous devez réutiliser au maximum ce que vous avez déjà fait
-		lors d'exercices précédents.
+		lors d’exercices précédents.
 	\end{Exercice}
 	
 	\begin{Exercice}{Généraliser un algorithme}
-		Dans l'exercice \vref{algo:mult5},
+		Dans l’exercice \vref{algo:mult5},
 		nous avons écrit un algorithme 
 		pour tester si un nombre est divisible par 5.
 		Si on vous demande à présent
@@ -725,7 +725,7 @@
 		Idem pour tester la divisibilité par 2, 4, 6, 7, 8, 9\dots{}
 		mais vous vous lasseriez bien vite.
 		
-		N'est-il pas possible d'écrire un seul algorithme,
-		plus général, qui résolve tous ces problèmes d'un coup ?  
+		N’est-il pas possible d’écrire un seul algorithme,
+		plus général, qui résolve tous ces problèmes d’un coup~?  
 	\end{Exercice}
 	
