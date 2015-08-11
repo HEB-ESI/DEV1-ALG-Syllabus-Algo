@@ -2,23 +2,19 @@
 \chapter{Gérer les données dans un tableau}
 %==========================================
 
-	\begin{TODO}
-		Voir ce qui va devenir des fiches.
-	\end{TODO}
-	
 	Une utilisation courante des tableaux
 	est le stockage des données changeantes.
-	Lors de l'évolution de l'algorithme
+	Lors de l’évolution de l’algorithme
 	des données sont ajoutées, recherchées, supprimées, modifiées.
 	
-	Par exemple, imaginons que l'école 
+	Par exemple, imaginons que l’école 
 	organise un événement libre et gratuit pour les étudiants.
-	Mais pour y assister, ils doivent s'inscrire.
-	On veut fournir ce qu'il faut pour :
+	Mais pour y assister, ils doivent s’inscrire.
+	On veut fournir ce qu’il faut pour~:
 	\begin{itemize}
-	\item inscrire un étudiant ;
-	\item vérifier si un étudiant est inscrit ;
-	\item désinscrire un étudiant (s'il change d'avis par exemple) ;
+	\item inscrire un étudiant~;
+	\item vérifier si un étudiant est inscrit~;
+	\item désinscrire un étudiant (s’il change d’avis par exemple)~;
 	\item afficher la liste des inscrits.
 	\end{itemize}
 
@@ -28,22 +24,22 @@
 	\footnote{%
 		Une vraie solution de ce problème
 		utiliserait probablement une base de données
-		mais ça c'est une autre histoire et un autre cours ;)
+		mais ça c’est une autre histoire et un autre cours~;)
 	}.
 	Comme le tableau ne sera généralement pas rempli,
 	on va gérer sa taille logique.
-	On a donc deux variables :
+	On a donc deux variables~:
 	\begin{itemize}
-	\item \lda{inscrits} : le tableau des numéros d'étudiants
-	\item \lda{nbInscrits} : le nombre d'étudiants actuellement inscrits (la taille logique du tableau)
+	\item \lda{inscrits}~: le tableau des numéros d’étudiants
+	\item \lda{nbInscrits}~: le nombre d’étudiants actuellement inscrits (la taille logique du tableau)
 	\end{itemize}
 	
-	On va envisager deux cas :
+	On va envisager deux cas~:
 	\begin{enumerate}
 	\item
-		Les numéros d'étudiants seront placés dans le tableau sans ordre imposé.
+		Les numéros d’étudiants seront placés dans le tableau sans ordre imposé.
 	\item
-		Les numéros d'étudiants seront placés dans l'ordre.		
+		Les numéros d’étudiants seront placés dans l’ordre.		
 	\end{enumerate}
 	
 	% ==============================================
@@ -53,7 +49,7 @@
 		Dans cette approche, 
 		les valeurs sont stockées dans le tableau 
 		dans un ordre quelconque.
-		Par exemple, on pourrait avoir la situation suivante :
+		Par exemple, on pourrait avoir la situation suivante~:
 		\begin{center}
 			\lda{inscrits} = 
 			\smallskip
@@ -65,19 +61,19 @@
 			\smallskip
 			\lda{nbInscrits = 4}
 		\end{center}
-		indiquant qu'il y a pour les moment quatre étudiants inscrits
+		indiquant qu’il y a pour les moment quatre étudiants inscrits
 		dont les numéros sont ceux repris 
 		dans les quatre premières cases du tableau.
 		
 		\subsection{Inscription}
 		%---------------------------------------------
 		
-			Commençons par l'inscription.
-			Pour inscrire un étudiant, il suffit de l'ajouter à la suite
+			Commençons par l’inscription.
+			Pour inscrire un étudiant, il suffit de l’ajouter à la suite
 			dans le tableau.
 			Par exemple, en partant de la situation décrite ci-dessus,
-			l'inscription de l'étudiant numéro 42123 aboutit à la situation
-			suivante :
+			l’inscription de l’étudiant numéro 42123 aboutit à la situation
+			suivante~:
 			\begin{center}
 				\lda{inscrits} = 
 				\smallskip
@@ -90,13 +86,13 @@
 				\lda{nbInscrits = 5}
 			\end{center}
 			
-			L'algorithme est assez simple :
+			L’algorithme est assez simple~:
 			
 			\begin{LDA}
 				\LComment{Inscrit un étudiant de numéro donné.}
 				\Algo{inscrire}{\Par{inscrits\In\Out}{\Array{n}{entiers}}, \Par{nbInscrits\In\Out}{entier}, \Par{numéro}{entier}}{}
-					\LComment{On peut imaginer vérifier que l'étudiant n'est pas déjà inscrit}
-					\LComment{On peut imaginer vérifier qu'il reste de la place (c-à-d que le tableau n'est pas plein)}
+					\LComment{On peut imaginer vérifier que l’étudiant n’est pas déjà inscrit}
+					\LComment{On peut imaginer vérifier qu’il reste de la place (c-à-d que le tableau n’est pas plein)}
 					\Let inscrits[nbInscrits] \Gets numéro
 					\Let nbInscrits \Gets nbInscrits + 1
 				\EndAlgo
@@ -109,9 +105,9 @@
 			il faut le rechercher dans la partie utilisée du tableau.
 			Cette recherche se fait via un parcours avec sortie
 			prématurée. On pourrait se contenter de retourner un
-			booléen indiquant si oui ou non on l'a trouvé
-			mais retournons plutôt un entier indiquant l'indice où
-			il est (-1 si on ne l'a pas trouvé), ce sera plus utile.
+			booléen indiquant si oui ou non on l’a trouvé
+			mais retournons plutôt un entier indiquant l’indice où
+			il est (-1 si on ne l’a pas trouvé), ce sera plus utile.
 			
 			\begin{LDA}
 				\LComment{Vérifie si un étudiant est inscrit et donne sa position (-1 si non inscrit)}
@@ -137,14 +133,14 @@
 		%---------------------------------------------
 		
 			Pour désinscrire un étudiant,
-			il faut le trouver dans le tableau et l'enlever.
+			il faut le trouver dans le tableau et l’enlever.
 			Attention, il ne peut pas y avoir de trou dans un tableau
-			(il n'y a pas de case vide).
-			Le plus simple est d'y déplacer le dernier élément.
+			(il n’y a pas de case vide).
+			Le plus simple est d’y déplacer le dernier élément.
 			Par exemple,
-			reprenons la situation après inscription de l'étudiant
+			reprenons la situation après inscription de l’étudiant
 			numéro 42123.
-			La désinscription de l'étudiant numéro 41390 donnerait%
+			La désinscription de l’étudiant numéro 41390 donnerait%
 			\footnote{
 				Nous avons volontairement indiqué le 42123 en 5\ieme{} position.
 				Il est toujours là mais ne sera pas considéré par les
@@ -164,11 +160,11 @@
 				\lda{nbInscrits = 4}
 			\end{center}
 			
-			L'algorithme est assez simple à écrire
-			si on utilise la recherche écrite juste avant :
+			L’algorithme est assez simple à écrire
+			si on utilise la recherche écrite juste avant~:
 			
 			\begin{LDA}
-				\LComment{désinscrit l'étudiant donné}
+				\LComment{désinscrit l’étudiant donné}
 				\Algo{désinscrire}{
 						\Par{inscrits\In\Out}{\Array{n}{entiers}}, 
 						\Par{nbInscrits\In\Out}{entier}, 
@@ -177,7 +173,7 @@
 						}{entier}
 					\Decl{pos}{entier}
 					\Let pos \Gets vérifier(inscrits, nbInscrits, numéro)
-					\LComment{On pourrait vérifier et générer une erreur si l'étudiant n'est pas inscrit}
+					\LComment{On pourrait vérifier et générer une erreur si l’étudiant n’est pas inscrit}
 					\Let inscrits[pos] \Gets inscrits[nbInscrits-1]
 					\Let nbInscrits \Gets nbInscrits - 1					
 				\EndAlgo
@@ -187,28 +183,28 @@
 		%---------------------------------------------
 			
 			\begin{Exercice}{Éviter la double inscription}
-				Comment modifier l'algorithme d'inscription
-				pour s'assurer qu'un étudiant ne s'inscrive pas deux fois ?
+				Comment modifier l’algorithme d’inscription
+				pour s’assurer qu’un étudiant ne s’inscrive pas deux fois~?
 			\end{Exercice}
 
-			\begin{Exercice}{Limite au nombre d'inscriptions}
-				Comment modifier l'algorithme d'inscription
+			\begin{Exercice}{Limite au nombre d’inscriptions}
+				Comment modifier l’algorithme d’inscription
 				pour refuser une inscription si le nombre maximal
 				de participant est atteint
-				en supposant que ce maximum est égal à la taille physique du tableau ?
+				en supposant que ce maximum est égal à la taille physique du tableau~?
 			\end{Exercice}
 
 			\begin{Exercice}{Vérifier la désinscription}
-				Que se passerait-il avec l'algorithme
-				de désinscription tel qu'il est
-				si on demande à désinscrire un étudiant non inscrit ?
-				Que suggérez-vous comme changement ?
+				Que se passerait-il avec l’algorithme
+				de désinscription tel qu’il est
+				si on demande à désinscrire un étudiant non inscrit~?
+				Que suggérez-vous comme changement~?
 			\end{Exercice}
 
 			\begin{Exercice}{Optimiser la désinscription}
-				Dans l'algorithme de désinscription tel qu'il est,
-				voyez-vous un cas où on effectue une opération inutile ?
-				Avez-vous une proposition pour l'éviter ?
+				Dans l’algorithme de désinscription tel qu’il est,
+				voyez-vous un cas où on effectue une opération inutile~?
+				Avez-vous une proposition pour l’éviter~?
 			\end{Exercice}
 
 	% ==============================================
@@ -218,8 +214,8 @@
 		Imaginons à présent que nous maintenons un ordre
 		dans les données du tableau.
 		
-		Si on reprend l'exemple utilisé pour les données non triées,
-		on a :
+		Si on reprend l’exemple utilisé pour les données non triées,
+		on a~:
 		\begin{center}
 			\lda{inscrits} = 
 			\smallskip
@@ -232,31 +228,31 @@
 			\lda{nbInscrits = 4}
 		\end{center}
 		
-		Qu'est-ce que ça change au niveau des algorithmes ?
-		Beaucoup ! 
+		Qu’est-ce que ça change au niveau des algorithmes~?
+		Beaucoup~! 
 		Par exemple,
 		plus question de placer un nouvel inscrit à la suite des autres;
 		il faut trouver sa place.
 		
-		\subsection{Rechercher la position d'une inscription}
+		\subsection{Rechercher la position d’une inscription}
 		%----------------------------------------------------
 
 			Tous les algorithmes que nous allons voir
-			dans le cadre de données triées ont une partie en commun :
-			la recherche de la position du numéro, s'il est présent
-			ou de la position où il aurait dû être s'il est absent.
+			dans le cadre de données triées ont une partie en commun~:
+			la recherche de la position du numéro, s’il est présent
+			ou de la position où il aurait dû être s’il est absent.
 			Commençons par ça.
 			
-			L'algorithme est assez proche de celui de la vérification
-			d'une inscription vu précédemment si ce n'est
-			qu'on peut s'arrêter dès qu'on trouve un numéro plus grand.
+			L’algorithme est assez proche de celui de la vérification
+			d’une inscription vu précédemment si ce n’est
+			qu’on peut s’arrêter dès qu’on trouve un numéro plus grand.
 			On va aussi ajouter un booléen 
 			indiquant si la valeur a été trouvée.
 
 			\begin{LDA}
 				\LComment{Recherche un étudiant.}
-				\LComment{- trouvé : indique si oui ou non il a été trouvé}
-				\LComment{- pos : indique la position où a été trouvé l'étudiant ou la position où il aurait dû être}
+				\LComment{- trouvé~: indique si oui ou non il a été trouvé}
+				\LComment{- pos~: indique la position où a été trouvé l’étudiant ou la position où il aurait dû être}
 				\Algo{rechercher}{
 						\Par{inscrits\In}{\Array{n}{entiers}}, 
 						\Par{nbInscrits\In}{entier}, 
@@ -272,38 +268,38 @@
 				\EndAlgo
 			\end{LDA}
 			
-			Comprenez-vous pourquoi :
+			Comprenez-vous pourquoi~:
 			\begin{itemize}
 			\item
 				on trouve un < dans la condition du tant que et pas un $\neq$~?
 			\item
-				l'expression assignée à \lda{trouvé} est composée de deux parties
+				l’expression assignée à \lda{trouvé} est composée de deux parties
 				et utilise un =~?
 			\end{itemize}
 
 		\subsection{Inscrire un étudiant}
 		%---------------------------------------------
 				
-			L'inscription d'un étudiant se fait en trois étapes :
+			L’inscription d’un étudiant se fait en trois étapes~:
 			\begin{enumerate}
 			\item
-				On recherche l'étudiant via l'algorithme qu'on vient de voir,
+				On recherche l’étudiant via l’algorithme qu’on vient de voir,
 				ce qui nous donne la place où le placer.
 			\item
-				On libère la place pour l'y mettre.
-				Comprenez-bien que cette opération n'est pas triviale.
+				On libère la place pour l’y mettre.
+				Comprenez-bien que cette opération n’est pas triviale.
 				Si vous tenez des cartes en main, 
-				il est tout aussi facile d'y insérer une nouvelle carte
-				à n'importe quelle position.
+				il est tout aussi facile d’y insérer une nouvelle carte
+				à n’importe quelle position.
 				Avec un tableau,
-				il en va tout autrement ;
+				il en va tout autrement~;
 				pour insérer un élément à un endroit donné,
-				il faut décaler tous les suivants d'une position sur la droite.
+				il faut décaler tous les suivants d’une position sur la droite.
 			\item
-				On peut placer l'élément à la position libérée.
+				On peut placer l’élément à la position libérée.
 			\end{enumerate} 
 			
-			Ce qui nous donne :
+			Ce qui nous donne~:
 			
 			\begin{LDA}
 				\LComment{Inscrit un étudiant de numéro donné.}
@@ -320,7 +316,7 @@
 					\Let nbInscrits \Gets nbInscrits + 1
 				\EndAlgo
 				\Empty
-				\LComment{Décale d'une position à droite les éléments entre la position début et fin}
+				\LComment{Décale d’une position à droite les éléments entre la position début et fin}
 				\Algo{décalerDroite}{
 						\Par{tab\In\Out}{\Array{n}{entiers}}, 
 						\Par{début\In}{entier}, 
@@ -363,7 +359,7 @@
 			les éléments qui suivent celui à supprimer.
 
 			\begin{LDA}
-				\LComment{désinscrit l'étudiant donné}
+				\LComment{désinscrit l’étudiant donné}
 				\Algo{désinscrire}{
 						\Par{inscrits\In\Out}{\Array{n}{entiers}}, 
 						\Par{nbInscrits\In\Out}{entier}, 
@@ -377,7 +373,7 @@
 					\Let nbInscrits \Gets nbInscrits - 1					
 				\EndAlgo
 				\Empty
-				\LComment{Décale d'une position à gauche les éléments entre la position début et fin}
+				\LComment{Décale d’une position à gauche les éléments entre la position début et fin}
 				\Algo{décalerGauche}{
 						\Par{tab\In\Out}{\Array{n}{entiers}}, 
 						\Par{début\In}{entier}, 
@@ -393,38 +389,38 @@
 		%---------------------------------------------
 			
 			\begin{Exercice}{Éviter la double inscription}
-				Comment modifier l'algorithme d'inscription
-				pour s'assurer qu'un étudiant ne s'inscrive pas deux fois ?
+				Comment modifier l’algorithme d’inscription
+				pour s’assurer qu’un étudiant ne s’inscrive pas deux fois~?
 			\end{Exercice}
 
-			\begin{Exercice}{Limite au nombre d'inscriptions}
-				Comment modifier l'algorithme d'inscription
+			\begin{Exercice}{Limite au nombre d’inscriptions}
+				Comment modifier l’algorithme d’inscription
 				pour refuser une inscription si le nombre maximal
 				de participant est atteint
-				en supposant que ce maximum est égal à la taille physique du tableau ?
+				en supposant que ce maximum est égal à la taille physique du tableau~?
 			\end{Exercice}
 
-			\begin{Exercice}{Vérifier la déinscription}
-				Que se passerait-il avec l'algorithme
-				de désinscription tel qu'il est
-				si on demande à désinscrire un étudiant non inscrit ?
-				Que suggérez-vous comme changement ?
+			\begin{Exercice}{Vérifier la désinscription}
+				Que se passerait-il avec l’algorithme
+				de désinscription tel qu’il est
+				si on demande à désinscrire un étudiant non inscrit~?
+				Que suggérez-vous comme changement~?
 			\end{Exercice}
 
-		\subsection{Intérêt de trier les valeurs ?}
+		\subsection{Intérêt de trier les valeurs~?}
 		%---------------------------------------------
 
-			Est-ce que trier les valeurs est vraiment intéressant ?
+			Est-ce que trier les valeurs est vraiment intéressant~?
 			On voit que la recherche est un peu plus rapide
-			(en moyenne 2x plus rapide si l'élément ne s'y trouve pas).
-			Par contre, l'ajout et la suppression d'un élément
+			(en moyenne 2x plus rapide si l’élément ne s’y trouve pas).
+			Par contre, l’ajout et la suppression d’un élément
 			sont plus lents.
 			En plus, les algorithmes sont plus complexes à écrire
 			et à comprendre.
 			Le gain ne parait pas évident
-			et en effet, en l'état, il ne l'est pas.
+			et en effet, en l’état, il ne l’est pas.
 			
-			Mais c'est sans compter 
+			Mais c’est sans compter 
 			un autre algorithme de recherche, beaucoup plus rapide,
 			la recherche dichotomique, que nous allons voir maintenant.
 			
@@ -433,7 +429,7 @@
 	% ==============================================
 
 		La recherche dichotomique 
-		est un algorithme de recherche d'une valeur dans un tableau trié.
+		est un algorithme de recherche d’une valeur dans un tableau trié.
 		Il a pour essence de réduire à chaque étape 
 		la taille de l’ensemble de recherche de moitié, 
 		jusqu’à ce qu’il ne reste qu’un seul élément 
@@ -441,12 +437,12 @@
 		sauf bien entendu en cas d’inexistence de cette valeur 
 		dans l’ensemble de départ. 
 	
-		Pour l'expliquer,
-		on va prendre un tableau d'entiers complètement rempli.
-		Il sera facile d'adapter la solution à un tableau partiellement
+		Pour l’expliquer,
+		on va prendre un tableau d’entiers complètement rempli.
+		Il sera facile d’adapter la solution à un tableau partiellement
 		rempli (avec une taille logique) 
 		ou un tableau contenant tout autre type de valeurs
-		qui peut s'ordonner.
+		qui peut s’ordonner.
 		
 		{\sffamily\bfseries\upshape
 		Description de l’algorithme}
@@ -457,16 +453,16 @@
 		c’est-à-dire celui qui se trouve « au milieu » 
 		de la zone de recherche%
 		\footnote{%
-			Cet élément médian n'est pas tout à fait au milieu 
-			dans le cas d'une zone contenant un nombre pair d'éléments.
-		} ; 
+			Cet élément médian n’est pas tout à fait au milieu 
+			dans le cas d’une zone contenant un nombre pair d’éléments.
+		}~; 
 		son indice sera déterminé par la formule
 	
 		{\centering
 		\lda{indiceMédian \Gets (indiceGauche + indiceDroit) DIV 2}\par{}
 		}
 	
-		On compare alors \lda{val} avec la valeur de cet élément médian ; 
+		On compare alors \lda{val} avec la valeur de cet élément médian~; 
 		il est possible qu’on ait trouvé la valeur cherchée; 
 		sinon, on partage la zone de recherche en deux parties~: 
 		une qui \textbf{ne contient certainement pas} la valeur cherchée 
@@ -604,7 +600,7 @@
 		\textit{Deuxième étape}~:
 		\lda{indiceMédian \Gets (10 + 19) DIV 2}, c’est-à-dire 14. 
 		Comme on y trouve la valeur 25, 
-		on garde les éléments situées à la gauche de celui-ci ; 
+		on garde les éléments situées à la gauche de celui-ci~; 
 		la nouvelle zone de recherche est [10, 13].
 				
 		\begin{center}
@@ -720,7 +716,7 @@
 
 		\textit{Quatrième étape~:}
 		\lda{indiceMédian \Gets (12 + 13) DIV 2}, 
-		c’est-à-dire 12 où se trouve la valeur cherchée ; 
+		c’est-à-dire 12 où se trouve la valeur cherchée~; 
 		la recherche est terminée.
 
 	{\sffamily\bfseries\upshape
@@ -865,8 +861,8 @@
 		Arrivé à ce stade, 
 		la zone de recherche s’est réduite à un seul élément.
 		Ce n’est pas celui qu’on recherche 
-		mais c’est à cet endroit qu’il se serait trouvé ; 
-		c’est donc là qu’on pourra éventuellement l'insérer. 
+		mais c’est à cet endroit qu’il se serait trouvé~; 
+		c’est donc là qu’on pourra éventuellement l’insérer. 
 		Le paramètre de sortie prend la valeur 5.
 
 		{\sffamily\bfseries
@@ -920,21 +916,21 @@
 
 		L’algorithme de recherche dichotomique 
 		est beaucoup plus rapide que l’algorithme de recherche linéaire. 
-		Mais qu’est-ce que cela veut dire exactement ? 
-		En est-on sûr ? 
-		Comment le mesure-t-on ? 
-		Quels critères utilise-t-on ?
+		Mais qu’est-ce que cela veut dire exactement~? 
+		En est-on sûr~? 
+		Comment le mesure-t-on~? 
+		Quels critères utilise-t-on~?
 		De façon générale, comment comparer la vitesse
 		de deux algorithmes différents qui résolvent le même problème.
 		
-		\subsection{Une approche pratique : la simulation numérique}
+		\subsection{Une approche pratique~: la simulation numérique}
 		%--------------------------------------------------
 	
 			On pourrait se dire que pour comparer deux algorithmes, 
 			il suffit de les traduire tous les deux 
 			dans un langage de programmation, 
 			de les exécuter et de comparer leur temps d’exécution. 
-			Cette technique pose toutefois quelques problèmes :			
+			Cette technique pose toutefois quelques problèmes~:			
 			\begin{itemize}
 				\item 
 					Il faut que les programmes soient exécutés 
@@ -942,32 +938,32 @@
 					ce qui n’est pas toujours le cas ou facile à vérifier.
 				\item
 					Certains environnements peuvent être favorables
-					à un algorithme par rapport à l'autre
-					ce qui ne serait pas le cas d'un autre environnement.
+					à un algorithme par rapport à l’autre
+					ce qui ne serait pas le cas d’un autre environnement.
 					Par exemple, certaines architectures
 					sont plus rapides dans les calculs entiers
 					mais moins dans les calculs flottants.
 				\item 
 					Le test ne porte que sur un (voir quelques uns) jeu(x) de tests. 
-					Comment en tirer un enseignement général ? 
-					Que se passerait-il avec des données plus importantes ? 
-					Avec des données différentes ?
+					Comment en tirer un enseignement général~? 
+					Que se passerait-il avec des données plus importantes~? 
+					Avec des données différentes~?
 			\end{itemize}		
 			En fait, un chiffre précis ne nous intéresse pas. 
 			Ce qui est vraiment intéressant,
-			c'est de savoir comment l'algorithme va se comporter
+			c’est de savoir comment l’algorithme va se comporter
 			avec de grandes données.
-			C'est ce qu'apporte l'approche suivante.
+			C’est ce qu’apporte l’approche suivante.
 		
-		\subsection{Une approche théorique : la complexité}
+		\subsection{Une approche théorique~: la complexité}
 		%--------------------------------------------------
 		
 			Avec cette approche,
-			on va déduire de l'algorithme
+			on va déduire de l’algorithme
 			le nombre d’opérations de base à effectuer
 			en fonction de la \textbf{taille} du problème à résoudre
 			et en déduire 
-			comment il va se comporter sur de «~gros~» problèmes ?
+			comment il va se comporter sur de «~gros~» problèmes~?
 		
 			Dans le cas de la recherche dans un tableau, 
 			la taille du problème 
@@ -977,7 +973,7 @@
 			La question est alors la suivante~: 
 			pour un tableau de taille $n$, 
 			à combien de comparaisons faut-il procéder 
-			pour trouver l’élément (ou se rendre compte de son absence) ?
+			pour trouver l’élément (ou se rendre compte de son absence)~?
 		
 			{\bfseries
 			Pour la recherche linéaire}
@@ -997,7 +993,7 @@
 				après 6 étapes, on arrive à un élément isolé. 
 				Pour une liste de taille $n$, 
 				on peut en déduire que le nombre de comparaisons 
-				est au maximum l'exposant qu'il faut donner à 2 pour obtenir $n$, 
+				est au maximum l’exposant qu’il faut donner à 2 pour obtenir $n$, 
 				soit «~$\log_2(n)$~».
 		
 			{\sffamily\bfseries\upshape
@@ -1028,11 +1024,11 @@
 			On voit que c’est surtout pour des grands problèmes 
 			que la recherche dichotomique montre toute son efficacité. 
 			On voit aussi que ce qui est important pour mesurer la complexité 
-			c'est l'ordre de grandeur du nombre de comparaisons. 
+			c’est l’ordre de grandeur du nombre de comparaisons. 
 		
 			On dira que la recherche simple 
 			est un algorithme de complexité linéaire
-			(c'est-à-dire que le nombre d'opérations est de l'ordre de $n$ 
+			(c’est-à-dire que le nombre d’opérations est de l’ordre de $n$ 
 			ou proportionnel à $n$ ou encore que si on double la taille
 			du problème, le temps va aussi être doublé) 
 			ce qu’on note en langage plus mathématique $O(n)$
@@ -1083,35 +1079,35 @@
 			pour trouver une valeur dans un tableau de 100 éléments.
 
 			\begin{Exercice}{Calcul de complexités}
-				Quelle est la complexité d'un algorithme qui :		
+				Quelle est la complexité d’un algorithme qui~:		
 				\begin{enumerate}[label=\alph*)]
 				\item 
-					recherche le maximum d'un tableau de $n$ éléments ?
+					recherche le maximum d’un tableau de $n$ éléments~?
 				\item 
 					remplace par 0 toutes les occurrences du maximum 
-					d'un tableau de $n$ éléments ?
+					d’un tableau de $n$ éléments~?
 				\item 
-					vérifie si un tableau contient deux éléments égaux ?
+					vérifie si un tableau contient deux éléments égaux~?
 				\item 
-					trie par recherche des minima successifs ?
+					trie par recherche des minima successifs~?
 				\item 
-					vérifie si les éléments d'un tableau forment un palindrome ?
+					vérifie si les éléments d’un tableau forment un palindrome~?
 				\item
 					cherche un élément dans un tableau 
-					en essayant des cases au hasard jusqu'à le trouver ?
+					en essayant des cases au hasard jusqu’à le trouver~?
 				\end{enumerate}
 			\end{Exercice}
 
 			\begin{Exercice}{Gestion des données}
-				Comparez les algorithmes d'ajout, 
+				Comparez les algorithmes d’ajout, 
 				de recherche et de suppression
-				de valeurs dans le cas d'un tableau trié
-				et d'un tableau non trié.
+				de valeurs dans le cas d’un tableau trié
+				et d’un tableau non trié.
 			\end{Exercice}
 			
 			\begin{Exercice}{Réflexion}
 				L’algorithme de recherche dichotomique 
 				est-il toujours à préférer à
-				l’algorithme de recherche linéaire ?
+				l’algorithme de recherche linéaire~?
 			\end{Exercice}
 	

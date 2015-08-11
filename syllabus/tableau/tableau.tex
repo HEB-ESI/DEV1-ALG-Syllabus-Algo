@@ -37,15 +37,15 @@
 		\begin{itemize}
 		\item
 			le traitement de début de journée, qui consiste essentiellement à mettre
-			les compteurs des quantités vendues pour chaque produit à 0 ;
+			les compteurs des quantités vendues pour chaque produit à 0~;
 		\item
 			le traitement itératif durant toute la journée~: 
 			au fur et à mesure des ventes, 
 			il convient de les enregistrer, 
 			c’est-à-dire d’ajouter au compteur des ventes d’un produit 
-			la quantité vendue de ce produit ; 
+			la quantité vendue de ce produit~; 
 			ce traitement itératif s’interrompra 
-			lorsque la valeur -1 sera introduite ;
+			lorsque la valeur -1 sera introduite~;
 		\item
 			le traitement final, consistant à communiquer les valeurs des compteurs
 			pour chaque produit.
@@ -113,13 +113,13 @@
 		\end{LDA}
 	
 		Il est clair, à la lecture de cet algorithme, 
-		qu’une simplification d’écriture s’impose ! 
+		qu’une simplification d’écriture s’impose~! 
 		Et que ce passerait-il si le nombre de produits à
-		traiter était de 20 ou 100 ? 
+		traiter était de 20 ou 100~? 
 		Le but de l’informatique étant de dispenser l’humain 
 		des tâches répétitives, 
 		le programmeur peut en espérer autant 
-		de la part d’un langage de programmation !
+		de la part d’un langage de programmation~!
 		La solution est apportée par un nouveau type de variables~: 
 		les \textbf{variables indicées} ou \textbf{tableaux}.
 	
@@ -127,7 +127,7 @@
 		(\lda{cpt0}, \lda{cpt1}, etc.), 
 		nous allons envisager une seule «~grande~» variable 
 		\lda{cpt} compartimentée en dix «~cases~» ou «~sous-variables~»
-		(qu'on appelle aussi les «~éléments~» du tableau). 
+		(qu’on appelle aussi les «~éléments~» du tableau). 
 		Elles se distingueront les unes des autres par un numéro 
 		(on dit un «~indice~»)~: 
 		\lda{cpt0} deviendrait ainsi \lda{cpt[0]}, 
@@ -221,12 +221,12 @@
 		Cet indice varie entre la position du premier élément 
 		et la position du dernier élément, 
 		ces positions correspondant aux bornes de l’indice.
-		Notons qu'il n'y a pas de «~trou~»~: 
+		Notons qu’il n’y a pas de «~trou~»~: 
 		tous les éléments existent entre le premier et le dernier indice.
 	
 		La \textbf{taille} d’un tableau\index{tableau (taille)}
 		est le nombre de ses éléments.
-		Attention ! la taille d’un tableau ne peut pas être modifiée pendant
+		Attention~! la taille d’un tableau ne peut pas être modifiée pendant
 		son utilisation.
 	
 	% ==================
@@ -240,11 +240,11 @@
 			\Decl{nomTableau}{\Array{taille}{TypeElément}}
 		\end{LDA}
 
-		où \lda{taille} est le nombre d'éléments 
+		où \lda{taille} est le nombre d’éléments 
 		et \lda{TypeElément} est le type des éléments 
 			que l’on trouvera dans le tableau.
 			Tous les types sont permis
-			mais tous les éléments d'un même tableau
+			mais tous les éléments d’un même tableau
 			sont du même type. 
 		
 	% ==================
@@ -254,19 +254,19 @@
 		Un élément (une case) du tableau peut être accédé
 		via la notation
 		\begin{LDA}
-			\Stmt tab[i]	\Comment{élément du tableau 'tab' à l'indice i}
+			\Stmt tab[i]	\Comment{élément du tableau 'tab' à l’indice i}
 		\end{LDA}
-		La première case du tableau porte l'indice \lda{0}%
+		La première case du tableau porte l’indice \lda{0}%
 		\footnote{%
 			Nous considérons que la première case du tableau
-			porte le numéro 0 comme c'est le cas dans beaucoup de langages
+			porte le numéro 0 comme c’est le cas dans beaucoup de langages
 			de programmation (comme Java par exemple).
 			Plus loin, nous verrons une notation alternative
 			qui permet de choisir un autre numéro de début pour le tableau
 			ce qui sera plus naturel pour certains problèmes.
 		},
-		la dernière l'indice \lda{taille-1}.
-		C'est considéré comme une erreur d'indiquer un indice
+		la dernière l’indice \lda{taille-1}.
+		C’est considéré comme une erreur d’indiquer un indice
 		qui ne correspond pas à une case du tableau (trop petit ou trop grand).
 		Par exemple, si on déclare~:
 		\lda{tabEntiers : {\Array{100}{entiers}}}	
@@ -293,24 +293,24 @@
 	\section{Initialisation compacte}
 	% ==================
 
-		Chaque élément d'un tableau
+		Chaque élément d’un tableau
 		doit être manié avec la même précaution 
 		qu’une variable simple, 
 		c’est-à-dire qu’on ne peut utiliser un élément du tableau 
 		qui n’aurait pas été préalablement affecté ou initialisé.
 
-		L'initialisation d'un tableau peut se faire 
-		via une série d'assignations, case par case
+		L’initialisation d’un tableau peut se faire 
+		via une série d’assignations, case par case
 		mais on va aussi se permettre une notation compacte%
 		\footnote{
 			Peu de langages de programmation 
 			ont une notation compacte de ce genre. 
 			Java, par exemple, en possède une version moins puissante
 			qui ne permet de coder que le premier des trois exemples.
-			C'est pourquoi, en début d'apprentissage, 
-			on vous demandera souvent d'initialiser des tableaux
+			C’est pourquoi, en début d’apprentissage, 
+			on vous demandera souvent d’initialiser des tableaux
 			sans utiliser cette notation compacte.
-		} :
+		}~:
 		
 		\begin{LDA}
 			\Let tab \Gets \{2, 3, 5, 7, 11\} 
@@ -318,10 +318,10 @@
 			\Let tab \Gets \{0, \dots, 0\} 
 			\RComment{tous les éléments du tableau sont initialisés à 0}
 			\Let tab \Gets \{0, 1, 2, \dots\} 
-			\RComment{l'élément d'indice i est initialisé à la valeur i}
+			\RComment{l’élément d’indice i est initialisé à la valeur i}
 		\end{LDA}
 
-		%Par contre, on ne se permettra pas de demander ou d'afficher 
+		%Par contre, on ne se permettra pas de demander ou d’afficher 
 		%un tableau en une seule instruction
 		%mais on utilisera des instructions \lda{\textbf{demander}} 
 		%et \lda{\textbf{afficher}}
@@ -333,7 +333,7 @@
 	
 		Le type \emph{tableau} étant un type à part entière,
 		il est tout-à-fait éligible comme type
-		pour les paramètres et la valeur de retour d'un algorithme.
+		pour les paramètres et la valeur de retour d’un algorithme.
 		Voyons cela en détail.
 
 		\subsection{Passer un tableau en paramètre}
@@ -342,16 +342,16 @@
 			Les trois sortes de passages de paramètres sont possibles.
 			Elles servent à spécifier ce qui sera fait avec
 			les cases du tableau.
-			Plus précisément :
+			Plus précisément~:
 			\begin{itemize}
 			\item \In : 
-				indique que l'algorithme va consulter les valeurs 
+				indique que l’algorithme va consulter les valeurs 
 				du tableau reçu en paramètre. 
 				Les éléments doivent donc avoir été initialisés
-				avant d'appeler l'algorithme. Exemple~:
+				avant d’appeler l’algorithme. Exemple~:
 			
 				\begin{LDA}
-					\LComment{Affiche les éléments d'un tableau}
+					\LComment{Affiche les éléments d’un tableau}
 					\Algo{afficher}{\Par{tab\In}{\Array{10}{entiers}}}{} 
 						\For{i}{0}{9}
 							\Write tab[i]
@@ -365,11 +365,11 @@
 					\Stmt affiche(monTab)
 				\end{LDA}
 				
-				Rappelons qu'il s'agit du passage
-				par défaut si aucune flèche n'est indiquée.
+				Rappelons qu’il s’agit du passage
+				par défaut si aucune flèche n’est indiquée.
 				
 			\item \In\Out :
-				indique que l'algorithme va consulter/modifier les valeurs 
+				indique que l’algorithme va consulter/modifier les valeurs 
 				du tableau reçu en paramètre. Exemple~:
 			
 				\begin{LDA}
@@ -388,10 +388,10 @@
 				\end{LDA}
 	
 			\item \Out :
-				indique que l'algorithme va assigner des valeurs 
+				indique que l’algorithme va assigner des valeurs 
 				au tableau reçu en paramètre.
-				Les éléments de ce tableau n'ont donc pas à être initialisés
-				avant d'appeler cet algorithme. Exemple~:
+				Les éléments de ce tableau n’ont donc pas à être initialisés
+				avant d’appeler cet algorithme. Exemple~:
 			
 				\begin{LDA}
 					\LComment{Initialise un tableau reçu en paramètre}
@@ -411,7 +411,7 @@
 		\subsection{Retourner un tableau}
 		%---------------------------------
 			
-			Comme pour n'importe quel autre type,
+			Comme pour n’importe quel autre type,
 			un algorithme peut retourner un tableau.
 			Ce sera à lui de le déclarer et de lui donner des valeurs.
 
@@ -436,7 +436,7 @@
 		%---------------------------------
 		
 			Un tableau peut être passé en paramètre à un algorithme 
-			mais qu’en est-il de sa taille ? 
+			mais qu’en est-il de sa taille~? 
 			Plus haut, nous avons écrit un algorithme qui affiche
 			un tableau de 10 entiers.
 			Il serait utile de pouvoir appeler le même algorithme avec des
@@ -444,7 +444,7 @@
 			Pour permettre cela, la taille du tableau reçu en paramètre 
 			peut être déclarée avec un nom (habituellement \emph{n})
 			qui peut être considéré comme un paramètre entrant
-			et peut être utilisé dans l'algorithme.
+			et peut être utilisé dans l’algorithme.
 			Idem pour un tableau en retour.
 		
 			\textbf{Exemple~:}
@@ -453,12 +453,12 @@
 				\LComment{Affiche un tableau de taille quelconque}
 				\Algo{afficher}{\Par{tab}{\Array{n}{entiers}}}{}
 					\Write "Tableau de ", n, " éléments".
-					\For{i}{0}{n-1} \RComment{Attention ! le dernier élément est à l'indice n-1}
+					\For{i}{0}{n-1} \RComment{Attention ! le dernier élément est à l’indice n-1}
 						\Write tab[i]
 					\EndFor
 				\EndAlgo
 				\Empty
-				\LComment Crée un tableau d'entiers de taille n, l'initialise à 0 et le retourne.
+				\LComment Crée un tableau d’entiers de taille n, l’initialise à 0 et le retourne.
 				\Algo{créer}{n : entier}{\Array{n}{entiers}}
 					\Decl{tab}{\Array{n}{entiers}}
 					\For{i}{0}{n-1}
@@ -476,17 +476,17 @@
 
 			\begin{Exercice}{Trouver les entêtes}
 				Écrire les entêtes (et uniquement les entêtes)
-				des algorithmes qui résolvent les problèmes suivants :
+				des algorithmes qui résolvent les problèmes suivants~:
 				\begin{enumerate}[label=\alph*)]
 				\item
 					Écrire un algorithme qui 
-					inverse le signe de tous les éléments négatifs dans un tableau d'entiers.
+					inverse le signe de tous les éléments négatifs dans un tableau d’entiers.
 				\item
 					Écrire un algorithme qui
-					donne le nombre d'éléments négatifs dans un tableau d'entiers.
+					donne le nombre d’éléments négatifs dans un tableau d’entiers.
 				\item
 					Écrire un algorithme qui
-					détermine si un tableau d'entiers contient au moins un nombre négatif.
+					détermine si un tableau d’entiers contient au moins un nombre négatif.
 				\item
 					Écrire un algorithme qui
 					détermine si un tableau de chaines contient
@@ -495,14 +495,14 @@
 					Écrire un algorithme qui
 					détermine si un tableau de chaines contient
 					au moins deux occurrences de la même chaine,
-					quelle qu'elle soit.
+					quelle qu’elle soit.
 				\item
 					Écrire un algorithme qui 
 					retourne un tableau donnant les $n$ premiers nombres premiers,
-					où $n$ est un paramètre de l'algorithme.
+					où $n$ est un paramètre de l’algorithme.
 				\item
 					Écrire un algorithme qui 
-					reçoit un tableau d'entiers
+					reçoit un tableau d’entiers
 					et retourne un tableau de booléens de la même taille
 					où la case $i$ indique si oui ou non
 					le nombre reçu dans la case $i$ est strictement positif.
@@ -510,7 +510,7 @@
 			\end{Exercice}
 		
 	% ==============================================
-	\section{Parcours d'un tableau} 
+	\section{Parcours d’un tableau} 
 	\label{Les parcours de tableaux}
 	% ==============================================
 
@@ -524,16 +524,16 @@
 		%----------------------------
 		
 			Vous avez déjà vu dans les exemples
-			comment parcourir tous les éléments d'un tableau.
-			On s'en sort facilement avec une boucle \K{pour}.
+			comment parcourir tous les éléments d’un tableau.
+			On s’en sort facilement avec une boucle \K{pour}.
 			La fiche \vref{fiche:tab-parcours-complet}
-			décrit comment afficher tous les éléments d'un tableau.
-			On pourrait faire autre chose avec ces éléments :
+			décrit comment afficher tous les éléments d’un tableau.
+			On pourrait faire autre chose avec ces éléments~:
 			les sommer, les comparer\dots
 				
 			\begin{Exercice}{Inverser le signe des éléments}
 				Écrire un algorithme qui 
-				inverse le signe de tous les éléments négatifs dans un tableau d'entiers.
+				inverse le signe de tous les éléments négatifs dans un tableau d’entiers.
 			\end{Exercice}
 
 			\begin{Exercice}{Somme}
@@ -543,7 +543,7 @@
 				et qui retourne la somme de ses éléments.
 			\end{Exercice}
 
-			\begin{Exercice}{Nombre d'éléments d'un tableau}
+			\begin{Exercice}{Nombre d’éléments d’un tableau}
 				Écrire un algorithme qui reçoit en paramètre le tableau
 				\lda{tabRéels} de $n$ réels et qui
 				retourne le nombre d’éléments du tableau.
@@ -551,48 +551,48 @@
 			
 			\begin{Exercice}{Compter les éléments négatifs}
 				Écrire un algorithme qui
-				donne le nombre d'éléments négatifs dans un tableau d'entiers.
+				donne le nombre d’éléments négatifs dans un tableau d’entiers.
 			\end{Exercice}
 
 		\subsection{Parcours partiel}
 		%----------------------------
 		
 			Parfois, on ne doit pas forcément parcourir 
-			le tableau jusqu'au bout
-			mais on pourra s'arrêter prématurément 
+			le tableau jusqu’au bout
+			mais on pourra s’arrêter prématurément 
 			si une certaine condition est remplie.
 			Par exemple~:
 			\begin{itemize}
 			\item 
-				on cherche la présence d'un élément et on vient de le trouver ;
+				on cherche la présence d’un élément et on vient de le trouver~;
 			\item 
-				on vérifie qu'il n'y a pas de $0$ et on vient d'en trouver un ;
+				on vérifie qu’il n’y a pas de $0$ et on vient d’en trouver un~;
 			\item
 				on vérifie que tous les éléments sont positifs
-				et on vient d'en trouver un qui est négatif ou nul.
+				et on vient d’en trouver un qui est négatif ou nul.
 			\end{itemize}
 	
 			Pour résoudre ce problème,
-			on peut partir du parcours complet et :
+			on peut partir du parcours complet et~:
 			\begin{itemize}
 			\item
 				Transformer le \K{pour} en \K{tant que}.
 			\item
-				Introduire un test d'arrêt.
+				Introduire un test d’arrêt.
 			\end{itemize}
 			La fiche \vref{fiche:tab-parcours-partiel}
 			détaille un parcours partiel.
 				
 			\begin{Exercice}{Tester la présence de négatifs}
 				Écrire un algorithme qui
-				détermine si un tableau d'entiers contient au moins un nombre négatif.
+				détermine si un tableau d’entiers contient au moins un nombre négatif.
 			\end{Exercice}
 
-			\begin{Exercice}{Y a-t-il un pilote dans l'avion ?}
+			\begin{Exercice}{Y a-t-il un pilote dans l’avion~?}
 				Écrire un algorithme qui reçoit en paramètre le tableau
 				\lda{avion} de $n$ chaines 
 				et qui retourne un booléen 
-				indiquant s'il contient au moins un élément de 
+				indiquant s’il contient au moins un élément de 
 				valeur "pilote". 
 			\end{Exercice}
 		
@@ -603,9 +603,9 @@
 		Parfois, on ne sait pas exactement 
 		quelle taille doit avoir un tableau.
 		Imaginons, par exemple,
-		qu'il s'agisse de demander des valeurs à l'utilisateur
+		qu’il s’agisse de demander des valeurs à l’utilisateur
 		et de les stocker dans un tableau pour un traitement ultérieur.
-		Supposons que l'utilisateur va indiquer la fin des données
+		Supposons que l’utilisateur va indiquer la fin des données
 		par une valeur sentinelle.
 		Impossible de savoir, à priori, combien de valeurs il va entrer
 		et, par conséquent, la taille à donner au tableau.
@@ -614,27 +614,27 @@
 		pour tous les cas%
 		\footnote{%
 			En tout cas, 
-			suffisamment grand pour tous les cas qu'on accepte
+			suffisamment grand pour tous les cas qu’on accepte
 			de prendre en compte; il faudra bien fixer une limite.
 		} 
-		quitte à n'en n'utiliser qu'une partie.
+		quitte à n’en n’utiliser qu’une partie.
 		Mais comment savoir quelle est la partie du tableau
-		qui est effectivement utilisée ?
-		Comprenez bien qu'il \textbf{n'y a pas de concept de case vide}.
-		Rien ne différencie une case utilisée d'une case non utilisée.
-		On s'en sort en stockant les valeurs 
+		qui est effectivement utilisée~?
+		Comprenez bien qu’il \textbf{n’y a pas de concept de case vide}.
+		Rien ne différencie une case utilisée d’une case non utilisée.
+		On s’en sort en stockant les valeurs 
 		dans la partie basse du tableau (à gauche)
 		et en retenant, dans une variable,
 		le nombre de cases effectivement utilisées.
 			
 		\marginicon{definition}
-		La \textbf{taille physique} d'un tableau 
-		est le nombre de cases qu'il contient.
+		La \textbf{taille physique} d’un tableau 
+		est le nombre de cases qu’il contient.
 		Sa \textbf{taille logique}
 		est le nombre de cases actuellement utilisées.
 	
 		\paragraph{Exemple.}
-		Voici un tableau qui ne contient pour l'instant que quatre nombres.
+		Voici un tableau qui ne contient pour l’instant que quatre nombres.
 		\begin{center}
 			\begin{tabular}{*{10}{|>{\centering\arraybackslash}m{5mm}}|}
 				\hline
@@ -646,20 +646,20 @@
 			\qquad
 			\lda{tailleLogique = 4}
 		\end{center}
-		Les cases indiquées par "?" ne sont pas vides ;
+		Les cases indiquées par "?" ne sont pas vides~;
 		elles peuvent être non initialisées
 		(et on ne peut pas tester si une case est non initialisée)
-		ou bien contenir une valeur qui n'est pas pertinente.
+		ou bien contenir une valeur qui n’est pas pertinente.
 		
 		\paragraph{Exemple.}
-		L'algorithme suivant 
-		demande des valeurs positives à l'utilisateur 
+		L’algorithme suivant 
+		demande des valeurs positives à l’utilisateur 
 		et les stocke dans un tableau (maximum 1000).
 		Toute valeur négative ou nulle est une valeur sentinelle.
 		\begin{LDA}
 			\Algo{stockerValeurs}{}{}
 				\Decl{tab}{\Array{1000}{entiers}}
-				\Decl{nbÉléments}{entier} \RComment{C'est la taille logique}
+				\Decl{nbÉléments}{entier} \RComment{C’est la taille logique}
 				\Decl{valeur}{entier}
 				\Let nbÉléments \Gets 0
 				\Read valeur
@@ -668,15 +668,15 @@
 					\Let nbÉléments \Gets nbÉléments + 1
 					\Read valeur
 				\EndWhile
-				\If{valeur > 0}		\RComment{Pourquoi tester valeur et pas nbÉléments ?}
+				\If{valeur > 0}		\RComment{Pourquoi tester valeur et pas nbÉléments~?}
 					\Write "La limite physique a été atteinte"
 				\EndIf
 			\EndAlgo
 		\end{LDA}
 
-		\begin{Exercice}{Modifier l'exemple}
-			Tel quel, l'exemple ci-dessus n'est pas très intéressant.
-			Ce serait mieux s'il retournait le tableau 
+		\begin{Exercice}{Modifier l’exemple}
+			Tel quel, l’exemple ci-dessus n’est pas très intéressant.
+			Ce serait mieux s’il retournait le tableau 
 			ce qui permettrait effectivement un traitement ultérieur
 			des valeurs.
 			Modifiez-le en ce sens.
@@ -686,17 +686,17 @@
 	\section{Des tableaux qui ne commencent pas à 0} 
 	% ==============================================
 
-		Les tableaux que nous avons vus jusqu'à présent
+		Les tableaux que nous avons vus jusqu’à présent
 		\emph{commencent à 0}
-		ce qui signifie que la première case est d'indice 0.
-		Il peut être intéressant d'utiliser des tableaux
+		ce qui signifie que la première case est d’indice 0.
+		Il peut être intéressant d’utiliser des tableaux
 		qui commencent à un autre indice.
 		
 		\paragraph{Exemple.}
-		Imaginons l'algorithme qui permet de convertir un numéro
-		de jour en son intitulé : 1 donne "lundi", 2 donne "mardi",
+		Imaginons l’algorithme qui permet de convertir un numéro
+		de jour en son intitulé~: 1 donne "lundi", 2 donne "mardi",
 		\dots{}
-		Une solution possible, sans tableau, serait :
+		Une solution possible, sans tableau, serait~:
 		
 		\begin{LDA}
 			\Algo{intituléJour}{\Par{numéroJour}{entier}}{chaine}
@@ -712,7 +712,7 @@
 			\EndAlgo
 		\end{LDA}
 		
-		Mais une solution plus élégante passe par l'utilisation d'un tableau.
+		Mais une solution plus élégante passe par l’utilisation d’un tableau.
 		Appelons-le \lda{nomsJours} et stockons-y les noms des jours
 		comme illustré ci-dessous.
 
@@ -731,19 +731,19 @@
 			\end{tabular}
 		\end{center}
 
-		Pour obtenir le nom d'un jour, il suffit d'écrire : 
+		Pour obtenir le nom d’un jour, il suffit d’écrire~: 
 		\lda{nomsJours[numéroJour]}.
 		
 		On voit dans cet exemple
-		qu'il est plus naturel que le tableau commence à 1.
+		qu’il est plus naturel que le tableau commence à 1.
 		Pour déclarer un tel tableau, 
-		nous utiliserons la notation suivante :
+		nous utiliserons la notation suivante~:
 		
 		\begin{LDA}
 			\Decl{nomsJours}{\Array[1]{7}{chaines}}
 		\end{LDA}
 		
-		L'algorithme devient :
+		L’algorithme devient~:
 		\begin{LDA}
 			\Algo{intituléJour}{\Par{numéroJour}{entier}}{chaine}
 				\Decl{nomsJours}{\Array[1]{7}{chaines}}
@@ -752,18 +752,18 @@
 			\EndAlgo
 		\end{LDA}
 		
-		\paragraph{Comment traduire ça dans un langage de programmation ?}
+		\paragraph{Comment traduire ça dans un langage de programmation~?}
 		Certains langages comme Pascal
-		permettent de choisir l'indice de début d'un tableau.
-		D'autres l'imposent, parfois à 1 comme Cobol 
+		permettent de choisir l’indice de début d’un tableau.
+		D’autres l’imposent, parfois à 1 comme Cobol 
 		mais le plus souvent à 0 comme Java.
-		Que faire dans ce cas ? Il existe deux stratégies.
+		Que faire dans ce cas~? Il existe deux stratégies.
 		
 		\begin{enumerate}
 		\item
-			La première passe par une conversion d'indice.
+			La première passe par une conversion d’indice.
 			On stocke les données dans le tableau 
-			comme nous l'impose le langage
+			comme nous l’impose le langage
 			
 				\begin{tabular}{*{7}{>{\centering\arraybackslash}m{15mm}}}
 					0 & 1 & 2 & 3 & 4 & 5 & 6
@@ -778,7 +778,7 @@
 					\\\hline
 				\end{tabular}
 				
-			et on accède à l'intitulé du jour $i$ dans la case $i-1$.
+			et on accède à l’intitulé du jour $i$ dans la case $i-1$.
 			Ce qui donne
 	
 			\begin{LDA}
@@ -792,7 +792,7 @@
 			
 		\item
 			La seconde approche crée un tableau avec une case en plus
-			et n'utilise pas la première.
+			et n’utilise pas la première.
 				
 				\begin{tabular}{>{\centering\arraybackslash}m{2mm}*{7}{>{\centering\arraybackslash}m{15mm}}}
 					0 & 1 & 2 & 3 & 4 & 5 & 6 & 7
@@ -808,7 +808,7 @@
 					\\\hline
 				\end{tabular}
 				
-			L'algorithme devient
+			L’algorithme devient
 	
 			\begin{LDA}
 				\Algo{intituléJour}{\Par{numéroJour}{entier}}{chaine}
@@ -821,17 +821,17 @@
 		\end{enumerate}
 		
 		Cette seconde approche est à préférer 
-		car elle modifie le moins l'algorithme de départ 
-		et entrainera moins d'erreurs de conversion
-		(au prix d'un faible gaspillage de la mémoire).
-		Mais elle n'est pas toujours possible.
-		Par exemple, imaginons qu'on veuille prendre 
-		des relevés de températures (arrondies à l'entier) à Bruxelles 
+		car elle modifie le moins l’algorithme de départ 
+		et entrainera moins d’erreurs de conversion
+		(au prix d’un faible gaspillage de la mémoire).
+		Mais elle n’est pas toujours possible.
+		Par exemple, imaginons qu’on veuille prendre 
+		des relevés de températures (arrondies à l’entier) à Bruxelles 
 		et retenir le nombre de fois que chaque température a été relevée.
-		Le plus évident serait d'utiliser un tableau allant de -30 à 40
+		Le plus évident serait d’utiliser un tableau allant de -30 à 40
 		où la case $i$ donne le nombre de fois 
 		que la température $i$ a été relevée.
-		Pour cet exemple, impossible d'utiliser la seconde approche
+		Pour cet exemple, impossible d’utiliser la seconde approche
 		mais la première est toujours possible en stockant
 		le nombre de relevés de la température $i$ dans la case $i+30$.
 
@@ -845,9 +845,9 @@
 		
 		\begin{Exercice}{Nombre de jours dans un mois}
 			Écrire un algorithme qui reçoit un numéro de mois (de 1 à 12)
-			ainsi qu'une année et donne le nombre de jours dans ce mois
+			ainsi qu’une année et donne le nombre de jours dans ce mois
 			(en tenant compte des années bissextiles).
-			N'hésitez pas à réutiliser des algorithmes déjà écrits.
+			N’hésitez pas à réutiliser des algorithmes déjà écrits.
 		\end{Exercice}
 		
 		

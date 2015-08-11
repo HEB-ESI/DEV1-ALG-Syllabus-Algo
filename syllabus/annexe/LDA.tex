@@ -1,7 +1,7 @@
 \chapter{Le LDA}
 
 	Dans cette annexe nous définissons le LDA
-	(\emph{le Langage de Description d'Algorithmes})
+	(\emph{le Langage de Description d’Algorithmes})
 	que nous allons utiliser. 
 	Nous ne nous attarderons pas sur les concepts
 	ni sur certaines bonnes pratiques;
@@ -12,36 +12,36 @@
 	\begin{itemize}
 	\item
 		Un programme est une suite de lignes
-		ne permettant pas d'utiliser pleinement les
+		ne permettant pas d’utiliser pleinement les
 		deux dimensions de la page 
 		(pensons à la mise en page des formules).
 	\item
 		Certaines constructions et règles
-		n'existent que pour simplifier le travail du compilateur
+		n’existent que pour simplifier le travail du compilateur
 		et/ou accélérer le code.
-		C'est le cas, par exemple, de la syntaxe du \emph{switch}.
+		C’est le cas, par exemple, de la syntaxe du \emph{switch}.
 	\end{itemize}
 	
 	Dans vos réflexions, brouillons, premiers jets,
 	nous vous encourageons à utiliser des notations
 	qui vous sont propres et qui vous permettent
 	de poser votre réflexion sur un papier
-	et d'avancer vers une solution.
+	et d’avancer vers une solution.
 	
 	La version finale, toutefois, 
-	doit être lue par d'autres personnes.
-	Il est \textbf{essentiel} qu'il n'y ait aucune ambigüité
+	doit être lue par d’autres personnes.
+	Il est \textbf{essentiel} qu’il n’y ait aucune ambigüité
 	sur le sens de votre écrit.
-	C'est pourquoi, nous devons définir une notation
+	C’est pourquoi, nous devons définir une notation
 	à la fois souple et précise.
 	
 	Cette notation doit aussi être adaptée à des étudiants de première année.
 	Ce qui nous amène à ne pas introduire des nuances qui leur échappent encore
 	et, parfois, à imposer des contraintes qui seront relâchées plus tard
-	mais qui permettent de cadrer l'apprentissage d'un débutant.
+	mais qui permettent de cadrer l’apprentissage d’un débutant.
 	
-	\textbf{Remarque} : Ce guide n'est pas universel.
-	En dehors de l'école, d'autres notations sont utilisées,
+	\textbf{Remarque}~: Ce guide n’est pas universel.
+	En dehors de l’école, d’autres notations sont utilisées,
 	parfois proches, parfois plus lointaines.
 	Votre professeur pourra également introduire quelques notations
 	qui ne sont pas reprises ici 
@@ -49,8 +49,8 @@
 	Lorsque vous changerez de professeur,
 	soyez conscient que ces ajouts ne seront peut-être plus valables.
 	
-	L'important est que le groupe qui doit communiquer
-	au moyen d'algorithmes se soit préalablement mis d'accord 
+	L’important est que le groupe qui doit communiquer
+	au moyen d’algorithmes se soit préalablement mis d’accord 
 	sur des notations.
 
 \subsection*{Un algorithme}
@@ -73,12 +73,12 @@
 		\end{LDA}
 	\end{minipage}
 
-	On permet l'utilisation du raccourci \lda{\K{algo}}.
+	On permet l’utilisation du raccourci \lda{\K{algo}}.
 	
 \subsection*{Types, variables et constantes}
 %-----------------------------------
 
-	Les types permis sont :
+	Les types permis sont~:
 	\lda{entier}, \lda{réel},
 	\lda{booléen} et \lda{chaine}.
 
@@ -94,7 +94,7 @@
 		\Let var \Gets expression
 		\Read var1, var2\dots
 		\Write expression1, expression2\dots
-		\Error "raison" \Comment Provoque l'arrêt de l'algorithme.
+		\Error "raison" \Comment Provoque l’arrêt de l’algorithme.
 	\end{LDA}
 	
 \subsection*{Les instructions de choix}
@@ -156,7 +156,7 @@
 		\EndSwitch
 	\end{LDA}
 	
-	où l'expression peut être de type \lda{entier} ou \lda{chaine}
+	où l’expression peut être de type \lda{entier} ou \lda{chaine}
 	(pas de \lda{réel}) et les valeurs sont des constantes.
 
 \subsection*{Les instructions de répétition}
@@ -192,9 +192,9 @@
 	\item
 		Le \lda{\K{par} pas} peut être omis si le pas vaut 1.
 	\item
-		Il n'est \textbf{pas nécessaire} de déclarer l'indice.
+		Il n’est \textbf{pas nécessaire} de déclarer l’indice.
 		Il ne peut être utilisé en dehors de la boucle et ne peut pas
-		être modifié à l'intérieur de la boucle.
+		être modifié à l’intérieur de la boucle.
 		De même, le \lda{début}, la \lda{fin} et le \lda{pas} 
 		ne peuvent pas être modifiés dans la boucle.
 	\end{itemize}
@@ -203,19 +203,19 @@
 %---------------------------------
 
 	Le type tableau se note \lda{\Array{n}{entiers}}.
-	Ainsi une déclaration ressemble à :
+	Ainsi une déclaration ressemble à~:
 	\begin{LDA}
 	\Decl{tab}{\Array{n}{entiers}}
 	\end{LDA}
 	
 	Les éléments se notent \lda{tab[0]} à \lda{tab[n-1]}.
 	On remarque que nous avons choisi de faire commencer les tableaux à 0
-	par défaut mais on peut choisir un autre début en écrivant :
+	par défaut mais on peut choisir un autre début en écrivant~:
 	\begin{LDA}
 	\Decl{tab}{\Array[1]{n}{entiers}}
 	\end{LDA}
 
-	On peut assigner toutes les valeurs d'un tableau 
+	On peut assigner toutes les valeurs d’un tableau 
 	via une notation compacte.
 	\begin{LDA}
 	\Let tab1 \Gets \{1,1,2,3,5,8,13\}
@@ -225,7 +225,7 @@
 \subsection*{Les structures}
 %---------------------------------
 
-	Une structure se définit ainsi :
+	Une structure se définit ainsi~:
 	\begin{LDA}
 		\Struct{NomDeLaStructure}
 			\Decl{nomChamp1}{type1}
@@ -240,9 +240,9 @@
 	\Decl{var}{NomDeLaStructure}
 	\end{LDA}
 	
-	Un champ s'accède grâce à la notation pointée : \lda{var.nomChamp}.
+	Un champ s’accède grâce à la notation pointée~: \lda{var.nomChamp}.
 	
-	Pour assigner une valeur à tous les champs d'une variable structurée,
+	Pour assigner une valeur à tous les champs d’une variable structurée,
 	on peut assigner chaque champ séparément avec la notation pointée
 	ou utiliser une notation compacte.
 	\begin{LDA}

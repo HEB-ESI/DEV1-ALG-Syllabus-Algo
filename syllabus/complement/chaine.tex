@@ -7,7 +7,7 @@
 	nous allons apprendre à manipuler du texte 
 	en étudiant les différentes fonctions associées 
 	aux variables de type chaine. 
-	Ce sera aussi l'occasion de revoir quelques techniques algorithmiques 
+	Ce sera aussi l’occasion de revoir quelques techniques algorithmiques 
 	déjà acquises pour les nombres (alternatives, boucles) 
 	afin de les consolider dans un contexte plus \og littéraire \fg.
 	
@@ -16,23 +16,23 @@
 
 	Très tôt dans ce cours,
 	nous avons introduit le type \lda{chaine}
-	mais nous n'en avons encore fait que des usages basiques,
+	mais nous n’en avons encore fait que des usages basiques,
 	essentiellement des affichages.
-	Il est temps d'aller plus loin et de les \emph{manipuler},
-	c'est-à-dire d'examiner et de manipuler le contenu de chaines. 
+	Il est temps d’aller plus loin et de les \emph{manipuler},
+	c’est-à-dire d’examiner et de manipuler le contenu de chaines. 
 	Mais procédons par étapes.
 	
 \section{Longueur}
 %=================
 	
-	\marginicon{definition}\index{chaine (longueur d'une)}
-	La \textbf{longueur} d'une chaine est le nombre de caractères
-	qu'elle contient. 
+	\marginicon{definition}\index{chaine (longueur d’une)}
+	La \textbf{longueur} d’une chaine est le nombre de caractères
+	qu’elle contient. 
 	Pour la connaitre on utilisera la notation \lda{long(uneChaine)}.
-	Par exemple :
+	Par exemple~:
 	\begin{itemize}
 	\item \lda{long("Bonjour")} vaut 7.
-	\item \lda{long("Une chaine")} vaut 10 (l'espace compte pour 1).
+	\item \lda{long("Une chaine")} vaut 10 (l’espace compte pour 1).
 	\item \lda{long("A")} est 1.
 	\item \lda{long("")} est égal à 0.
 	\end{itemize}
@@ -44,34 +44,34 @@
 	distinguent clairement le type chaine et le type caractère\index{caractère}.
 	Ainsi, en Java, le littéral \lda{'A'} représente un caractère
 	qui est différent du littéral \lda{"A"} qui représente une chaine
-	(composée d'un seul caractère).
+	(composée d’un seul caractère).
 	Cette distinction est essentiellement dictée par des détails
-	d'implémentation; un caractère pouvant se représenter
-	de façon plus économe qu'une chaine.
+	d’implémentation; un caractère pouvant se représenter
+	de façon plus économe qu’une chaine.
 
-	D'autres langages, comme Python, n'ont pas de type caractère spécifique.
-	D'autres encore, comme C, ont un type caractère mais pas de type chaine
+	D’autres langages, comme Python, n’ont pas de type caractère spécifique.
+	D’autres encore, comme C, ont un type caractère mais pas de type chaine
 	à proprement parler; ils sont vus comme des tableaux de caractères. 
 
 	Ici, nous introduirons un type \lda{caractère}
-	mais sans le distinguer clairement d'une chaine.
+	mais sans le distinguer clairement d’une chaine.
 	Ainsi, un caractère pourra être utilisé comme une chaine
-	et une chaine d'un seul caractère pourra être considéré comme
+	et une chaine d’un seul caractère pourra être considéré comme
 	un caractère. 
-	En somme, \lda{caractère} n'est qu'un raccourci pour dire :
+	En somme, \lda{caractère} n’est qu’un raccourci pour dire~:
 	\emph{une chaine de longueur 1}.
 	
-\section{Le contenu d'une chaine}
+\section{Le contenu d’une chaine}
 %=================================
 
 	Pour pouvoir manipuler une chaine,
 	il faut pouvoir accéder aux caractères qui la composent.
-	Comme il s'agit d'une opération de base souvent utilisée,
+	Comme il s’agit d’une opération de base souvent utilisée,
 	nous allons introduire une écriture compacte,
-	empruntée aux tableaux : 
+	empruntée aux tableaux~: 
 	\lda{chaine[i]} désigne le i\ieme{} caractère de la chaine
 	(en commençant à 1).
-	Par exemple :
+	Par exemple~:
 	\begin{LDA}
 		\Decl{texte}{chaine}
 		\Let texte \Gets "Hello"
@@ -98,9 +98,9 @@
 
 	Il est fréquent de devoir rassembler plusieurs chaines 
 	pour former une seule chaine plus grande, 
-	il s'agit de l'opération de \textbf{concaténation}.
+	il s’agit de l’opération de \textbf{concaténation}.
 	Introduisons également une notation compacte, le \lda{+}. 
-	Par exemple : 
+	Par exemple~: 
 	\begin{LDA}
 		\Let texte \Gets "al" + "go" + "rithmique"
 		\RComment
@@ -108,7 +108,7 @@
 	\end{LDA}	
 
 	\paragraph{Exemple.}
-	Écrivons un algorithme qui inverse toutes les lettres d'un mot.
+	Écrivons un algorithme qui inverse toutes les lettres d’un mot.
 	Ainsi, "algo" deviendra "ogla".
 	\begin{LDA}
 		\Algo{miroir}{\Par{mot}{chaine}}{chaine}
@@ -127,7 +127,7 @@
 	Les algorithmes qui suivent pourraient être écrits
 	avec ce que nous avons déjà introduit mais ce serait long
 	et fastidieux. 
-	Nous allons supposer qu'ils existent et on pourra les utiliser
+	Nous allons supposer qu’ils existent et on pourra les utiliser
 	si nécessaire.
 	
 	\begin{description}
@@ -152,12 +152,12 @@
 		ont été converties en minuscule.
 	\end{description}
 	
-\section{L'alphabet}
+\section{L’alphabet}
 %===================
 
 	Il peut aussi être pratique de connaitre 
-	la position d'une lettre dans l'alphabet. 
-	Ceci se fera à l'aide de la fonction :
+	la position d’une lettre dans l’alphabet. 
+	Ceci se fera à l’aide de la fonction~:
 
 	\begin{description}
 	\item[\lda{numLettre(car: caractère)\Gives~entier}]
@@ -167,17 +167,17 @@
 		cette fonction traite donc de la même manière 
 		les majuscules et les minuscules. 
 		\lda{numLettre} retournera aussi 5 pour les caractères "é", "è", "ê", "ë"\dots). 
-		Attention, il est interdit d'utiliser cette fonction 
-		si le caractère n'est pas une lettre !
+		Attention, il est interdit d’utiliser cette fonction 
+		si le caractère n’est pas une lettre~!
 	\end{description}
 	
-	Il peut être utile d'avoir un outil qui fait l'opération inverse, 
-	à savoir associer la lettre de l'alphabet correspondant à une position donnée. 
-	Pour cela, nous aurons : 
+	Il peut être utile d’avoir un outil qui fait l’opération inverse, 
+	à savoir associer la lettre de l’alphabet correspondant à une position donnée. 
+	Pour cela, nous aurons~: 
 
 	\begin{description}
 	\item[\lda{lettreMaj(n: entier)\Gives~caractère}]
-		Retourne la forme majuscule de la n\ieme{} lettre de l'alphabet 
+		Retourne la forme majuscule de la n\ieme{} lettre de l’alphabet 
 		(où \textit{n} sera obligatoirement compris entre 1 et 26). 
 		Par exemple, \lda{lettreMaj(13)} retourne "M".
 	\item[\lda{lettreMin(n: entier)\Gives~caractère}]
@@ -199,7 +199,7 @@
 		Transforme une chaine contenant des caractères numériques 
 		en nombre.
 		Ainsi, \lda{nombre("3,14")} retournera 3,14. 
-		C'est une erreur de l'utiliser avec une chaine
+		C’est une erreur de l’utiliser avec une chaine
 		qui ne représente pas un nombre.
 	\end{description}
 	
@@ -208,32 +208,32 @@
 
 	\begin{description}
 	\item[\lda{sousChaine(ch: chaine, pos: entier, long: entier) \Gives~chaine}]
-		Permet d'extraire une portion 
-		d'une certaine longueur d'une chaine donnée, 
-		et ceci à partir d'une position donnée. 
+		Permet d’extraire une portion 
+		d’une certaine longueur d’une chaine donnée, 
+		et ceci à partir d’une position donnée. 
 	\end{description}
 
 	Il faudra aussi être très vigilant 
 	pour une utilisation correcte: 
 	\lda{pos} doit être compris entre 1 et la taille de la chaine, 
 	et la valeur de \lda{long} doit être telle 
-	qu'on ne déborde pas de la chaine ! 
+	qu’on ne déborde pas de la chaine~! 
 
 	Par exemple, \lda{sousChaine("algorithmique", 5, 3)} 
 	donne "rit".
 
 	Cette fonction est très utile pour sélectionner 
-	des portions d'une chaine 
+	des portions d’une chaine 
 	contenant des informations codées sous un certain format. 
 	Prenons par exemple une date stockée dans une chaine \textit{ch} de format 
 	"JJ/MM/AAAA" (de longueur 10). 
 	Pour extraire le jour de cette date, 
-	on écrira \lda{sousChaine(ch, 1, 2)} ; 
-	le mois s'obtiendra avec \lda{sousChaine(ch, 4, 2)} 
-	et l'année avec \lda{sousChaine(ch, 7, 4)}. 
+	on écrira \lda{sousChaine(ch, 1, 2)}~; 
+	le mois s’obtiendra avec \lda{sousChaine(ch, 4, 2)} 
+	et l’année avec \lda{sousChaine(ch, 7, 4)}. 
 	Attention, les 3 résultats obtenus sont des chaines de chiffres 
 	et non des nombres mais il est possible de les convertir
-	via la fonction \lda{nombre} !
+	via la fonction \lda{nombre}~!
 
 \section{Recherche de sous-chaine}
 % ==================================
@@ -243,17 +243,17 @@
 		Permet de savoir 
 		si une sous-chaine donnée 
 		est présente dans une chaine donnée. 
-		Elle permet d'éviter d'écrire 
+		Elle permet d’éviter d’écrire 
 		le code correspondant à une recherche. 
 	\end{description}
 	
-	La valeur de l'entier renvoyé est la position 
+	La valeur de l’entier renvoyé est la position 
 	où commence la sous-chaine recherchée. 
 	Par exemple, 
 	\lda{position("algorithmique", "mi")} retournera 9. 
-	Si la sous-chaine ne s'y trouve pas, 
+	Si la sous-chaine ne s’y trouve pas, 
 	la fonction retourne 0. 
-	On peut admettre ici d'écrire un caractère à la place de la sous-chaine. 
+	On peut admettre ici d’écrire un caractère à la place de la sous-chaine. 
 	Par exemple, 
 	\lda{position("algorithmique", "m")} retournera également 9. 
 
@@ -265,7 +265,7 @@
 		qui reçoit une fraction sous forme de chaine, 
 		et retourne la valeur numérique de celle-ci. 
 		Par exemple, si la fraction donnée est "5/8", 
-		l'algorithme renverra 0,625. 
+		l’algorithme renverra 0,625. 
 		On peut considérer que la fraction donnée est correcte, 
 		elle est composée de 2 entiers séparés 
 		par le caractère de division '/'.
@@ -285,43 +285,43 @@
 	
 	\begin{Exercice}{Conversion de nom}
 		Écrire un algorithme 
-		qui reçoit le nom complet d'une personne 
+		qui reçoit le nom complet d’une personne 
 		dans une chaine sous la forme "nom, prénom" 
 		et la renvoie au format "prénom nom" 
 		(sans virgule séparatrice). 
-		Exemple : "De Groote, Jan" deviendra "Jan De Groote".	
+		Exemple~: "De Groote, Jan" deviendra "Jan De Groote".	
 	\end{Exercice}
 	
 	\begin{Exercice}{Gauche et droite}
 		Écrire un algorithme \lda{gauche} 
 		et un \lda{droite}
 		qui retourne la chaine formée respectivement 
-		des n premiers et des n derniers caractères d'une chaine donnée.	
+		des n premiers et des n derniers caractères d’une chaine donnée.	
 	\end{Exercice}
 	
 	\begin{Exercice}{Grammaire}
 		Écrire un algorithme 
 		qui met un mot en « ou » au pluriel. 
 		Pour rappel, 
-		un mot en « ou » prend un « s » à l'exception des 7 mots 
+		un mot en « ou » prend un « s » à l’exception des 7 mots 
 		bijou, caillou, chou, genou, hibou, joujou et pou qui prennent 
 		un « x » au pluriel. 
-		Exemple : un clou, des clous, un hibou, des hiboux. 
-		Si le mot soumis à l'algorithme n'est pas un mot en « ou », 
+		Exemple~: un clou, des clous, un hibou, des hiboux. 
+		Si le mot soumis à l’algorithme n’est pas un mot en « ou », 
 		un message adéquat sera affiché.
 	\end{Exercice}
 
 	\begin{Exercice}{Normaliser une chaine}
 		Écrire un module qui reçoit une chaine et retourne une autre chaine,
 		version normalisée de la première.
-		Par normalisée, on entend~:~enlever tout ce qui n'est pas une lettre 
+		Par normalisée, on entend~:~enlever tout ce qui n’est pas une lettre 
 		et tout mettre en majuscule.
-		\\Exemple~:~"Le <COBOL>, c'est la santé~!" devient "LECOBOLCESTLASANTE".
+		\\Exemple~:~"Le <COBOL>, c’est la santé~!" devient "LECOBOLCESTLASANTE".
 	\end{Exercice}
 		
 	\begin{Exercice}{Les palindromes}
 		Cet exercice a déjà été réalisé pour des entiers, 
-		en voici 2 versions « chaine » ! 
+		en voici 2 versions « chaine »~! 
 		\begin{enumerate}[label=\alph*)]
 		\item 
 			Écrire un algorithme qui vérifie 
@@ -333,7 +333,7 @@
 			Écrire un algorithme qui vérifie 
 			si une phrase donnée sous forme de chaine constitue un palindrome 
 			(comme par exemple "Esope reste ici et se repose" 
-			ou "Tu l'as trop écrasé, César, ce Port-Salut !"). 
+			ou "Tu l’as trop écrasé, César, ce Port-Salut~!"). 
 			Dans cette seconde version, 
 			on fait abstraction des majuscules/minuscules 
 			et on néglige les espaces et tout signe de ponctuation.
@@ -342,26 +342,26 @@
 	
 	\begin{Exercice}{Le chiffre de César}
 		\label{ex:cesar}
-		Depuis l'antiquité, les hommes politiques, les militaires, 
-		les hommes d'affaires cherchent à garder secret les messages
-		importants qu'ils doivent envoyer.
-		L'empereur César utilisait une technique (on dit un \emph{chiffrement})
+		Depuis l’antiquité, les hommes politiques, les militaires, 
+		les hommes d’affaires cherchent à garder secret les messages
+		importants qu’ils doivent envoyer.
+		L’empereur César utilisait une technique (on dit un \emph{chiffrement})
 		qui porte à présent son nom~:
 		remplacer chaque lettre du message par la lettre qui se situe 
-		$k$ positions plus loin dans l'alphabet (cycliquement).
+		$k$ positions plus loin dans l’alphabet (cycliquement).
 		
 		Exemple~:~si $k$ vaut $2$, 
-		alors le texte clair "CESAR" devient "EGUCT" lorsqu'il est chiffré 
+		alors le texte clair "CESAR" devient "EGUCT" lorsqu’il est chiffré 
 		et le texte "ZUT" devient "BWV".
 		
-		Bien sûr, il faut que l'expéditeur du message et le récepteur
-		se soient mis d'accord sur la valeur de $k$.
+		Bien sûr, il faut que l’expéditeur du message et le récepteur
+		se soient mis d’accord sur la valeur de $k$.
 		
-		On vous demande d'écrire un algorithme qui reçoit une chaine ne contenant
+		On vous demande d’écrire un algorithme qui reçoit une chaine ne contenant
 		que des lettres majuscules ainsi que la valeur de $k$ et qui retourne
 		la version chiffrée du message.
 	
-		On vous demande également d'écrire l'algorithme de déchiffrement.
+		On vous demande également d’écrire l’algorithme de déchiffrement.
 		Cet algorithme reçoit un message chiffré et la valeur de $k$ qui a été
 		utilisée pour le chiffrer et retourne le message en clair.
 		Attention~! Ce second algorithme est \textbf{très simple}.
@@ -372,8 +372,8 @@
 		qui remplace dans une chaine donnée 
 		toutes les sous-chaines ch1 par la sous-chaine ch2. 
 		Attention, 
-		cet exercice est plus coriace qu'il n'y parait à première vue\dots~
-		Assurez-vous que votre code n'engendre pas de boucle infinie. 
+		cet exercice est plus coriace qu’il n’y parait à première vue\dots~
+		Assurez-vous que votre code n’engendre pas de boucle infinie. 
 	\end{Exercice}	
 	
 	

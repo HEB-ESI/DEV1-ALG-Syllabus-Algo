@@ -7,9 +7,9 @@
 
 \Section{Spécification}
 
-	\textbf{Données} : le nombre entier dont on veut savoir si il est pair.
+	\textbf{Données}~: le nombre entier dont on veut savoir si il est pair.
 		
-	\textbf{Résultat} : un booléen à \textit{vrai} si le \textit{nombre} est pair et \textit{faux} sinon.
+	\textbf{Résultat}~: un booléen à \textit{vrai} si le \textit{nombre} est pair et \textit{faux} sinon.
 
 	\begin{center}	
 		\flowalgod{nombre (entier)}{estPair}{booléen}
@@ -25,7 +25,7 @@
 \Section{Solution}
 
 	Un nombre est pair si il est multiple de 2. 
-	C'est-à-dire si le reste de sa division par 2 vaut 0.
+	C’est-à-dire si le reste de sa division par 2 vaut 0.
 	%\[
 		%estPair\ est\ vrai\ \equiv nombre\ MOD\ 2 = 0
 	%\]
@@ -37,7 +37,7 @@
 	\end{LDA}
 
 	Attention à éviter les mauvaises écritures 
-	expliquées à l'annexe \vref{B-ass-bool} :
+	expliquées à l’annexe \vref{B-ass-bool}~:
 	pas de \lda{\K{si-sinon}}.
 	
 %\Section{Alternatives}
@@ -55,9 +55,9 @@
 	%\end{minipage}
 	%\quad
 	%\begin{minipage}[t]{6cm}
-		%Certains étudiants se sentent plus à l'aise avec
-		%la solution ci-contre en début d'année.			
-		%C'est probablement parce qu'elle colle plus à la façon de l'exprimer
+		%Certains étudiants se sentent plus à l’aise avec
+		%la solution ci-contre en début d’année.			
+		%C’est probablement parce qu’elle colle plus à la façon de l’exprimer
 		%en français.
 		%On les encourage toutefois à rapidement 
 		%passer à la version plus compacte
@@ -82,7 +82,7 @@
 	%\end{minipage}
 	%\quad
 	%\begin{minipage}[t]{6cm}
-		%Cette solution n'est pas non plus à privilégier.
+		%Cette solution n’est pas non plus à privilégier.
 		%On a un seul retour, ce qui est mieux,
 		%mais le test est encore de trop.
 		%Nous la sanctionnerons dans les évaluations.
@@ -105,21 +105,21 @@
 		%On rencontre également ce genre de solution
 		%qui, pour certains, 
 		%parait mieux que la précédente 
-		%parce qu'elle ne contient pas de "sinon"
+		%parce qu’elle ne contient pas de "sinon"
 		%et est donc plus courte.
-		%Il n'en n'est rien.
-		%Rappelons que la longueur de l'algorithme
-		%n'est pas, en soi, un critère de qualité. 
+		%Il n’en n’est rien.
+		%Rappelons que la longueur de l’algorithme
+		%n’est pas, en soi, un critère de qualité. 
 		%À proscrire, donc.
 	%\end{minipage}
 	
-\Section{Quand l'utiliser ?}
+\Section{Quand l’utiliser~?}
 
-	À chaque fois qu'un résultat booléen dépend d'un calcul simple.
+	À chaque fois qu’un résultat booléen dépend d’un calcul simple.
 	Si le calcul est plus compliqué, on peut le décomposer comme
 	indiqué dans la fiche \vref{fiche:calcul-complexe}.
 	
-	On peut également s'inspirer de cette solution
+	On peut également s’inspirer de cette solution
 	quand il faut donner sa valeur à une variable booléenne.
 		
 \end{Fiche}

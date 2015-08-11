@@ -2,24 +2,24 @@
 \chapter{Une question de choix}
 %===========================================
 
-	Vous avez déjà eu l'occasion d'aborder les alternatives
+	Vous avez déjà eu l’occasion d’aborder les alternatives
 	lors de votre initiation aux algorithmes sur le site
 	\url{code.org}.
-	Par exemple, vous avez indiqué au zombie quelque chose comme :
-	\og{}S'il existe un chemin à gauche alors tourner à gauche\fg{}.
+	Par exemple, vous avez indiqué au zombie quelque chose comme~:
+	\og{}S’il existe un chemin à gauche alors tourner à gauche\fg{}.
 	
 	Les \textbf{alternatives}\index{alternatives} 
-	permettent de n'exécuter des instructions
+	permettent de n’exécuter des instructions
 	que si une certaine \emph{condition} est vérifiée.
-	Avec le zombie, vous testiez son environnement ;
+	Avec le zombie, vous testiez son environnement~;
 	dans nos algorithmes, vous allez tester les données.
 	
-	Les algorithmes vus jusqu'à présent ne proposent
-	qu'un seul \og{}chemin\fg{}, une seule \og{}histoire\fg{}.
-	À chaque exécution de l'algorithme,
-	les mêmes instructions s'exécutent dans le même ordres.
+	Les algorithmes vus jusqu’à présent ne proposent
+	qu’un seul \og{}chemin\fg{}, une seule \og{}histoire\fg{}.
+	À chaque exécution de l’algorithme,
+	les mêmes instructions s’exécutent dans le même ordres.
 	Les alternatives permettent de créer des histoires différentes,
-	d'adapter les instructions aux valeurs concrètes des données.
+	d’adapter les instructions aux valeurs concrètes des données.
 	Procédons par étapes.
 
 %===========================================
@@ -35,12 +35,12 @@
 	Supposons que la variable \lda{nb}
 	contienne un nombre positif ou négatif,
 	on ne sait pas.
-	Et supposons qu'on veuille le rendre positif.
+	Et supposons qu’on veuille le rendre positif.
 	On peut tester son signe.
-	S'il est négatif on peut l'inverser.
-	Par contre, s'il est positif,
-	il n'y a rien à faire.
-	Voici comment on peut l'écrire,
+	S’il est négatif on peut l’inverser.
+	Par contre, s’il est positif,
+	il n’y a rien à faire.
+	Voici comment on peut l’écrire,
 	graphiquement%
 	\footnote{%
 		Ce graphique, appelé 
@@ -48,7 +48,7 @@
 		permet de représenter un algorithme
 		de façon plus visuelle.
 		cf. \url{http://fr.wikipedia.org/wiki/Organigramme_de_programmation}.
-	} et en LDA :
+	} et en LDA~:
 	
 	\qquad
 	\begin{minipage}{6cm}
@@ -98,16 +98,16 @@
 	\end{tabular}
 	\end{center}
 	
-	La condition peut être n'importe quelle expression (calcul)
+	La condition peut être n’importe quelle expression (calcul)
 	dont le résultat est un booléen (vrai ou faux).
 
 	\marginicon{attention}
-	Attention !
+	Attention~!
 	Vous faites parfois la confusion.
-	Un \og{}si\fg{} n'est pas une règle que l'ordinateur
-	doit apprendre et exécuter à chaque fois que l'occasion se présente.
-	La condition n'est testée que lorsqu'on arrive à cet endroit
-	de l'algorithme.
+	Un \og{}si\fg{} n’est pas une règle que l’ordinateur
+	doit apprendre et exécuter à chaque fois que l’occasion se présente.
+	La condition n’est testée que lorsqu’on arrive à cet endroit
+	de l’algorithme.
 
 	\begin{Exercice}{Compréhension}
 		Tracez cet algorithme et donnez la valeur de retour.
@@ -167,16 +167,16 @@
 %===============================
 	
 	La construction \lda{si-sinon}
-	permet d'exécuter certaines instructions
-	ou d'autres en fonction d'un test.
+	permet d’exécuter certaines instructions
+	ou d’autres en fonction d’un test.
 	Pour illustrer cette instruction,
 	nous allons nous pencher sur un grand classique,
 	la recherche de maximum.
 	
 	\paragraph{Exemple.}
-	Supposons qu'on veuille déterminer
+	Supposons qu’on veuille déterminer
 	le maximum de deux nombres,
-	c'est-à-dire la plus grande des deux valeurs.
+	c’est-à-dire la plus grande des deux valeurs.
 	Dans la solution, il y a deux chemins possibles.
 	Le maximum devra pendre la valeur du premier nombre
 	ou du second selon que le premier est plus grand 
@@ -370,18 +370,18 @@
 %============================
 
 	Avec cette construction,
-	on peut indiquer à un endroit de l'algorithme
+	on peut indiquer à un endroit de l’algorithme
 	plus que deux chemins possibles.
-	Partons à nouveau d'un exemple pour illustrer cette instruction.
+	Partons à nouveau d’un exemple pour illustrer cette instruction.
 	
 	\paragraph{Exemple.}
 	On voudrait mettre dans la chaine \lda{signe}
 	la valeur \lda{"positif"}, \lda{"négatif"}
 	ou \lda{"nul"}
-	selon qu'un nombre donné est positif, négatif ou nul.
+	selon qu’un nombre donné est positif, négatif ou nul.
 	
-	Ici, lorsqu'on va examiner le nombre, 
-	trois chemins vont s'offrir à nous.
+	Ici, lorsqu’on va examiner le nombre, 
+	trois chemins vont s’offrir à nous.
 
 	\begin{minipage}{9cm}
 		\begin{tikzpicture}[auto]
@@ -453,7 +453,7 @@
 	\begin{itemize}
 	\item
 		Pour le dernier cas, on se contente
-		d'un \lda{\K{sinon}} sans indiquer la condition ;
+		d’un \lda{\K{sinon}} sans indiquer la condition~;
 		ce serait inutile, elle serait toujours vraie.
 	\item
 		Le \lda{\K{si}} et le \lda{\K{si-sinon}} 
@@ -478,22 +478,22 @@
 		\end{LDA}
 		%\end{wrong}
 	\item
-		Lorsqu'une condition est testée,
+		Lorsqu’une condition est testée,
 		on sait que toutes celles au-dessus
 		se sont avérées fausses.
 		Cela permet parfois de simplifier la condition.
 
 		\textbf{Exemple.}
-		Supposons que le prix unitaire d'un produit (\lda{prixUnitaire})
+		Supposons que le prix unitaire d’un produit (\lda{prixUnitaire})
 		dépende de la quantité achetée (\lda{quantité}). 
-		En dessous de 10 unités, on le paie 10\texteuro{} l'unité.
-		De 10 à 99 unités, on le paie 8\texteuro{} l'unité.
-		À partir de 100 unités, on paie 6\texteuro{} l'unité.
+		En dessous de 10 unités, on le paie 10\texteuro{} l’unité.
+		De 10 à 99 unités, on le paie 8\texteuro{} l’unité.
+		À partir de 100 unités, on paie 6\texteuro{} l’unité.
 		
 		\begin{LDA}
 			\If{quantité<10}
 				\Let prixUnitaire \Gets 10
-			\ElsIf{quantité<100} \Comment{On sait que ce n'est pas <10; inutile de le tester}
+			\ElsIf{quantité<100} \Comment{On sait que ce n’est pas <10; inutile de le tester}
 				\Let prixUnitaire \Gets 8
 			\Else
 				\Let prixUnitaire \Gets 6
@@ -516,7 +516,7 @@
 
 	\begin{Exercice}{Le type de triangle}
 		Écrire un algorithme qui indique si un triangle
-		dont on donne les longueurs de ces 3 cotés est :
+		dont on donne les longueurs de ces 3 cotés est~:
 		équilatéral (tous égaux), isocèle (2 égaux)
 		ou quelconque.
 	\end{Exercice}
@@ -528,12 +528,12 @@
 	\end{Exercice}
 
 	\begin{Exercice}{Grade}
-		Écrire un algorithme qui retourne le grade d'un étudiant 
-		suivant la moyenne qu'il a obtenue.
+		Écrire un algorithme qui retourne le grade d’un étudiant 
+		suivant la moyenne qu’il a obtenue.
 		
 		Un étudiant ayant obtenu 
 		\begin{itemize}
-			\item moins de 50\% n'a pas réussi~;
+			\item moins de 50\% n’a pas réussi~;
 			\item de 50\% inclus à 60\% exclu a réussi~;
 			\item de 60\% inclus à 70\% exclu a une satisfaction~;
 			\item de 70\% inclus à 80\% exclu a une distinction~;
@@ -548,16 +548,16 @@
 \index{selon-que}
 %=====================
 
-	Cette nouvelle instruction permet d'écrire plus lisiblement
+	Cette nouvelle instruction permet d’écrire plus lisiblement
 	\emph{certains} \lda{\K{si-sinon-si}},
-	plus précisément quand le choix d'une branche dépend
-	de la valeur précise d'une variable
-	(ou d'une expression).
+	plus précisément quand le choix d’une branche dépend
+	de la valeur précise d’une variable
+	(ou d’une expression).
 
 	\paragraph{Exemple.}
-	Imaginons qu'une variable (\lda{numéroJour}) 
+	Imaginons qu’une variable (\lda{numéroJour}) 
 	contienne un numéro de jour de la semaine
-	et qu'on veuille mettre dans une variable (\lda{nomJour})
+	et qu’on veuille mettre dans une variable (\lda{nomJour})
 	le nom du jour correspondant 
 	("lundi" pour 1, "mardi" pour 2\dots)
 	
@@ -606,10 +606,10 @@
 		On peut spécifier plusieurs valeurs pour un cas donné.
 	\item
 		On peut mettre un cas \lda{\K{défaut}}
-		qui sera exécuté si la valeur n'est pas reprise par ailleurs.
+		qui sera exécuté si la valeur n’est pas reprise par ailleurs.
 	\end{itemize}
 	
-	La syntaxe générale est :
+	La syntaxe générale est~:
 	
 	\begin{LDA}
 		\Switch{expression}
@@ -631,7 +631,7 @@
 	\end{Exercice}
 
 	\begin{Exercice}{Tirer une carte}
-		Écrire un algorithme qui affiche l'intitulé d'une carte
+		Écrire un algorithme qui affiche l’intitulé d’une carte
 		tirée au hasard dans un paquet de 52 cartes.
 		Par exemple, "As de cœur", "3 de pique", "Valet de carreau"
 		ou encore "Roi de trèfle".
@@ -653,26 +653,26 @@
 	et laquelle est la plus adaptée.
 
 	\begin{Exercice}{Réussir DEV1}
-		Pour réussir l'UE (unité d'enseignement) DEV1,
+		Pour réussir l’UE (unité d’enseignement) DEV1,
 		il faut que la cote attribuée à cette UE 
 		soit supérieure ou égale à 50\%.
 		Cette cote tient compte de votre examen intégré
 		et de vos interrogations.
 		Écrire un algorithme 
 		qui reçoit la cote finale (sur 100)
-		d'un étudiant pour l'UE DEV1
-		et qui indique si l'étudiant a réussi cette UE.
+		d’un étudiant pour l’UE DEV1
+		et qui indique si l’étudiant a réussi cette UE.
 	\end{Exercice}		
 
 	\begin{Exercice}{Réussir GEN1}
 		\label{algo:réussirGEN1}
-		Pour réussir l'unité d'enseignement GEN1,
-		il faut que la cote attribuée à chaque AA (activité d'apprentissage)
+		Pour réussir l’unité d’enseignement GEN1,
+		il faut que la cote attribuée à chaque AA (activité d’apprentissage)
 		soit supérieure ou égale à 50\%.
-		Écrire un algorithme qui reçoit les 3 cotes (sur 20) d'AA d'un étudiant
-		pour l'UE GEN1 et qui \textbf{affiche} un message
-		indiquant si l'étudiant a réussi ou pas.
-		S'il a réussi, l'algorithme affiche également sa moyenne
+		Écrire un algorithme qui reçoit les 3 cotes (sur 20) d’AA d’un étudiant
+		pour l’UE GEN1 et qui \textbf{affiche} un message
+		indiquant si l’étudiant a réussi ou pas.
+		S’il a réussi, l’algorithme affiche également sa moyenne
 		(cherchez quelle est la pondération entre ces AA).
 	\end{Exercice}		
 	

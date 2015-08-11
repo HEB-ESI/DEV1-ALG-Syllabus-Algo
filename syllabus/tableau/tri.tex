@@ -4,7 +4,7 @@
 
 	\marginicon{objectif}
 	Dans ce chapitre nous voyons quelques algorithmes simples pour trier un
-	ensemble d'informations~: recherche des maxima, tri
+	ensemble d’informations~: recherche des maxima, tri
 	par insertion et tri bulle dans un tableau. 
 	Des algorithmes plus efficaces seront vus
 	en deuxième année.
@@ -14,9 +14,9 @@
 %===================
 
 	Dans le chapitre précédent,
-	nous avons vu que la recherche d'information est beaucoup
+	nous avons vu que la recherche d’information est beaucoup
 	plus rapide dans un tableau trié 
-	grâce à l'algorithme de recherche dichotomique.
+	grâce à l’algorithme de recherche dichotomique.
 	Nous avons vu comment \textbf{garder} un ensemble trié
 	en insérant toute nouvelle valeur au \emph{bon} endroit.
 
@@ -50,7 +50,7 @@
 	sur le numéro de groupe et en \textbf{mineur} sur le nom d’étudiant.
 
 	Notons que certains tris sont dits \textbf{stables} parce
-	qu'en cas de tri sur une nouvelle clé, l’ordre de la
+	qu’en cas de tri sur une nouvelle clé, l’ordre de la
 	clé précédente est préservé pour des valeurs identiques de la nouvelle
 	clé, ce qui évite de faire des comparaisons sur les deux champs à la
 	fois. Les méthodes nommées \textbf{tri par insertion}, \textbf{tri
@@ -86,7 +86,7 @@
 	\lda{Moment} (que nous verrons
 	plus tard), etc. De plus, le seul ordre envisagé sera l’ordre
 	\textbf{croissant} des données. Plus loin, on envisagera le tri 
-	d'autres structures de données.
+	d’autres structures de données.
 
 	Enfin, dans toutes les méthodes de tri abordées, nous supposerons la
 	taille physique du tableau à trier (notée $n$) égale à sa taille
@@ -426,7 +426,7 @@
 	et le sous-tableau des autres valeurs non encore triées 
 	(de l’indice 1 à 19).
 	On recommence ce processus dans ce second sous-tableau~: 
-	le minimum est à présent l'élément d’indice 16 et de valeur 19.
+	le minimum est à présent l’élément d’indice 16 et de valeur 19.
 	Celui-ci viendra donc en 2\ieme{} position, 
 	échangeant sa place avec la valeur 52 qui s’y trouvait~:
 
@@ -481,7 +481,7 @@
 	Le sous-tableau trié est maintenant formé des deux premiers éléments, 
 	et le sous-tableau non trié par les 18 éléments suivants. 
 	
-	Et ainsi de suite, jusqu'à obtenir un sous-tableau trié 
+	Et ainsi de suite, jusqu’à obtenir un sous-tableau trié 
 	comprenant tout le tableau.
 	En pratique l’arrêt se fait une étape avant 
 	car lorsque le sous-tableau non trié n’est plus que de taille 1, 
@@ -545,7 +545,7 @@
 	valeurs consécutives. Quand deux valeurs sont dans le désordre, on les
 	permute. Le premier parcours s’achève lorsqu’on arrive à l’élément
 	d’indice 0 qui contient alors la «~bulle~»,
-	c'est-à-dire la plus petite valeur du tableau, soit 1~:
+	c’est-à-dire la plus petite valeur du tableau, soit 1~:
 
 	\begin{tabular}{*{14}{>{\centering\sffamily\itshape\arraybackslash}m{0.31cm}}}
 		 \textcolor{gray}{\scriptsize 1} &
@@ -872,7 +872,7 @@
 		Une autre situation courante est la suivante~: un ensemble de valeurs
 		sont traitées (lues, calculées\dots) et il ne faut garder que les
 		$k$ plus petites (ou plus grandes).
-		L'algorithme est plus simple à écrire si on utilise
+		L’algorithme est plus simple à écrire si on utilise
 		une position supplémentaire en fin de tableau. Notons aussi qu’il faut
 		tenir compte du cas où il y a moins de valeurs que le nombre de valeurs
 		voulues~; c’est pourquoi on ajoute une variable indiquant le nombre

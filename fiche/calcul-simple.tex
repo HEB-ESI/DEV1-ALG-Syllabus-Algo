@@ -4,17 +4,17 @@
 \label{fiche:calcul-simple}
 
 %\Section{Le problème}
-Calculer la surface d'un rectangle à partir de sa longueur et sa largeur.
+Calculer la surface d’un rectangle à partir de sa longueur et sa largeur.
 	
 \Section{Spécification}
 
-	\textbf{Données} (toutes réelles et non négatives) :
+	\textbf{Données} (toutes réelles et non négatives)~:
 		\begin{itemize}
-			\item la longueur du rectangle ;
+			\item la longueur du rectangle~;
 			\item sa largeur.
 		\end{itemize}
 		
-	\textbf{Résultat} : un réel représentant la surface du rectangle.
+	\textbf{Résultat}~: un réel représentant la surface du rectangle.
 
 	\begin{center}	
 		\flowalgodd{longueur (réel)}{largeur (réel)}{surfaceRectangle}{réel}
@@ -29,12 +29,12 @@ Calculer la surface d'un rectangle à partir de sa longueur et sa largeur.
 
 \Section{Solution}
 
-	La surface d'un rectangle est obtenue en multipliant
+	La surface d’un rectangle est obtenue en multipliant
 	la largeur par la longueur.
 	\[
 		\textrm{surface} = \textrm{longueur} * \textrm{largeur}
 	\]
-	Ce qui donne :
+	Ce qui donne~:
 
 	\begin{LDA}
 		\Algo{surfaceRectangle}{\Par{longueur, largeur}{réel}}{réel}
@@ -54,10 +54,10 @@ Calculer la surface d'un rectangle à partir de sa longueur et sa largeur.
 		\end{tabular}
 	\end{center}				
 
-\Section{Quand l'utiliser ?}
+\Section{Quand l’utiliser~?}
 
 	Ce type de solution peut être utilisé à chaque fois
-	que la réponse s'obtient par un calcul simple sur les données.
+	que la réponse s’obtient par un calcul simple sur les données.
 	Si le calcul est plus complexe, 
 	il peut être utile de le décomposer pour accroitre la lisibilité
 	(cf. fiche \vref{fiche:calcul-complexe}) 

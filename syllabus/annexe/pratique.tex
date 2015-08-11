@@ -10,10 +10,10 @@
 \section{Tester un booléen}
 %===================================================
 
-	Lorsqu'il s'agit de comparer deux nombres dans la condition
-	d'un \K{si}, vous écrivez tous assez naturellement :
+	Lorsqu’il s’agit de comparer deux nombres dans la condition
+	d’un \K{si}, vous écrivez tous assez naturellement~:
 	\lda{\K{si} (nb1<nb2) \dots}
-	\\Il ne vous viendrait pas à l'idée d'écrire :
+	\\Il ne vous viendrait pas à l’idée d’écrire~:
 	\lda{\K{si} (nb1<nb2 = vrai) \dots}
 	
 	\bigskip
@@ -23,7 +23,7 @@
 		si la variable \lda{adulte} est vraie,
 		vous êtes nombreux à écrire
 		le bout de code ci-contre,
-		en tout cas en début d'année.
+		en tout cas en début d’année.
 	\end{minipage}
 	\quad
 	\begin{minipage}{4cm}
@@ -40,7 +40,7 @@
 	\begin{minipage}{9cm}
 		Cette écriture est correcte mais inutilement lourde.
 		La variable étant déjà un booléen qui vaut vrai ou faux,
-		il suffit d'écrire :
+		il suffit d’écrire~:
 	\end{minipage}
 	\quad
 	\begin{minipage}{4cm}
@@ -56,7 +56,7 @@
 	\bigskip
 	\begin{minipage}{9cm}
 		De même, si le test doit être vrai quand la variable booléenne
-		est fausse, il suffit d'écrire : 
+		est fausse, il suffit d’écrire~: 
 	\end{minipage}
 	\quad
 	\begin{minipage}{4cm}	
@@ -71,17 +71,17 @@
 
 	\bigskip
 	On comprend que la première écriture vous vienne
-	d'abord et on la tolérera les premières séances
-	mais vous devrez vite vous en débarrasser ;
+	d’abord et on la tolérera les premières séances
+	mais vous devrez vite vous en débarrasser~;
 	elle ne sera pas tolérée lors des évaluations.
 	
 %===================================================
 \section{Assigner un booléen}\label{B-ass-bool}
 %===================================================
 
-	Lorsqu'il s'agit de donner une valeur à un booléen,
+	Lorsqu’il s’agit de donner une valeur à un booléen,
 	on vous voit souvent écrire un si-sinon.
-	Ce n'est pas la bonne idée.
+	Ce n’est pas la bonne idée.
 
 	\bigskip
 	\begin{minipage}{9cm}
@@ -106,11 +106,11 @@
 
 	\bigskip
 	\begin{minipage}{9cm}
-		C'est correct mais inutilement compliqué.
+		C’est correct mais inutilement compliqué.
 		Puisque on assigne \lda{vrai} si la condition
 		est vraie et \lda{faux} si la condition est
-		fausse, il suffit d'assigner la condition.
-		Ce qui donne :
+		fausse, il suffit d’assigner la condition.
+		Ce qui donne~:
 	\end{minipage}
 	\quad
 	\begin{minipage}{4cm}
@@ -129,11 +129,11 @@
 	Ce sera sanctionné lors des évaluations.
 
 %===================================================
-\section{Assigner une valeur en fonction d'une condition}\label{B-ass-val}
+\section{Assigner une valeur en fonction d’une condition}\label{B-ass-val}
 %===================================================
 
 	\begin{minipage}{9cm}
-		Examinons l'exemple ci-contre 
+		Examinons l’exemple ci-contre 
 		qui assigne un \lda{prix}
 		qui doit être différent en fonction
 		du droit ou non à un tarif réduit.  
@@ -155,16 +155,16 @@
 		Nous voyons régulièrement
 		des étudiants écrire plutôt fièrement
 		la version ci-contre
-		en arguant qu'elle est plus courte,
+		en arguant qu’elle est plus courte,
 		donc mieux.
 
 		Elle comporte effectivement (un peu) moins de lignes
-		mais ce critère n'a que très peu d'importance.
-		Cette version n'est pas plus rapide
+		mais ce critère n’a que très peu d’importance.
+		Cette version n’est pas plus rapide
 		(elle est même plus lente en cas de tarif réduit)
 		et elle est moins lisible car le lecteur
-		croit d'abord que le tarif est toujours de 12
-		avant de constater qu'il peut être différent.
+		croit d’abord que le tarif est toujours de 12
+		avant de constater qu’il peut être différent.
 	\end{minipage}
 	\quad
 	\begin{minipage}{4cm}
@@ -186,11 +186,11 @@
 %===================================================
 
 	On voit trop souvent des étudiants écrire une boucle
-	pour et l'interrompre anticipativement en modifiant l'indice; 
-	c'est une très mauvaise idée.
+	pour et l’interrompre anticipativement en modifiant l’indice; 
+	c’est une très mauvaise idée.
 
 	\begin{minipage}{6cm}
-		Dans l'exemple ci-contre,
+		Dans l’exemple ci-contre,
 		si une certain condition est vraie,
 		on donne une grande valeur à \lda{i}
 		pour sortir de la boucle.
@@ -212,15 +212,15 @@
 	\includegraphics[width=1cm]{icon/dont}
 
 	Il est totalement interdit de modifier explicitement 
-	l'indice d'une boucle, quelle qu'en soit la raison.
-	Ce n'est pas une bonne idée en terme de lisibilité
-	et dans certains langages c'est interdit ou
+	l’indice d’une boucle, quelle qu’en soit la raison.
+	Ce n’est pas une bonne idée en terme de lisibilité
+	et dans certains langages c’est interdit ou
 	cela ne fait pas ce qui est attendu.
 	
 	\begin{minipage}{6cm}
 	Nous tenons absolument à ce que vous passiez par une boucle tant-que
-	et l'utilisation d'un booléen pour contrôler la fin.
-	Par exemple :
+	et l’utilisation d’un booléen pour contrôler la fin.
+	Par exemple~:
 	\end{minipage}
 	\quad
 	\begin{minipage}[t]{7cm}
@@ -266,16 +266,16 @@
 %===================================================
 	
 	Dans le cours,
-	nous vous avons donné comme règle :
+	nous vous avons donné comme règle~:
 	\og{}Un seul \lda{retourner} par algorithme\fg{}.
 
-	Cette règle n'est pas partagée par tous les programmeurs.
+	Cette règle n’est pas partagée par tous les programmeurs.
 	Il existe un courant qui tolère plusieurs \lda{retourner}
 	dans certains cas précis.
 
 	\begin{minipage}{7cm}
 		Un cas concret est pour interrompre anticipativement une boucle.
-		Certains écrivent :
+		Certains écrivent~:
 	\end{minipage}
 	\quad
 	\begin{minipage}{6cm}
@@ -293,8 +293,8 @@
 	
 	\bigskip
 	\begin{minipage}{7cm}
-		Une autre situation est lorsque la valeur à retourner dépend d'un test.
-		On voit alors des bouts de code qui ressemblent à :
+		Une autre situation est lorsque la valeur à retourner dépend d’un test.
+		On voit alors des bouts de code qui ressemblent à~:
 	\end{minipage}
 	\quad
 	\begin{minipage}{6cm}
@@ -312,6 +312,6 @@
 	Ces écritures seront tolérées dans ce cours
 	(et donc non sanctionnées)
 	mais nous ne les encourageons pas
-	par crainte d'abus : elles ne peuvent se
+	par crainte d’abus~: elles ne peuvent se
 	justifier que pour des algorithmes très courts.
 	

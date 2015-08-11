@@ -1,19 +1,19 @@
 %================================
-\begin{Fiche}{Parcours partiel d'un tableau}
+\begin{Fiche}{Parcours partiel d’un tableau}
 %================================
 \label{fiche:tab-parcours-partiel}
 
-	Recherche d'un zéro dans un tableau.
+	Recherche d’un zéro dans un tableau.
 
 \Section{Spécification}
 	
-	\textbf{Données} : le tableau à tester
+	\textbf{Données}~: le tableau à tester
 		
-	\textbf{Résultat} : 
+	\textbf{Résultat}~: 
 		un booléen à vrai si il existe une valeur nulle dans le tableau.
 	
 	\begin{center}	
-		\flowalgod{tab (tableau d'entiers)}{contientZéro}{booléen}
+		\flowalgod{tab (tableau d’entiers)}{contientZéro}{booléen}
 	\end{center}
 
 \Section{Solution}
@@ -21,7 +21,7 @@
 	Contrairement au parcours complet 
 	(cf. fiche \vref{fiche:tab-parcours-complet})
 	on va utiliser un \emph{tant que}
-	car on peut s'arrêter dès qu'on trouve ce qu'on cherche.
+	car on peut s’arrêter dès qu’on trouve ce qu’on cherche.
 	
 	Il existe essentiellement deux solutions, avec ou sans variable booléenne.
 	En général, la solution [A] sera plus claire si le test est court.
@@ -41,7 +41,7 @@
 	
 		Il faut être attentif à \textbf{ne pas inverser}
 		les deux parties du test.
-		Il faut absolument vérifier que l'indice est bon avant
+		Il faut absolument vérifier que l’indice est bon avant
 		de tester la valeur à cet indice.
 		Revoyez la notion de court-circuit (\vref{court-circuit} ).
 		
@@ -62,9 +62,9 @@
 		\end{LDA}
 
 		Au sortir de la boucle,
-		l'indice \lda{i} ne désigne pas l'élément
-		qui nous a permis d'arrêter mais le suivant.
-		Si nécessaire, on peut remplacer l'intérieur de la boucle par :
+		l’indice \lda{i} ne désigne pas l’élément
+		qui nous a permis d’arrêter mais le suivant.
+		Si nécessaire, on peut remplacer l’intérieur de la boucle par~:
 
 		\begin{LDA}
 			\If{tab[i] = 0}
@@ -85,11 +85,11 @@
 
 		Dans tous les cas,
 		faites attention à ne pas utiliser \lda{tab[i]}
-		si vous n'êtes pas sûr du \lda{i}.
-		C'est particulièrement vrai après la boucle.
+		si vous n’êtes pas sûr du \lda{i}.
+		C’est particulièrement vrai après la boucle.
 
 		Attention aussi à éviter les mauvaises pratiques 
-		expliquées à l'annexe \vref{B-for-break}.
+		expliquées à l’annexe \vref{B-for-break}.
 		
 %\Section{Alternatives}
 
@@ -109,25 +109,25 @@
 
 	%On rencontre parfois ce genre de solutions.
 	%Elle est plus simple à écrire car on ne doit
-	%pas gérer manuellement l'indice
+	%pas gérer manuellement l’indice
 	%mais le lecteur doit attendre de lire
 	%le code de la boucle pour comprendre
 	%que le parcours ne sera pas toujours complet.
 	
 	%Nous ne la recommandons pas en 1ère année
-	%mais nous l'accepterons 
-	%s'il s'agit d'un algorithme court
+	%mais nous l’accepterons 
+	%s’il s’agit d’un algorithme court
 	%qui ne contient que ce parcours.
 					
-\Section{Quand l'utiliser ?}
+\Section{Quand l’utiliser~?}
 
 	Ce type de solution peut être utilisé à chaque fois
-	qu'on parcourt un tableau mais qu'un arrêt avant la fin est possible.
+	qu’on parcourt un tableau mais qu’un arrêt avant la fin est possible.
 
 	\begin{itemize}
-	\item Est-ce que tous les éléments sont positifs ?
-	\item Est-ce que les élément sont triés ?
-	\item Est-ce qu'un élément précis est présent ?
+	\item Est-ce que tous les éléments sont positifs~?
+	\item Est-ce que les élément sont triés~?
+	\item Est-ce qu’un élément précis est présent~?
 	\item \dots
 	\end{itemize}
 	

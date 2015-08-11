@@ -3,19 +3,19 @@
 %================================
 \label{fiche:calcul-complexe}
 
-	Calculer la vitesse moyenne (en km/h) d'un véhicule dont on donne
+	Calculer la vitesse moyenne (en km/h) d’un véhicule dont on donne
 	la durée du parcours (en secondes) 
 	et la distance parcourue (en mètres).
 
 \Section{Spécification}
 	
-	\textbf{Données} (toutes réelles et non négatives) :
+	\textbf{Données} (toutes réelles et non négatives)~:
 		\begin{itemize}
-		\item la distance parcourue par le véhicule (en m) ;
+		\item la distance parcourue par le véhicule (en m)~;
 		\item la durée du parcours (en s).
 		\end{itemize}
 		
-	\textbf{Résultat} : la vitesse moyenne du véhicule (en km/h).
+	\textbf{Résultat}~: la vitesse moyenne du véhicule (en km/h).
 
 	\begin{center}
 	\flowalgodd{distanceM (réel)}{duréeS (réel)}{vitesseKMH}{réel}
@@ -30,7 +30,7 @@
 
 \Section{Solution}
 
-	La vitesse moyenne est liée à la distance et à la durée par la formule :
+	La vitesse moyenne est liée à la distance et à la durée par la formule~:
 	\[
 		\textrm{vitesse} = \frac{\textrm{distance}}{\textrm{durée}}
 	\]
@@ -39,7 +39,7 @@
 	Ainsi pour obtenir une vitesse en km/h, 
 	il faut convertir la distance en kilomètres 
 	et la durée en heures.
-	Ce qui donne :
+	Ce qui donne~:
 		
 	\begin{LDA}
 		\Algo{vitesseKMH}{\Par{distanceM, duréeS}{réel}}{réel}
@@ -62,11 +62,11 @@
 		\end{tabular}
 	\end{center}								
 
-\Section{Quand l'utiliser ?}
+\Section{Quand l’utiliser~?}
 
 	Ce type de solution peut être utilisé à chaque fois
-	que la réponse s'obtient par un calcul complexe sur les données
-	qu'il est bon de décomposer pour aider à sa lecture.
+	que la réponse s’obtient par un calcul complexe sur les données
+	qu’il est bon de décomposer pour aider à sa lecture.
 	Si le calcul est plutôt simple, 
 	on peut le garder en une seule expression
 	(cf. fiche \vref{fiche:calcul-simple}).
