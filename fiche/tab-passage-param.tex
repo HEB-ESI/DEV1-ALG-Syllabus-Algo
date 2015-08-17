@@ -1,0 +1,107 @@
+%================================
+\begin{Fiche}{Passage d’un tableau en paramètre}
+%================================
+\label{fiche:tab-passage-param}
+
+	Le type \emph{tableau} étant un type à part entière,
+		il est tout-à-fait éligible comme type
+		pour les paramètres et la valeur de retour d’un algorithme.
+
+%\Section{Spécification}
+	
+
+%\Section{Solution}
+	\section{Passer un tableau en paramètre}
+		\begin{itemize}
+			\item \In : 
+				indique que l’algorithme va consulter les valeurs 
+				du tableau reçu en paramètre. 
+				Les éléments doivent donc avoir été initialisés
+				avant d’appeler l’algorithme. Exemple~:
+			
+				\begin{LDA}
+					\LComment{Affiche les éléments d’un tableau de n entiers}
+					\Algo{afficher}{\Par{tab\In}{\Array{n}{entiers}}}{} 
+						\For{i}{0}{n-1}
+							\Write tab[i]
+						\EndFor
+					\EndAlgo 
+		
+					\Empty
+					\LComment{Utilisation possible}
+					\Decl{monTab}{\Array{10}{entiers}}
+					\Let monTab \Gets \{2,3,5,7,11,13,17,19,23,29\}
+					\Stmt afficher(monTab)
+				\end{LDA}
+				
+				Rappelons qu’il s’agit du passage
+				par défaut si aucune flèche n’est indiquée.
+				
+			\item \In\Out :
+				indique que l’algorithme va consulter/modifier les valeurs 
+				du tableau reçu en paramètre. Exemple~:
+			
+				\begin{LDA}
+					\LComment{Inverse le signe des éléments d'un tableau de n entiers}
+					\Algo{inverserSigne}{\Par{tab\In\Out}{\Array{n}{entiers}}}{} 
+						\For{i}{0}{n-1}
+							\Let tab[i] \Gets -tab[i]
+						\EndFor
+					\EndAlgo 
+		
+					\Empty
+					\LComment{Utilisation possible}
+					\Decl{monTab}{\Array{5}{entiers}}
+					\Let monTab \Gets \{2,-3,5,-7,11\}
+					\Stmt inverserSigne(monTab)
+				\end{LDA}
+	
+			\item \Out :
+				indique que l’algorithme va assigner des valeurs 
+				au tableau reçu en paramètre.
+				Les éléments de ce tableau n’ont donc pas à être initialisés
+				avant d’appeler cet algorithme. Exemple~:
+			
+				\begin{LDA}
+					\LComment{Initialise un tableau de n entiers reçu en paramètre}
+					\Algo{initialiser}{\Par{tab\Out}{\Array{n}{entiers}}}{}
+						\For{i}{0}{n-1}
+							\Let tab[i] \Gets i
+						\EndFor
+					\EndAlgo 
+					\Empty
+					\LComment{Utilisation possible}
+					\Decl{monTab}{\Array{n}{entiers}}
+					\Stmt initialiser(monTab)
+				\end{LDA}
+
+			\end{itemize}
+
+		\section{Retourner un tableau}
+		%---------------------------------
+			
+			Comme pour n’importe quel autre type,
+			un algorithme peut retourner un tableau.
+			Ce sera à lui de le déclarer et de lui donner des valeurs.
+
+			\textbf{Exemple~:}
+			\begin{LDA}
+				\LComment Crée un tableau d’entiers de taille n, l’initialise à 0 et le retourne.
+				\Algo{créer}{n : entier}{\Array{n}{entiers}}
+					\Decl{tab}{\Array{n}{entiers}}
+					\For{i}{0}{n-1}
+						\Let tab[i] \Gets 0
+					\EndFor
+					\Return tab
+				\EndAlgo
+				\Empty
+				\LComment{Utilisation possible}
+				\Algo{test}{}{}
+					\Decl{entiers}{\Array{20}{entiers}}
+					\Let entiers \Gets créerTableau(20)
+					\Stmt afficher(entiers)
+				\EndAlgo
+			\end{LDA}
+%\Section{Variante}
+	
+\end{Fiche}

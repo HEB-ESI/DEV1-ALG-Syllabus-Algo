@@ -61,7 +61,7 @@
 			\smallskip
 			\lda{nbInscrits = 4}
 		\end{center}
-		indiquant qu’il y a pour les moment quatre étudiants inscrits
+		indiquant qu’il y a pour le moment quatre étudiants inscrits
 		dont les numéros sont ceux repris 
 		dans les quatre premières cases du tableau.
 		
@@ -90,7 +90,7 @@
 			
 			\begin{LDA}
 				\LComment{Inscrit un étudiant de numéro donné.}
-				\Algo{inscrire}{\Par{inscrits\In\Out}{\Array{n}{entiers}}, \Par{nbInscrits\In\Out}{entier}, \Par{numéro}{entier}}{}
+				\Algo{inscrire}{\Par{inscrits\In\Out}{\Array{n}{entiers}}, \Par{nbInscrits\In\Out}{entier}, \Par{numéro\In}{entier}}{}
 					\LComment{On peut imaginer vérifier que l’étudiant n’est pas déjà inscrit}
 					\LComment{On peut imaginer vérifier qu’il reste de la place (c-à-d que le tableau n’est pas plein)}
 					\Let inscrits[nbInscrits] \Gets numéro
@@ -111,7 +111,7 @@
 			
 			\begin{LDA}
 				\LComment{Vérifie si un étudiant est inscrit et donne sa position (-1 si non inscrit)}
-				\Algo{vérifier}{\Par{inscrits\In}{\Array{n}{entiers}}, \Par{nbInscrits\In}{entier}, \Par{numéro}{entier}}{entier}
+				\Algo{vérifier}{\Par{inscrits\In}{\Array{n}{entiers}}, \Par{nbInscrits\In}{entier}, \Par{numéro\In}{entier}}{entier}
 					\Decl{i}{entier}
 					\Let i \Gets 0
 					\While{i < nbInscrits ET inscrits[i] $\ne$ numéro}
@@ -125,9 +125,8 @@
 				\EndAlgo
 			\end{LDA}
 			
-			La fiche (A ECRIRE) reprend cet algorithme
-			dans un cadre plus général et met en avant
-			les variantes et les pièges à éviter.
+			La fiche \vref{fiche:tab-recherche-non-triee} reprend cet algorithme
+			dans un cadre plus général.
 
 		\subsection{Désinscription}
 		%---------------------------------------------
@@ -369,7 +368,7 @@
 					\Decl{pos}{entier}
 					\Decl{trouvé}{booléen}
 					\Stmt rechercher( inscrits, nbInscrits, numéro, trouvé, pos )
-					\Stmt décalerDroite( inscrits, pos+1, nbInscrits)
+					\Stmt décalerGauche( inscrits, pos+1, nbInscrits)
 					\Let nbInscrits \Gets nbInscrits - 1					
 				\EndAlgo
 				\Empty
@@ -384,6 +383,9 @@
 					\EndFor
 				\EndAlgo
 			\end{LDA}
+			
+			La fiche \vref{fiche:tab-recherche-triee} reprend cet algorithme
+			dans un cadre plus général.
 			
 		\subsection{Exercices}
 		%---------------------------------------------

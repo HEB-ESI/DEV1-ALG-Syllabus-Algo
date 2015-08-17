@@ -1,0 +1,81 @@
+%================================
+\begin{Fiche}{Tableau non trié}
+%================================
+\label{fiche:tab-recherche-non-triee}
+
+	Rechercher, ajouter, supprimer des données non triées dans un tableau d’entiers.
+
+%\Section{Spécification}
+	
+	%\textbf{Données}~: le tableau à analyser
+		
+	%\textbf{Résultat}~: la valeur du maximum
+
+\Section{Solution}
+
+	Rechercher l'indice d'une donnée trouvée dans un tableau non trié ou -1 si elle n'est pas trouvée
+	
+	\textbf{Données}~: le tableau à analyser, le nombre d'éléments dans ce tableau, la valeur à rechercher
+		
+	\textbf{Résultat}~: la position de l'élément si il est dans le tableau et -1 sinon
+	
+		\begin{LDA}
+			\LComment{Vérifie si un nombre est dans un tableau et donne sa position (-1 sinon)}
+			\Algo{vérifier}{\Par{tab\In}{\Array{n}{entiers}}, \Par{nbElem\In}{entier}, \Par{nbRecherché\In}{entier}}{entier}
+				\Decl{i}{entier}
+				\Let i \Gets 0
+				\While{i < nbElem ET tab[i] $\ne$ nbRecherché}
+					\Let i \Gets i + 1
+				\EndWhile
+				\If{i < nbElem}
+					\Return i
+				\Else
+					\Return -1
+				\EndIf
+			\EndAlgo
+		\end{LDA}
+
+	Ajouter une donnée non encore présente dans le tableau de données non triées
+	
+	\textbf{Données}~: le tableau à modifier, le nombre d'éléments dans ce tableau, la valeur à ajouter
+		
+	\textbf{Résultat}~: le tableau reçu est modifié en lui ajoutant la valeur si elle n'y était pas déjà
+	
+		\begin{LDA}
+			\LComment{Ajoute un nombre non encore présente dans le tableau.}
+			\Algo{ajouter}{\Par{tab\In\Out}{\Array{n}{entiers}}, \Par{nbElem\In\Out}{entier}, \Par{nbAjouter\In}{entier}}{}
+				\If{nbElem $<$ n ET vérifier(tab, nbElem, nbAjouter) $\ne$ -1}
+					\Let tab[nbElem] \Gets nbAjouter
+					\Let nbElem \Gets nbElem + 1
+				\EndIf
+			\EndAlgo
+		\end{LDA}
+	
+	Supprimer une donnée d'un tableau de données non triées
+	
+	\textbf{Données}~: le tableau à modifier, le nombre d'éléments dans ce tableau, la valeur à supprimer
+		
+	\textbf{Résultat}~: le tableau reçu est modifié en lui supprimant la valeur
+		
+		\begin{LDA}
+			\LComment{Supprime un nombre donné dans le tableau.}
+			\Algo{supprimer}{
+				\Par{tab\In\Out}{\Array{n}{entiers}}, 
+				\Par{nbElem\In\Out}{entier}, 
+				\\\hfill
+				\Par{nbSupprimer\In}{entier}
+			}{entier}
+				\Decl{pos}{entier}
+				\Let pos \Gets vérifier(tab, nbElem, nbSupprimer)
+				\If{pos $\ne$ -1}
+					\Let tab[pos] \Gets tab[nbElem-1]
+					\Let nbElem \Gets nbElem - 1
+				\EndIf			
+			\EndAlgo
+		\end{LDA}
+
+%\Section{Variante}
+
+
+	
+\end{Fiche}

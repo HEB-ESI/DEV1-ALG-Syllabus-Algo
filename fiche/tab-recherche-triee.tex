@@ -1,0 +1,136 @@
+%================================
+\begin{Fiche}{Tableau trié}
+%================================
+\label{fiche:tab-recherche-triee}
+
+	Rechercher, ajouter, supprimer des données triées dans un tableau d’entiers.
+
+%\Section{Spécification}
+	
+	%\textbf{Données}~: le tableau à analyser
+		
+	%\textbf{Résultat}~: la valeur du maximum
+
+\Section{Solution}
+
+	Rechercher la position où a été trouvé l’élément ou la position où il aurait dû être
+	
+	\textbf{Données}~: le tableau à analyser, le nombre d'éléments dans ce tableau, la valeur à rechercher
+		
+	\textbf{Résultat}~: la position de l'élément si il est dans le tableau et -1 sinon
+
+		\begin{LDA}
+				\LComment{Recherche un étudiant.}
+				\LComment{- trouvé~: indique si oui ou non il a été trouvé}
+				\LComment{- pos~: indique la position où a été trouvé l’étudiant ou la position où il aurait dû être}
+				\Algo{rechercher}{
+						\Par{tab\In}{\Array{n}{entiers}}, 
+						\Par{nbElem\In}{entier}, 
+						\\\hfill\Par{nbRecherché\In}{entier},
+						\Par{trouvé\Out}{booléen},
+						\Par{pos\Out}{entier}
+						}{}
+					\Let pos \Gets 0
+					\While{pos < nbElem ET tab[pos] < nbRecherché}
+						\Let pos \Gets pos + 1
+					\EndWhile
+					\Let trouvé \Gets pos < nbElem ET tab[pos] = nbRecherché
+				\EndAlgo
+			\end{LDA}
+
+	Rechercher l'indice d'une donnée trouvée dans un tableau trié ou -1 si elle n'est pas trouvée
+	
+	\textbf{Données}~: le tableau à analyser, le nombre d'éléments dans ce tableau, la valeur à rechercher
+		
+	\textbf{Résultat}~: la position de l'élément si il est dans le tableau et -1 sinon
+	
+	Cette opération est triviale.
+			
+		\begin{LDA}
+			\LComment{Vérifie si un nombre est dans un tableau d'entiers trié et donne sa position (-1 si non inscrit)}
+			\Algo{vérifier}{
+				\Par{tab\In}{\Array{n}{entiers}}, 
+				\Par{nbElem\In}{entier}, 
+				\\\hfill
+				\Par{nbRecherché\In}{entier}
+			}{entier}
+				\Decl{pos}{entier}
+				\Decl{trouvé}{booléen}
+				\Stmt rechercher( tab, nbElem, nbRecherché, trouvé, pos )
+				\If{trouvé}
+					\Return pos
+				\Else
+					\Return -1
+				\EndIf
+			\EndAlgo
+		\end{LDA}
+
+	Ajouter une donnée non encore présente dans le tableau de données non triées
+	
+	\textbf{Données}~: le tableau à modifier, le nombre d'éléments dans ce tableau, la valeur à ajouter
+		
+	\textbf{Résultat}~: le tableau reçu est modifié en lui ajoutant la valeur si elle n'y était pas déjà
+	
+		\begin{LDA}
+				\LComment{Ajouter un nombre donné.}
+				\Algo{ajouter}{
+						\Par{tab\In\Out}{\Array{n}{entiers}}, 
+						\Par{nbElem\In\Out}{entier}, 
+						\Par{nbAjouter\In}{entier}
+						}{}
+					\Decl{pos}{entier}
+					\Decl{trouvé}{booléen}
+					\Stmt rechercher( tab, nbElem, nbAjouter, trouvé, pos )
+					\Stmt décalerDroite( tab, pos, nbElem)
+					\Let tab[pos] \Gets nbAjouter
+					\Let nbElem \Gets nbElem + 1
+				\EndAlgo
+				\Empty
+				\LComment{Décale d’une position à droite les éléments entre la position début et fin}
+				\Algo{décalerDroite}{
+						\Par{tab\In\Out}{\Array{n}{entiers}}, 
+						\Par{début\In}{entier}, 
+						\Par{fin\In}{entier}
+						}{}
+					\For[-1]{i}{fin}{début}
+						\Let tab[i+1] \Gets tab[i]
+					\EndFor
+				\EndAlgo
+			\end{LDA}
+	
+	Supprimer une donnée d'un tableau de données non triées
+	
+	\textbf{Données}~: le tableau à modifier, le nombre d'éléments dans ce tableau, la valeur à supprimer
+		
+	\textbf{Résultat}~: le tableau reçu est modifié en lui supprimant la valeur
+		
+		\begin{LDA}
+			\LComment{supprimer l'élément donné}
+			\Algo{supprimer}{
+				\Par{tab\In\Out}{\Array{n}{entiers}}, 
+				\Par{nbElem\In\Out}{entier}, 
+				\\\hfill
+				\Par{nbSupprimer\In}{entier}
+			}{entier}
+				\Decl{pos}{entier}
+				\Decl{trouvé}{booléen}
+				\Stmt rechercher( tab, nbElem, nbSupprimer, trouvé, pos )
+				\Stmt décalerGauche( tab, pos+1, nbElem)
+				\Let nbElem \Gets nbElem - 1					
+			\EndAlgo
+			\Empty
+			\LComment{Décale d’une position à gauche les éléments entre la position début et fin}
+			\Algo{décalerGauche}{
+				\Par{tab\In\Out}{\Array{n}{entiers}}, 
+				\Par{début\In}{entier}, 
+				\Par{fin\In}{entier}
+			}{}
+				\For{i}{début}{fin}
+					\Let tab[i-1] \Gets tab[i]
+				\EndFor
+			\EndAlgo
+			\end{LDA}
+
+%\Section{Variante}
+
+\end{Fiche}

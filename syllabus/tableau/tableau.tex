@@ -237,7 +237,7 @@
 		Pour déclarer un tableau, on écrit~:
 	
 		\begin{LDA}
-			\Decl{nomTableau}{\Array{taille}{TypeElément}}
+			\Decl{nomTableau}{\Array{\textit{taille}}{\textit{TypeElément}}}
 		\end{LDA}
 
 		où \lda{taille} est le nombre d’éléments 
@@ -313,8 +313,8 @@
 		}~:
 		
 		\begin{LDA}
-			\Let tab \Gets \{2, 3, 5, 7, 11\} 
-			\RComment{équivalent à tab[0] \Gets 2, tab[1] \Gets 3, tab[2] \Gets 5\dots}
+			\Let tab \Gets \{2, 3, 5, 7\} 
+			\RComment{équivalent à tab[0] \Gets 2, tab[1] \Gets 3, tab[2] \Gets 5, tab[3] \Gets 7}
 			\Let tab \Gets \{0, \dots, 0\} 
 			\RComment{tous les éléments du tableau sont initialisés à 0}
 			\Let tab \Gets \{0, 1, 2, \dots\} 
@@ -362,7 +362,7 @@
 					\LComment{Utilisation possible}
 					\Decl{monTab}{\Array{10}{entiers}}
 					\Let monTab \Gets \{2,3,5,7,11,13,17,19,23,29\}
-					\Stmt affiche(monTab)
+					\Stmt afficher(monTab)
 				\end{LDA}
 				
 				Rappelons qu’il s’agit du passage
@@ -373,8 +373,8 @@
 				du tableau reçu en paramètre. Exemple~:
 			
 				\begin{LDA}
-					\LComment{Inverser le signe des éléments du tableau}
-					\Algo{opposé}{\Par{tab\In\Out}{\Array{10}{entiers}}}{} 
+					\LComment{Inverse le signe des éléments du tableau}
+					\Algo{inverserSigne}{\Par{tab\In\Out}{\Array{10}{entiers}}}{} 
 						\For{i}{0}{9}
 							\Let tab[i] \Gets -tab[i]
 						\EndFor
@@ -383,8 +383,8 @@
 					\Empty
 					\LComment{Utilisation possible}
 					\Decl{monTab}{\Array{10}{entiers}}
-					\Let monTab \Gets \{2,3,5,7,11,13,17,19,23,29\}
-					\Stmt opposé(monTab)
+					\Let monTab \Gets \{2,-3,5,-7,11,13,17,-19,23,29\}
+					\Stmt inverserSigne(monTab)
 				\end{LDA}
 	
 			\item \Out :
@@ -469,10 +469,12 @@
 				\Empty
 				\Algo{test}{}{}
 					\Decl{entiers}{\Array{20}{entiers}}
-					\Let entiers \Gets créerTableau(20)
+					\Let entiers \Gets créer(20)
 					\Stmt afficher(entiers)
 				\EndAlgo
 			\end{LDA}
+			
+			La fiche \vref{fiche:tab-passage-param} récapitule tout ça.
 
 			\begin{Exercice}{Trouver les entêtes}
 				Écrire les entêtes (et uniquement les entêtes)
