@@ -69,14 +69,14 @@
 	Comme il s’agit d’une opération de base souvent utilisée,
 	nous allons introduire une écriture compacte,
 	empruntée aux tableaux~: 
-	\lda{chaine[i]} désigne le i\ieme{} caractère de la chaine
+	\lda{nomChaine[i]} désigne le i\ieme{} caractère de la chaine nomChaine
 	(en commençant à 1).
 	Par exemple~:
 	\begin{LDA}
 		\Decl{texte}{chaine}
 		\Let texte \Gets "Hello"
-		\Write chaine[5]	\RComment Affiche "o"
-		\Let chaine[2] \Gets "a" \RComment texte vaut "Hallo"; un caractère doit être remplacé par un seul caractère.
+		\Write texte[5]	\RComment Affiche "o"
+		\Let texte[2] \Gets "a" \RComment texte vaut "Hallo"; un caractère doit être remplacé par un seul caractère.
 	\end{LDA}
 
 	\paragraph{Exemple.}
@@ -146,10 +146,10 @@
 		et faux dans tous les autres cas.
 	\item[\lda{majuscule(texte: chaine)\Gives~chaine}]
 		Retourne une chaine où toutes les lettres du texte
-		ont été converties en majuscule.
+		ont été converties en majuscules.
 	\item[\lda{minuscule(texte: chaine)\Gives~chaine}]
 		Retourne une chaine où toutes les lettres du texte
-		ont été converties en minuscule.
+		ont été converties en minuscules.
 	\end{description}
 	
 \section{L’alphabet}
@@ -163,8 +163,8 @@
 	\item[\lda{numLettre(car: caractère)\Gives~entier}]
 		Retourne toujours un entier entre 1 et 26. 
 		Par exemple \lda{numLettre("E")} donnera 5, 
-		ainsi que \lda{numLettre("e")}, 
-		cette fonction traite donc de la même manière 
+		ainsi que \lda{numLettre("e")}. 
+		Cette fonction traite donc de la même manière 
 		les majuscules et les minuscules. 
 		\lda{numLettre} retournera aussi 5 pour les caractères "é", "è", "ê", "ë"\dots). 
 		Attention, il est interdit d’utiliser cette fonction 
@@ -188,7 +188,7 @@
 %=========================
 
 	Si une chaine contient un nombre,
-	on doit pouvoir le convertir, et inversément.
+	on doit pouvoir le convertir, et inversement.
 
 	\begin{description}
 	\item[\lda{chaine(n: réel)\Gives~chaine}]
