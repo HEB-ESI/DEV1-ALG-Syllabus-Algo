@@ -841,8 +841,8 @@
 	\LComment Trie le tableau reçu en paramètre (via un tri bulle).
 		\Algo{triBulle}{\Par{tab\InOut}{\Array{n}{entiers}}}{}
 			\Decl{indiceBulle, i}{entiers}
-			\For{indiceBulle}{1}{n-1}
-				\For[-1]{i}{n – 1}{indiceBulle}
+			\For{indiceBulle}{0}{n-1}
+				\For[-1]{i}{n – 2}{indiceBulle}
 					\If{tab[i] > tab[i + 1]}
 						\Stmt swap( tab[i], tab[i + 1] )
 						\RComment voir algorithme précédent
@@ -895,7 +895,7 @@
 		\end{LDA}
 		
 		\begin{LDA}			
-			\Algo{insérer}{\Par{val\In}{entier}, \Par{plusPetits\InOut}{\Array{k+1}{entiers}}, \Par{nbValeurs\Out}{entier}}{}
+			\Algo{insérer}{\Par{val\In}{entier}, \Par{plusPetits\InOut}{\Array{k+1}{entiers}}, \Par{nbValeurs\InOut}{entier}}{}
 				\Decl{i}{entier}
 				\Let i \Gets nbValeurs - 1
 				\While{i ${\geq}$ 0 ET val < plusPetits[i]}
