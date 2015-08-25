@@ -31,7 +31,7 @@
 			qu’il nous serait impossible de résoudre sans son existence 
 			(conquête spatiale, prévision météorologique, jeux vidéo\dots).
 			
-			En première approche, 
+			En première approximation, 
 			nous pourrions dire que l’ordinateur 
 			est destiné à nous remplacer, 
 			à faire à notre place 
@@ -63,7 +63,7 @@
 			
 			La formulation d’un problème ne serait pas complète 
 			sans la connaissance
-			\textbf{du cadre dans lequel se pose le problème~:}
+			\textbf{du cadre dans lequel le problème est posé~:}
 			de quoi dispose-t-on, quelles sont les hypothèses de base, 
 			quelle est la situation de départ~? 
 			Faire un baba au rhum est un problème tout à fait différent 
@@ -71,7 +71,7 @@
 			ou dans une cuisine super équipée~! 
 			D’ailleurs, dans certains cas, 
 			la première phase de la résolution d’un problème 
-			consiste à mettre à sa disposition 
+			consiste à identifier et mettre à sa disposition 
 			les éléments nécessaires à sa résolution~:~
 			dans notre exemple, 
 			ce serait se procurer les ingrédients 
@@ -95,8 +95,11 @@
 			\begin{Emphase}
 				\paragraph{Exercice.} Un problème flou.\\
 				Soit le problème suivant~:~
-				«~Calculer la moyenne de nombres entiers.~».
-				\\Qu’est-ce qui vous parait flou dans cet énoncé~?
+				«~Calculer la moyenne de nombres entiers.~».\\
+				Ce problème est-il bien posé~?\\
+				Expliquez pourquoi cet énoncé n'est pas bon. \\
+				Proposez un énoncé qui soit acceptable.
+				~?
 			\end{Emphase}
 			
 			Une fois le problème correctement posé, 
@@ -152,11 +155,15 @@
 			ce sont des \textbf{commentaires}.
 		\end{itemize}
 	
-		On pourra donc définir, en première approche, 
+		On pourra donc définir, en première approximation, 
 		une procédure de résolution comme un texte, 
 		écrit dans un certain langage, 
 		qui décrit une suite d’actions à exécuter dans un ordre précis, 
 		ces actions opérant sur des objets issus des données du problème.
+		
+		Traduite en termes informatiques, une telle procédure d'exécutions d'actions
+		dans un contexte précis, sera appelé un \textbf{algorithme}. Nous y reviendrons
+		et le définirons tout à fait précisément dans notre contexte plus loin.
 	
 		\subsection{Chronologie des opérations}
 		%--------------------------------------
@@ -224,7 +231,7 @@
 				dans la littérature spécialisée 
 				que même les procédures de génération de nombres aléatoires
 				sont elles aussi issues d’algorithmes mathématiques 
-				tout à fait déterminés.
+				tout à fait déterministes.
 			}
 			
 			Une \textbf{opération bien définie} 
@@ -336,15 +343,19 @@
 			de la réalisation d’une condition 
 			(\textit{lancer le dé jusqu’à ce qu’il tombe sur 6}, 
 			\textit{faire cuire jusqu’à évaporation complète} \dots). 
-			C’est ici que réside le danger de boucle infinie, 
+			
+			En informatique, lorsqu'il y a répétition organisée, on parle de 
+			\textbf{boucle}. On en retrouve beaucoup, sous différentes formes,
+			dans les codes informatiques.
+			
+			L'exemple ci-dessus permet d'illustrer le danger de boucle infinie, 
 			due à une mauvaise formulation de la condition d’arrêt.
-			Par exemple~:~
-			\textit{lancer le dé jusqu’à ce que le point obtenu soit 7}\dots{} 
-			Bien sûr, 
+			Si l'on demande de 
+			\textit{lancer le dé jusqu’à ce que la valeur obtenue soit 7},
 			un humain doté d’intelligence comprend 
 			que la condition est impossible à réaliser, 
 			mais un robot appliquant cette directive à la lettre 
-			lancera le dé perpétuellement\dots
+			lancera le dé perpétuellement.
 	
 		\subsection{À propos des données}
 		%--------------------------------
