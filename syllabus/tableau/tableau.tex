@@ -244,7 +244,7 @@
 		et \lda{TypeElément} est le type des éléments 
 			que l’on trouvera dans le tableau.
 			Tous les types sont permis
-			mais tous les éléments d’un même tableau
+			mais tous les éléments
 			sont du même type. 
 		
 	% ==================
@@ -262,8 +262,8 @@
 			porte le numéro 0 comme c’est le cas dans beaucoup de langages
 			de programmation (comme Java par exemple).
 			Plus loin, nous verrons une notation alternative
-			qui permet de choisir un autre numéro de début pour le tableau
-			ce qui sera plus naturel pour certains problèmes.
+			qui permet de choisir un autre numéro de début pour le tableau,
+			plus naturel pour certains problèmes.
 		},
 		la dernière l’indice \lda{taille-1}.
 		C’est considéré comme une erreur d’indiquer un indice
@@ -288,6 +288,11 @@
 			Écrire un algorithme qui déclare un tableau de 100 entiers
 			et y met les nombres de 1 à 100.
 		\end{Exercice}
+
+		\begin{Exercice}{Compréhension}
+			Expliquez la différence entre \lda{tab[i] \Gets tab[i+1]}
+			et \lda{tab[i] \Gets tab[i]+1}.
+		\end{Exercice}
 		
 	% ==================
 	\section{Initialisation compacte}
@@ -302,10 +307,10 @@
 		L’initialisation d’un tableau peut se faire 
 		via une série d’assignations, case par case
 		mais on va aussi se permettre une notation compacte%
-		\footnote{
+		\footnote{%
 			Peu de langages de programmation 
 			ont une notation compacte de ce genre. 
-			Java, par exemple, en possède une version moins puissante
+			Java en possède une version moins puissante
 			qui ne permet de coder que le premier des trois exemples.
 			C’est pourquoi, en début d’apprentissage, 
 			on vous demandera souvent d’initialiser des tableaux
