@@ -67,6 +67,38 @@
 		\lda{faux} sinon.
 	\end{Exercice}
 	
+	\begin{Exercice}{Remplir un tableau}
+		On souhaite remplir un tableau de 20 éléments avec
+		les entiers de 1 à 5, chaque nombre étant répété quatre fois.
+		On voudrait deux variantes :
+		\begin{enumerate}[label=\alph*)]
+		\item
+			D'abord une version
+			où les nombres identiques sont groupés :
+			d'abord tous les 1 puis tous les 2, \dots
+			
+			\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.20cm}|}}
+			\hline
+			1 & 1 & 1 & 1 & 2 & 2 & 2 & 2 & 3 & 3 & 3 & 3 & 4 & 4 & 4 & 4 & 5 & 5 & 5 & 5\\
+			\hline
+			\end{tabular}
+		\item
+			Ensuite une version où on trouve dans le tableau
+			les valeurs 1, 2, 3, 4, 5 qui se suivent, quatre fois.
+			
+			\begin{tabular}{|*{20}{>{\centering\arraybackslash}m{0.20cm}|}}
+			\hline
+			1 & 2 & 3 & 4 & 5 & 1 & 2 & 3 & 4 & 5 & 1 & 2 & 3 & 4 & 5 & 1 & 2 & 3 & 4 & 5 \\
+			\hline
+			\end{tabular}
+		\end{enumerate}
+		\smallskip
+		\textbf{Remarque} : 
+		Il existe de nombreuses façons de résoudre ce problème.
+		On peut par exemple utiliser deux boucles imbriquées.
+		On peut aussi adapter un algorithme de génération de suites.
+	\end{Exercice}
+	
 	\begin{Exercice}{Positions du minimum}
 		\marginicon{java}
 		Écrire un algorithme qui reçoit en paramètre le tableau
