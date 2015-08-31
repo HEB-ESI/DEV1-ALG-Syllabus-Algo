@@ -45,7 +45,7 @@
 		\subsection*{Score d’un mot}
 			
 			\'Ecrire un algorithme, \texttt{scoreMot}, 
-			qui reçoit une chaîne de caractères, 
+			qui reçoit une chaine de caractères, 
 			\texttt{mot}, et retourne la valeur de ce mot, c’est-à-dire la somme de la valeur de chacune de ses lettres.
 	
 			\underline{Exemple}: si l’algorithme reçoit le mot \texttt{JAVA}, il retourne 14 (=8+1+4+1).
@@ -53,7 +53,7 @@
 		\subsection*{Mot possible}
 	
 			\'Ecrire un algorithme, \texttt{motPossible}, qui reçoit un tableau de caractères, 
-			\texttt{chevalet}, et une chaîne de caractères, 
+			\texttt{chevalet}, et une chaine de caractères, 
 			\texttt{mot}, et retourne vrai si les lettres du chevalet permettent d’obtenir le mot donné, et retourne faux dans le cas contraire. 
 	
 	
@@ -68,7 +68,7 @@
 			si elle s’y trouve de la remplacer par un symbole (par exemple un '-').
 			Pour cela on définit un algorithme \texttt{copieChevalet} 
 			permettant de copier un chevalet et un algorithme \texttt{indiceLettre} 
-			permettant de connaître l’indice d’une lettre dans un chevalet 
+			permettant de connaitre l’indice d’une lettre dans un chevalet 
 			(cet algorithme retourne -1 si la lettre ne s’y trouve pas). 
 	
 		\subsection*{Meilleur mot}
@@ -76,7 +76,7 @@
 			\'Ecrire un algorithme, \texttt{meilleurMot}, qui reçoit~:
 			\begin{itemize}
 			\item un tableau de caractères, \texttt{chevalet}, qui contient les lettres disponibles pour former un mot~;
-			\item un tableau de chaînes de caractères, \texttt{dico}, qui contient par exemple tous les mots du dictionnaire.
+			\item un tableau de chaines de caractères, \texttt{dico}, qui contient par exemple tous les mots du dictionnaire.
 			\end{itemize}
 			L’algorithme retourne le mot du dictionnaire que l’on peut obtenir avec les lettres du chevalet 
 			et qui a le score le plus élevé. 
@@ -171,7 +171,7 @@
 			Écrivez un algorithme 
 		
 			\begin{LDA}
-			\Entete{enPremièrePosition}{\Par{positionsJoueurs\In}{\Array{m}{entier}}}{entier}
+			\Entete{enPremièrePosition}{\Par{positionsJoueurs\In}{\Array{m}{entiers}}}{entier}
 			\end{LDA}
 			
 			Cet algorithme retourne le numéro du joueur en tête de la course. 
@@ -186,15 +186,15 @@
 	
 			\begin{LDA}
 			\Entete{jouer}{
-				\Par{chemin\In}{\Array{n}{entier}},
-				\Par{positionsJoueurs\InOut}{\Array{m}{entier}},
-				\Par{joueurCourrant\In}{entier},
+				\Par{chemin\In}{\Array{n}{entiers}},
+				\Par{positionsJoueurs\InOut}{\Array{m}{entiers}},
+				\Par{joueurCourant\In}{entier},
 				\Par{valeurDé\In}{entier}
 				}{}
 			\end{LDA}
 		
 			Cet algorithme fait changer de position le joueur d’indice
-			\textit{joueurCourrant} de la valeur donnée par le dé (\textit{valeurDé}) en
+			\textit{joueurCourant} de la valeur donnée par le dé (\textit{valeurDé}) en
 			respectant les règles du jeu. 
 		
 			Cet algorithme met donc à jour le tableau \textit{positionsJoueurs}. 
@@ -231,7 +231,7 @@
 		et, en fin de collier, il est possible qu’on ne puisse
 		appliquer qu’une partie du motif.
 		
-		\textbf{Nous allons representer chaque perle par un caractère
+		\textbf{Nous allons représenter chaque perle par un caractère
 		indiquant sa couleur et un collier comme un tableau de caractères.
 		Une perle non coloriée sera indiquée par un point (\Verb_'.'_).}
 		

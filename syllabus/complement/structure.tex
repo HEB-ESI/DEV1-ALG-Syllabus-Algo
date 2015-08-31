@@ -21,8 +21,8 @@
 		\begin{itemize}
 		\item
 			Une \textbf{date} est composée de trois éléments (le jour, le mois,
-			l’année). Le mois peut s’exprimer par un entier (15/10/2014) 
-			ou par une chaine (15~octobre~2014).
+			l’année). Le mois peut s’exprimer par un entier (15/10/2015) 
+			ou par une chaine (15~octobre~2015).
 		\item
 			Un \textbf{moment} de la journée est un triple d’entiers 
 			(heures, minutes, secondes).
@@ -146,7 +146,7 @@
 		\Stmt nomVariable.nomChamp
 		\end{LDA}
 	
-		Exemple d’instructions utilisant les variables
+		Exemples d’instructions utilisant les variables
 		déclarées au paragraphe précédent~:
 	
 		\begin{LDA}
@@ -175,10 +175,19 @@
 		\Let arrivée.minute \Gets départ.minute
 		\Let arrivée.seconde \Gets départ.seconde
 		\end{LDA}
+		
+		
+		Par facilité d’écriture, 
+		on peut assigner tous les champs en une fois via des «~\{\}~». 
+		Exemple~:
+	
+		\begin{LDA}
+		\Let anniversaire \Gets \{1, 9, 1989\}
+		\end{LDA}
 	
 		Une variable structurée peut aussi 
-		être le paramètre ou la valeur de retour d’un algorihtme. 
-		Par exemple, l’entête d’un algorihtme 
+		être le paramètre ou la valeur de retour d’un algorithme. 
+		Par exemple, l’entête d’un algorithme 
 		renvoyant le nombre de secondes 
 		écoulées entre une heure de départ et d’arrivée serait~:
 	
@@ -210,13 +219,6 @@
 		il faudra dans ce cas écrire 
 		des modules de comparaison adaptés aux structures utilisées.
 	
-		Par facilité d’écriture, 
-		on peut assigner tous les champs en une fois via des «~\{\}~». 
-		Exemple~:
-	
-		\begin{LDA}
-		\Let anniversaire \Gets \{1, 9, 1989\}
-		\end{LDA}
 	
 	% =============================
 	\section{Exemple d’algorithme}
