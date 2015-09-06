@@ -1,0 +1,97 @@
+\chapter{Aide mémoire}
+
+	Cet aide-mémoire peut vous accompagner lors d'une
+	interrogation ou d'un examen. 
+	Il vous est permis d’utiliser ces méthodes sans les développer.
+	Par contre, si vous sentez le besoin d’utiliser 
+	une méthode qui n'apparait pas ici, 
+	il faudra en écrire explicitement le contenu.
+
+%===================================================
+\section*{Manipuler les nombres}
+%===================================================
+
+	\begin{description}
+	\item[\lda{hasard(\Par{n}{entier})\Gives~entier}]
+		Donne un entier entre 1 et $n$.
+	\end{description}
+	
+	
+%===================================================
+\section*{Manipuler les chaines}
+%===================================================
+	
+	Remarque : lorsqu'on indique \lda{caractère},
+	on signifie une chaine de longueur 1.
+	
+	\begin{description}
+	\item[\lda{chaine[i]}]
+		Désigne le i\ieme caractère de la chaine (en commençant à 1).
+		\\Ex: \lda{texte[2] \Gets "a"}
+		ou \lda{\K{afficher} texte[1]}
+	\item[\lda{chaine1 + chaine2}]
+		Produit une chaine qui est la concaténation des deux chaines.
+	\item[\lda{long(chaine : chaine) \Gives{} entier}]
+		Donne la longueur de la chaine (nb de caractères).
+	\item[\lda{estLettre(car: caractère)\Gives~booléen}]
+		Cette fonction indique si un caractère est une lettre. 
+		Par exemple elle retourne vrai pour "a", "e", "G", "K", 
+		mais faux pour "4", "\$", "@"\dots %$ 
+	\item[\lda{estMinuscule(car: caractère)\Gives~booléen}]	
+		Permet de savoir si le caractère est une lettre minuscule.
+	\item[\lda{estMajuscule(car: caractère)\Gives~booléen}]	
+		Permet de savoir si le caractère est une lettre majuscule.
+	\item[\lda{estChiffre(car: caractère)\Gives~booléen}]	
+		Permet de savoir si un caractère est un chiffre. 
+		Elle retourne vrai uniquement pour les dix caractères 
+		"0", "1", "2", "3", "4", "5", "6", "7", "8" et "9" 
+		et faux dans tous les autres cas.
+	\item[\lda{majuscule(texte: chaine)\Gives~chaine}]
+		Retourne une chaine où toutes les lettres du texte
+		ont été converties en majuscules.
+	\item[\lda{minuscule(texte: chaine)\Gives~chaine}]
+		Retourne une chaine où toutes les lettres du texte
+		ont été converties en minuscules.
+	\item[\lda{numLettre(car: caractère)\Gives~entier}]
+		Retourne toujours un entier entre 1 et 26. 
+		Par exemple \lda{numLettre("E")} donnera 5, 
+		ainsi que \lda{numLettre("e")}. 
+		Cette fonction traite donc de la même manière 
+		les majuscules et les minuscules. 
+		\lda{numLettre} retournera aussi 5 pour les caractères "é", "è", "ê", "ë"\dots). 
+		Attention, il est interdit d’utiliser cette fonction 
+		si le caractère n’est pas une lettre~!
+	\item[\lda{lettreMaj(n: entier)\Gives~caractère}]
+		Retourne la forme majuscule de la n\ieme{} lettre de l’alphabet 
+		(où \textit{n} sera obligatoirement compris entre 1 et 26). 
+		Par exemple, \lda{lettreMaj(13)} retourne "M".
+	\item[\lda{lettreMin(n: entier)\Gives~caractère}]
+		Idem pour les minuscules.
+	\item[\lda{chaine(n: réel)\Gives~chaine}]
+		Transforme un nombre en chaine.
+		Ex: \lda{chaine(42)} retourne la chaine "42"
+		et \lda{chaine (3,14)} donnera "3,14". 
+	\item[\lda{nombre(ch : chaine) \Gives~réel}]
+		Transforme une chaine contenant des caractères numériques 
+		en nombre.
+		Ainsi, \lda{nombre("3,14")} retournera 3,14. 
+		C’est une erreur de l’utiliser avec une chaine
+		qui ne représente pas un nombre.
+	\item[\lda{sousChaine(ch: chaine, pos: entier, long: entier) \Gives~chaine}]
+		Permet d’extraire une portion 
+		d’une certaine longueur d’une chaine donnée, 
+		et ceci à partir d’une position donnée. 
+	\item[\lda{position(ch: chaine, sous-chaine: chaine)\Gives~entier}]	
+		Permet de savoir 
+		si une sous-chaine donnée 
+		est présente dans une chaine donnée. 
+		Elle permet d’éviter d’écrire 
+		le code correspondant à une recherche. 
+		La valeur de l’entier renvoyé est la position 
+		où commence la sous-chaine recherchée. 
+		Par exemple, 
+		\lda{position("algorithmique", "mi")} retournera 9. 
+		Si la sous-chaine ne s’y trouve pas, 
+		la fonction retourne 0. 
+	\end{description}
+	
