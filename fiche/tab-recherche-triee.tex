@@ -11,18 +11,18 @@
 		
 	%\textbf{Résultat}~: la valeur du maximum
 
-\Section{Solution}
+\Section{Rechercher}
 
 	Rechercher la position où a été trouvé l’élément ou la position où il aurait dû être
 	
 	\textbf{Données}~: le tableau à analyser, le nombre d'éléments dans ce tableau, la valeur à rechercher
 		
-	\textbf{Résultat}~: la position de l'élément si il est dans le tableau et -1 sinon
+	\textbf{Résultat}~: la position où a été trouvé la valeur ou la position où elle aurait dû être
 
 		\begin{LDA}
 				\LComment{Recherche un étudiant.}
 				\LComment{- trouvé~: indique si oui ou non il a été trouvé}
-				\LComment{- pos~: indique la position où a été trouvé l’étudiant ou la position où il aurait dû être}
+				\LComment{- pos~: indique la position où a été trouvé la valeur ou la position où elle aurait dû être}
 				\Algo{rechercher}{
 						\Par{tab\In}{\Array{n}{entiers}}, 
 						\Par{nbElem\In}{entier}, 
@@ -38,6 +38,7 @@
 				\EndAlgo
 			\end{LDA}
 
+\Section{Vérifier}
 	Rechercher l'indice d'une donnée trouvée dans un tableau trié ou -1 si elle n'est pas trouvée
 	
 	\textbf{Données}~: le tableau à analyser, le nombre d'éléments dans ce tableau, la valeur à rechercher
@@ -65,6 +66,7 @@
 			\EndAlgo
 		\end{LDA}
 
+\Section{Ajouter}
 	Ajouter une donnée non encore présente dans le tableau de données non triées
 	
 	\textbf{Données}~: le tableau à modifier, le nombre d'éléments dans ce tableau, la valeur à ajouter
@@ -98,6 +100,7 @@
 				\EndAlgo
 			\end{LDA}
 	
+\Section{Supprimer}
 	Supprimer une donnée d'un tableau de données non triées
 	
 	\textbf{Données}~: le tableau à modifier, le nombre d'éléments dans ce tableau, la valeur à supprimer
