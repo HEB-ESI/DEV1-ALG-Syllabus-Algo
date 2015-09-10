@@ -228,6 +228,7 @@
 		On continue tant que le nombre n’a pas dépassé 5.
 		Ce qui donne (en n’oubliant pas l’initialisation de \lda{nb})~:
 
+		\marginicon{java}
 		\begin{minipage}{5cm}
 			\begin{LDA}[1]
 				\Algo{compteur5}{}{}
@@ -349,6 +350,7 @@
 		\end{Exercice}
 
 		\begin{Exercice}{Afficher des nombres}
+		\marginicon{java}
 			En utilisant un \lda{\algorithmicwhile},
 			écrire un algorithme qui reçoit un entier $n$ positif et affiche
 			\begin{enumerate}[label=\alph*)]
@@ -422,6 +424,7 @@
 		Voici la solution avec un \lda{\algorithmicfor} 
 		et le traçage correspondant.
 
+		\marginicon{java}
 		\begin{minipage}{55mm}
 			\begin{LDA}[1]
 				\Algo{compterJusque5}{}{}
@@ -554,6 +557,7 @@
 		On peut utiliser un \og{}pour\fg{}.
 		Une solution possible est~:
 
+		\marginicon{java}
 		\begin{LDA}
 		\Algo{afficherPair}{\Par{n}{entier}}{} 
 			\For[2]{nb}{2}{n} 
@@ -609,6 +613,7 @@
 		\end{Exercice}
 
 		\begin{Exercice}{Afficher des nombres}
+			\marginicon{java}
 			Reprenons un exercice déjà donné avec le \lda{\algorithmicwhile}.
 			En utilisant un \lda{\algorithmicfor},
 			écrire un algorithme qui reçoit un entier $n$ positif et affiche
@@ -667,6 +672,7 @@
 		Reprenons notre exemple d’affichage des nombres de 1 à 5.
 		Voici la solution et le traçage correspondant.
 
+		\marginicon{java}
 		\begin{minipage}{5cm}
 			\begin{LDA}[1]
 				\Algo{compteur5}{}{}
@@ -735,6 +741,7 @@
 		\end{Exercice}
 
 		\begin{Exercice}{Afficher des nombres}
+		\marginicon{java}
 			Reprenons un exercice déjà fait avec le \lda{\algorithmicwhile}
 			et le \lda{\algorithmicfor}
 			en utilisant cette fois un \lda{\algorithmicrepeat} \lda{\algorithmicwhile}.
@@ -802,6 +809,7 @@
 	\subsection{Variante 1~: nombre de valeurs connu} 
 	%------------------------------------------------	
 	
+		\marginicon{java}
 		L’utilisateur indique le nombre de termes au départ.
 		Ce problème est proche de ce qui a déjà été fait.
 		
@@ -832,6 +840,7 @@
 	\subsection{Variante 2~: stop ou encore}
 	%------------------------------------------------	
 	
+		\marginicon{java}
 		Après chaque nombre, 
 		on demande à l’utilisateur s’il y a encore un nombre à additionner.
 
@@ -893,6 +902,7 @@
 	\subsection{Variante 3~: valeur sentinelle}
 	%------------------------------------------------	
 		
+		\marginicon{java}
 		L’utilisateur entre une valeur spéciale pour indiquer la fin. 
 		On parle de valeur \textbf{sentinelle}. 
 		Ceci n’est possible que si cette valeur \textbf{sentinelle} ne peut pas être
@@ -931,6 +941,7 @@
 		\end{Exercice}
 
 		\begin{Exercice}{Afficher les nombres impairs}
+			\marginicon{java}
 			Écrire un algorithme qui demande une série
 			de valeurs entières non nulles à l’utilisateur
 			et qui affiche celles qui sont impaires.
@@ -939,6 +950,7 @@
 		\end{Exercice}
 
 		\begin{Exercice}{Compter le nombre de réussites}
+			\marginicon{java}
 			Écrire un algorithme qui demande une série
 			de cotes (entières, sur 20) à l’utilisateur
 			et qui affiche le pourcentage de réussites.
@@ -967,6 +979,7 @@
 	\subsubsection{Exemple - Afficher les carrés}
 	%--------------------------------------------
 	
+		\marginicon{java}
 		On veut afficher les $n$ premiers nombres carrés parfaits~:
 		$1$, $4$, $9$, $16$, $25$\dots
 
@@ -1054,6 +1067,7 @@
 		
 		qui, dans notre exemple précis, devient~:
 
+		\marginicon{java}
 		\begin{LDA}
 			\LComment affiche la suite 1 2 4 7 11 16 ...
 			\Algo{suite}{\Par{n}{entier}}{}
@@ -1067,6 +1081,7 @@
 		\end{LDA}
 
 		\begin{Exercice}{Suites}
+		\marginicon{java}
 			Écrire les algorithmes qui affichent
 			les $n$ premiers termes des suites suivantes.
 			À vous de voir quel est le canevas de solution
@@ -1091,6 +1106,7 @@
 	À vous de jouer\dots{}
 	
 	\begin{Exercice}{Lire un nombre}
+		\marginicon{java}
 		Écrire un algorithme 
 		qui demande à l’utilisateur un nombre entre 1 et $n$
 		et le retourne.
@@ -1133,6 +1149,7 @@
 	\end{Exercice}
 
 	\begin{Exercice}{Lancé de dés}
+		\marginicon{java}
 		Écrire un algorithme qui lance $n$ fois un dé
 		et compte le nombre de fois qu’une certaine valeur est obtenue.
 		\begin{LDA}
@@ -1141,6 +1158,7 @@
 	\end{Exercice}
 	
 	\begin{Exercice}{Factorielle}
+		\marginicon{java}
 		Écrire un algorithme qui retourne la factorielle de $n$ (entier positif ou
 		nul). Rappel~: la factorielle de $n$, notée $n$!, est le produit des $n$
 		premiers entiers strictement positifs. 
@@ -1155,7 +1173,7 @@
 	\end{Exercice}
 
 	\begin{Exercice}{Table de multiplication}
-
+		\marginicon{java}
 		\begin{minipage}[t]{10cm}
 			Écrire un algorithme qui affiche la table de multiplication
 			des nombres de 1 à 10
@@ -1183,12 +1201,14 @@
 	\end{Exercice}
 	
 	\begin{Exercice}{Double 6}
+		\marginicon{java}
 		Écrire un algorithme qui lance de façon répétée deux dés.
 		Il s’arrête lorsqu’il obtient un double 6
 		et retourne le nombre de lancés effectués.
 	\end{Exercice}
 	
 	\begin{Exercice}{Nombre premier}
+		\marginicon{java}
 		Écrire un algorithme qui vérifie si un entier positif est un
 		\textbf{nombre premier}. 
 		
@@ -1197,6 +1217,7 @@
 	\end{Exercice}
 	
 	\begin{Exercice}{Nombres premiers}
+		\marginicon{java}
 		Écrire un algorithme qui affiche les nombres premiers inférieurs ou
 		égaux à un entier positif donné. Le module de cet algorithme fera appel
 		de manière répétée mais économique à celui de l’exercice précédent.
@@ -1211,6 +1232,7 @@
 	\end{Exercice}
 	
 	\begin{Exercice}{Nombre parfait}
+		\marginicon{java}
 		Écrire un algorithme qui vérifie si un entier positif est un
 		\textbf{nombre parfait}, c’est-à-dire un nombre égal à la somme de ses
 		diviseurs (sauf lui-même). 
@@ -1227,6 +1249,7 @@
 	\end{Exercice}
 
 	\begin{Exercice}{Nombre miroir}
+		\marginicon{java}
 		Le miroir d’un nombre est le nombre obtenu
 		en lisant les chiffres de droite à gauche.
 		Ainsi le nombre miroir de $4209$ est $9024$.
@@ -1235,6 +1258,7 @@
 	\end{Exercice}
 	
 	\begin{Exercice}{Palindrome}
+		\marginicon{java}
 		Écrire un algorithme qui vérifie si un entier donné 
 		forme un palindrome ou non. 
 		Un nombre palindrome est un nombre qui lu dans un sens 
