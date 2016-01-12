@@ -309,7 +309,7 @@
 					\Decl{pos}{entier}
 					\Decl{trouvé}{booléen}
 					\Stmt rechercher( inscrits, nbInscrits, numéro, trouvé, pos )
-					\Stmt décalerDroite( inscrits, pos, nbInscrits)
+					\Stmt décalerDroite( inscrits, pos, nbInscrits-1)
 					\Let inscrits[pos] \Gets numéro
 					\Let nbInscrits \Gets nbInscrits + 1
 				\EndAlgo
@@ -366,7 +366,7 @@
 					\Decl{pos}{entier}
 					\Decl{trouvé}{booléen}
 					\Stmt rechercher( inscrits, nbInscrits, numéro, trouvé, pos )
-					\Stmt décalerGauche( inscrits, pos+1, nbInscrits)
+					\Stmt décalerGauche( inscrits, pos+1, nbInscrits-1)
 					\Let nbInscrits \Gets nbInscrits - 1					
 				\EndAlgo
 				\Empty
