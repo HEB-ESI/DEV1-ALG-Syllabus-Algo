@@ -454,24 +454,24 @@
 
 	\begin{LDA}[1]
 		\Algo{testDivision}{}{}
-			\Decl {compteurAppels, nb1, nb2, quotient, resteDiv}{entiers}
-			\Let{compteurAppels \Gets 0}
+			\Decl{cptAppels, nb1, nb2, quotient, resteDiv}{entiers}
+			\Let{cptAppels \Gets 0}
 			\Let{nb1 \Gets 5}
 			\Let{nb2 \Gets 3}
-			\Let{quotient \Gets division(compteurAppels, nb1, nb2, resteDiv)}
+			\Let{quotient \Gets division(cptAppels, nb1, nb2, resteDiv)}
 			\Write quotient
 			\Write resteDiv
-			\Write compteurAppels
+			\Write cptAppels
 			\Let{nb1 \Gets 7}
 			\Let{nb2 \Gets 9}
-			\Let{quotient \Gets division(compteurAppels, nb1, nb2, resteDiv)}
+			\Let{quotient \Gets division(cptAppels, nb1, nb2, resteDiv)}
 			\Write quotient
 			\Write resteDiv
-			\Write compteurAppels
+			\Write cptAppels
 		\EndAlgo
 		\Empty
 		\Algo{division}{\Par{compteur\In\Out}{entier}, \Par{dividende\In}{entier}, \Par{diviseur\In}{entier}, \Par{reste\Out}{entier}}{entier}
-			\Let{\color{gray} compteur \Gets compteurAppels} 
+			\Let{\color{gray} compteur \Gets cptAppels} 
 			\Let{\color{gray} dividende \Gets nb1} 
 			\Let{\color{gray} diviseur \Gets nb2} 
 			\Empty
@@ -481,7 +481,7 @@
 			\Let{quotient \Gets dividende DIV diviseur}
 			\Let{reste \Gets dividende MOD diviseur}
 			\Empty
-			\Let{\color{gray} compteurAppels \Gets compteur}
+			\Let{\color{gray} cptAppels \Gets compteur}
 			\Let{\color{gray} resteDiv \Gets reste} 
 			\Return quotient
 		\EndAlgo
@@ -490,12 +490,12 @@
 	Traçons-le.
 		
 	\begin{tabular}{|>{\centering\arraybackslash}m{1cm}
-					|*{5}{>{\centering\arraybackslash}m{10mm}}
-					|*{5}{>{\centering\arraybackslash}m{10mm}}|}
+					|*{5}{>{\centering\arraybackslash}m{8mm}}
+					|*{5}{>{\centering\arraybackslash}m{8mm}}|}
 		\hline
 		  & \multicolumn{5}{c|}{\lda{testDivision}} & \multicolumn{5}{c|}{\lda{division}} \\
 		\hline
-		\# & \tiny{compteurAppels} & \tiny{nb1} & \tiny{nb2} 
+		\# & \tiny{cptAppels} & \tiny{nb1} & \tiny{nb2} 
 		& \tiny{quotient} & \tiny{resteDiv}  
 		& \tiny{compteur} & \tiny{dividende} & \tiny{diviseur} 
 		& \tiny{reste} & \tiny{quotient} \\
@@ -620,8 +620,12 @@
 			\Write a
 			\Let a \Gets 3
 			\Let b \Gets 5
-			\Stmt addition(b, a, b)
+			\Stmt soustraction(b, a, b)
 			\Write b
+		\EndAlgo
+		\Empty
+		\Algo{soustraction}{a\In, b\In, c\Out~:~entiers}{}
+			\Let c \Gets a - b
 		\EndAlgo
 		\end{LDA}
 	
