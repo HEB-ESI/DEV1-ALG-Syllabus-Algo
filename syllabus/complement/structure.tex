@@ -245,7 +245,38 @@
 			\EndIf
 		\EndAlgo
 		\end{LDA}
+
 	
+	% =============================
+	\section{Remarque sur les champs}
+	% =============================
+	
+		Tous les exemples ci-dessus présentent des champs simples
+		(entier ou chaîne) 
+		mais il n'y a en fait aucune contrainte :
+		un champ peut-être un tableau ou même une autre structure.
+		
+		Par exemple, la structure suivante définit une personne
+		qui possède, en plus de son nom,
+		une date de naissance (la structure \lda{Date})
+		et trois numéros de téléphone (un tableau de trois chaînes).
+		
+		\begin{LDA}
+			\Struct{Personne}
+			\Decl{nom}{chaîne}
+			\Decl{naissance}{Date}
+			\Decl{téléphones}{\Array{3}{chaînes}}
+			\EndStruct
+		\end{LDA}
+		
+		Et voici un exemple d'utilisation.
+
+		\begin{LDA}
+			\Decl{moi}{personne}
+			\Let moi.naissance.jour \Gets 23
+			\Let moi.téléphones[0] \Gets "0444/42.42.42"
+		\end{LDA}
+		
 	% =====================================
 	\section{Exercices sur les structures}
 	% =====================================
