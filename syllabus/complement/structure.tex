@@ -84,7 +84,7 @@
 		Pour exemple, nous définissons ci-dessous trois
 		types structurés que nous utiliserons souvent par la suite~:
 	
-		\begin{minipage}{4.5cm}
+		\begin{minipage}{3.2cm}
 		\begin{LDA}
 		\Struct{Date}
 			\Decl{jour}{entier}
@@ -94,7 +94,7 @@
 		\end{LDA}
 		\end{minipage}
 	\ 
-		\begin{minipage}{4.5cm}
+		\begin{minipage}{3.2cm}
 		\begin{LDA}
 		\Struct{Moment}
 			\Decl{heure}{entier}
@@ -104,7 +104,7 @@
 		\end{LDA}
 		\end{minipage}
 	\ 
-		\begin{minipage}{4.5cm}
+		\begin{minipage}{3.2cm}
 		\begin{LDA}
 		\Struct{Point}
 			\Decl{x}{réel}
@@ -113,6 +113,16 @@
 		\Empty
 		\end{LDA}
 		\end{minipage}
+	\ 
+	\begin{minipage}{3.2cm}
+		\begin{LDA}
+			\Struct{Etudiant}
+			\Decl{nom}{chaîne}
+			\Decl{matricule}{entier}
+			\Decl{section}{chaîne}
+			\EndStruct{}
+		\end{LDA}
+	\end{minipage}
 	
 	% =====================================================
 	\section{Déclaration d’une variable de type structuré}
@@ -272,7 +282,7 @@
 		Et voici un exemple d'utilisation.
 
 		\begin{LDA}
-			\Decl{moi}{personne}
+			\Decl{moi}{Personne}
 			\Let moi.naissance.jour \Gets 23
 			\Let moi.téléphones[0] \Gets "0444/42.42.42"
 		\end{LDA}
