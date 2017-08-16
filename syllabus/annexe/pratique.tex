@@ -4,7 +4,15 @@
 	nous voyons souvent les étudiants écrire
 	les mêmes bouts de code qui sont discutables,
 	voire à proscrire.
-	Discutons ici des plus courants.
+	Discutons ici des plus courants en rappelant
+	que le critère qui nous guide est la lisibilité
+	et donc la facilité de compréhension de l'algorithme
+	ce qui induit évidemment un aspect subjectif, voir culturel%
+	\footnote{%
+		Certaines communautés de programmeurs habitués à un langage
+		adoptent des styles de programmation qui ne sont pas
+		partagés par d'autres programmeurs, habitués à un autre langage.
+	}.
 	
 %===================================================
 \section{Tester un booléen}
@@ -186,7 +194,7 @@
 %===================================================
 
 	On voit trop souvent des étudiants écrire une boucle
-	pour et l’interrompre anticipativement en modifiant l’indice; 
+	\og{}pour\fg{} et l’interrompre anticipativement en modifiant l’indice; 
 	c’est une très mauvaise idée.
 
 	\begin{minipage}{6cm}
@@ -261,6 +269,10 @@
 	\hskip-5mm
 	\includegraphics[width=1cm]{icon/do}
 
+	\medskip
+	Si vous tenez absolument à interrompre la boucle \og{}pour\fg{},
+	vous pouvez utiliser un \lda{retourner} comme expliqué au point suivant.
+	 
 %===================================================
 \section{Plusieurs retourner}
 %===================================================
@@ -274,11 +286,12 @@
 	dans certains cas précis.
 
 	\begin{minipage}{7cm}
-		Un cas concret est pour interrompre anticipativement une boucle.
+		Un cas concret est l'arrêt anticipé d'une boucle.
 		Certains écrivent~:
 	\end{minipage}
 	\quad
-	\begin{minipage}{6cm}
+	\begin{minipage}[t]{6cm}
+		\vskip-5mm
 		\begin{LDA}
 			\For{i}{1}{n}
 				\If{\dots}
@@ -297,7 +310,8 @@
 		On voit alors des bouts de code qui ressemblent à~:
 	\end{minipage}
 	\quad
-	\begin{minipage}{6cm}
+	\begin{minipage}[t]{6cm}
+		\vskip-5mm
 		\begin{LDA}
 			\If{\dots}
 				\Return quelquechose
@@ -309,6 +323,7 @@
 	\hskip-5mm
 	\includegraphics[width=1cm]{icon/caution}
 	
+	\medskip
 	Ces écritures seront tolérées dans ce cours
 	(et donc non sanctionnées)
 	mais nous ne les encourageons pas
