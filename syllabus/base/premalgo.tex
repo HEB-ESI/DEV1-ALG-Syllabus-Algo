@@ -1174,7 +1174,7 @@
 			d’un algorithme qui fournit un nombre réel aléatoire entre 0 inclus et 1 exclu.
 
 			\begin{center}
-				\flowalgo{hasard}{réel (entre 0 inclus et 1 exclu)}
+				\flowalgor{hasard}{réel (entre 0 inclus et 1 exclu)}
 			\end{center}
 			
 			À partir de cet algorithme,
@@ -1848,11 +1848,37 @@
 			et affiche le résultat
 			car il peut être utilisé (appelé) dans un autre algorithme
 			pour résoudre une partie du problème.
+
+			Supposons qu'on dispose de cet algorithme pour le calcul de la surface d'un rectangle.
+			\begin{center}
+				\flowalgodd{longueur (réel)}{surface (réel)}{surfaceRectangle}{réel}
+			\end{center}
 			
 			Rien n’empêche d’écrire, à partir de là,
 			un algorithme qui interagit avec l’utilisateur
 			et fait appel à l’algorithme qui réalise le calcul.
-			Par exemple~:
+			
+			\paragraph{Exemple :}
+				Écrire un algorithme qui calcule et affiche la surface d'un triangle 
+				dont la longueur et la largeur dont demandés à l'utilisateur.
+				
+			\paragraph{Spécification.}
+			\begin{center}
+				\flowalgo{TestSurface}
+			\end{center}
+			\begin{itemize}
+				\item \textbf{Donnée} et \textbf{Résultat} : aucun
+				\item \textbf{Demande} : la longueur et la largeur
+				\item \textbf{Affiche} : la surface du triangle
+			\end{itemize}
+			
+			Remarquez qu'on distingue bien une valeur qui est une donnée de l'algorithme
+			(passée en paramètre) et une valeur qui est demandée à l'utilisateur.
+			De même, on distingue le résultat d'un algorithme (ce qui est retourné)
+			de ce qui est affiché à l'utilisateur.
+			
+			\paragraph{Solution.}
+						
 			\begin{LDA}
 				\Algo{TestSurface}{}{}
 					\Decl{longueur, largeur}{réels}
