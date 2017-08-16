@@ -1166,45 +1166,81 @@
 			aléatoires.			
 			Concevoir de tels algorithmes est très compliqué
 			et dépasse largement le cadre de ce cours.
+			Heureusement, la plupart des langages informatiques proposent de base
+			une façon d'obtenir un tel nombre aléatoire.
+
 			Nous allons juste supposer qu’on dispose,
 			sans devoir l’écrire,
-			d’un algorithme qui fournit un entier aléatoire.
-			
+			d’un algorithme qui fournit un nombre réel aléatoire entre 0 inclus et 1 exclu.
+
 			\begin{center}
-				\flowalgod{n (entier)}{hasard}{entier (entre 1 et n)}
+				\flowalgo{hasard}{réel (entre 0 inclus et 1 exclu)}
 			\end{center}
 			
-			Dans nos algorithmes,
-			nous pourrons donc écrire \lda{hasard(n)}
-			pour obtenir un nombre entier aléatoire
-			entre $1$ et $n$ inclus.
-			
-			\textbf{Exemple.}
-			\begin{LDA}
-				\LComment{Simule le lancer d’un dé}
-				\Algo{dé}{}{entier}
-					\Return hasard(6)
-				\EndAlgo
-			\end{LDA}
+			À partir de cet algorithme,
+			on peut gérer de nombreuses autres situations
 
-			Cet algorithme \lda{hasard()}
-			peut être utilisé pour générer des nombres
-			appartenant à d’autres intervalles.
+\clearpage
+			\subsubsection{Un entier entre 0 inclus et n exclu}
 			
-			\begin{Exercice}{Chiffre aléatoire}
-				Écrivez un algorithme qui donne un chiffre
-				(de 0 à 9 donc) aléatoire.
-			\end{Exercice}
+				Si on veut un nombre aléatoire entre 0 inclus) et n (exclu),
+				l'algorithme suivant fera l'affaire
 
-			\begin{Exercice}{Nombre aléatoire entre min et max}
-				\marginicon{java}
-				Écrivez un algorithme
-				qui donne un nombre entier aléatoire
-				compris entre \lda{min} et \lda{max} inclus.
 				\begin{LDA}
-				\Entete{hasard}{\Par{min, max}{entiers}}{entier}
+					\Algo{hasard}{\Par{n}{entier}}{entier}
+					\Return hasard() * n		// le nombre réel est tronqué
+					\EndAlgo
 				\end{LDA}
+				
+				Dans la suite du cours,
+				vous pourrez considérer que vous disposez de cet algorithme
+				\begin{center}
+					\flowalgod{n (entier)}{hasard}{entier (entre 0 inclus et n exclu)}
+				\end{center}
+
+			\subsubsection{Un entier entre min et max inclus}
+			
+				Si on veut un entier entre deux bornes (min et max) données,
+				on peut se baser sur l'algorithme précédent
+			
+				\begin{LDA}
+					\Algo{hasard}{\Par{min}{entier}, \Par{max}{entier}}{entier}
+					\Return hasard(max-min+1) + min
+					\EndAlgo
+				\end{LDA}
+			
+				Dans la suite du cours,
+				vous pourrez considérer que vous disposez de cet algorithme
+				\begin{center}
+					\flowalgodd{min (entier)}{max (entier)}{hasard}{entier (entre min et max inclus)}
+				\end{center}
+
+			\begin{Exercice}{Chiffre aléatoire}
+				Écrivez un algorithme qui simule le lancé d'un dé à 6 faces.
 			\end{Exercice}
+						
+%			\textbf{Exemple.}
+%			\begin{LDA}
+%				\LComment{Simule le lancer d’un dé}
+%				\Algo{dé}{}{entier}
+%					\Return hasard(1,6)
+%				\EndAlgo
+%			\end{LDA}
+
+%			\begin{Exercice}{Chiffre aléatoire}
+%				Écrivez un algorithme qui donne un chiffre
+%				(de 0 à 9 donc) aléatoire.
+%			\end{Exercice}
+
+%			\begin{Exercice}{Nombre aléatoire entre min et max}
+%				\marginicon{java}
+%				Écrivez un algorithme
+%				qui donne un nombre entier aléatoire
+%				compris entre \lda{min} et \lda{max} inclus.
+%				\begin{LDA}
+%				\Entete{hasard}{\Par{min, max}{entiers}}{entier}
+%				\end{LDA}
+%			\end{Exercice}
 			
 		%---------------------
 		\subsection{Exercices récapitulatifs sur les difficultés de calcul}

@@ -10,6 +10,16 @@
 
 % === Synopsis adaptés aux nombres d'entrées et de sorties
 
+\newcommand{\flowalgo}[2]{
+	\begin{tikzpicture}
+	\sffamily
+	\matrix [column sep = 2em] {
+		\node[draw, rounded corners, thick] (M) {#1}; \pgfmatrixnextcell \node (R) {#2}; \\
+	};
+	\draw[->,thick] (M)  to (R);
+	\end{tikzpicture}
+}
+
 \newcommand{\flowalgod}[3]{
 	\begin{tikzpicture}
 		\sffamily
