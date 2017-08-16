@@ -841,7 +841,7 @@
 	\LComment Trie le tableau reçu en paramètre (via un tri bulle).
 		\Algo{triBulle}{\Par{tab\InOut}{\Array{n}{entiers}}}{}
 			\Decl{indiceBulle, i}{entiers}
-			\For{indiceBulle}{0}{n-1}
+			\For{indiceBulle}{0}{n-2}
 				\For[-1]{i}{n – 2}{indiceBulle}
 					\If{tab[i] > tab[i + 1]}
 						\Stmt swap( tab[i], tab[i + 1] )
