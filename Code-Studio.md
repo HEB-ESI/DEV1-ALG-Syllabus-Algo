@@ -37,7 +37,7 @@ Pour le prof :
 
 1) Aller sur https://studio.code.org/ et s'inscrire comme enseignant
    - je vous conseille de choisir l'option "Se connecter avec compte Google"
-     et d'utiliser votre compte @heb.be
+     et d'utiliser votre compte @he2b.be
 2) Choisissez "Comptes et progressions de l'élève"
 3) Cliquez sur le bouton "Nouvelle section" (= nouveau cours/groupe)
    - nom du genre "ESI-1ere-numGroupe"
@@ -50,6 +50,6 @@ Pour les élèves :
 
 1) Aller sur https://studio.code.org/ et s'inscrire comme élève
    - je conseille de choisir l'option "Se connecter avec compte Google
-     et d'utiliser le compte nnnnn@heb.be
+     et d'utiliser le compte nnnnn@he2b.be
 2) Aller sur la page donnée au point 4
 3) Faire les exercices ;)
