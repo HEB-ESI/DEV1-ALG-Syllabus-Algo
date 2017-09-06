@@ -4,7 +4,7 @@
 
 - Il y a 20 étapes
 	- 11 étapes d'expériences manuelles dont on peut se passer.
-	- 9 étapes de création d'algorithmes
+	- 9 étapes de création d'algorithmes, détaillées ci-dessous:
 - Étape 2
 	- ex. 1-5 : algo séquentiels avec "avancer" et "tourner"
 	- ex. 6-9 : introduction du "repeat x times"
@@ -40,9 +40,9 @@ Pour le prof :
      et d'utiliser votre compte @he2b.be
 2) Choisissez "Comptes et progressions de l'élève"
 3) Cliquez sur le bouton "Nouvelle section" (= nouveau cours/groupe)
-   - nom du genre "ESI-1ere-numGroupe"
    - type de connexion = email
-   - cours = 20-hour
+   - nom du genre "ESI-1ere-numGroupe"
+   - cours = 20-hour ("Cours accéléré")
    La section apparait et est cliquable
 4) Cliquez sur "gérer les élèves" pour voir l'URL de connexion à ce cours/section
 
