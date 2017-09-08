@@ -46,22 +46,25 @@
 % titletoc - permet de gérer les titres de toc
 % https://www.ctan.org/pkg/titletoc
 %----------------------------------------------
-\usepackage[explicit]{titlesec}
-\usepackage{titletoc}
-\startcontents[chapters] 	 % pour pouvoir faire stop avant partie -> pas dans toc
-\titleclass{\part}{top}		 % Partie en haut de page
-\titleformat{\part}[display] % Formatage de la partie
-	{\thispagestyle{empty}\stopcontents[chapters]\centering\normalfont\Large}% 
-	{\titlerule[3pt]\vspace{3pt}\titlerule[1pt]\vspace{3pt}{\partname}}%
-	{5pt}%
-	{\huge\bfseries#1%
-	\startcontents[chapters]%
-	\vspace*{1cm}%
-	\\%
-	\large\printcontents[chapters]{}{0}{\setcounter{tocdepth}{0}}%
-	\vspace*{3pc}%
-	\noindent\rule{\textwidth}{2pt}}
-\titlespacing*{\part}{0pt}{30pt}{0pt}	% Espace autour de la partie
+%
+% ATTENTION : Avec ceci, les numéros de sections disparaissent !
+%
+%\usepackage[explicit]{titlesec}
+%\usepackage{titletoc}
+%\startcontents[chapters] 	 % pour pouvoir faire stop avant partie -> pas dans toc
+%\titleclass{\part}{top}		 % Partie en haut de page
+%\titleformat{\part}[display] % Formatage de la partie
+%	{\thispagestyle{empty}\stopcontents[chapters]\centering\normalfont\Large}% 
+%	{\titlerule[3pt]\vspace{3pt}\titlerule[1pt]\vspace{3pt}{\partname}}%
+%	{5pt}%
+%	{\huge\bfseries#1%
+%	\startcontents[chapters]%
+%	\vspace*{1cm}%
+%	\\%
+%	\large\printcontents[chapters]{}{0}{\setcounter{tocdepth}{0}}%
+%	\vspace*{3pc}%
+%	\noindent\rule{\textwidth}{2pt}}
+%\titlespacing*{\part}{0pt}{30pt}{0pt}	% Espace autour de la partie
 
 
 % ===================================================
