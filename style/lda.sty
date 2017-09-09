@@ -224,45 +224,47 @@
 	\ifthenelse{\equal{#1}{0}}{de~#2~#3}{[#1~à~#2] de #3}%	
 }
 
-%% Classe
-%\algdef{SE}[CLASS]{Class}{EndClass}[1]
-  %{\printandpush\algorithmicclass\ #1}
-  %{\popandprint\algorithmicend\ \algorithmicclass}%
-%% Bloc customisable
-%\algdef{SE}[CUSTOM]{Custom}{EndCustom}
-  %{\printandpush}
-  %{\popandprint}
-%% Bloc
+%-----------
+% Classe
+%-----------
+\algdef{SE}[CLASS]{Class}{EndClass}[1]
+  {\printandpush\algorithmicclass\ #1}
+  {\popandprint\algorithmicend\ \algorithmicclass}%
+% Bloc customisable
+\algdef{SE}[CUSTOM]{Custom}{EndCustom}
+  {\printandpush}
+  {\popandprint}
+% Bloc
 %\algdef{SE}[BLOC]{Block}{EndBlock}[1]
-  %{\printandpush \algorithmicblock\ #1}
-  %{\popandprint \algorithmicend\ \algorithmicblock}
-%% Module
+%  {\printandpush \algorithmicblock\ #1}
+%  {\popandprint \algorithmicend\ \algorithmicblock}
+% Module
 %\algblockdefx[MODULE]{Module}{EndModule}[3]%
-  %{\printandpush\algorithmicprocedure\ \textproc{#1}(#2)\ifthenelse{\equal{#3}{}}{}{\Gives\ #3}}
-  %{\popandprint\algorithmicend\ \algorithmicprocedure}
-%% Méthode
-%\algblockdefx[METHOD]{Method}{EndMethod}[3]%
-  %{\printandpush\algorithmicmethod\ \textproc{#1}(#2)\ifthenelse{\equal{#3}{}}{}{\Gives\ #3}}
-  %{\popandprint\algorithmicend\ \algorithmicmethod}
-%% Constructeur
-%\algblockdefx[CONSTR]{Constr}{EndConstr}[2]%
-  %{\printandpush\algorithmicconstr\ \textproc{#1}(#2)}
-  %{\popandprint\algorithmicend\ \algorithmicconstr}
-%% Parties privées/publiques
-%\algdef{C}[CLASS]{CLASS}{Private}{\popandprint\pushindent\ privé:}%
-%\algdef{C}[CLASS]{CLASS}{Public}{\popandprint\pushindent\ public:}%
-%% Signatures de module / méthode / constructeur
-%\newcommand{\ModuleSign}[3]{\Stmt \algorithmicprocedure\ \textproc{#1}(#2)\ifthenelse{\equal{#3}{}}{}{\Gives\ #3}}
-%\newcommand{\MethodSign}[3]{\Stmt \algorithmicmethod\ \textproc{#1}(#2)\ifthenelse{\equal{#3}{}}{}{\Gives\ #3}}
-%\newcommand{\ConstrSign}[2]{\Stmt \algorithmicconstr\ \textproc{#1}(#2)}
+%  {\printandpush\algorithmicprocedure\ \textproc{#1}(#2)\ifthenelse{\equal{#3}{}}{}{\Gives\ #3}}
+%  {\popandprint\algorithmicend\ \algorithmicprocedure}
+% Méthode
+\algblockdefx[METHOD]{Method}{EndMethod}[3]%
+  {\printandpush\algorithmicmethod\ \textproc{#1}(#2)\ifthenelse{\equal{#3}{}}{}{\Gives\ #3}}
+  {\popandprint\algorithmicend\ \algorithmicmethod}
+% Constructeur
+\algblockdefx[CONSTR]{Constr}{EndConstr}[2]%
+  {\printandpush\algorithmicconstr\ \textproc{#1}(#2)}
+  {\popandprint\algorithmicend\ \algorithmicconstr}
+% Parties privées/publiques
+\algdef{C}[CLASS]{CLASS}{Private}{\popandprint\pushindent\ privé:}%
+\algdef{C}[CLASS]{CLASS}{Public}{\popandprint\pushindent\ public:}%
+% Signatures de module / méthode / constructeur
+\newcommand{\ModuleSign}[3]{\Stmt \algorithmicprocedure\ \textproc{#1}(#2)\ifthenelse{\equal{#3}{}}{}{\Gives\ #3}}
+\newcommand{\MethodSign}[3]{\Stmt \algorithmicmethod\ \textproc{#1}(#2)\ifthenelse{\equal{#3}{}}{}{\Gives\ #3}}
+\newcommand{\ConstrSign}[2]{\Stmt \algorithmicconstr\ \textproc{#1}(#2)}
+\algnewcommand\algorithmicclass{\textbf{classe}}
+\algnewcommand\algorithmicmethod{\textbf{méthode}}
+\algnewcommand\algorithmicconstr{\textbf{constructeur}}
   
 % ==============================================================================
 % Ajouts propres pour la francisation des termes prédéfinis + nouveaux termes
 % ==============================================================================
-%\algnewcommand\algorithmicclass{\textbf{classe}}
-%\algnewcommand\algorithmicmethod{\textbf{méthode}}
-%\algnewcommand\algorithmicconstr{\textbf{constructeur}}
 %\algnewcommand\algorithmicblock{\textbf{bloc}}
 %\algnewcommand\algorithmicbegin{\textbf{début}}
-%\algrenewcommand\algorithmicprocedure{\textbf{module}}
-%\algrenewcommand\algorithmicfunction{\textbf{module}}
+%\algrenewcommand\algorithmicprocedure{\textbf{algorithme}}
+%\algrenewcommand\algorithmicfunction{\textbf{algorithme}}
