@@ -976,7 +976,7 @@
 	et les solutions qui vont avec.
 	Elles pourront se généraliser à beaucoup d’autres exemples.
 	
-	\subsubsection{Exemple - Afficher les carrés}
+	\subsubsection{Exemple 1 - Afficher les carrés}
 	%--------------------------------------------
 	
 		\marginicon{java}
@@ -1021,7 +1021,13 @@
 		chaque fois qu’on peut calculer le nombre à afficher
 		en fonction de $i$.
 		
-	\subsubsection{Exemple - Une suite un peu plus complexe}
+		Cet exemple illustre un premier modèle important d'algorithme 
+		de génération de suite, modèle dans lequel l'élément 
+		à la i\ieme\ place, souvent appelé le \textit{i\ieme\ terme},
+		peut être déterminé directement
+		au départ d'une fonction de l'indice i.
+		 	 
+	\subsubsection{Exemple 2 - Une suite un peu plus complexe}
 	%-------------------------------------------------------
 	 
 		Écrire un algorithme qui affiche 
@@ -1060,7 +1066,7 @@
 				\Let val \Gets \textit{1\iere{} valeur à afficher}
 				\For{i}{1}{n}
 					\Write val
-					\Let val \Gets \textit{la valeur suivante calculée à partir de la valeur courante}
+					\Let val \Gets \textit{la valeur suivante calculée à partir de la valeur courante et/ou de précédentes valeurs}
 				\EndFor
 			\EndAlgo
 		\end{LDA}
@@ -1080,11 +1086,20 @@
 			\EndAlgo
 		\end{LDA}
 
+        Cet exemple illustre un second modèle de génération
+        de suite dans lequel l'élément à la i\ieme\ place, le i\ieme\
+        terme, est 
+        exprimé en fonction du ou des précédents termes. On parle
+        dans ce cas d'une «~suite récurrente~». 
+                     
+                   
 		\begin{Exercice}{Suites}
 		\marginicon{java}
 			Écrire les algorithmes qui affichent
 			les $n$ premiers termes des suites suivantes.
-			À vous de voir quel est le canevas de solution
+			À vous de voir quel est, parmi les 2 modèles 
+			décrits dans les exemples précédents, le 
+			modèle de solution
 			le plus adapté.
 			\begin{enumerate}[label=\alph*)]
 			\item -1, -2, -3, -4, -5, -6\dots
