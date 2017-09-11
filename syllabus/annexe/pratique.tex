@@ -219,14 +219,17 @@
 	\hskip-5mm
 	\includegraphics[width=1cm]{icon/dont}
 
-	Il est totalement interdit de modifier explicitement 
-	l’indice d’une boucle, quelle qu’en soit la raison.
+	Il est \textbf{totalement} interdit de modifier explicitement 
+	l’indice d’une boucle \lda{\algorithmicfor}, 
+	quelle qu’en soit la raison.
 	Ce n’est pas une bonne idée en terme de lisibilité
-	et dans certains langages c’est interdit ou
+	et dans certains langages c’est interdit par le compilateur ou
 	cela ne fait pas ce qui est attendu.
 	
 	\begin{minipage}{6cm}
-	Nous tenons absolument à ce que vous passiez par une boucle tant-que
+	Si vous devez interrompre un parcours répétitif, 
+	lorsqu'une condition est remplie, nous tenons absolument 
+	à ce que vous passiez par une boucle tant-que
 	et l’utilisation d’un booléen pour contrôler la fin.
 	Par exemple~:
 	\end{minipage}
