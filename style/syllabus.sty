@@ -74,3 +74,9 @@
 % Pour un plus beau style pour le titre de chapitre
 \usepackage[Lenny]{fncychap}
 
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{				% Redéfinir le style plain
+	\fancyhf{} 						% Enlever tout
+	\fancyhead[RO,LE]{\thepage}
+	\renewcommand{\headrulewidth}{0pt} % pas de ligne en entête
+}
